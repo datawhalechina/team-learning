@@ -27,7 +27,7 @@
 
 **详细安排**：
 
-https://github.com/datawhalechina/team-learning/blob/master/数据结构与算法（上）/课程任务.md
+https://github.com/datawhalechina/team-learning/blob/master/数据结构与算法（上）/学习任务.md
 
 ---
 ## 初级算法梳理
@@ -51,7 +51,7 @@ https://github.com/datawhalechina/team-learning/blob/master/数据结构与算�
 
 **详细安排**：
 
-https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/课程任务.md
+https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/学习任务.md
 
 
 
@@ -86,7 +86,7 @@ https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/�
 
 **详细安排**：
 
-https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房价预测）/课程任务.md
+https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房价预测）/学习任务.md
 
 
 ---
