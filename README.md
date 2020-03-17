@@ -28,7 +28,7 @@ https://tianchi.aliyun.com/competition/entrance//information
 
 **详细安排**：
 
-https://github.com/datawhalechina/team-learning/blob/master/学习任务.md
+https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（二手车价格预测）/学习任务.md
 
 
 
