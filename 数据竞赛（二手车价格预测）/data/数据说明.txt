@@ -1,0 +1,6 @@
+train.csv  训练集
+testA.csv 测试集A  不含price列
+testB.csv 测试集B  不含price列
+testA_result.csv 测试集A的真实结果  #不公开
+testB_result.csv 测试集B的真实结果  #不公开
+sample_summit.csv 提交样例
