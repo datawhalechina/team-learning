@@ -1,0 +1,52 @@
+类别,字段,字段内容,说明
+租赁房源,ID,房屋编号,每间房屋编号唯一
+,area,房屋面积,租赁房间的面积单位平方米
+,ren tType,1出租方式:整租/合租/未知,房间的出租方式
+,houseType,房型,房屋的形状
+,houseFloor,所在楼层,房间所在的楼层(分为高、中、低三类)
+,totalFloor,总楼层数,房间所在楼栋的总楼层数
+,houseToward,房屋朝向,房间的朝向
+,houseDecorati on,房屋装修,房屋内的装修情况
+小区信息,commu nityName,小区名称,房屋所在小区(XQ00001)
+,city,城市,城市(SH)
+,region,区域,城市行政区域(RG00001)
+,plate,板块,区域板块(BK00001)
+,buildYear,小区建筑年代,小区建筑年代
+,saleSecHouseNum,该板块当月挂牌房源数,板块当月二手房挂牌房源数
+配套设施,subwayStati onNum,该板块地铁站数量,板块当前地铁站总数量
+,busStati onNum,该板块公交站数量,板块当前公交站总数量
+,interSchoolNum,该板块国际学校数量,板块当前国际学校总数量
+,schoolNum,该板块公立学校数量,板块当前公立学校总数量
+,privateSchoolNum,该板块私立学校数量,板块当前私立学校总数量
+,hospitalNum,该板块综合医院数量,板块当前综合医院总数量
+,drugStoreNum,该板块药房数量,板块当前药房总数量
+,gymNum,该板块健身中心数量,板块当前健身中心总数量
+,bankNum,该板块银行数量,板块当前银行总数量
+,shopNum,该板块便利店数量,板块当前便利店总数量
+,parkNum,该板块公园数量,板块当前公园总数量
+,mallNum,该板块购物中心教量,板块当前购物中心总数量
+,superMarketNum,该板块超市数量,板块当前超市总数量
+二手房,totalTradeMoney ,该板块当月二手房成交总金额（元）,当月板块二手房成交总金额 
+,totalTradeArea, 该板块当月二手房成交总面积（平米）,当月板块二手房成交总面积
+,tradeMea nPrice,该板块当月二手房成交均价（元/平 |米）,当月板块二手房成交均价
+,tradeSecNum,该板块当月二手房成交套数,当月板块二手房成交总套数
+新房,totalNewTradeMo n ey,该板块当月新房成交总金额,当月板块新房成交总套数
+,tota IN ewTra deArea,该板块当月新房成交总面积,当月板块新房成交总面积
+,tradeNewMeanPric e,该板块当月新房成交均价,当月板块新房成交均价
+,tradeNewNum,该板块当月新房成交套数,当月板块新房成交总套数
+,remainNewNum,该板块当月新房剩余未成交套数,当月板块新房剩余未成交套数
+,supplyNewNum,该板块当月新房供应套数,当月板块新房供应总套数
+土地,supply La ndNum,该板块当月土地供应幅数,当月板块土地供应幅数
+,supply La ndArea,该板块当月土地供应面积,当月板块土地供应面积
+,tradeLa ndNum,该板块当月土地成交幅数,当月板块土地成交幅数 1 .
+,tradeLa ndArea,该板块当月土地成交面积,当月板块土地板楼面积
+,Ian dTotalPrice,该板块当月土地成交总价,当月板块土地成交总价
+,landMeanPrice,板块土地楼板价（元/* ）,板块楼板均价（板块）
+人口,totalworkers,当前板块现有办公人数,当前板块现有办公人数（包括本月新增 招聘）
+,newWorkers,该板块当月流入人口 （新招聘人数）,本月新增招聘人数
+,reside ntPopulatio n,当前板块常住人口,当前板块常住人口
+客户,PV,该板块当月租客浏览网页次数,当月板块租客浏览网页次数
+,uv,该板块当月租客浏览网页总人数,当月板块租客浏览网页总人数
+,lookNum,带看次数,线下看房次数
+真实租金,tradeTime,成交日期 ,租房的日期 
+, tradeMoney,成交租金,成交房屋每月租金
