@@ -2,9 +2,9 @@
 
 第十一期Datawhale组队学习计划马上就要开始啦！
 
-本次组队学习的内容为：数据挖掘之二手车交易价格预测，该内容来自 Datawhale与天池联合发起的0基础入门系列赛事第一场。
+本次组队学习的内容为：数据挖掘之二手车交易价格预测，该内容来自 Datawhale与天池联合发起的“0基础入门系列”赛事第一场。
 
-https://tianchi.aliyun.com/competition/entrance//information
+https://tianchi.aliyun.com/competition/entrance/231784/introduction
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
@@ -38,6 +38,5 @@ https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（二�
 - 按照任务安排进行学习，完成后写学习笔记Blog。
 - 在每次任务截止之前在群内打卡（发Blog链接），遇到问题在群内讨论。
 - 未按时打卡的同学视为自动放弃，被抱出学习群。
-
 
 
