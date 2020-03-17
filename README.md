@@ -15,20 +15,20 @@ https://tianchi.aliyun.com/competition/entrance/231784/introduction
 
 **定位人群**：有一定数据分析与python编程的基础。
 
-**时间安排**：17天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动
+**时间安排**：14天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动
 
 
 **任务简介**：
 
-- Task01：赛题理解，熟悉blog打卡方式，组队和修改群名片（3月21日）
-- Task02：数据的探索性分析（EDA）（3月22日-24日）
-- Task03：数据的特征工程（3月25日-27日）
-- Task04：建模与调参（3月28日-31日）
-- Task05：模型结果融合（4月1日-3日）
+- Task01：赛题理解，熟悉blog打卡方式，组队和修改群名片（1Day）
+- Task02：数据的探索性分析（EDA）（3Day）
+- Task03：数据的特征工程（3Day）
+- Task04：建模与调参（4Day）
+- Task05：模型结果融合（3Day）
 
 **详细安排**：
 
-https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（二手车价格预测）/学习任务.md
+https://github.com/datawhalechina/team-learning/blob/master/数据挖掘实践（二手车价格预测）/学习任务.md
 
 
 
