@@ -1,0 +1,8 @@
+*.vscode
+*.pyc
+*.db
+.idea
+venv
+log.txt
+cookies.txt
+captcha.jpg
