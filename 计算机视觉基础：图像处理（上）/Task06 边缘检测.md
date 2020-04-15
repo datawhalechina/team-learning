@@ -7,10 +7,9 @@
 边缘是图像强度函数快速变化的地方
 
 ### 6.1.2 如何检测边缘？
-
 为了检测边缘，我们需要检测图像中的**不连续性**，可以使用**导数**来检测不连续性。
 
-![](https://github.com/2209520576/CV-Image-Processing/raw/master/Task06%20%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/IMG/edge1.jpg)
+![](https://github.com/2209520576/CV-Image-Processing/blob/master/IMG/edge1.jpg)
 
 如上图所示，上图的第一幅图表示一张数字图片，我们对水平红线处进行求导，便可得到上图二中的关系，可以看到在边缘处有着较大的跳变。但是，导数也会受到噪声的影响，因此建议在求导数之前先对图像进行平滑处理（上图三）。
 
@@ -32,12 +31,11 @@
 ### 6.4.1 Sobel算子
 
 
-
 我们可以使用$3 \times 3$ 的卷积核来进行图像求导：  
 
 $$
 {\displaystyle \mathbf {G}'_{y}={ \begin{bmatrix}+1&+2&+1\\0&0&0\\-1&-2&-1\end{bmatrix}}*\mathbf {I} \quad {\mbox{和}}\quad \mathbf{G}'_{x}={\begin{bmatrix}+1&0&-1\\+2&0&-2\\+1&0&-1\end{bmatrix}}*\mathbf {I} }
-$$  
+$$
 
 其中$ \mathbf {I}$表示原图片，$\mathbf {G}'_{x}$和$\mathbf {G}'_{y}$分别表示沿图片水平和竖直方向上的变化，$ * $表示卷积操作
 
@@ -51,13 +49,13 @@ $$
 
 若图像$\mathbf {G}$中一个3x3的窗口为A，要计算梯度的像素点为e，则和Sobel算子进行卷积之后，像素点e在x和y方向的梯度值分别为：  
 
-$$ 
-\begin{equation}\begin{aligned}{G}'_{x}=G_{x} * A=\left[\begin{array}{ccc}-1 & 0 & 1 \\-2 & 0 & 2 \\-1 & 0 & 1\end{array}\right]  * \left[\begin{array}{ccc}a & b & c \\d & e & f \\g & h & i\end{array}\right]=\operatorname{sum}\left(\left[\begin{array}{ccc}-a & 0 & c \\-2 d & 0 & 2 f \\-g & 0 & i\end{array}\right]\right) \\{G}'_{y}=G_{y} * A=\left[\begin{array}{ccc}1 & 2 & 1 \\0 & 0 & 0 \\-1 & -2 & -1\end{array}\right] * left[\begin{array}{ccc}a & b & c \\d & e & f \\g & h & i\end{array}\right]=\operatorname{sum}\left(\left[\begin{array}{ccc}a & 2 b & c \\0 & 0 & 0 \\-g & -2 h & -i\end{array}\right]\right)\end{aligned}\end{equation}
-$$  
+$$
+\begin{equation}\begin{aligned}{G}'_{x}=G_{x} * A=\left[\begin{array}{ccc}-1 & 0 & 1 \\-2 & 0 & 2 \\-1 & 0 & 1\end{array}\right] *\left[\begin{array}{ccc}a & b & c \\d & e & f \\g & h & i\end{array}\right]=\operatorname{sum}\left(\left[\begin{array}{ccc}-a & 0 & c \\-2 d & 0 & 2 f \\-g & 0 & i\end{array}\right]\right) \\{G}'_{y}=G_{y} * A=\left[\begin{array}{ccc}1 & 2 & 1 \\0 & 0 & 0 \\-1 & -2 & -1\end{array}\right] *\left[\begin{array}{ccc}a & b & c \\d & e & f \\g & h & i\end{array}\right]=\operatorname{sum}\left(\left[\begin{array}{ccc}a & 2 b & c \\0 & 0 & 0 \\-g & -2 h & -i\end{array}\right]\right)\end{aligned}\end{equation}
+$$
 
 其中“ * ” 为卷积符号，sum表示矩阵中所有元素相加求和。
 
-### 6.5.2 Canny边缘检测
+### 6.4.2 Canny边缘检测
 
 Canny边缘检测于1986年由JOHN CANNY首次在论文《A Computational Approach to Edge Detection》中提出，就此拉开了Canny边缘检测算法的序幕。
 
@@ -71,7 +69,7 @@ Canny边缘检测是从不同视觉对象中提取有用的结构信息并大大
 
 在目前常用的边缘检测方法中，Canny边缘检测算法是具有严格定义的，可以提供良好可靠检测的方法之一。由于它具有满足边缘检测的三个标准和实现过程简单的优势，成为边缘检测最流行的算法之一。
 
-完成一个Canny边缘检测算法可以分为以下五步：
+完成一个Canny边缘检测算法可以分为以下四步：
 
 | 高斯滤波                            | 目的                                   |
 | ----------------------------------- | -------------------------------------- |
@@ -119,7 +117,7 @@ $$
 
 比如计算出的$\theta=91 $度,则应将其归类到90--270度方向
 
-![](https://github.com/2209520576/CV-Image-Processing/raw/master/Task06%20%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/IMG/angle.png)
+![](https://github.com/2209520576/CV-Image-Processing/blob/master/IMG/angle.png)
 
 #### 3.非极大值抑制(NMS)
 
@@ -131,7 +129,7 @@ $$
 
 一张图解释双阈值算法检测：
 
-![](https://github.com/2209520576/CV-Image-Processing/raw/master/Task06%20%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/IMG/doubleThreshold.png)
+![](https://github.com/2209520576/CV-Image-Processing/blob/master/IMG/doubleThreshold.png)
 
 双阈值法非常简单，我们假设两类边缘：经过非极大值抑制之后的边缘点中，**梯度值超过TH的称为强边缘，梯度值小于TH大于TL的称为弱边缘，梯度小于TL的不是边缘**。
 
@@ -182,7 +180,7 @@ plt.show()
 
 结果：
 
-![](https://github.com/2209520576/CV-Image-Processing/raw/master/Task06%20%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/IMG/sobel_result.png)
+![](https://github.com/2209520576/CV-Image-Processing/blob/master/IMG/sobel_result.png)
 
 #### 6.5.2 Canny算法
 
@@ -221,7 +219,7 @@ plt.show()
 
 结果：
 
-![](https://github.com/2209520576/CV-Image-Processing/raw/master/Task06%20%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/IMG/canny_result.png)
+![](https://github.com/2209520576/CV-Image-Processing/blob/master/IMG/canny_result.png)
 
 ## 6.6 总结
 
