@@ -1,4 +1,0 @@
-Pillow >= 5.0.0
-matplotlib >= 2.1.2
-requests >= 2.18.4
-pyexecjs >= 1.5.1
