@@ -29,6 +29,10 @@ https://github.com/datawhalechina/team-learning/blob/master/Pandas教程（上�
 
 **延伸阅读**：
 
+- 《“笨办法”学Python 3》
+- https://www.epubit.com/bookDetails?id=N92
+
+
 ![](https://img-blog.csdnimg.cn/20200417183105433.jpg)
 
 ---
@@ -53,6 +57,9 @@ https://github.com/datawhalechina/team-learning/blob/master/Pandas教程（上�
 https://github.com/datawhalechina/team-learning/tree/master/机器学习算法基础
 
 **延伸阅读**：
+
+- 《机器学习精讲》
+- https://www.epubit.com/bookDetails?id=UB6ca56d535c5c5
 
 ![](https://img-blog.csdnimg.cn/20200417183010450.jpg)
 
@@ -83,6 +90,9 @@ https://github.com/datawhalechina/team-learning/tree/master/计算机视觉基�
 
 **延伸阅读**：
 
+- 《计算机视觉度量深入解析》
+- https://www.epubit.com/bookDetails?id=N23670
+
 ![](https://img-blog.csdnimg.cn/20200417182959774.jpg)
 
 
@@ -110,6 +120,9 @@ https://github.com/datawhalechina/team-learning/tree/master/计算机视觉基�
 https://github.com/datawhalechina/team-learning/tree/master/Python爬虫编程实践
 
 **延伸阅读**：
+
+- 《用Python写网络爬虫（第2版）》
+- https://www.epubit.com/bookDetails?id=N33225
 
 ![](https://img-blog.csdnimg.cn/20200417183110177.jpg)
 
