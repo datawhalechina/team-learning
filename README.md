@@ -2,7 +2,7 @@
 
 第12期Datawhale组队学习计划马上就要开始啦！
 
-这次共组织四门课程的组队学习，涵盖了编程、机器学习理论、计算机视觉以及动手实践的内容，大家可以按照需要选择参加。
+Datawhale将联合人民邮电出版社异步社区，共同发起机器学习算法、计算机视觉、Pandas及爬虫编程实践的组队学习，大家可以按照需要选择参加。
 
 ---
 ## Pandas教程（上） 
@@ -27,6 +27,10 @@
 
 https://github.com/datawhalechina/team-learning/blob/master/Pandas教程（上）
 
+**延伸阅读**：
+
+![](https://img-blog.csdnimg.cn/20200417183105433.jpg)
+
 ---
 ## 机器学习算法
 
@@ -47,6 +51,10 @@ https://github.com/datawhalechina/team-learning/blob/master/Pandas教程（上�
 **详细安排**：
 
 https://github.com/datawhalechina/team-learning/tree/master/机器学习算法基础
+
+**延伸阅读**：
+
+![](https://img-blog.csdnimg.cn/20200417183010450.jpg)
 
 
 
@@ -73,6 +81,10 @@ https://github.com/datawhalechina/team-learning/tree/master/机器学习算法�
 
 https://github.com/datawhalechina/team-learning/tree/master/计算机视觉基础：图像处理（上）
 
+**延伸阅读**：
+
+![](https://img-blog.csdnimg.cn/20200417182959774.jpg)
+
 
 ---
 ## Python爬虫编程实践
@@ -97,6 +109,9 @@ https://github.com/datawhalechina/team-learning/tree/master/计算机视觉基�
 
 https://github.com/datawhalechina/team-learning/tree/master/Python爬虫编程实践
 
+**延伸阅读**：
+
+![](https://img-blog.csdnimg.cn/20200417183110177.jpg)
 
 ---
 ## 具体规则
