@@ -24,7 +24,8 @@
 
 &emsp;&emsp;最近邻插值，是指将目标图像中的点，对应到源图像中后，找到最相邻的整数点，作为插值后的输出。
 
-![Image](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa1.png)
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412101740312.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
+
 
 
 &emsp;&emsp;如上图所示，目标图像中的某点投影到原图像中的位置为点P,此时易知，$f(P) = f(Q11)$.
@@ -49,15 +50,17 @@ f(0,3)=h(0,2.25)=h(0,2) \\
 \end{array}
 $$
 
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412101854853.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
 
-![Image](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa2_1.png)
 
 
 
 **缺点：**
 用该方法作放大处理时，在图象中可能出现明显的块状效应
 
-![Image1](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa4.png)
+
+<div align=center><img width="150" height="150" src="https://img-blog.csdnimg.cn/20200412102932888.png#pic_center"/></div>
+
 
 
 ### 1.4.2 双线性插值
@@ -68,37 +71,51 @@ $$
 f(x)=a_{1} x+a_{0}
 $$
 
-![Image](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa3.png)
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412103208674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
 
 
-$$y=y_{0}+\left(x-x_{0}\right) \frac{y_{1}-y_{0}}{x_{1}-x_{0}}=y_{0}+\frac{\left(x-x_{0}\right) y_{1}-\left(x-x_{0}\right) y_{0}}{x_{1}-x_{0}}$$
+
+$$
+y=y_{0}+\left(x-x_{0}\right) \frac{y_{1}-y_{0}}{x_{1}-x_{0}}=y_{0}+\frac{\left(x-x_{0}\right) y_{1}-\left(x-x_{0}\right) y_{0}}{x_{1}-x_{0}}
+$$
 
 &emsp;&emsp;双线性插值就是线性插值在二维时的推广,在两个方向上做三次线性插值，具体操作如下图所示：
 
-![Image](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa5.png)
+<div align=center><img  src="https://img-blog.csdnimg.cn/2020041210201784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
+
 
 &emsp;&emsp;令$f(x，y)$为两个变量的函数，其在单位正方形顶点的值已知。假设我们希望通过插值得到正方形内任意点的函数值。则可由双线性方程:
-$$f(x, y)=a x+b y+c x y+d$$
+$$
+f(x, y)=a x+b y+c x y+d
+$$
 
 &emsp;&emsp;来定义的一个双曲抛物面与四个已知点拟合。
 
 &emsp;&emsp;首先对上端的两个顶点进行线性插值得：
 
-$$f(x, 0)=f(0,0)+x[f(1,0)-f(0,0)]$$
+$$
+f(x, 0)=f(0,0)+x[f(1,0)-f(0,0)]
+$$
 
 &emsp;&emsp;类似地，再对底端的两个顶点进行线性插值有：
-$$f(x, 1)=f(0,1)+x[f(1,1)-f(0,1)]$$
+$$
+f(x, 1)=f(0,1)+x[f(1,1)-f(0,1)]
+$$
 
 &emsp;&emsp;最后，做垂直方向的线性插值，以确定：
 
-$$f(x, y)=f(x, 0)+y[f(x, 1)-f(x, 0)]$$
+$$
+f(x, y)=f(x, 0)+y[f(x, 1)-f(x, 0)]
+$$
 
 &emsp;&emsp;整理得：
 
-$$\begin{array}{l}
+$$
+\begin{array}{l}
 f(x, y)=[f(1,0)-f(0,0)] x+[f(0,1)-f(0,0)] y \\
 +[f(1,1)+f(0,0)-f(0,1)-f(1,0)] x y+f(0,0)
-\end{array}$$
+\end{array}
+$$
 
 
 ### 1.4.3 映射方法
@@ -183,19 +200,21 @@ int main(int argc, char* argv[])
 ```
 **原图**
 
-![SRC](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa9.png)
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412102109963.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
 
 **0.2倍缩小，双线性插值**
 
-![SRC](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa7.png)
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412102607684.png#pic_center"/></div>
+
 
 **1.5倍放大，最近邻插值**
 
-![SRC](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa8.png)
+<div align=center><img  src="https://img-blog.csdnimg.cn/2020041210264398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
+
 
 **1.5倍放大，双线性插值**
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412102712212.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
 
-![SRC](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa9.png)
 
 
 ### 1.5.2 Python
@@ -254,17 +273,16 @@ if __name__ == "__main__":
     cv2.destroyAllWindows()
 ```
 **0.3倍缩小，双线性插值**
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412102754700.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
 
-![SRC](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa10.png)
 
 **1.5倍放大，最近邻插值**
 
-![SRC](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa11.png)
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412102819211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
 
 **1.5倍放大，双线性插值**
 
-![SRC](https://github.com/Sandy1230/Python_for-OpenCv/raw/master/image/chazhisuanfa12.png)
-
+<div align=center><img  src="https://img-blog.csdnimg.cn/20200412102843387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTk0MDUxMg==,size_16,color_FFFFFF,t_70#pic_center"/></div>
 
 
 - 推荐书籍：学习OpenCV中文版
