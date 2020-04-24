@@ -88,9 +88,9 @@ https://github.com/datawhalechina/team-learning/tree/master/计算机视觉基�
 
 **延伸阅读**：
 
-- [《计算机视觉度量深入解析》](https://www.epubit.com/bookDetails?id=N23670)
+- [《计算机视觉度量：从特征描述到深度学习》](https://www.epubit.com/bookDetails?id=UB6c7836a28a498)
 
-![](https://img-blog.csdnimg.cn/20200417182959774.jpg)
+![](https://cdn.ptpress.cn/pubcloud/bookImg/A20170167/20190830367360AD.jpg)
 
 
 ---
