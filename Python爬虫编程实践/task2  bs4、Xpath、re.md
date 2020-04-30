@@ -1,4 +1,4 @@
-# **Task02 学习内容：**bs4 xpath re
+# **Task02 学习内容：** bs4 xpath re
 ## 2.1 Beautiful Soup库入门
 ### 目标：
 - 2.1.1 Beautiful Soup库的基本元素
