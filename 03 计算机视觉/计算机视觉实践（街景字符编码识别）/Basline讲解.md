@@ -1,6 +1,6 @@
 # Datawhale 零基础入门CV赛事-Baseline讲解    
                     
-Baseline思路：将不定长字符转换为定长字符的识别问题，并使用CNN完成训练和验证，具体包括以下几个步骤：     
+### Baseline思路：将不定长字符转换为定长字符的识别问题，并使用CNN完成训练和验证，具体包括以下几个步骤：     
                    
 - 赛题数据读取（封装为Pytorch的Dataset和DataLoder）
              
@@ -9,27 +9,28 @@ Baseline思路：将不定长字符转换为定长字符的识别问题，并使
 - 模型训练与验证
                 
 - 模型结果预测
-           
-运行环境要求：Python2/3，Pytorch1.x，内存4G，有无GPU都可以。         
+    
+###  运行环境及安装示例   
+- 运行环境要求：Python2/3，Pytorch1.x，内存4G，有无GPU都可以。         
                         
 下面给出python3.7+ torch1.3.1gpu版本的环境安装示例：      
                                
-首先在Anaconda中创建一个专门用于本次天池练习赛的虚拟环境。          
+- 首先在Anaconda中创建一个专门用于本次天池练习赛的虚拟环境。          
 ```$conda create -n py37_torch131 python=3.7```      
                                 
-激活环境，并安装pytorch1.3.1                               
+- 激活环境，并安装pytorch1.3.1                               
 ```$source activate py37_torch131```                          
 
 ```$conda install pytorch=1.3.1 torchvision cudatoolkit=10.0```                     
        
        
-通过下面的命令一键安装所需其它依赖库     
+- 通过下面的命令一键安装所需其它依赖库     
 ```$pip install jupyter tqdm opencv-python matplotlib pandas```                                   
        
-启动notebook，即可开始baseline代码的学习                  
+- 启动notebook，即可开始baseline代码的学习                  
 ```$jupyter-notebook```    
     
-假设所有的赛题输入文件放在../input/目录下，首先导入常用的包：            
+- 假设所有的赛题输入文件放在../input/目录下，首先导入常用的包：            
 ```python
   import os, sys, glob, shutil, json
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
