@@ -18,9 +18,9 @@
 - 首先在Anaconda中创建一个专门用于本次天池练习赛的虚拟环境。          
 >$conda create -n py37_torch131 python=3.7      
                                 
-- 激活环境，并安装pytorch1.3.1                               
+- 激活环境，并安装pytorch1.3.1                                     
 >$source activate py37_torch131                          
-$conda install pytorch=1.3.1 torchvision cudatoolkit=10.0                     
+ $conda install pytorch=1.3.1 torchvision cudatoolkit=10.0                     
        
        
 - 通过下面的命令一键安装所需其它依赖库     
@@ -31,7 +31,7 @@ $conda install pytorch=1.3.1 torchvision cudatoolkit=10.0
     
 - 假设所有的赛题输入文件放在../input/目录下，首先导入常用的包：            
 ```python
-  import os, sys, glob, shutil, json
+import os, sys, glob, shutil, json
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 import cv2
 
@@ -39,8 +39,6 @@ from PIL import Image
 import numpy as np
 
 from tqdm import tqdm, tqdm_notebook
-
-%pylab inline
 
 import torch
 torch.manual_seed(0)
