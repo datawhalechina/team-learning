@@ -217,7 +217,7 @@ for data in train_loader:
 ```    
            
 在加入DataLoder后，数据按照批次获取，每批次调用Dataset读取单个样本进行拼接。此时data的格式为：       
-                ``` torch.Size([10, 3, 64, 128]), torch.Size([10, 6]) ```
+                ``` torch.Size([10, 3, 64, 128]), torch.Size([10, 6]) ```          
 前者为图像文件，为batchsize * chanel * height * width次序；后者为字符标签。      
 
 ## 2.5 本章小节       
