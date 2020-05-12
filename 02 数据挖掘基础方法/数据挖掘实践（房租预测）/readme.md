@@ -41,7 +41,6 @@ https://2019ai.futurelab.tv/contest_detail/3#contest_des
 
 ### Task01：赛题分析（2天）
 
-https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）/1_赛题分析.ipynb
 
 每一步都要认真完成，附上代码，最终效果截图
 
@@ -64,7 +63,6 @@ https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）
 ---
 ### Task02：数据清洗（2天）
 
-https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）/2_数据清洗.ipynb
 
 每一步都要认真完成，附上代码，最终效果截图
 
@@ -86,7 +84,6 @@ https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）
 
 ### Task03：特征工程&特征选择（2天）
 
-https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）/3_特征工程.ipynb
 
 使用3种以上特征选择的方法，附上代码，最终效果截图
 
@@ -126,7 +123,6 @@ https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）
 
 ### Task04：模型选择&模型调优（2天）
 
-https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）/4_模型选择.ipynb
 
 每一步都要认真完成，附上代码，最终效果截图
 
@@ -149,7 +145,7 @@ https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）
 
 ### Task05：模型融合（3天）
 
-https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）/5_模型融合.ipynb
+
 
 任选三个模型融合的方法进行融合。附上代码，最终效果截图
 
@@ -177,7 +173,7 @@ https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）
 
 ### Task06：比赛整理（1天）  
 
-https://github.com/datawhalechina/team-learning/blob/master/数据竞赛（房租预测）/6_竞赛整理.ipynb
+
 
 以赛方最后给的答辩模板为主线整理比赛思路，模拟比赛答辩环节，进行比赛整理。
 
