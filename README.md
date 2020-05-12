@@ -10,9 +10,16 @@
 ---
 # 计算机视觉实践（街景字符编码识别） 
 
-**内容设计**：刘羽中，安晟，王程伟，张强，伊小雪
+**内容设计**：刘羽中（阿水），安晟，王程伟，张强，伊雪
 
-**最终审核**：刘羽中，王茂霖
+**最终审核**：刘羽中（阿水），王茂霖
+
+- 阿水，竞赛领域Top级选手 ，公众号：Coggle数据科学 知乎： https://www.zhihu.com/people/finlayliu
+- 伊雪，中电科网安研究院 开发工程师
+- 安晟，算法工程师，博客：https://blog.csdn.net/u011583927
+- 张强，宁波大学计算机硕士，Github：https://github.com/QiangZiBro
+- 王程伟，南昌航空大学硕士，博客：https://blog.csdn.net/weixin_40647819
+- 王茂霖，华中科技大学研究生，常年混迹Tianchi，Github: https://github.com/mlw67
 
 **定位人群**：有python编程基础，对计算机视觉方向有兴趣，且对入门CV比赛有需求的学习者。
 
@@ -31,8 +38,6 @@
 **详细安排**：
 
 https://github.com/datawhalechina/team-learning/tree/master/03%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AE%9E%E8%B7%B5%EF%BC%88%E8%A1%97%E6%99%AF%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%89
-
-
 
 
 ---
