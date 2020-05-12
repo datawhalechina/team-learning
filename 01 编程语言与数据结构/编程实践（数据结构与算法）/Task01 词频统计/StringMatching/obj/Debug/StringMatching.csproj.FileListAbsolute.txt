@@ -1,0 +1,11 @@
+C:\Users\Administrator\Desktop\ConsoleApplication1\StringMatching\bin\Debug\StringMatching.dll
+C:\Users\Administrator\Desktop\ConsoleApplication1\StringMatching\bin\Debug\StringMatching.pdb
+C:\Users\Administrator\Desktop\ConsoleApplication1\StringMatching\obj\Debug\StringMatching.dll
+C:\Users\Administrator\Desktop\ConsoleApplication1\StringMatching\obj\Debug\StringMatching.pdb
+C:\Users\Administrator\Desktop\ConsoleApplication1\StringMatching\obj\Debug\StringMatching.csprojResolveAssemblyReference.cache
+C:\Users\lsgomyp\Desktop\20180525WordFA\WordFA\StringMatching\bin\Debug\StringMatching.dll
+C:\Users\lsgomyp\Desktop\20180525WordFA\WordFA\StringMatching\bin\Debug\StringMatching.pdb
+C:\Users\lsgomyp\Desktop\20180525WordFA\WordFA\StringMatching\obj\Debug\StringMatching.csprojAssemblyReference.cache
+C:\Users\lsgomyp\Desktop\20180525WordFA\WordFA\StringMatching\obj\Debug\StringMatching.csproj.CoreCompileInputs.cache
+C:\Users\lsgomyp\Desktop\20180525WordFA\WordFA\StringMatching\obj\Debug\StringMatching.dll
+C:\Users\lsgomyp\Desktop\20180525WordFA\WordFA\StringMatching\obj\Debug\StringMatching.pdb

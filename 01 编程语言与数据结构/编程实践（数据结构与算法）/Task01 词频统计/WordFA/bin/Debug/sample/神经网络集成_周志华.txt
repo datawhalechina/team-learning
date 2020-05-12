@@ -1,0 +1,725 @@
+第25卷　第1期
+2002年1月
+计　　算　　机　　学　　报
+CHIN ESE J. COM PU TERS 
+Vo l. 25 No. 1 
+Ja n. 2002 
+　
+神经网络集成
+周志华　　陈世福
+(南京大学计算机软件新技术国家重点实验室　南京210093) 
+收稿日期: 2001-01-03.本课题得到国家自然科学基金( 60105004)和江苏省自然科学基金重点项目( B K2001202)资助. 周志华,男, 1973 
+年生,博士,主要研究领域为机器学习、神经网络、进化计算、数据挖掘. E-mail: zhou zh@ nju. edu. cn. 陈世福, 男, 1938年生,教授,博士生
+导师,主要研究领域为机器学习、知识工程、分布式人工智能、图像处理. 
+摘　要　神经网络集成通过训练多个神经网络并将其结论进行合成,可以显著地提高学习系统的泛化能力.它不
+仅有助于科学家对机器学习和神经计算的深入研究,还有助于普通工程技术人员利用神经网络技术来解决真实世
+界中的问题.因此,它被视为一种有广阔应用前景的工程化神经计算技术,已经成为机器学习和神经计算领域的研
+究热点.该文从实现方法、理论分析和应用成果等三个方面综述了神经网络集成的国际研究现状,并对该领域值得
+进一步研究的一些问题进行了讨论. 
+关键词　神经网络,神经网络集成,机器学习,神经计算,泛化
+中图法分类号: TP18 
+Neural Network Ensemble 
+ZHOU Zhi-Hua　CHEN Shi-Fu 
+(N ational Laborator y for Novel Sof tware Technolo gy, N anj ing Universi ty , Nanj ing 210093) 
+Abstract　Neural netw o rk ensemble can sig nificantly improv e the g enera li zatio n abili ty of 
+learning sy stems through training a fini te number of neural netwo rks and then combining thei r 
+resul ts. It is not o nly helpful for scientists to inv estiga te machine lea rning a nd neural computing 
+but al so helpful for common engineers to solv e real-w o rld problems using neural netwo rk 
+techniques. Therefore neura l netw o rk ensemble has been regarded as an engineering neural 
+computing tech nolog y tha t has g reat applica tion prospect . Also i t has become a hot topic in both 
+machine learning and neural computing communi ties. In thi s paper, the state-o f-the-a rt o f neural 
+netw o rk ensemble is surv ey ed from th ree aspects including implementation methods, theo retical 
+analysis, and applicatio ns. Mo reov er, some i ssues v aluable fo r future ex plo ratio n in this area are 
+indica ted and discussed. 
+Keywords　neural netw o rks, neural netw o rk ensembles, machine lea rning , neural computing, 
+g enerali zatio n 
+1　引　言
+神经网络已经在很多领域得到了成功的应用, 
+但由于缺乏严密理论体系的指导,其应用效果完全
+取决于使用者的经验. 虽然Hornik等人[1 ]证明,仅
+有一个非线性隐层的前馈网络就能以任意精度逼近
+任意复杂度的函数,但一些研究者[ 2, 3 ]指出,对网络
+的配置和训练是N P问题.在实际应用中,由于缺乏
+问题的先验知识,往往需要经过大量费力耗时的实
+验摸索才能确定合适的神经网络模型、算法以及参
+数设置,其应用效果完全取决于使用者的经验.即使
+采用同样的方法解决同样的问题,由于操作者不同, 
+其结果也很可能大相径庭.在实际应用中,操作者往
+
+往是缺乏神经计算经验的普通工程技术人员,如果
+没有易于使用的工程化神经计算方法,神经网络技
+术的应用效果将很难得到保证. 
+1990年, Hansen和Salamon[ 4]开创性地提出了
+神经网络集成( neural netw o rk ensemble)方法. 他
+们证明,可以简单地通过训练多个神经网络并将其
+结果进行合成,显著地提高神经网络系统的泛化能
+力. 由于该方法易于使用且效果明显,即使是缺乏神
+经计算经验的普通工程技术人员也可以从中受益, 
+因此它被视为一种非常有效的工程化神经计算
+方法.
+1996年, Sollich 和Kro gh[5 ]为神经网络集成下
+了一个定义,即“神经网络集成是用有限个神经网络
+对同一个问题进行学习,集成在某输入示例下的输
+出由构成集成的各神经网络在该示例下的输出共同
+决定” . 目前这个定义已被广泛接受. 但是,也有一些
+研究者[6 ]认为,神经网络集成指的是多个独立训练
+的神经网络进行学习并共同决定最终输出结果,并
+不要求集成中的网络对同一个(子)问题进行学习. 
+符合后一定义的研究至少可以上溯到1972年诺贝
+尔物理奖获得者Co oper[7 ]及其同事和学生于20世
+纪80年代中后期在Nesto r系统中的工作,但是,目
+前一般认为神经网络集成的研究始于Hansen和
+Salamo n在1990年的工作. 
+由于认识到神经网络集成所蕴涵的巨大潜力和
+应用前景,在Hansen和Salamo n之后,很多研究者
+都进行了这方面的研究.但当时的研究工作主要集
+中在如何将神经网络集成技术用于具体的应用领
+域. 从20世纪90年代中期开始,有关神经网络集成
+的理论研究受到了极大的重视,大量研究者涌入该
+领域,理论和应用成果不断涌现,使得神经网络集成
+成为目前国际机器学习和神经计算界的一个相当活
+跃的研究热点. 
+2　研究进展
+Kearns和Valia nt [8 ]指出, 在PAC 学习模型[ 9] 
+中,若存在一个多项式级学习算法来辨别一组概念, 
+并且辨别正确率很高,那么这组概念是强可学习的; 
+而如果学习算法辨别一组概念的正确率仅比随机猜
+测略好, 那么这组概念是弱可学习的. Kea rns 和
+Valiant提出了弱学习算法与强学习算法的等价性
+问题,即是否可以将弱学习算法提升成强学习算法. 
+如果两者等价,那么在学习概念时,只需找到一个比
+随机猜测略好的弱学习算法,就可以将其提升为强
+学习算法,而不必直接去找通常情况下很难获得的
+强学习算法. 
+上述等价性问题可视为神经网络集成思想的出
+发点. 1990年, Schapi re[10 ]通过一个构造性方法对
+该问题作出了肯定的证明, 其构造过程称为
+Bo osting .虽然Bo osting 算法并非专为神经网络设
+计,但由于其与神经网络集成有着难以分割的血缘
+关系,因此本文也将对Boosting 及相关技术进行介
+绍. 
+在神经网络集成的研究中,始终存在着两方面
+的内容.一方面,研究者们试图设计出更有效的神经
+网络集成实现方法, 以直接用于解决问题. 另一方
+面,研究者们试图对神经网络集成进行理论分析,以
+探明这种方法为何有效、在何种情况下有效,从而为
+实现方法的设计提供指导.除此之外,还有很多研究
+者将神经网络集成应用到实际问题域中,取得了很
+好的效果. 本节后续部分将分别对这些方面的研究
+进展进行介绍. 
+2. 1　实现方法
+对神经网络集成实现方法的研究主要集中在两
+个方面,即怎样将多个神经网络的输出结论进行结
+合以及如何生成集成中的个体网络. 
+2. 1. 1　结论生成方法
+当神经网络集成用于分类器时,集成的输出通
+常由个体网络的输出投票产生.通常采用绝对多数
+投票法(某分类成为最终结果当且仅当有超过半数
+的神经网络输出结果为该分类)或相对多数投票法
+(某分类成为最终结果当且仅当输出结果为该分类
+的神经网络的数目最多) . 理论分析和大量试验表
+明[4 ] ,后者优于前者. 因此,在对分类器进行集成时, 
+目前大多采用相对多数投票法. 
+当神经网络集成用于回归估计时,集成的输出
+通常由各网络的输出通过简单平均或加权平均产
+生. Perro ne等人[ 11]认为,采用加权平均可以得到比
+简单平均更好的泛化能力. 但是,也有一些研究
+者[12 ] 认为, 对权值进行优化将会导致过配
+( ov erf it ting ) ,从而使得集成的泛化能力降低,因此, 
+他们建议使用简单平均. 
+此外还存在多种结合方式. 例如, 有的研究
+者[13, 14 ]利用神经网络这样的学习系统,通过学习来
+对多个预测进行结合; 有的研究者[15 ]通过对一组子
+网进行优化,使各子网都可以较好地处理一个输入
+子空间, 从而一步步地进行结合; 有的研究者[16 ]不
+2 计　　算　　机　　学　　报　2002年
+
+使用线性结合方法,而是使用一些随个体网络输出
+的确定程度而变化的动态权值来产生最终的分类; 
+有的研究者[17 ]以最小化分类误差为标准选择出相
+对于每一个输出分类的最佳网络,然后估计出最优
+线性权以将个体网络集成起来形成理想分类器. 
+2. 1. 2　个体生成方法
+在生成集成中个体网络方面,最重要的技术是
+Boosting[ 10]和Bagging ( Bo ot st rap Ag g rega ting ) [18 ] . 
+Boosting 是一大类算法的总称, 最早由
+Schapi re[ 10]提出, Freund[19 ]对其进行了改进. 通过
+这种方法可以产生一系列神经网络,各网络的训练
+集决定于在其之前产生的网络的表现,被已有网络
+错误判断的示例将以较大的概率出现在新网络的训
+练集中. 这样,新网络将能够很好地处理对已有网络
+来说很困难的示例. 另一方面,虽然Boosting 方法
+能够增强神经网络集成的泛化能力,但是同时也有
+可能使集成过分偏向于某几个特别困难的示例. 因
+此,该方法不太稳定,有时能起到很好的作用,有时
+却没有效果[10 ] . 值得注意的是, Schapi re[ 10] 和
+Freund[19 ]的算法在解决实际问题时有一个缺陷,即
+它们都要求事先知道弱学习算法学习正确率的下
+限,这在实际问题中很难做到. 1995年, Freund和
+Schapi re[ 20] 提出了AdaBoost ( Ada ptiv e Boo st )算
+法,该算法的效率与Freund算法[19 ]很接近,却可以
+非常容易地应用到实际问题中,因此,该算法已成为
+目前最流行的Bo osting 算法. 
+Boosting 方法有两种不同的使用方式,即使用
+带权的示例和按概率重取示例, Quinlan[21 ]通过实
+验发现,前者效果优于后者. 1996年, Breiman[ 22]提
+出了Arcing ( Adaptiv e Resample a nd Combine )的
+概念,认为Bo osting 是Arcing 算法族的一个特例. 
+在此基础上,他[ 22]设计出Arc-x 4算法,该算法在产
+生新网络时,示例的权的变化与已有的所有网络都
+有关. 有趣的是, Bauer和Kohavi [23 ]通过实验发现, 
+与AdaBo ost相反,按概率重取示例的Arc-x 4优于
+使用带权示例的Arc-x 4. 
+另外,在使用Boosting 类算法时,由于被已有
+网络正确判别的示例的权值会不断减小, 在
+Boosting 轮数较多,即产生了较多的个体网络时,计
+算机有可能会发生下溢. Bauer 和Kohavi[23 ]为此设
+计了一个与AdaBoost 中的权更新公式等价的公
+式,可以较好地缓解该问题. 
+Bagging[ 18] 的基础是可重复取样( Boo tst ra p 
+Sampling ) [24 ] . 在该方法中,各神经网络的训练集由
+从原始训练集中随机选取若干示例组成,训练集的
+规模通常与原始训练集相当,训练例允许重复选取. 
+这样,原始训练集中某些示例可能在新的训练集中
+出现多次,而另外一些示例则可能一次也不出现. 
+Bag ging 方法通过重新选取训练集增加了神经网络
+集成的差异度,从而提高了泛化能力. Breiman[22 ]将
+此类算法称为P& C( Perturb a nd Combine)族算法, 
+他[18 ]指出,稳定性是Bag ging 能否发挥作用的关键
+因素, Bagging 能提高不稳定学习算法的预测精度, 
+而对稳定的学习算法效果不明显,有时甚至使预测
+精度降低. 学习算法的稳定性是指如果训练集有较
+小的变化,学习结果不会发生较大变化,例如, k 最
+近邻方法、Naiv e Bayes方法等是稳定的,而决策树、
+神经网络等方法是不稳定的.目前Bag ging 也有很
+多种变体,例如在扰动训练集时不进行重取样,而是
+对各示例的权加入零均值高斯噪音的Wagging 
+(Weight Agg rega tion) [23 ] . 
+Bagg ing 类算法与Boosting 类算法的主要区别
+在于Bag ging 的训练集的选择是随机的,各轮训练
+集之间相互独立,而Boo sting 的训练集的选择不是
+独立的,各轮训练集的选择与前面各轮的学习结果
+有关; Bagging 的各个预测函数没有权重, 而
+Bo osting 是有权重的; Bagging 的各个预测函数可
+以并行生成,而Boosting 的各个预测函数只能顺序
+生成. 对于像神经网络这样极为耗时的学习方法, 
+Bag ging 可通过并行训练节省大量时间开销. 另外, 
+一些研究者[6, 23 ]发现,一般情况下, Bag ging 方法总
+是可以改善学习系统的性能;而Bo osting 方法在有
+效时效果比Bagging 还好,但在无效时却可能使学
+习系统的性能恶化. 
+值得注意的是, Bo osting 和Bagging 的轮数并
+非越多越好,实验[ 6]表明,学习系统性能的改善主要
+发生在最初的若干轮中. 
+此外还存在多种个体生成方法.例如,有些研究
+者使用不同的目标函数[25 ]、隐层神经元数[26 ]、权空
+间初始点[27 ]等来训练不同的网络,从而获得神经网
+络集成中的个体; 有的研究者[ 28 ]使用交叉验证技术
+来产生神经网络集成中的个体; 有的研究者[29, 30 ]利
+用遗传算法进化出的神经网络种群作为集成中的个
+体;本文作者[31 ]使用遗传算法对网络群体进行选择
+以获得集成中的个体. 
+2. 2　理论分析
+对神经网络集成的理论分析与对其实现方法的
+研究类似,也分为两个方面,即对结论生成方法的分
+1期 周志华等: 神经网络集成 3
+
+析以及对网络个体生成方法的分析. 
+2. 2. 1　结论生成方法分析
+1990年, Hansen和Salamon[4 ]证明,对神经网
+络分类器来说,采用集成方法能够有效提高系统的
+泛化能力. 假设集成由N 个独立的神经网络分类器
+构成,采用绝对多数投票法,再假设每个网络以1- p 
+的概率给出正确的分类结果,并且网络之间错误不
+相关,则该神经网络集成发生错误的概率per r为
+per r = ΣN 
+k> N /2 
+N
+k 
+pk ( 1 - p )N - k ( 1) 
+在p < 1 /2时, per r随N 的增大而单调递减. 因
+此,如果每个神经网络的预测精度都高于50% ,并
+且各网络之间错误不相关,则神经网络集成中的网
+络数目越多,集成的精度就越高. 当N 趋向于无穷
+时,集成的错误率趋向于0.在采用相对多数投票法
+时,神经网络集成的错误率比式( 1)复杂得多,但是
+Ha nsen和Salamon[ 4]的分析表明,采用相对多数投
+票法在多数情况下能够得到比绝对多数投票法更好
+的结果. 
+在实际应用中,由于各个独立的神经网络并不
+能保证错误不相关,因此,神经网络集成的效果与理
+想值相比有一定的差距,但其提高泛化能力的作用
+仍相当明显. 
+1993年, Per ro ne 和Coo per[11 ]证明,在将神经
+网络集成用于回归估计时,如果采用简单平均,且各
+网络的误差是期望为0且互相独立的随机变量,则
+集成的泛化误差为各网络泛化误差平均值的1 /N , 
+其中N 为集成中网络的数目; 如果采用加权平均, 
+通过适当选取各网络的权值,能够得到比采用简单
+平均法更好的泛化能力. 
+1996年, Sollich 和Kro gh[5 ]指出,在神经网络
+集成的规模较大,即个体网络较多时,对结论的权进
+行优化没有好处,适于使用简单平均等结论合成方
+法; 而在神经网络集成的规模较小,即个体网络较
+少,或者数据集中噪音较多时,对结论的权进行优化
+将提高学习系统的泛化能力. 
+常用的一些神经网络模型在学习过程中容易陷
+入局部极小,这通常被认为是神经网络的主要缺点
+之一. 然而, Perro ne 和Co oper[11 ]却认为, 这一特性
+对神经网络集成泛化能力的提高起到了重要作用. 
+这是因为,如果各神经网络互不相关,则它们在学习
+中很可能会陷入不同的局部极小,这样神经网络集
+成的差异度(v ariance)就会很大,从而减小了泛化误
+差. 换句话说,各局部极小的负作用相互抵消了. 
+1995年, Krogh 和Vedelsby[28 ]给出了神经网
+络集成泛化误差计算公式.假设学习任务是利用N 
+个神经网络组成的集成对f :Rn→R进行近似,集
+成采用加权平均,各网络分别被赋以权值wT,并满
+足式( 2)和式( 3): 
+wT> 0 ( 2) 
+ΣT
+wT= 1 ( 3) 
+再假设训练集按分布p (x )随机抽取,网络T对
+输入X 的输出为VT(X ) ,则神经网络集成的输出为
+V - 
+(X ) = ΣT
+wTVT
+(X ) ( 4) 
+神经网络T的泛化误差ET和神经网络集成的
+泛化误差E 分别为
+ET
+=∫dx p (x ) ( f ( x ) - VT
+(x ) ) 2 ( 5) 
+E =∫dx p (x ) ( f ( x ) - V - 
+(x ) ) 2 ( 6) 
+各网络泛化误差的加权平均为
+E - 
+= ΣT
+wTET ( 7) 
+神经网络T的差异度AT和神经网络集成的差
+异度A - 
+分别为
+AT=∫dx p ( x ) (V ( x ) - V - 
+( x ) ) 2 ( 8) 
+A - = ΣT
+wTAT 
+( 9) 
+则神经网络集成的泛化误差为
+E = E - 
+- A- ( 10) 
+式( 10)中的A - 
+度量了神经网络集成中各网络
+的相关程度.若集成是高度偏向( biased)的,即对于
+相同的输入,集成中所有网络都给出相同或相近的
+输出,此时集成的差异度接近于0,其泛化误差接近
+于各网络泛化误差的加权平均.反之,若集成中各网
+络是相互独立的,则集成的差异度较大,其泛化误差
+将远小于各网络泛化误差的加权平均. 因此,要增强
+神经网络集成的泛化能力,就应该尽可能地使集成
+中各网络的误差互不相关. 
+2. 2. 2　个体生成方法分析
+1997年, Freund 和Schapi re[20 ]以AdaBo ost为
+代表,对Boo sting 类方法进行了分析,并证明该类方
+法产生的最终预测函数H 的训练误差满足式( 11) , 
+其中Xt 为预测函数ht 的训练误差,Vt= 1 /2- Xt . 
+H =Πt
+[2 Xt ( 1 - Xt ) ] 
+=Πt
+1 - 4V2 
+t ≤ exp( - 2Σt
+V2t
+) ( 11) 
+4 计　　算　　机　　学　　报　2002年
+
+从式( 11)可以看出,只要学习算法略好于随机
+猜测,训练误差将随t 以指数级下降.在此基础上, 
+Freund和Schapire[20 ]用VC维[32 ]对Boo sting 的泛
+化误差进行了分析. 设训练例为m 个,学习算法的
+V C维为d ,训练轮数为T,则其泛化误差上限如式
+( 12)所示, 其中Pr ^ ( ) 表示对训练集的经验概率. 
+P^ r ( H(x ) ≠ y ) + O Td 
+m 
+( 12) 
+式( 12)表明,若训练轮数过多, Boo sting 将发生
+过配.但大量试验表明, Boosting 即使训练几千轮后
+仍不会发生过配现象,而且其泛化误差在训练误差
+已降到零后仍会继续降低. 为解释这一现象, 1998 
+年Scha pi re等人[33 ]从边际( margin)的角度对泛化
+误差进行了分析. 边际margin (x , y )定义为
+margin ( x , y ) = yΣn 
+i= 1
+Ti hi (x ) ( 13) 
+正边际表示正确预测,负边际表示错误预测,较
+大的边际可信度较高,较小的边际可信度较低. 如
+图1所示,假设存在两个不同的类别的数据点,若以
+h1 为划分超平面,则两个分类的最小边际为d1 ; 若
+以h2 为划分超平面,则两个分类的最小边际为d2 . 
+显然, 如果d2> d1 ,则h2 是比h1 更好的划分超平
+面,因为其分类鲁棒性更好. 
+Schapi re等人[33 ]认为, 在训练误差降为零后, 
+Boosting 仍会改善边际,即继续寻找边际更大的划
+分超平面,这就使得分类可靠性得到提高,从而使泛
+化误差得以继续降低. 进一步, Schapi re等人[33 ]还
+具体地给出了泛化误差的上限: 
+P^ r [margin( x , y )≤θ]+ O d 
+mθ2 
+( 14) 
+从式( 14)可以看出, Boosting 的泛化误差上限
+与训练轮数无关, Schapire[34 ]的一些实验也证实了
+这一点. 
+然而, 1998 年Grov e 和Schuurmans[ 35] 指出, 
+Schapi re等人的边际假说并不能真正解释Bo osting 
+成功的原因. 为证明这一点,他们在AdaBoo st的基
+础上设计了LPBoo st算法,通过线性规划来调整各
+预测函数的权重,从而增大最小边际.他们指出,如
+果边际假说成立,那么LPBo ost算法产生的学习系
+统泛化误差应比较小,然而实验表明,该学习系统的
+泛化误差并不小,也就是说,边际的增大并不必然导
+致泛化误差的减小,有时甚至造成泛化误差增大. 因
+此,关于Boo sting 为什么有效, 目前仍然没有一个
+被广泛接受的理论解释. 
+1996年, Breiman[18 ]对Bagging 进行了理论分
+析.他指出,分类问题可达到的最高正确率以及利用
+Bag ging 可达到的正确率分别如式( 15)和式( 16)所
+示, 其中C表示序正确( o rder co rrect )的输入集,C′ 
+为C 的补集, I ( )为指示函数( indicato r function) . 
+r* =∫max 
+j 
+P ( j|x )PX ( x ) ( 15) 
+rA=∫x∈ C 
+max j P ( j|x ) PX ( dx )+ 
+∫x∈ C′ 
+[Σj
+I (OA (x )= j ) P ( j|x ) ]PX ( x ) ( 16) 
+显然, Bag ging 可使序正确集的分类正确率达
+到最优,单独的预测函数则无法做到这一点. 
+对回归问题, Breiman推出式( 17) ,不等号左边
+为Bag ging 的误差平方,右边为各预测函数误差平
+方的期望: 
+|ELh(x ,L )|2 ≤ ELh2 ( x , L ) ( 17) 
+显然,预测函数越不稳定,即式( 17)右边和左边
+的差越大, Bag ging的效果越明显. 
+除此之外, Breima n[36 ]还从偏向( bias)和差异
+( v ariance)的角度对泛化误差进行了分析. 他指出, 
+不稳定预测函数的偏向较小、差异较大, Bag ging 正
+是通过减小差异来减小泛化误差的. 在此之后, 
+Wolpert和Macready[37 ]具体地给出了泛化误差、偏
+向和差异之间的关系: 
+E (C|f ,m , q) =Σd
+P (d|f ,m ) (hd ( q) - f* 
+(q) )
+2 　
+= ( h* 
+(q ) - f * 
+( q) ) 
+2
++ 
+Σd
+P (d|f ,m ) (hd ( d ) - h
+* 
+( q) ) 
+2 ( 18) 
+式( 18)左边为泛化误差,右边第一项为偏向的
+平方,第二项为差异. Bag ging 就是对h* (q)进行模
+拟,使得在偏差相同的情况下差异尽量趋向于零. 
+值得注意的是, 虽然利用偏向和差异来解释
+Bag ging 获得了一定的成功, 但Freund 和
+Schapire[38 ]通过一系列基于Stumps和C4. 5的实验
+指出,偏向和差异并不能很好地解释Bo osting . 
+2. 3　应用成果
+由于神经网络集成方法操作简单且效果明显, 
+1期 周志华等: 神经网络集成 5
+
+因此,该技术已在很多领域中得到了成功的应用. 
+Hansen等人[ 39]利用由相对多数投票法结合的
+神经网络集成进行手写体数字识别,实验结果表明, 
+集成的识别率比最好的单一神经网络识别率高出
+20%— 25% . 此后, Schw enk 和Bengio[ 40 ] 将
+AdaBoo st与神经网络结合进行手写体字符识别,系
+统对由200多个人的手写字符所组成的数据库能达
+到1. 4% 的错误率,而对UCI字符数据集则能达到
+1. 5%的错误率. 
+Mao[41 ]比较了用Bo osting, Bag ging 等方法产
+生的神经网络集成在改善OCR性能上的效果. 实
+验结果表明,虽然Boo sting 的精度在零拒识率时略
+优于Bag ging ,但随着拒识率的上升其优势迅速下
+降,最终在高拒识率时不敌Bagging. 
+Gut ta 和Wechsler[42 ]将神经网络集成和决策
+树相结合进行正面人脸识别,其集成由RBF网络采
+用相对多数投票法构成,实验结果表明,使用神经网
+络集成不仅增加了系统的健壮性,还提高了识别率. 
+此后, Gut ta 等人[43 ]用RBF网络的集成进行多性
+别、多人种和多姿态的正面人脸识别. 他们使用了
+“分而治之( div ide and co nquer)”的模块化方法,并
+利用决策树和支持向量机[44 ]来实现挑选个体网络
+以确定输出分类的选通( gating )功能. 本文作者与
+Carnegie Mellon大学、微软中国研究院的合作者一
+起[45 ] ,将神经网络集成用于图像在深度方向上发生
+偏转的多姿态人脸识别,在省去了偏转角度估计预
+处理的情况下,系统的识别精度甚至高于多个单一
+神经网络在理想偏转角度估计预处理协助之下所能
+取得的最佳识别精度,除此之外,系统还能在进行识
+别的同时给出一定的角度估计信息. 
+Cherkauer[26 ]用简单平均法集成具有不同隐层
+神经元数的BP网络,并用它代替N ASA的喷射推
+进实验室研制的JARTOO L中的Gauss分类器,对
+Magellan 空间探测器收集到的关于金星的合成孔
+径雷达图像进行分析,在火山检测方面达到了行星
+地质专家的水平. 
+Shimsho ni和Int rato r[46 ]利用神经网络集成进
+行地震波分类.他们采用了二级集成方式,地震波信
+号的三种不同表示分别被输入到采用不同网络结构
+的三个集成中,每个集成都被赋予一个可信度,第二
+级集成就以该可信度为权值,通过加权平均对第一
+级的三个集成进行结合. 
+Schapi re和Singer[47 ]将Boosting 用于文本分
+类( tex t categ orization) . 他们通过实验发现,在该问
+题上, Boo sting 的效果始终优于或相当于Sleepingexperts, 
+Ro cchio , Naiv e-Bayes等常用技术. 
+此外,神经网络集成还在语音识别[ 25]、文本过
+滤[48 ]、遥感信息处理[49 ]、疾病诊断[50 ]等多个领域成
+功地得到了应用,限于篇幅,这里就不再一一详细介
+绍了. 
+3　进一步的问题
+目前,在神经网络集成的研究中仍然存在着很
+多有待解决的问题. 本文认为,在将来的研究中,以
+下几方面的问题可望成为该领域的主要研究内容: 
+( 1) 关于神经网络集成的研究目前基本上是针
+对分类和回归估计这两种情况分别进行的,这就导
+致了多种理论分析以及随之而来的多种不同解释的
+产生.如果能为神经网络集成建立一个统一的理论
+框架,不仅可以为集成技术的理论研究提供方便,还
+有利于促进其应用层面的发展. 
+( 2) 关于Boo sting 为什么有效,虽然已有很多
+研究者进行了研究,但目前仍然没有一个可以被广
+泛接受的理论解释.如果能够成功地解释这种方法
+背后隐藏的东西,不仅会促进统计学习方法的发展, 
+还会对整个机器学习技术的进步发挥积极作用. 
+Bauer 和Kohavi[23 ]通过实验发现, Bagging 有效的
+主要原因是减小学习系统的差异,而Boosting 有效
+的主要原因是在减小差异的同时减小偏向. 对该结
+论进行深入的理论分析也许是一条有希望的途径. 
+( 3) 现有研究成果表明,当神经网络集成中的
+个体网络差异较大时,集成的效果较好,但如何获得
+差异较大的个体网络以及如何评价多个网络之间的
+差异度,目前仍没有较好的方法.如果能找到这样的
+方法,将极大地促进神经网络集成技术在应用领域
+的发展. 在这方面, Liu和Yao[51, 52 ]提出的负相关学
+习方法也许有一定的启发性. 
+( 4) 在使用神经网络集成,尤其是Bo osting 类
+方法时, 训练样本的有限性是一个很大的问题, 
+Bag ging 等算法正是通过缓解该问题而获得了成
+功.如何尽可能地充分利用训练数据,也是一个很值
+得研究的重要课题. 
+( 5) 神经网络的一大缺陷是其“黑箱性” ,即网
+络学到的知识难以被人理解,而神经网络集成则加
+深了这一缺陷. 已经有一些研究者[ 53, 54 ]对改善
+Bag ging 和Boo sting 系统的可理解性进行了初步研
+究.目前,从神经网络中抽取规则的研究已成为研究
+6 计　　算　　机　　学　　报　2002年
+
+热点[55 ] ,如果能从神经网络集成中抽取规则,则可
+以在一定程度上缓解集成的不可理解性. 
+参考文献
+1 Hornik K M , Stinchcom be M, Whi te H. M ulti layer 
+feedf orw ard netw ork s are universal approximat ors. Neu ral 
+Netw orks, 1989, 2( 2): 359- 366 
+2 Judd J S. Learning in n etw orks i s h ard. In: Proc th e 1st IE EE 
+Int ernati onal Conf erence on Neu ral Netwo rk s, San Di ego, 
+C A, 1987, 2: 685- 692 
+3 Baum E B, Haussl er D. Wh at si ze net gives valid 
+generali zati on? Neural Comput ation, 1989, 1( 1): 151- 160 
+4 Hans en L K, Salamon P. Neu ral netw ork ensembl es. IE EE 
+T rans Pat t ern Anal ysis and M ach ine Int elli gence, 1990, 12 
+( 10): 993- 1001 
+5 Sollich P, Krogh A. Learning w ith ens embl es: How ov erfi 
+tt ing can be us eful. In: Tou ret zky D, Mo zer M , Has selmo M 
+eds. Advances in Neu ral Inf ormati on Processing Sys t ems 8, 
+Cam bridge, M A: M IT Press , 1996. 190- 196 
+6 Opi t z D, Maclin R. Popular ensemble methods: An empi rical 
+study. Journal of Arti fici al Int el ligence Res earch , 1999, 11: 
+169- 198 
+7 Cooper L N. Hyb rid neural netw ork archit ectures: Equilibrium 
+sys tems that pay att enti on. In: Mammone R J, Zeevi Y Y eds. 
+Neu ral Netwo rks:
+Th eo ry and Appli cati ons, San Di ego, CA: 
+Academic Press , 1991. 81- 96 
+8 Kearns M, Valiant L G. Learning Boolean f ormulae or 
+factoring. Aik en Compu tati on Laboratory, Harvard 
+Universit y, Camb ridge, M A, Tech ni cal Report: T R-1488, 
+1988 
+9 Anth ony M. Probabili sti c analysi s of learning in artif icial 
+neu ral netw orks: Th e PAC model and i ts v ariant s. Neu ral 
+Comput ing Su rveys, 1997, 1: 1- 47 
+10 Sch api re R E. The s t rength of weak learnabi lit y. Machine 
+Learning, 1990, 5( 2): 197- 227 
+11 Perrone M P, Coop er L N. Wh en netw orks disag ree: 
+Ensembl e method f or n eural netw orks. In: Mammone R J ed. 
+Arti fici al Neural Netw orks f or Speech and Visi on, N ew York: 
+Chapman& Hall , 1993. 126- 142 
+12 Opi t z D, Sh avlik J. Actively s earching fo r an ef fect ive neu ral 
+netw ork ens em ble. Conn ection Sci ence, 1996, 8( 3- 4): 337- 
+353 
+13 Zhang X, Mesi rov J P, Wal t z D L. Hyb rid s yst em f or prot ein 
+secondary st ructu re p rediction. Journal of Molecular Biology, 
+1992, 225( 4): 1049- 1063 
+14 Ros t B, Sand er C. Predi ct ion of protein s econdary s t ructure at 
+bett er than 70% Accu racy. Journal of Mol ecu lar Biology, 
+1993, 232( 2): 584- 599 
+15 Jacobs R, Jord an M, Now lan S, Hin ton G. Adap tive mix tu res 
+of local ex per ts. Neural Comput ation, 1991, 3(1) : 79- 87 
+16 Jimenez D. Dynamical ly w eigh ted ens em ble neu ral n etw orks 
+f or classi fi cation. In: Proc th e IEEE Int ernati onal Joint 
+Conf erence on Neural Netwo rk s, Ancho rage, AK, 1998, 1: 
+753- 756 
+17 Ueda N. Op timal linear combinat ion of neu ral netwo rk s f or 
+imp roving classif icat ion perf ormance. IEEE Trans Pat tern 
+Analysi s and Machine Int el ligence, 2000, 22( 2): 207- 215 
+18 Breiman L. Bagging predi ct ors. M ach ine Learning , 1996, 24 
+( 2): 123- 140 
+19 Freund Y. Boos ting a weak al gori thm b y majo ri ty. Inf ormati on 
+and Comput ation, 1995, 121( 2): 256- 285 
+20 Freund Y, Schapire R E. A deci sion-theoretic generalizati on of 
+on-line learning and an applicat ion to boos ting. Jou rnal of 
+Comp ut er and Sys t em Sci ences , 1997, 55( 1): 119- 139 
+21 Quin lan J R. Bagging, boos ting, and C4. 5. In: Proc th e 13th 
+Nati onal Conf erence on Arti fici al Int el li gence, Po rtland , OR, 
+1996. 725- 730 
+22 Breiman L. Arcing classif iers. Annals of Stat is tics, 1998, 26 
+( 3): 801- 849 
+23 Bauer E, Koh avi R. An empirical comparis on of voting 
+clas sif icati on al gori thms: Bagging, boos ting , and vari ants. 
+Machine Learning, 1999, 36( 1- 2): 105- 139 
+24 Ef ron B, Tib shi rani R. An In t rod ucti on t o the Boots t rap. New 
+York: Chapman& Hal l, 1993 
+25 Hampshi re J, Waib el A. A novel objectiv e function f or 
+imp roved phon eme recognit ion u sing time-delay neural 
+netwo rk s. IEEE Trans Neu ral Netwo rk s, 1990, 1 ( 2): 216- 
+228 
+26 Ch erkauer K J. Human expert level perf ormance on a s cienti fic 
+image analysis t as k by a s yst em using combin ed arti fici al neural 
+netwo rk s. In: Proc th e 13th AAAI Work shop on Int egrating 
+Mu ltiple Learned Model s fo r Improving and Scaling Machine 
+Learning Algorithms , Port land, OR, 1996. 15- 21 
+27 Maclin R, Shavlik J W. Combining th e predi cti ons of m ultiple 
+clas sif iers: Using competi tive learning to ini tiali ze neural 
+netwo rk s. In: Proc the 14th In ternational Join t Conf erence on 
+Ar tifi cial Int elli gence, Mon treal , Canada, 1995. 524- 530 
+28 Krogh A, Ved els by J. Neural netwo rk ensembles, cross 
+validation , and activ e learning. In: Tes auro G, Touretzk y D, 
+Leen T eds. Advances in Neural Inf ormation Processing 
+Sys t ems 7, Cambridge, M A: M IT Pres s, 1995. 231- 238 
+29 Opit z D W, Shavlik J W. Generating accurate and diverse 
+members of a neural n etw ork ensembl e. In: Touret zky D, 
+Mo zer M , Has selmo M eds. Advances in Neural Inf ormati on 
+Processing Sys tems 8, Cambridge, M A: MIT Pres s, 1996. 
+535- 541 
+30 Yao X, Liu Y. Making use of populati on inf ormation in 
+evoluti onary art ifi cial neural netw ork s. IEE E Trans Syst ems , 
+Man and Cybernetics—— Part B: Cybernetics, 1998, 28 ( 3): 
+417- 425 
+31 Zh ou Z-H, Wu J-X, Jiang Y, Ch en S-F. Genetic alg ori thm 
+based selectiv e neural n etw ork ens em ble. In: Proc th e 17th 
+Int ernational Joint Conference on Art ifi cial Int elligence, 
+Seat tl e, W A, 2001, 2: 797- 802 
+1期 周志华等: 神经网络集成 7
+
+32 Cui Wei-Dong , Zhou Zhi-Hua, Li Xing. Research of th e V Cdimension 
+compu tation of neural n etw orks. Comput er Sci ence, 
+2000, 27( 7): 59- 62( in Chinese) 
+(崔伟东,周志华,李　星. 神经网络V C维计算研究. 计算机
+科学, 2000, 27( 7): 59- 62) 
+33 Sch api re R E, Freund Y, Bartl et t Y, Lee W S. Boos ting th e 
+margin: A new explanati on f or th e ef f ectiveness of vot ing 
+methods. An nal s of S tatis ti cs , 1998, 26( 5): 1651- 1686 
+34 Sch api re R E. A b ri ef int roduction of boos ting. In: Proc th e 
+16th Int ernat ional Joint Conf erence on Ar tifi cial Int elli gence, 
+St ockh olm, Sw eden, 1999. 1401- 1405 
+35 Grove A J, Schuu rmans D. Boosting in th e limi t: Maximi zing 
+th e margin of learn ed ens embl es. In: Proc th e 15th National 
+Conf erence on Artif icial Int elli gence, Madi son, W I, 1998. 692 
+- 699 
+36 Breiman L. Bias, variance, and arcing classi fiers. Departmen t 
+of St atis ti cs , Univ ersi ty of Calif ornia at Berkeley: Tech nical 
+Report 460, 1996 
+37 Wolp ert D H, Macready W G. An eff ici en t m ethod to es timat e 
+bagging 's gen eralizati on erro r. Mach ine Learning , 1999, 35 
+( 1): 41- 55 
+38 Freund Y, Schapire R E. Dis cus sion of the paper “ Arcing 
+classi fi ers” by Leo Breiman. Annals of Stati sti cs , 1998, 26 
+( 3): 824- 832 
+39 Hans en L K, Liis berg L, Salamon P. Ensemble meth ods for 
+h andw ri t ten digi t recogniti on. In: Proc th e 1992 IE EE 
+Works hop on Neu ral Netw orks f or Si gnal Proces sing, 
+Copenh agen, Denmark, 1992. 333- 342 
+40 Schw enk H, Bengio Y. Boos ting n eural netw orks. Neu ral 
+Comput ation, 2000, 12( 8): 1869- 1887 
+41 Mao J. A cas e s tudy on bagging, boosting and basic ensembl es 
+of neural netw orks fo r OC R. In: Proc th e IEEE In ternational 
+Joint Conf erence on Neural Netw orks , Anch orag e, AK, 1998, 
+3: 1828- 1833 
+42 Gu t ta S, Wechs ler H. Face recog ni ti on using h ybrid clas sifi er 
+sys tems. In: Proc the IEEE Int ernat ional Conf erence on 
+Neu ral Netw orks , Was hing ton, DC, 1996. 1017- 1022 
+43 Gu t ta S, Huang J R J, Jonathon P, Wechsl er H. Mi xture of 
+expert s f or classi fication of gend er, eth ni c origin, and pose of 
+h uman f aces. IEEE Trans Neural Netw ork s, 2000, 11( 4): 948 
+- 960 
+44 Cor tes C, Vap nik V. Suppor t vect or n etw orks. Machine 
+Learning, 1995, 20( 3): 273- 297 
+45 Huang F J, Zh ou Z-H, Zhang H-J, Ch en T. Pose invariant 
+f ace recogni tion. In: Proc th e 4th IEEE Int ernati onal 
+Conf erence on Au tomati c Face and Ges ture Recogniti on, 
+Grenoble, France, 2000. 245- 250 
+46 Shimsh oni Y, Int rator N. Classi fication of s eismi c si gnals by 
+in tegrating ens embl es of n eural netwo rk s. IE EE Trans Si gnal 
+Processing, 1998, 46( 5): 1194- 1201 
+47 Schapi re R E, Sing er Y. BoosText er: A boosting-based 
+s ys t em f or text categ ori zation. Machine Learning , 2000, 39( 2 
+- 3): 135- 168 
+48 Schapi re R E, Singer Y, Singhal A. Boos ting and Rocch io 
+applied to t ex t f il tering. In: Proc the 21st An nual ACM SIGIR 
+Int ernational Conf erence on Research and Dev elopm en t in 
+Inf ormation Ret rieval , NY, 1998. 215- 223 
+49 Ceccarelli M, Petrosino A. Mul ti-featu re adaptiv e cl as sifi ers 
+f or SAR image segment ation. Neu rocompu ting, 1997, 14( 4): 
+345- 363 
+50 Sh ark ey A J C, Sharkey N E, Cross S S. Adapting an 
+ensemble app roach f or th e di agnosi s of breas t cancer. In: Proc 
+Int ernational Conf erence on Ar tifi cial Neural Netw orks , 
+Sk vd e, Sw eden, 1998. 281- 286 
+51 Liu Y, Yao X. Ensemble learning vi a n egativ e co rrelati on. 
+Neural Netw orks, 1999, 12(10): 1399- 1404 
+52 Liu Y, Yao X, Hi guchi T. Evoluti onary ens emb les wi th 
+negative co rrelati on l earning. IEEE Trans Evolu tionary 
+Comp utati on, 2000, 4( 4): 380- 387 
+53 Kohavi R, Ku nz C. Opt ion deci sion t rees wi th majori ty v otes. 
+In: Proc the 14th In ternational Conf erence on Machine 
+Learning, Nashvi lle, TN, 1997. 161- 169 
+54 Ridgew ay G, Madigan D, Richardson T. In terpretable boos ted 
+nai ve bayes cl as sif icati on. In: Proc the 4th Int ernati onal 
+Conf erence on Know ledg e Dis covery and Dat a Mining, NY, 
+1998. 101- 106 
+55 Zh ou Zhi-Hua, He Jia-Zhou , Ch en Shi-Fu. Int ernati onal 
+t rends of neural netw ork res earch. Pat t ern Recogni ti on and 
+Ar tifi cial Int elli gence, 2000, 13( 4): 415- 418( in Chinese) 
+(周志华, 何佳洲,陈世福. 神经网络国际研究动向. 模式识别
+与人工智能, 2000, 13( 4): 415- 418) 
+ZHOU Zhi-Hua, ma le, bo r n in 
+1973. He r eceiv ed his Ph. D. deg r ee 
+from the Computer Science & 
+Tech no lo gy Depar tment, Nanjing 
+Univ er sity in 2000. He is now a faculty 
+membe r a t the same depa rtm ent. At 
+pr esent he is a membe r o f th e 
+administr ativ e bo ard of Chinese Associa tio n o f Machine 
+Lea rning , a mem ber of IEEE and IEEE Computer So ciety. 
+His r esea rch inter ests mainly include machine lea rning , 
+neura l netw o rks, ev o lutionar y computing , and data mining. 
+CHEN Shi-Fu, male, bo rn in 1938. He is a full 
+pr ofessor at the Com puter Science & Techno log y 
+Depa rtment, Na njing Univ er sity. His resear ch interests 
+mainly include machine lea rning , know ledg e enginee ring , 
+dist ributed a rtificial intelligence, and imag e processing. 
+8 计　　算　　机　　学　　报　2002年
+

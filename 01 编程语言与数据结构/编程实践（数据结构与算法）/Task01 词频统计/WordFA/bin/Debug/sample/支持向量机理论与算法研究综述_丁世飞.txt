@@ -1,0 +1,1275 @@
+第 
+40卷第 
+1期电子科技大学学报 Vol.40 No.1 
+2011年1月 Journal of University of Electronic Science and Technology of China Jan. 2011 
+
+·复杂性科学·
+支持向量机理论与算法研究综述
+
+
+丁世飞1, 2，齐丙娟1，谭红艳3 
+
+(1. 中国矿业大学计算机科学与技术学院江苏徐州 221116; 
+2.中国科学院计算技术研究所智能信息处理重点实验室北京海淀区 100080; 
+3.中国科学院声学研究所高性能网络实验室北京海淀区 100190 ) 
+【摘要】统计学习理论(statistical learning theory，SLT)是一种小样本统计理论，着重研究在小样本情况下的统计规律及学
+习方法性质。支持向量机(support vector machinse, SVM)是一种基于SLT的新型的机器学习方法，由于其出色的学习性能，已
+经成为当前机器学习界的研究热点。该文系统介绍了支持向量机的理论基础，综述了传统支持向量机的主流训练算法以及一
+些新型的学习模型和算法，最后指出了支持向量机的研究方向与发展前景。
+
+关键词 
+FSVM; GSVM; 统计学习理论; 支持向量机; 训练算法; TSVMs 
+
+中图分类号 
+TP181文献标识码 
+A doi:10.3969/j.issn.1001-0548.2011.01.001 
+
+An Overview on Theory and Algorithm of Support Vector Machines 
+
+DING Shi-fei1,2, QI Bing-juan1, and TAN Hong-yan3 
+
+(1. School of Computer Science and Technology, China University of Mining and Technology Xuzhou Jiangsu 221116; 
+2. Key Laboratory of Intelligent Information Processing, Institute of Computing Technology, Chinese Academy of Science Haidian Beijing 100080; 
+3. High Performance Network Laboratory, Institute of Acoustic, Chinese Academy of Science Haidian Beijing 100190) 
+Abstract Statistical learning theory is the statistical theory of smallsample, and it focuses on the statistical 
+law and the nature of learning of small samples. Support vector machine is a new machine learning method based 
+on statistical learning theory, and it has become the research field of machine learning because of its excellent 
+performance. This paper describes the theoretical basis of support vector machines (SVM) systematically, sums up 
+the mainstream machine training algorithms of traditional SVM and some new learning models and algorithms 
+detailedly, and finally points out the research and development prospects of support vector machine. 
+
+Key words fuzzy support vector machines; granular support vector machines; statistical learning theory; 
+support vector machines; training algorithm; twin support vector machines 
+
+支持向量机[1-2](support vector machines，SVM)题，利用牛顿法、内点法等成熟的经典最优化算法
+是建立在统计学习理论 
+[3-4]VC维理论和结构风险最便能够很好地求解。但是当训练集规模很大时，就
+小化原理基础上的机器学习方法。它在解决小样本、会出现训练速度慢、算法复杂、效率低下等问题。
+非线性和高维模式识别问题中表现出许多特有的优目前一些主流的训练算法都是将原有大规模的 
+QP
+势，并在很大程度上克服了“维数灾难”和“过学问题分解成一系列小的 
+QP问题，按照某种迭代策
+习”等问题。此外，它具有坚实的理论基础，简单略，反复求解小的 
+QP问题，构造出原有大规模的 
+QP
+明了的数学模型，因此，在模式识别、回归分析、问题的近似解，并使该近似解逐渐收敛到最优解。
+函数估计、时间序列预测等领域都得到了长足的发但是如何对大规模的 
+QP问题进行分解以及如何选
+展，并被广泛应用于文本识别[5]、手写字体识别[6]、择合适的工作集是当前训练算法所面临的主要问
+人脸图像识别[7]、基因分类[8]及时间序列预测[9]等。题，并且也是各个算法优劣的表现所在。另外，现
+
+标准的支持向量机学习算法问题可以归结为求有的大规模问题训练算法并不能彻底解决所面临的
+解一个受约束的二次型规划 
+(quadratic 问题，因此，在原有算法上进行合理的改进或研究
+programming，QP)问题。对于小规模的二次优化问新的训练算法势在必行。本文首先对支持向量机的
+
+收稿日期： 
+2010 . 12 . 15；修回日期： 
+2011 . 01 . 09 
+
+基金项目: 国家自然科学基金(60975039)；江苏省基础研究计划(BK2009093) 
+作者简介: 丁世飞(1963 . )，男，博士后，教授，博士生导师，主要从事模式识别与机器学习、粗糙集与软计算及粒度支持向量机方面的研究. 
+
+
+
+
+第1期 
+丁世飞，等: 支持向量机理论与算法研究综述 
+
+
+理论进行系统的介绍，进而对当今 
+SVM训练算法进
+行综述，并对未来的研究方向进行展望。 
+
+
+1 SVM理论 
+
+
+1.1 统计学习理论(statistical learning theory, SLT) 
+统计学习理论是一种专门研究小样本情况下机
+器学习规律的理论。该理论针对小样本统计问题建
+立了一套新的理论体系，在该体系下的统计推理规
+则不仅考虑了对渐近性能的要求，而且追求在现有
+有限信息的条件下得到最优结果。
+
+统计学习理论的一个核心概念是VC维，模式识
+别方法中VC维的直观定义是：对一个指示函数集，
+如果存在 
+h个样本能够被函数集中的函数按所有可
+能够的 
+2h种形式分开，则称函数集能够把 
+h个样本
+打散，函数集的 
+VC维就是它能打散的最大样本数目 
+h。VC维反映了函数集的学习能力，VC维越大则学
+习机器越复杂(学习能力越强)。
+
+统计学习理论系统地研究了各种类型函数集的
+经验风险(即训练误差 
+)和实际风险 
+(即期望风险 
+)之
+间的关系，即推广性的界。
+
+关于两类分类问题有如下结论：对指示函数集
+中的所有函数，经验风险和实际风险之间至少以概
+率1.η满足如下关系： 
+
+
+2l η
+
+h(ln +.1) ln 
+R() ≤Remp() h 4
+
+ww+ 
+
+
+ (1)
+l 
+式中， 
+h是函数集的VC维； 
+l是样本数。
+
+该结论从理论上说明了学习机器的实际风险是
+由两部分组成的：一是经验风险 
+(训练误差)；二是置
+信范围。实际风险与学习机器的 
+VC维及训练样本数
+有关，可以简单地表示为： 
+
+
+R()w≤Remp ()w+Φ(/) 
+
+hn (2)
+式(2)表明，在有限的训练样本下，学习机器 
+VC
+维越高(复杂度越高)则置信范围越大，导致真实风险
+与经验风险之间可能的差别越大。这就是为什么会
+出现过学习现象的原因。机器学习过程不但要经验
+风险最小，还要使 
+VC维尽量小以缩小置信范围，才
+能取得较小的实际风险，即对未来样本有较好的推
+广性。
+在此基础上，统计学习理论提出了一种新的策
+略解决该问题，就是首先把函数集 
+S={(x, a), 
+
+f 
+a∈Ω} 分解为一个函数子集序列： 
+S. 
+.. 
+..S ..S (3)
+
+1 S2" 
+k 
+
+使各子集能够按照 
+Φ的大小排列，也就是按照 
+VC维的大小排列，即： 
+h.....h " 
+h.. (4)
+
+12 k 
+
+在同一子集中置信范围就相同；在每一个子集
+中寻找最小经验风险和置信范围，取得实际风险的
+最小值，称作结构风险最小化 
+(structural risk 
+minimization，SRM)，即SRM准则。
+
+实现SRM原则可以有两种思路，一是在每个子
+集中求最小经验风险，然后选择使最小经验风险和
+置信范围之和最小的子集，该方法显然比较费时，
+当子集数目很大甚至是无穷时不可行；二是设计函
+数集的某种结构使每个子集中都能取得最小的经验
+风险(如使训练误差为 
+0)，然后只需选择适当的子集
+使置信范围最小，则这个子集中经验风险最小的函
+数就是最优函数。支持向量机方法实际上就是这种
+思想的具体实现。 
+
+
+1.2 
+支持向量机理论 
+(support vector machines, 
+SVM) 
+支持向量机(SVM)是建立在统计学习理论基础
+上的一种数据挖掘方法，能非常成功地处理回归问
+题(时间序列分析)和模式识别(分类问题、判别分析 
+)
+等诸多问题，并可推广于预测和综合评价等领域和
+学科。 
+
+
+SVM的机理是寻找一个满足分类要求的最优分
+类超平面，使得该超平面在保证分类精度的同时，
+能够使超平面两侧的空白区域最大化。理论上，支
+持向量机能够实现对线性可分数据的最优分类。
+
+以两类数据分类为例，给定训练样本集 
+
+
+xy .l x 
+Ry{ 1} 
+
+(,ii)，i=1,2, .., ，∈n ， 
+∈±，超平面记作 
+
+
+(wx.) +=
+
+b 0 ，为使分类面对所有样本正确分类并
+且具备分类间隔，就要求它满足如下约束： 
+
+
+i[( . 
+i) +b]≥1 i=1,2, ..,l
+
+y wx 
+. 
+可以计算出分类间隔为 
+2/ || w|| ，因此构造最优
+超平面的问题就转化为在约束式下求： 
+
+
+1 21
+
+minΦ () = 
+|| w|| =(ww.) (5)
+
+w 
+′
+
+22 
+为了解决该个约束最优化问题，引入 
+Lagrange函数： 
+1
+
+L(w,b,a) = 
+|| w|| 21=
+Σi.la( (( . 
++. 
+b) 1) (6)
+
+y 
+wx)
+
+i i 
+i
+
+2 
+式中，ai>0 为Lagrange乘数。约束最优化问题的解
+由Lagrange函数的鞍点决定，并且最优化问题的解
+在鞍点处满足对 
+w和 
+b的偏导为0，将该 
+QP问题转
+化为相应的对偶问题即：
+
+
+
+电子科技大学学报第 
+40卷
+
+4 
+
+l ll 
+max () =Σaj. 
+1 Σ∑ 
+aiji j( i. 
+j)
+
+
+Qa ayyxx 
+
+2
+
+j=1 i=1 j=1 
+
+.. Σ(l) ay =0 j=1,2, , ，≥，j=1,2, 
+
+st ... 
+la 0 ... 
+,l
+
+jj j 
+j=1 
+
+
+ (7)
+* ** *T
+
+解得最优解 
+a=( ,,... 
+a) 。
+
+aa ,
+
+2
+
+1 l 
+
+计算最优权值向量 
+w* 和最优偏置 
+b*，分别为： 
+
+
+** 
+
+w=Σ(l) ayx (8) 
+
+j jj 
+j=1
+
+**
+
+.Σ(l) ( . 
+) (9)
+
+b= 
+y yax x
+
+i jj j i 
+j=1 
+
+式中，下标 
+j∈{|ja* 
+j>0} 。因此得到最优分类超平
+面 
+(w * . 
+x) +b* =0 ，而最优分类函数为： 
+
+
+() =sgn{( w 
+* .x) +b*}
+
+fx 
+= 
+.. 
+.. 
+(10)
+
+.. 
+n
+
+sgn ...Σ(l) ., x∈R 
+
+. 
+j= 
+**
+1().+..
+jjjiayxxb.
+
+.. 
+.. 
+
+
+对于线性不可分情况， 
+SVM的主要思想是将输人向
+量映射到一个高维的特征向量空间，并在该特征空
+间中构造最优分类面。
+
+将 
+x做从输入空间 
+Rn到特征空间 
+H的变换 
+Φ，得： 
+x 
+→Φ()x 
+=(Φ 
+(), (), l()) (11)
+
+T12,...ΦΦxxx
+以特征向量Φ()x代替输入向量 
+x，则可以得到
+最优分类函数为： 
+
+
+() =sgn( w 
+.Φ 
+x 
++b) =
+
+fx 
+() 
+. 
+l . 
+(12)
+
+.∑ 
+i ii () +b.
+
+sgn a yΦ(x 
+) .Φ 
+x. 
+i=1 . 
+
+
+在上面的对偶问题中，无论是目标函数还是决
+策函数都只涉及到训练样本之间的内积运算，在高
+维空间避免了复杂的高维运算而只需要进行内积
+运算。 
+
+
+2 SVM训练算法 
+
+
+2.1 块算法(chunking algorithm) 
+Chunking算法[10]的出发点是删除矩阵中对应 
+Lagrange乘数为零的行和列将不会影响最终的结
+果。对于给定的样本， 
+Chunking算法的目标是通过
+某种迭代方式逐步排除非支持向量，从而降低训练
+过程对存储器容量的要求。具体做法是，将一个大
+型QP问题分解为一系列较小规模的 
+QP问题，然后找
+到所有非零的 
+Lagrange乘数并删除。在算法的每步
+中Chunking都解决一个QP问题，其样本为上一步所
+
+剩的具有非零 
+Lagrange乘数的样本以及 
+M个不满足 
+KKT条件的最差样本。如果在某一步中，不满足KKT
+条件的样本数不足 
+M个，则这些样本全部加入到新
+的QP问题中。每个 
+QP子问题都采用上一个 
+QP子问
+题的结果作为初始值。在算法进行到最后一步时，
+所有非零Lagrange乘数都被找到，从而解决了初始
+的大型QP问题。 
+
+
+Chunking算法将矩阵规模从训练样本数的平方
+减少到具有非零 
+Lagrange乘数的样本数的平方，在
+很大程度上降低了训练过程对存储容量的要求。 
+Chunking算法能够大大提高训练速度，尤其是当支
+持向量的数目远远小于训练样本的数目时。然而，
+如果支持向量个数比较多，随着算法迭代次数的增
+多，所选的块也会越来越大，算法的训练速度依旧
+会变得十分缓慢。 
+
+
+2.2 分解算法(decomposition algorithm) 
+分解算法最早在文献[11]中提出，是目前有效解
+决大规模问题的主要方法。分解算法将二次规划问
+题分解成一系列规模较小的二次规划子问题，进行
+迭代求解。在每次迭代中，选取拉格朗日乘子分量
+的一个子集做为工作集，利用传统优化算法求解一
+个二次规划的子问题。以分类 
+SVM为例，分解算法
+的主要思想是将训练样本分成工作集B和非工作集 
+N，工作集 
+B中的样本个数为 
+q， 
+q远小于训练样本
+总数。每次只针对工作集 
+B中的样本进行训练，而固
+定N中的训练样本。该算法的关键在于选择一种最优
+工作集选择算法，而在工作集的选取中采用了随机
+的方法，因此限制了算法的收敛速度。
+
+文献[12]在分解算法的基础上对工作集的选择
+做了重要改进。采用类似可行方向法的策略确定工
+作集B。如果存在不满足 
+KTT条件的样本，利用最速
+下降法，在最速下降方向中存在 
+q个样本，然后以
+这 
+q个样本构成工作集，在该工作集上解决 
+QP问题，
+直到所有样本满足 
+KTT条件。如此改进提高了分解
+算法的收敛速度，并且实现了SVMlight算法。
+
+文献 
+[13]提出的序列最小优化 
+(sequential 
+minimal optimization，SMO)算法是分解算法的一个
+特例，工作集中只有 
+2个样本，其优点是针对 
+2个样
+本的二次规划问题可以有解析解的形式，从而避免
+多样本情况下的数值解不稳定及耗时问题，且不需
+要大的矩阵存储空间，特别适合稀疏样本。工作集
+的选择不是传统的最陡下降法，而是启发式。通过
+两个嵌套的循环寻找待优化的样本，然后在内环中
+选择另一个样本，完成一次优化，再循环，进行下
+
+
+
+第1期 
+丁世飞，等: 支持向量机理论与算法研究综述 
+
+
+一次优化，直到全部样本都满足最优条件。 
+SMO算
+法主要耗时在最优条件的判断上，所以应寻找最合
+理即计算代价最低的最优条件判别式。 
+
+
+SMO算法提出后，许多学者对其进行了有效的
+改进。文献[14]提出了在内循环中每次优化3个变量，
+因为3个变量的优化问题同样可以解析求解，实验表
+明该算法比 
+SMO的训练时间更短。文献 
+[15-16]在迭
+代过程中的判优条件和循环策略上做了一定的修
+改，加快了算法的速度。 
+
+
+2.3 
+增量算法(incremental algorithm) 
+增量学习是机器学习系统在处理新增样本时，
+能够只对原学习结果中与新样本有关的部分进行增
+加修改或删除操作，与之无关的部分则不被触及。
+增量训练算法的一个突出特点是支持向量机的学习
+不是一次离线进行的，而是一个数据逐一加入反复
+优化的过程。
+
+文献[17]最早提出了 
+SVM增量训练算法，每次
+只选一小批常规二次算法能处理的数据作为增量，
+保留原样本中的支持向量和新增样本混合训练，直
+到训练样本用完。文献 
+[18]提出了增量训练的精确
+解，即增加一个训练样本或减少一个样本对 
+Lagrange系数和支持向量的影响。文献 
+[19]提出了另
+一种增量式学习方法，其思想是基于高斯核的局部
+特性，只更新对学习机器输出影响最大的 
+Lagrange
+系数，以减少计算复杂度。文献 
+[20]提出了一种“快
+速增量学习算法”，该算法依据边界向量不一定是支
+持向量，但支持向量一定是边界向量的原理，首先
+选择那些可能成为支持向量的边界向量，进行 
+SVM
+的增量学习，找出支持向量，最终求出最优分类面，
+提高训练速度。文献[21]提出了基于中心距离比值的
+增量运动向量机，利用中心距离比值，在保证训练
+和测试准确率没有改变的情况下，提高收敛速度。
+文献[22]提出了基于壳向量的线性 
+SVM增量学习算
+法，通过初始样本集求得壳向量，进行 
+SVM训练，
+得到支持向量集降低二次规划过程的复杂度，提高
+整个算法的训练速度和分类精度。 
+
+
+3 
+
+新型SVM 
+
+3.1 
+粒度支持向量机 
+(granular support vector 
+machines，GSVM) 
+GSVM[23]的主要思想是通过常用的粒度 
+[24-26]划
+分方法构建粒度空间获得一系列信息粒，然后在每
+个信息粒上进行学习，最后通过聚合信息粒上的信
+息(或数据、规则知识、属性等 
+)获得最终的支持向量
+
+机决策函数。该学习机制通过数据的粒化可以将一
+个线性不可分问题转化为一系列线性可分问题，从
+而获得多个决策函数；该学习机制还使数据的泛化
+性能增强，即可在 
+SVM的训练中得到间隔更宽的超
+平面。
+
+原空间的GSVM模型在原空间进行粒划分，然
+后在核空间进行 
+SVM学习。基于关联规则的 
+GSVM
+是文献[27]提出的，其基本思想是通过RBF核函数原
+空间的样本映射到特征空间并展开成麦克劳林级
+数，并从展开式中挖掘对分类分析起重要作用的关
+联规则，利用这些有用的相关关联规则划分粒度，
+从而在SVM的分类模式中学习出关联规则分类器 
+
+
+[28]。基于聚类的GSVM[29-30]，其基本思想是首先采
+用常用的聚类方法结合一定的评价规则将原始数据
+划分为若干个粒，然后选择其中含有较多信息量的
+粒参与SVM的分类或者回归，使 
+SVM在大规模数据
+集的训练中能得到较高的效率和泛化能力。基于粗
+糙集的GSVM[31-32]，其基本思想是首先用粗糙集对
+数据进行预处理，以达到减少冗余数据，压缩数据
+规模的目的，进而提高支持向量机的分类速度。基
+于树形层次结构的GSVM[33]其基本思想是根据聚类
+训练结果对正类数据与负类数据分别构造两棵“支
+持向量粒度树”，离边缘较近的继续延伸，直到达到
+需要的精度为止。此外，我国还有很多学者研究基
+于商空间[34-35]、决策树[36]、神经网络[37]的GSVM学
+习算法。
+文献[38-39]提出的核空间的 
+GSVM(KGSVM)模
+型首先将原始数据映射到核空间，然后在核空间进
+行粒的划分和粒的代替，最后在相同的核空间中进
+行粒的 
+SVM训练。与传统的 
+GSVM模型相比， 
+KGSVM模型克服了核空间数据分布不一致的问题。
+传统的GSVM由于分粒是在原空间中进行的，粒划
+分时非常可能丢失大量有用的信息。但是GSVM是
+在核空间中进行粒的划分和替代，因此可以利用半
+径规则获得更好的分类精度和泛化性能。文献 
+[40]
+对KGSVM模型进行了改进，提出了核粒度下基于关
+联规则的GSVM。 
+
+
+3.2 
+模糊支持向量机 
+(fuzzy support vector 
+machines, FSVM) 
+为了克服噪声和野值点对支持向量机的影响 
+[41-42]，文献 
+[43]将模糊数学和支持向量机相结合，提
+出了模糊支持向量机，主要用于处理训练样本中的
+噪声数据。其主要思想是针对支持向量机对训练样
+本内的噪音和孤立点的敏感性，在训练样本集中增
+
+
+
+电子科技大学学报 
+第 
+40卷
+
+6
+
+加一项隶属度，并赋予支持向量较高的隶属度，而
+非支持向量及噪声野值点赋予较小的隶属度，从而
+降低非支持向量、噪声和野值点对最优超平面的影
+响。 
+
+
+FSVM中存在的问题是如何确定隶属度值，即
+如何确定各个样本的权重。文献[43]提出了基于类中
+心的隶属度确定方法，将样本点到其类中心的距离
+的线性函数作为隶属度函数，但是隶属函数会严重
+依赖训练样本集的几何形状，降低支持向量的隶属
+度。文献[44-45]也提出相似的隶属度确定方法。文
+献[46]提出一种基于类内超平面距离的隶属度确定
+方法，将样本点到类内平面距离的线性函数作为隶
+属度函数，降低了隶属度函数对训练样本集几何形
+状的依赖，提高了支持向量的隶属度。文献 
+[47]提出
+了一种新的核隶属度函数，该新的隶属度函数不仅
+依赖于每个样本点到类型中心的距离，还依赖于该
+样本点最邻近的K个其他样本点的距离。文献 
+[48]通
+过对每个样本赋予不同的双隶属度，得到最优分类
+器。去边缘的FSVM[49-50]主要是根据训练集的几何
+形状，将其分成两个子集，认为其中一个子集不包
+含支持向量并将其舍去；另一子集包含支持向量并
+在该子集中进行训练，但会人为地去除一些支持向
+量而导致分类精度降低。针对一般模糊支持向量机
+训练时间过长，训练效率低下的问题，文献 
+[51]对边
+缘数据赋予较大的隶属度，而对类中心附近的数据
+赋予较小的隶属度，体现加大对容易错分样本进行
+惩罚的改进策略。文献[52]进一步对离分类超平面较
+远不可能成为支持向量的数据赋予较小的隶属度，
+使训练样本集中的数据大大减少。 
+
+
+3.3 
+孪生支持向量机 
+(twin support vector 
+machines，TWSVMs) 
+文献[53]提出了一种二值数据的分类器——孪
+生支持向量机 
+(又称双分界面支持向量机 
+)。 
+TWSVMs在形式上类似于传统的支持向量机[54-55]，
+不仅具有传统支持向量机的优点，而且对大规模数
+据具有更好的处理能力。TWSVMs为两个类各自得
+到一个分类平面 
+[56-57]，属于每个类的数据尽量围绕
+在与之相对应的分类平面周围，然后TWSVMs通过
+优化一对分类平面来构建分类超平面 
+[58-59]。也就是
+说，TWSVMs需要解决一对QP问题，而 
+SVM则是解
+决一个QP问题，但是在 
+TWSVMs中，其中一个类的
+数据要作为另一个QP问题的约束条件，反之亦然。
+
+尽管 
+TWSVMs相比较于 
+SVM具有更为快速的
+训练速度，但如今信息时代面临的是“数据海量，
+
+知识匮乏”，对于机器学习是一个很大的挑战，同
+样，对 
+TWSVMs而言，训练速度也非常重要。尽管
+目前传统 
+SVM已有许多成熟的学习算法，并且也可
+以推广到孪生模型，但这些算法并没有考虑到孪生
+模型的具体区别，因而有必要提出基于具体孪生模
+型的高效学习算法，以体现 
+TWSVMs的具体特性。
+另外，现有的孪生模型并不具有类似于传统支持向
+量机的特性，即间隔。因此，如果能将孪生模型与
+传统支持向量的优点成功结合在一起，则可以得到
+既具有较快训练速度又具有较好理论基础的孪生支
+持向量机模型。
+
+有了好的模型、好的算法之后，可以考虑将孪
+生模型推广到一些具体问题，如半监督学习问题、
+模糊或区间数据的学习问题、回归问题，并将该模
+型推广到各类实际问题，特别是生物信息学方面的
+应用，如基因调控网络预测。 
+
+
+3.4 
+排序支持向量机 
+(ranking support vector 
+machines，RSVM) 
+排序学习是当前信息检索和机器学习领域的热
+点问题，广泛应用于许多领域，包括文档检索、协
+同过滤、关键字提取、定义发现等等。排序学习问
+题大致分为基于回归的排序学习和基于分类的排序
+学习两类[60]。从上面的介绍可以看出， 
+SVM的排序
+学习模型可以基于分类又可以基于顺序回归，所以
+自RSVM[61]提出以来，该排序学习方法便得到了很
+大的发展。 
+
+
+RSVM[62]在应用中大部分用于信息检索，其中
+最主要的问题是如何针对检索问题建立适用于具体
+应用的损伤函数。可以与基本的 
+SVM一样，两类数
+据使用相同的代价函数 
+[63]；也可以针对两类数据分
+别建立不同的代价函数 
+[64]，对某些应用会大大提高
+排序的精确度。
+
+文献[65]将RSVM用于推荐系统，文中使用 
+1-SVM对给定数据的相关度顺序进行预测，通过使
+用图核处理数据集，取得了很好的效果。 
+SVM的回
+归排序模型也能用于推荐系统 
+[66]，与传统的使用启
+发式的推荐系统相比，该方法在大样本下的性能是
+相当高效的。
+
+在实际应用中，速度永远是人们追求的目标。
+传统的RSVM都是使用 
+2-SVM进行学习，文献 
+[67]
+使用1-SVM学习排序，该方法可以使用更少的支持
+向量，大大提高训练速度。参数选择对于 
+SVM的训
+练速度起着至关重要的作用，使用用于核方法的正
+则化路径方法可以加速 
+RSVM中的参数选择并使该
+
+
+
+第1期 
+丁世飞，等: 支持向量机理论与算法研究综述 
+
+
+过程自动化，从而提高训练速度。在分子测序中，
+由于数据为结构数据， 
+RSVM的训练速度很长，将
+粒度计算与 
+RSVM结合，使用粒度计算进行属性约
+简和问题分割，在保证学习质量的情况下提高训练
+速度。
+
+传统的RSVM在应用中有其局限性 
+[68]，即模型
+过于简单而不能用于复杂的排序；很难将先验知识
+加入模型中。为了克服这些局限，一种新的排序支
+持向量机 
+[69]被提出，它将一般 
+RSVM输出的打分函
+数映射为一个概率sigmoid函数，该函数用交叉检验
+进行训练，实际上该函数就是输入数据集的后验概
+率，可以用其进行一些后处理的工作，避免传统 
+RSVM的应用局限性。 
+
+
+4 结术语
+
+统计学习理论系统地研究了机器学习问题，尤
+其是在有限样本情况下的统计学习问题。这一理论
+框架下产生的 
+SVM是一种通用的机器学习新方法，
+在理论和实际应用中表现出很多优越的性能。 
+SVM
+的优越性使得它在模式识别、回归分析、函数估计、
+时间序列预测等领域都得到了长足的发展，并被广
+泛应用于文本识别、手写字体识别、人脸图像识别、
+基因分类、时间序列预测等。 
+
+
+SVM的理论与算法研究均取得了长足的进步，
+但在处理有大量训练数据的实际应用中，仍然存在
+计算速度和存储容量等问题。该领域需要进一步发
+展和完善，研究方向包括： 
+
+
+1) 进一步完善和改进 
+SVM自身算法。SVM是一
+种基于核函数的学习机器，因此其泛化能力在很大
+程度上依赖于所选择的核函数。另外， 
+SVM的学习
+效率取决于样本数据集的规模，但是现有的 
+SVM对
+于实际问题的大规模样本数据集的训练效率并不能
+达到理想的训练效率。因此，对于 
+SVM算法的训练
+效率和泛化性能的进一步提升，对于算法本身的完
+善和改进不可避免。 
+2) 探索SVM与其他学科的融合。近些年来，支
+持向量机与其他学科融合构造出的新型支持向量
+机，比如FSVM、GSVM、TWSVMs，虽然在训练
+效率、误差率、泛化性能等方面均有所提升，但是
+现有模型也各有缺点，比如TWSVMs不具有稀疏性，
+泛化性较低。如何对现有模型进行完善，提出更为
+合理的模型，探索是否还有其他理论可以与支持向
+量机融合等。 
+3) 
+不断探索SVM新的应用领域。虽然SVM在理
+论上有很突出的优势，但与其理论研究相比，应用
+研究还比较滞后，目前只有比较有限的实验研究报
+道，且多属于仿真和对比试验。因此，在以后的研
+究工作中，如何将 
+SVM更多地应用于人们的日常生
+活中去，需要不断探索新的应用领域。
+
+参考文献 
+
+
+[1] CRISTIANINI N, TAYLOR J S.支持向量机导论 
+[M].李国
+正, 王猛, 曾华军, 译. 北京: 电子工业出版社, 2004. 
+CRISTIANINI N, TAYLOR J S. An introduction to support 
+vector machines and other kernel-based learning 
+methods[M]. Translated by LI Guo-zheng, WANG Meng, 
+ZENG Hua-jun. Beijing: Publishing House of Electronics 
+Industry, 2004. 
+[2]张学工. 关于统计学习理论与支持向量机 
+[J].自动化学
+报, 2000, 26(1): 32-41. 
+ZHANG Xue-gong. Statistical learning theory and support 
+vector machines[J]. Acta Automatica Sinica, 2000, 26(1): 
+32-41. 
+[3] VAPNIK V N. 
+统计学习理论的本质[M].张学工 
+, 译. 北
+京: 清华大学出版社, 2000. 
+VAPNIK V N. The nature of statistical learning theory[M]. 
+Translated by ZHANG Xue-gong. Beijing: Tsinghua 
+University Press, 2000. 
+[4] VAPNIK V N. 
+统计学习理论[M].许建华, 张学工, 译. 
+北京: 电子工业出版社, 2004. 
+VAPNIK V N. Statistical Learning Theory[M]. Translated 
+by XU Jian-hua, ZHANG Xue-gong. Beijing: Publishing 
+House of Electronics Industry, 2004. 
+[5]刘晓亮, 丁世飞. SVM用于文本分类的适用性[J].计算机
+工程与科学, 2010, 32(6): 106-108. 
+LIU Xiao-liang, DING Shi-fei. Appropriateness in applying 
+SVMs to text classification[J]. Computer Engineering and 
+Science, 2010, 32(6): 106-108. 
+[6]林开标, 王周敬 
+. 基于支持向量机的传真收件人识别方
+法[J].计算机工程与应用, 2006, 42(7): 156-158. 
+LIN Kai-biao, WANG Zhou-jing. The method of fax 
+receiver's name recognition based on SVM[J]. Computer 
+Engineering and Applications, 2006, 42(7): 156-158. 
+[7]谢塞琴, 沈福明, 邱雪娜. 基于支持向量机的人脸识别方
+法[J].计算机工程, 2009, 35(16): 186-188. 
+XIE Sai-qin, SHEN Fu-ming, QIU Xue-na. Face recognition 
+using support vector machines[J]. Computer Engineering, 
+2009, 35(16): 186-188. 
+[8]李颖新, 阮晓钢 
+. 基于支持向量机的肿瘤分类特征基因
+选取[J].计算机研究与发展, 2005, 42(10): 1796-1801. 
+LI Ying-xin, RUAN Xiao-gang. Feature selection for cancer 
+classification based on support vector machine[J]. Journal of 
+Computer Research and Development, 2005, 42(10): 
+1796-1801. 
+[9]高伟, 王宁. 浅海混响时间序列的支持向量机预测 
+[J].计
+算机工程, 2008, 34(6): 25-27. 
+GAO Wei, WANG Ning. Prediction of shallow-water 
+reverberation time series using support vector machine[J]. 
+Computer Engineering, 2008, 34(6): 25-27. 
+
+电子科技大学学报 
+第 
+40卷
+
+8 
+
+[10] BOSER B E, GUYON I M, VAPNIK V N. A training 
+algorithm for optimal margin classifiers[C]//Proceedings of 
+The Fifth Annual Workshop on Computational Learning 
+Theory. New York: ACM Press, 1992: 144-152. 
+[11] OSUNA E, FRENUD R, GIROSI F. An improved training 
+algorithm for support vector machines[C]//Proceedings of 
+IEEE Workshop on Neural Networks for Signal Processing. 
+New York, USA: [s.n.], 1997: 276-285. 
+[12] JOACHIMS T. Making large-scale support vector machine 
+learning practical[C]//Advances in Kernel Methods: 
+Support Vector Learning. Cambridge, MA: The MIT Press, 
+1998. 
+[13] PLATT J. Fast training of support vector machines using 
+sequential minimal optimization[C]//Advances in Kernel 
+Methods: Support Vector Learning. Cambridge, MA: The 
+MIT Press, 1998. 
+[14] DAI Liu-ling, HUANG 
+He-yan, CHEN Zhao-xiong. 
+Ternary sequential analytic optimization algorithm for 
+SVM classifier design[J]. Asian Journal of Information 
+Technology, 2005, 4(3): 2-8. 
+[15] KEERTHI S S, SHEVADE S K, BHATTAEHARYYA C. 
+Improvements to platt's SMO algorithm for SVM classifier 
+design[J]. Neural Computation, 2001, 13(3): 637- 649. 
+[16] PLATT J. Using analytic QP 
+and sparseness to speed 
+training support vector machines[C]//Advances in Neural 
+Information Processing Systems. [S.l]: MIT Press, 1999, 
+557-563. 
+[17] SYED N, LIU H, SUNG K. Incremental learning with 
+support vector machines[C]//International Joint Conference 
+on Artificial Intelligence. Sweden: Morgan kaufmann 
+publishers, 1999: 352-356. 
+[18] GAUWENBERGHS G, 
+POGGIO T. Incremental and 
+decremental support vector machine[J]. Machine Learning. 
+2001, 44 (13): 409- 415. 
+[19] RALAIVOLA 
+L, FLORENCE D’ALCHé-BUC. 
+Incremental support vector machine learning: a local 
+approach[C]//Proceedings of International Conference on 
+Neural Networks. Vienna, Austria: [s.n.], 2001: 322-330. 
+[20]孔锐, 张冰. 一种快速支持向量机增量学习算法 
+[J].控
+制与决策, 2005, 20(1): 1129- 1132. 
+KONG Rui, ZHANG Bing. A fast incremental learning 
+algorithm for support vector machine[J]. Control And 
+Decision, 2005, 20(1): 1129- 1132. 
+[21]孔波, 刘小茂, 张钧. 基于中心距离比值的增量支持向
+量机[J].计算机应用, 2006, 26(6): 1434-1436. 
+KONG Bo, LIU Xiao-mao, ZHANG Jun. Incremental 
+support vector machine based on center distance ratio[J]. 
+Journal of Computer Applications, 2006, 26(6): 1434-1436. 
+[22]李东晖, 杜树新, 吴铁军. 基于壳向量的线性支持向量
+机快速增量学习算法 
+[J].浙江大学学报 
+, 2006, 40(2): 
+202- 215. 
+LI Dong-hui, DU Shu-xin, WU Tie-jun. Fast incremental 
+learning algorithm of linear support vector machine based 
+on hull vectors[J]. Journal of Zhejiang University 
+(Engineering Science), 2006, 40(2): 202- 215. 
+[23] TANG Yu-chun, JIN Bo, ZHANG Yan-qing et al. Granular 
+support vector machines for medical binary classification 
+problems[C]//Proceedings of the IEEE CIBIB. Piscataway, 
+HJ: IEEE Computationl Intelligence Society, 2004: 73-78. 
+
+[24]李道国, 苗夺谦 
+, 张东星 
+, 等. 粒度计算研究综述 
+[J].计
+算机科学, 2005, 32(9): 1-12. 
+LI Dao-guo, MIAO Duo-qian, ZHANG Dong-xing, et al. 
+An overview of granular computing[J]. Computer Science, 
+2005, 32(9): 1-12. 
+[25]程伟, 石扬, 张燕平 
+. 粒度计算的三种主要方法 
+[J].计
+算机技术与发展, 2007, 17(3): 91-94. 
+CHENG Wei, SHI Yang, ZHANG Yan-ping. Three primary 
+mothods of granular computing[J]. Computer Technology 
+and Development, 2007, 17(3): 91-94. 
+[26] DING Shi-fei, XU Li, ZHU Hong et al. Research and 
+progress of cluster algorithms based on granular 
+computing[J]. International Journal of Digital Content 
+Technology and its Applications, 2010, 4(5): 96-104. 
+[27] TANG Yu-chun, JIN Bo, 
+ZHANG Yan-qing. Granular 
+support vector machines with association rules mining for 
+protein homology prediction[J]. Artificial Intelligence in 
+Medicine, 2005, 35: 121-134. 
+[28]张文浩, 王文剑 
+. 一种基于关联规则的核粒度支持向量
+机[J].广西师范大学学报 
+(自然科学版 
+), 2009, 27(3): 
+89-92. 
+ZHANG Wen-hao, WANG Wen-jian. A kernel granular 
+support vector machine based on association rules[J]. 
+Journal of Guangxi Normal University (Natural Science 
+Edition), 2009, 27(3): 89-92. 
+[29] WANG Wen-jian, XU Zong-ben. A heuristic training in 
+support vector regression[J]. Neurocomputing, 2004, 61: 
+259-275. 
+[30]张鑫, 王文剑. 一种基于粒度的支持向量机学习策略 
+[J].
+计算机科学, 2008, 35(8a): 101-103, 116. 
+ZHANG Xin, WANG Wen-jian. A support vector machine 
+learning strategy based on Granular[J]. Computer Science, 
+2008, 35(8a): 101-103,116. 
+[31]段丹青, 陈松乔 
+, 杨卫军, 等. 使用粗糙集和支持向量
+机检测入侵[J]. 小型微型计算机系统 
+, 2008, 29(4): 
+627-630. 
+DUAN Dan-qing, CHEN Song-qiao, YANG Wei-jun, et al. 
+Detect intrusion using rough set and support vector 
+machine[J]. Journal of Chinese Computer Systems, 2008, 
+29(4): 627-630. 
+[32] LI Ye, CAI Yun-ze, LI Yuan-gui, et al. Rough sets method 
+for SVM data preprocessing[C]//IEEE Conference on 
+Cybernetics and Intelligent Systems. Singapore: [s.n.], 
+2004, 1039-1042. 
+[33] YU H, YANG-JIONG, HAN Jia-wei, et al. Making SVMs 
+scalable to large data sets using hierarchical cluster 
+indexing[J]. Data Mining and Knowledge Discovery, 2005, 
+11(3): 295-321.. 
+[34]文贵华, 向君, 丁月华. 基于商空间粒度理论的大规模 
+SVM分类算法 
+[J].计算机应用研究 
+, 2008, 25(8): 
+2299-2301. 
+WEN Gui-hua, XIANG Jun, DING Yue-hua. Large-scale 
+SVM classification algorithm based on granularity of 
+quotient space theory[J]. Application Research of 
+Computers, 2008, 25(8): 2299-2301. 
+
+第1期 
+丁世飞，等: 支持向量机理论与算法研究综述 
+
+
+[35]程伟, 张燕平, 赵姝. 商空间理论框架下的 
+SVM产量预
+测模型研究 
+[J].中国农业大学学报 
+, 2009, 14(5): 
+135-139. 
+CHENG Wei, ZHANG Yan-ping, ZHAO Shu. Research of 
+yield prediction model based on support vector machine 
+within the framework of quotient space theory[J]. Journal 
+of China Agricultural University, 2009, 14(5): 135-139. 
+[36]连可, 黄建国 
+, 王厚军, 等.一种基于遗传算法的 
+SVM决
+策树多分类策略研究 
+[J].电子学报 
+, 2008, 36(8): 
+1502-1507. 
+LIAN Ke, HUANG Jian-guo, WANG Hou-jun, et al. Study 
+on a GA-based SVM decision2tree multi-classification 
+strategy[J]. Acta Electronic Sinica, 2008, 36(8): 
+1502-1507. 
+[37]郭虎升, 王文剑 
+. 基于神经网络的 
+SVM学习算法 
+[J].计
+算机工程与应用, 2009, 45(2): 51-54. 
+GUO Hu-sheng, WANG Wen-jian. SVM learning 
+algorithms based on neural network[J]. Computer 
+Engineering and Applications, 2009, 45(2): 51-54. 
+[38] GUO Hu-sheng, WANG Wen-jian, MEN Chang-qian. A 
+novel learning model-kernel granular support vector 
+machine[C]//Proceeding of the eighth international 
+conference on machine learning and cybernetic. Baoding: 
+[s.n.], 2009: 930-935. 
+[39]王文剑, 郭虎升 
+. 粒度支持向量机学习模型 
+[J].山西大
+学学报: 自然科学版, 2009, 32( 4): 535- 540. 
+WANG Wen-jian, GUO Hu-sheng. Granular support vector 
+machine learning model[J]. Journal of Shanxi University: 
+Natural Science Edition, 2009, 32( 4): 535- 540. 
+[40]张文浩, 王文剑 
+. 一种基于关联规则的核粒度支持向量
+机[J].广西师范大学学报 
+:自然科学版 
+, 2009, 27(3): 
+89-92. 
+ZHANG Wen-hao, WANG Wen-jian. A kernel granular 
+support vector machine based on association rules[J]. 
+Journal of Guangxi Normal University: Natural Science 
+Edition, 2009, 27(3): 89-92. 
+[41] LI Xue-hua, SHU Lan. Fuzzy theory based support vector 
+machine classifier[C]//Proceedings of the Fifth 
+International Conference on Fuzzy Systems and 
+Knowledge Discovery. Shandong, China: [s.n.], 2008: 
+600-604. 
+[42] HAO Pei-yi, 
+LIN Min-shiu, TSAI Lung-biao. A new 
+support vector machine with fuzzy hyper-plane and its 
+application to evaluate credit risk[C]//Proceedings of the 
+eighth international conference on intelligent systems 
+design and applications. Taiwan, China: [s.n.], 2008, 3: 
+83-88. 
+[43] LIN Chun-fu, WANG Sheng-de. Fuzzy support vector 
+machines[J]. IEEE Transactions on Neural Networks, 2002, 
+3(2): 464-471. 
+[44] HUANG H P, LIU Y H. Fuzzy support vector machines for 
+pattern recognition and data mining[J]. International 
+Journal of Fuzzy Systems, 2002, 4(3): 826-835. 
+[45]张翔, 肖小玲, 徐徐徐. 模糊支持向量机中隶属度的确
+定与分析[J].中国图像图形学报 
+, 2006, 11(8): 1188- 
+1192. 
+ZHANG Xiang, XIAO Xiao-ling, XU Guang-you. 
+Determination and analysis of fuzzy membership for 
+SVM[J]. Journal of Image and Graphics, 2006, 11(8): 
+1188-1192. 
+
+[46]张贵香, 费岚, 杜徐, 等. 基于类内超平面的模糊支持
+向量机[J].计算机工程与设计 
+, 2008, 12(29): 3177-3178, 
+3207. 
+ZHANG Gui-xiang, FEI Lan, DU Zhe, et al. Fuzzy support 
+vector machine based on cluster hyperplane[J]. Computer 
+Engineering and Design, 2008, 12(29): 3177-3178, 3207. 
+[47]李苗苗, 向凤红, 刘新旺. 一种新颖隶属度函数的模糊
+支持向量机[J].计算机工程与科学, 2009, 31(9): 92-94. 
+LI Miao-miao, XIANG Feng-hong, LIU Xin-wang. A 
+novel membership function for fuzzy support vector 
+machine[J]. Computer Engineering and Science, 2009, 
+31(9): 92-94. 
+[48]孙名松, 高庆国, 王宣丹. 基于双隶属度模糊支持向量
+机的邮件过滤[J].计算机工程与应用, 2010, 46(2): 
+93-95. 
+SUN Ming-song, GAO Qing-guo, WANG Xuan-dan. Mail 
+filtering by dual membership fuzzy support vector 
+machine[J].Computer Engineering and Applications, 2010, 
+46(2): 93-95. 
+[49]吴青, 刘三阳, 杜徐. 基于边界向量提取的模糊支持向
+量机方法 
+[J].模式识别与人工智能 
+, 2008, 3(21): 
+332-337. 
+WU Qing, LIU San-yang, DU Zhe. Fuzzy support vector 
+machine method based on border vector extraction[J]. 
+Pattern Recognition and Artificial Intelligence, 2008, 21(3): 
+332-337. 
+[50] YAN 
+W Y, HE Q. Multi-class fuzzy support vector 
+machine based on dismissing margin[C]//Proceedings of 
+the Eighth International Conference on Machine Learning 
+and Cybernetics. Baoding, China: [s.n.], 2009: 1139-1144. 
+[51]刘宏冰, 熊盛武 
+. 一类快速模糊支持向量机 
+[J].系统仿
+真学报, 2008, 20(24): 6664-6667. 
+LIU Hong-bing, XIONG Sheng-wu. A kind of fast fuzzy 
+support vector machines[J]. Journal of System Simulation, 
+2008, 20(24): 6664-6667. 
+[52]施其权, 李小明, 肖辞源. 一类新型快速模糊支持向量
+机[J].计算机技术与发展, 2010, 20(2): 103-105. 
+SHI Qi-quan, LI Xiao-ming, XIAO Ci-yuan. A kind of 
+novel fast fuzzy support vector machines[J]. Computer 
+Technology and Development, 2010, 20(2): 103-105. 
+[53] JAYADCVA R, KHEMCHANDANI S C. Twin support 
+vector machines for pattern classification[J]. IEEE Trans 
+On Pattern Analysis and Machine Intelligence, 2007, 29(5): 
+905-910. 
+[54] ARUN K M, GOPAL M. Least squares twin support vector 
+machines for pattern classification[J]. Expert Systems with 
+Applications, 2009, 36: 7535-7543. 
+[55] ZHANG Xin-sheng. Boosting twin support vector machine approach for MCs detection[C]//Proceedings of 
+Asia-Pacific Conference Information Processing. 
+Shenzhen: [s.n.], 2009, 46: 149-(on) 152. 
+
+[56] PENG Xin-jun. A ν-twin support vector machine (ν-TSVM) 
+classifier and its geometric algorithms[J]. Information 
+Sciences, 2010, 180(20): 3863-3875. 
+
+电子科技大学学报 
+第 
+40卷
+
+10 
+
+[57] CHEN Jing, JI Guang-rong. Weighted least squares twin 
+support vector machines for pattern classification[C] 
+//Proceedings of the 2nd International Conference on 
+Computer and Automation Engineering. Singapore: [s.n.], 
+2010, 2:242-246. 
+[58] WANG Di, YE Ning, YE Qiao-lin. Twin support vector 
+machines via fast generalized Newton refinement[C] 
+//Proceedings of the 2nd International Conference on 
+Intelligent Human-Machine Systems and Cybernetics. 
+Nanjing, Jiangsu: [s.n.], 2010, 115:62-65. 
+[59] GANESH R N, DINESH K K, JAYADEVA. Twin SVM for 
+gesture classification using the surface electromyogram[J]. 
+IEEE Transactions on Information Technology in 
+Biomedicine, 2010, 14(2): 301-308. 
+[60]王扬, 黄亚楼 
+, 刘杰, 等. 基于PRank算法的主动排序学
+习算法[J].计算机工程, 2008, 34(21): 38-39, 47. 
+WANG Yang, HUANG Yan-lou, LIU Jie, et al. Algorithm 
+of active learning to rank based on PRank algorithm[J]. 
+Computer Engineering, 2008, 34(21): 38-39, 47. 
+[61] HERBRICH R, GRAEPEL T, 
+OBERMAYER K. Large 
+margin rank boundaries for ordinal regression[C] 
+//Advances in Large Margin Classifiers. Cambridge, MA: 
+MIT Press, 2000, 7:115-132. 
+[62] DING Shi-fei, LIU Xiao-liang, ZHANG Li-wen. Research 
+on ranking support vector machine and prospects[C]// 
+Proceedings of the 29th Chinese Control Conference, 
+Beijing: [s.n.], 2010, 2829-2831. 
+[63] JOACHIMS 
+T. Optimizing Serarch engines using 
+clickthrough data[C]//Proceedings of the eighth ACM 
+SIGKDD International Conference on Knowledge 
+Discovery And Data Mining. New York, USA: ACM, 2002, 
+133-142. 
+[64] CAO Yun-bo, Xu Jun, LIU Tie-yan, et al. Adapting ranking 
+SVM to document retrieval[C]//Proceedings of the 29th 
+Annual International ACM SIGIR Conference on Research 
+and Development in Information Retrieval. New York, 
+USA: ACM, 2006, 186-193. 
+[65] YAJIMA Y, 
+Kuo Tien-fang. Efficient formulations for 
+1-SVM and their application to recommendation tasks[J]. 
+Journal of Computers, 2006, 1(3): 27-34. 
+[66]王宏宇, 糜仲春 
+, 梁晓艳, 等. 一种基于支持向量机回
+归的推荐算法 
+[J].中国科学院研究生院学报 
+, 2007,24(6): 
+742-748. 
+WANG Hong-yu, MI Zhong-chun, LIANG Xiao-yan, et al. 
+A recommendation algorithm based on support vector 
+regression[J]. Journal of the Graduate School of the 
+Chinese Academy of Sciences, 2007, 24(6): 742-748. 
+[67] YU H, KIM Y, 
+HWANG S. An efficient method for 
+learning ranking SVM[C]//Proceedings of Pacific-Asia 
+Conference on Knowledge Discovery and Data Mining. 
+Berlin: Springer, 2009, 426-438. 
+[68] QIN Tao, 
+ZHANG Xu-dong, WANG De-sheng, et al. 
+Ranking with multiple hyperplanes[C]//Proceedings of the 
+30th Annual International ACM SIGIR Conference on 
+Research and Development in Information Retrieval. New 
+York, USA: ACM, 2007, 279-286. 
+[69] NGUYEN T, NGO A V, NGUYEN H V, et al. Probabilistic 
+ranking support vector machine[C]//Advances in Neural 
+Networks -ISNN 2009. Berlin: Springer, 2009: 345–353. 
+编辑蒋晓
+
+
+

@@ -1,0 +1,813 @@
+第26 卷　第9 期
+2003 年9 月
+计　　算　　机　　学　　报
+CHINESE JOURNA L OF COMPU TERS 
+Vol .26 No .9 
+Sept .2003　
+普适计算
+徐光　史元春　谢伟凯
+(清华大学计算机科学与技术系　北京100084) 
+(清华大学智能技术与系统国家重点实验室　北京100084) 
+收稿日期:2002-01-14 ;修改稿收到日期:2002-11-14 .本课题得到国家“ 八六三” 高技术研究发展计划项目(2001AA114171)“ 智能工作空
+间———普适计算时代的人机交互技术” 项目资助.徐光, 男, 1940 年生, 教授, 博士生导师, 主要研究方向为计算机视觉和多媒体技术. 
+E-mail:xgy-dcs @t singhua .edu .cn .史元春, 女,1967 年生, 博士, 副教授, 主要研究方向为人机交互和分布式多媒体信息处理.谢伟凯, 男, 
+1976 年生, 博士, 研究方向为普适计算软件支撑平台. 
+摘　要　计算技术的发展需要与之适应的计算模式.计算技术在桌面计算模式下经历的20 年的飞速发展正蕴育
+着一种革新性的计算模式——— 普适计算.普适计算是信息空间与物理空间的融合, 在这个融合的空间中人们可以
+随时随地和透明地获得数字化的服务;计算机本身将从人们的视线中消失, 人们注意力的中心可以回归到要完成
+的任务本身.普适计算将从根本上改变人们对什么是计算的思考, 也改变我们整个生活和工作的方式.该文综述了
+普适计算研究的现状和发展趋势, 并讨论了普适计算的两个关键研究内容——— 觉察上下文的计算和普适计算系统
+软件, 最后简要介绍作者在智能空间领域的研究成果. 
+关键词　计算模式;普适计算;觉察上下文计算;智能空间
+中图法分类号TP391 
+Pervasive/Ubiquitous Computing 
+XU Guang-You 　SHI Yuan-Chun 　XIE Wei-Kai 
+(Depar tment o f Computer S cience and Technology , Tsinghua U niversit y , Beij ing 100084) 
+(S tate Key Laboratory of Intell igence Technology a nd S ystems , Tsinghua U niversi ty , Bei jing 100084) 
+Abstract 　To promote the development of computer technology i t is essential to adopt a homologous 
+comput ing paradigm .Now it is an urgent need to explore the new computing paradigm homologous 
+w ith the current development trend of computer technology which is characterized by the more and 
+more close integ ration w ith communication and digi tal media technology and embedded to the living 
+space .That is the ubiquitous or pervasive comput ing .The main idea of pervasive computing is to embed 
+computer into the living environment or tool of human , so as to make the computer invisible from 
+users' sight and the users can focus on their task i tself , instead of the computer .Pervasive computing 
+embodying the integration of computer , communication and digi tal media technology makes it possible 
+to integ rate the physical wo rld we are living in and the vi rtual w orld in the informat ion space together 
+as the w hole .That , as the result , w ill makes a profound influence on our thinking on information and 
+our wo rking and lives sty le as well.This paper surveys the development of pervasive comput ing including 
+the current stage , research content and development trend .Authors' preliminarily research results 
+are also introduced . 
+Keywords 　computing paradigm ;pervasive/ubiquitous computing ;contex-aware comput ing ;smart 
+space 
+1 　引　言
+1 .1 　新世纪需要的新计算模式
+计算技术的健康发展需要有与之相适应的计算
+模式(computing paradigm).计算模式在20 世纪的
+80 年代经历了从主机计算(mainframe computing) 
+到桌面计算(desktop computing)的革新, 这使计算
+机从实验室的“象牙塔”进入了普通的办公室和家
+庭, 极大地推动了计算机技术和产业的发展.那么近
+
+20 年来计算技术的飞速发展, 是否蕴育了新的计算
+模式呢? 
+为此, 我们首先需要分析当前计算机技术发展
+的特点: 
+(1)计算、通信和数字媒体技术的互相渗透和
+结合, 其集中的体现就是互联网的发展.互联网已成
+为人们在工作、生活、娱乐和学习中获取信息、进行
+交互的主要途径. 
+(2)计算机在计算能力和存储容量提高的同时
+体积也越来越小, 其发展趋势是把计算能力嵌入到
+各种设备中去, 而且这些设备可联网使用. 
+与这样的发展形成鲜明对照的是传统的计算模
+式以及与此相应的计算机使用方式: 
+(1)以计算机为中心的计算:(a)计算机的使用
+方法不符合人类的习惯;(b)为了完成一项任务, 需
+要与计算机进行的对话过于烦琐(如需要手工配置
+计算机的软、硬件环境和把计算任务映射到应用程
+序中去).这使得计算机本身吸引了太多注意力, 而
+不是需要解决的问题本身. 
+(2)基于桌面的使用模式:(a)用户要使用计算
+机, 就需要端坐在计算机面前;而人是生活在一个相
+对自由的三维空间中的.因此计算机并没有与人们
+的生活环境融合在一起[ 1] ;(b)桌面计算从本质上
+说是一种私有的模式, 难以适应一个用户可能在不
+同地点和环境, 甚至在移动过程中使用多台计算设
+备进行工作的情况. 
+限于上述这样的计算模式, 计算机还只是一种
+不太好用的工具, 无法真正融入人们的工作和生活, 
+更谈不上成为如空气、水、电这样的生活必需品.这
+是当前计算机产业和应用领域进一步发展的主要障
+碍.因此, 计算机技术进一步发展迫切地需要全新的
+计算模式, 这就是普适计算(pervasive (或ubiquitous)
+computing). 
+1 .2 　普适计算的定义
+普适计算的思想最早是1991 年Mark Weiser 
+在《Scientific American》的“ The Computer fo r the 
+21st Century”[ 2] 中提出的, 强调把计算机嵌入到环
+境或日常工具中去, 让计算机本身从人们的视线中
+消失, 让人们注意的中心回归到要完成的任务本身. 
+他的思想在90 年代后期开始在国际上得到广泛关
+注和接受, 许多相关的研究计划纷纷启动, 目前已经
+成为一个极具活力和影响力的研究领域.其重要标
+志是分别从1999 年和2000 年开始的Ubicomp 国
+际会议和Pervasive Computing 国际会议、2002 年
+IEEE Pervasive Computing 期刊的创刊.关于普适计
+算准确的定义, 不同的研究者有不同的理解, 其目标
+都是“要建立一个充满计算和通信能力的环境, 同时
+使这个环境与人们逐渐地融合在一起”[ 2] .我们给
+出的定义是:“普适计算是信息空间与物理空间的融
+合, 在这个融合的空间中人们可以随时随地、透明地
+获得数字化的服务.” 
+其中“随时随地”是指人们可以在工作、生活的
+现场就可以获得服务, 而不需离开这个现场而去端
+坐在一个专门的计算机面前;这也是普适计算的英
+文中Ubiquitous 或Pervasive 的含义, 即像空气一样
+无所不在.MI T 的普适计算研究计划命名为Oxygen 
+的原因也在此[ 3] .而“透明” 是指获得这种服务
+时不需要花费很多注意力, 即这种服务的访问方式
+是十分自然的甚至是用户本身注意不到的, 即所谓
+蕴涵式的交互(implicit interaction).相对“随时随
+地”的特性, “透明”是普适计算更本质的要求, 是其
+与桌面计算模式最本质的区别.否则, 如果仅仅要求
+“随时随地”性, 一人一台无线联网的笔记本或许就
+可以了, 但这显然不是普适计算.Weiser 在文献[ 2] 
+中这样描述“透明”的本质性:“最具有深远意义的是
+那些从人们注意力中消失的技术.这些技术已经渗
+透到人们的日常生活中以致与生活难以区分” .人们
+在写字时, 笔和纸本身不会分散我们的注意力, 因此
+对于我们的注意力是透明的;又如雕刻家创作时, 手
+中的雕刀于其注意力是透明的.Weiser 以此来比拟
+普适计算所希望的服务访问过程或手段的透明性. 
+与此相似的有Don No rman 的“ Invisible Computer”[ 
+4] 、CMU 的Aura 计划[ 5] 和欧盟的“Disappearing 
+Computer”研究计划[ 6] , 它们都表达了同样的思想. 
+MIT 命名Oxy gen 计划的另一层含义也是想让计算
+成为像氧气一样看不见又必不可少的东西. 
+在文章的第2 节我们将从如何实现信息空间与
+物理空间融合的角度, 分析普适计算研究所面临的
+技术挑战.其后的几节将进一步阐述普适计算的若
+干关键技术, 然后给出我们目前的研究进展, 最后是
+一个小结. 
+2 　如何实现普适计算
+2 .1 　信息空间和物理空间的融合
+普适计算的定义表明了实现普适计算“随时随
+地”性和“透明”性的方法是使信息空间和物理空间
+融合为一体.我们把信息空间(cy berspace)定义为存
+在于计算机和网络中的数字化的信息、服务、计算和
+通信构成的总体.我们认为信息空间和物理空间的
+9 期 徐光 等:普适计算 1043
+
+融合有两层含义:绑定(binding )和自发的交互
+(spontaneous interaction). 
+2 .1 .1 　绑　定
+绑定是指信息空间中的对象与物理空间中的物
+体建立相互的对应, 使这个物体成为访问信息空间中
+服务的直接入口.这种绑定可以通过两种途径实现: 
+(1)直接在物体上(内)嵌入一定的感知、计算、
+通信能力, 使其同时具有物理空间和信息空间中的
+用途.例如, MERL 实验室研究的Interactive Table 
+中一张桌子可以显示影集和具有交互能力[ 7] ;在我
+们研究的Smart Classroom 中, 一个物理的教室同时
+又是一个基于网络的虚拟远程教室的访问入口[ 8] ; 
+MIT Media Lab 的Things That Think 项目也是基
+于同样的考虑[ 9] . 
+(2)为每个物体添加可以被计算机自动识别的
+标签, 标签可以是基于条码、红外和RFID 的.例如, 
+HP 的Cool Tow n 计划就是通过在所有物理世界中
+的物体(如地理位置和货架上的商品)上附着一个编
+码有U RL 信息的条形码来建立物体与其Web 上的
+表示之间的对应, 从而建立一个数字化的城市[ 10] . 
+2 .1 .2 　自发的交互
+自发的交互是指物理空间和信息空间之间无需
+人的干预的交互, 即其中任一个空间状态的改变可
+以引起另一个空间的状态的相应改变.从两个相对
+的方向来看: 
+(1)信息空间的状态改变映射到物理空间中, 
+其最主要的形式是数字化的信息可以无缝地叠加在
+物理空间中/上.一个很好的例子就是已经广泛采用
+的各种电器上的显示屏, 它可以直观地反映出信息
+空间中的状态.E-Ink 公司正在研究的电子纸[ 11] 和
+IBM 研究院的Everyw here Display
+[ 12] 就是要开发出
+可以到处使用的轻便显示设备.在这层意义增强现
+实(augmented reality)的研究与此目的是一致的, 但
+倾向于通过把信息显示在半透的眼镜显示器上来实
+现.同时MEMS 技术的发展已经可以把操作器(actuator)
+直接集成到芯片上, 从而为信息空间到物理
+空间的状态映射形式提供了一种新的可能, 即直接
+改变物理世界中的某些物理参数. 
+(2)信息空间也可以自动地觉察物理空间中状
+态的改变, 从而改变相应对象的状态或触发某些事
+件.这种特性称为觉察上下文的计算(contex t-aware 
+computing), 是普适计算的重要特征.位置、身份、时
+间是目前研究的最多的几种上下文信息, 利用物理
+空间中的这些上下文信息可以设计出许多十分有用
+和方便的应用.比如, 你的手持设备可以在你抵达一
+个场所时, 自动获得有关这个物理环境中可以利用
+的各种服务和设备的信息.再比如,Weiser 认为未来
+的计算设备将像纸张一样公用化.当一个用户拿起
+一个公用设备时, 它可以自动识别用户身份并进行
+相应的个性化设置, 这一设想已经在MIT 的Oxygen 
+计划中得到部分实现.人也是物理空间中的一
+份子, 所以物理空间到信息空间的自动映射也包括
+信息空间对人的行为甚至表情的自动理解, 在这种
+理解的基础上进一步提供主动的伺候式的服务则称
+为主动的计算(proactive computing)[ 13] 或者蕴涵式
+的人机交互[ 14] .与此相对, 目前的人机交互多为显
+式的(ex plici t).觉察上下文计算和蕴涵式人机交互
+的研究根据实现途径的不同可以分为两类:通过传
+感器和通过多模态感知接口.前者如欧盟的TEA 
+(Technology for Embedded Aw areness)计划就是通
+过在日常器具如咖啡杯、家具、手机等中嵌入传感器
+来实现对物理空间的上下文的感知[ 15] ;而后者如我
+们的Smart Classroom 中则用视觉跟踪、姿态识别等
+方法来判断目前教室中的上下文. 
+在桌面计算模式下, 信息空间和物理空间是隔
+离的.表现为:(a)绑定是稀疏的, 唯一的绑定点就
+是计算机本身;(b)它们之间的交互是由人驱动的, 
+即人先察觉物理空间的改变然后用一定的方式输入
+到信息空间.可以说这种隔离正是桌面计算模式各
+种不足的根源.而普适计算模式下这种绑定和自发
+交互将变得无所不在, 从空间中的物体、用品、家具、
+房间以至整个空间本身, 信息世界和物理世界的界
+限将变得模糊, 正是这种界限的消失提供了人们可
+以随时随地透明地访问到数字化服务的可能.Ishii 
+形象地将这种融合称为Tangible Bits
+[ 16] ———即信息
+空间中的基本单位比特将像物理世界中的基本单位
+原子一样是看的见摸的着的. 
+2 .2 　全面的技术挑战
+追求普适计算理想的一个最为典型的研究计划
+就是文中多次提到的MIT 的Oxygen 计划, 目标是
+“使丰富的计算和通信能力像空气一样无所不在和
+自由地融入人们的生活之中” , 因此, 普适计算应具
+有以下特性: 
+(1)无所不在的(pervasive):用户可以随地以各
+种接入手段进入同一信息世界; 
+(2)嵌入的(embedded):计算和通信能力存在于
+我们生活的世界中, 用户能够感觉到它和作用于它; 
+(3)游牧的(nomadic):用户和计算均可按需自
+由移动; 
+(4)自适应的(adaptable):计算和通信服务可按
+1044 计　　算　　机　　学　　报2003 年
+
+用户需要和运行条件提供充分的灵活性和自主性; 
+(5)永恒的(eternal):系统在开启以后再也不
+会死机或需要重起;部件可以因需要、出错或升级来
+去, 但整个系统则永远可用. 
+由此我们可以看出, 普适计算的本质就是力图
+真正全面实现计算技术的“以人为本” , 它对计算机科
+学的各个层次的研究都提出了新的要求和技术挑战: 
+(1)在硬件或接入层次上, 需要研究和开发出新
+的嵌入环境的和便于携带的计算设备、传感设备和
+显示设备; 
+(2)在网络层次上, 当具有计算、感知能力的物
+体变得无所不在时, 这些物体间的互联通过有线网
+络进行显然是不可取的, 所以无线网络将成为普适
+计算的重要基础设施, 而网格(grid)则可能构成普
+适计算的网络和计算资源的平台; 
+(3)在系统软件(inf rast ructure)层次上, 各种异
+质的具有计算、传感能力的物体间的交互的需求对
+系统软件提出了前所未有的挑战, 需要解决如何使
+它们实现数据的交互、任务的协作;在传感设备无所
+不在时如何保护用户的隐私等等一系列问题; 
+(4)在人机交互层次上, 普适计算要求交互方式
+从困难烦琐的显式交互转变为透明的蕴涵式交互, 这
+就需要研究新的交互模式(metaphor)和感知接口. 
+由于各研究团队背景和研究侧重点的不同, 围
+绕上述普适计算在一个或者多个层次上的需求和特
+点, 目前已经在普适计算的大帽子下形成了许多相
+对自完备的研究领域, 比如智能空间(smart space)、
+可穿戴计算(w earable computing)、觉察上下文计算
+(contex t-aw are computing)、游牧计算(nomadic computing)
+等等.本文将对其中相对成熟和完整的三个
+研究领域:觉察上下文计算、普适计算系统软件和智
+能空间分别进行综述.这三个领域并不是严格按照
+一个统一角度对普适计算的研究内容进行划分的. 
+觉察上下文计算可以认为是从支持主动觉察和应用
+上下文的目标出发, 从一种纵向的角度来研究普适
+计算, 牵涉到从硬件到交互和应用的各个层次;普适
+计算的系统软件则是从横向的角度来研究普适计算
+的软件基础设施, 集中于系统软件层次;智能空间则
+可以认为是一种普适计算的一种体现或者是一种应
+用方式, 可以认为是从一种纵向剖面的角度来研究
+普适计算, 将包含各个层次的问题.因此这三者的研
+究是互相交叉和互相支持的, 比如觉察上下文计算
+的研究牵涉到如何在普适系统软件中提供相应的支
+持;觉察上下文计算和系统软件的典型问题将在智
+能空间中得到充分体现, 同时它们也是智能空间系
+统的一个组成部分. 
+3 　觉察上下文的计算
+(Context-Aware Computing) 
+普适计算把计算和信息融入到物理世界, 这不
+仅是使计算机无所不在, 由于人与信息以及计算能
+力将保持不间断的接触, 它还提供了一种新的交互
+方式的可能, 这就是前面提到的蕴涵的交互方式.这
+时需要系统能觉察在当时的情景中与交互的任务有
+关的上下文, 并据此做出决策和自动地提供相应的
+服务.虽然在桌面计算中已开始利用上下文信息, 但
+与桌面计算模式下上下文是固定或人为设定的情况
+不同, 在普适计算模式下上下文将随任务而变化, 而
+且由于工作环境是现场, 其中的背景情况不但复杂
+而且是动态变化的, 使上下文的动态性问题更加突
+出.上下文在交互中的重要性表现为
+(1)同样的输入, 不同的上下文可能具有不同
+的语义. 
+(2)鉴于在人与人的交谈中应用蕴含的状态信
+息(即上下文)可提高交互的效率, 充分觉察环境中
+的上下文是实现普适计算系统尽少分散用户注意力
+这一目标的重要途径[ 17] .例如, 文献[ 18] 中描述的
+在野外跟踪长颈鹿时, 可以自动记录, 发现长颈鹿位
+置的一种应用, 科学家可以集中精力去观察和记录, 
+而不是去查看GPS 的读数. 
+(3)在普适计算的情况下, 物理上的接口不是
+个人专有的, 而是由多人共享, 因此在交互过程中, 
+为实现接口和服务的个性化也需要上下文信息. 
+由此可见觉察上下文计算在人机交互中的重要
+性.有人认为觉察上下文计算概念的引入将需要对
+现有的人机交互理论做全面的重新考虑[ 19] . 
+觉察上下文计算具有广泛的应用领域, 其中包
+括:对用户提供主动启动(proactive t riggering)的服
+务, 即利用用户当前的上下文来启动有关的操作和
+显示有关的信息;流水线式交互(st reaming interaction).
+人们可利用交谈时蕴含的状态信息, 也即利
+用上下文信息来提高交谈的效率[ 20] ;以往事件的记
+忆;优化行为的模式;共享经验等. 
+3 .1 　觉察上下文计算的基本概念
+从普适计算的角度来看, 上下文是指任何可用
+于表征实体状态的信息.这里的实体可以是个人、位
+置、物理的或信息空间中的对象.觉察上下文计算是
+指每当用户需要时利用上下文向用户提供适合于当
+时任务、地点、时间和人物的信息或服务.觉察上下
+9 期 徐光 等:普适计算 1045
+
+文应用是指其行为(在某种程度上)是由用户的上下
+文所决定的应用.例如, 如果系统知道用户所携带的
+移动电话的位置和音乐会的时刻表, 那么在音乐会
+的过程中系统就把移动电话设置在振动方式.再如
+GPS 提供的位置信息在农业、建筑、军事和“p-commerce”(
+基于用户位置的商务)方面的应用. 
+觉察上下文计算的重要性已为越来越多的研究
+者所认识.HP 公司的年度报告中认为觉察上下文
+应用是公司未来的关键技术, 因为应用上下文是解
+决信息超载最有希望的途径.觉察上下文本质上是
+一种协助其他应用提高性能的支持工具. 
+在实际的应用中为了方便, 可把上下文的种类
+归纳为
+(1)计算上下文.如网络的连接情况、通信成
+本、通信的带宽和附近的资源(如打印机、显示器和
+工作站等); 
+(2)用户的上下文.用户的特性、位置、时间, 附
+近的人员、当前的人际关系; 
+(3)物理的上下文.如光照、噪声程度、交通条
+件和温度等; 
+(4)上下文的历史. 
+觉察上下文计算中的关键技术包括上下文的获
+取技术、上下文的模型、支持觉察上下文计算的软件
+结构等. 
+3 .2 　当前上下文的获取
+当前的上下文信息可从以下几种方式或来源获
+取:从各种传感器;从已有的信息, 其中包括日期、日
+程表、天气预报等;从用户和任务模块获取;通过计
+算设备间的交互;由用户直接设定等. 
+上下文有不同的层次:低层的和高层的.从传感
+器直接得到的上下文通常是低层的.例如, “门是否
+是开的” 、“椅子上是否有人” , 这些信息可由相应的
+传感器获得.一般来说, 人们对高层的上下文更为感
+兴趣.例如,“人们是否是忙碌” 、“会议是否已开始” . 
+低层和高层的上下文通常是相互关联的.因此, 有可
+能从低层的事件来假设高层的事件.系统如能从假
+设中检测上下文, 那么需要由用户输入系统的信息
+就可减少.例如, 推测用户是否是在度假.进行推测
+需要概率模型的支持.文献[ 21] 采用Bayesian 网络
+作为概率框架, 根据来自传感器的数据推理查询的
+上下文变量.在TEA 计划中采用Kohonen Self-Org 
+anizing Map 人工神经网络的方法把输入的传感器
+数据进行标记和分类, 然后再用概率的有限自动机
+对结果进行校验[ 22] .对于某些高层的上下文, 例如
+用户的当前活动, 一种可用的方法是利用计算机视
+觉进行跟踪和识别. 
+由于上下文可能在人机交互中重复地出现, 所
+以对上下文的记忆在觉察上下文计算中占重要地
+位.在上下文记忆的最低层中, 最重要的信息是上下
+文值的变化, 而不是值本身.例如, 在检测物体的移
+动时就需要记忆位置的变化.在上下文记忆的较高
+层次上就需要分析过去的上下文, 特别是分析什么
+改变了和什么没有改变, 以便得出合理的推论.例
+如, 从用户在过去的十多分钟里一直在看有关古建
+筑的网页可推论可能对古建筑感兴趣. 
+3 .3 　觉察上下文计算的软件支持环境
+开发觉察上下文计算的应用系统是个困难的问
+题, 这是由于开发中必须解决由上下文种类的多样
+性、数据格式和精度各不相同、提供的时间互不同步
+所造成的困难.例如, 在对用户从室外到室内的位置
+信息进行跟踪和记录来说, 用GPS 可能准确到
+10m , 但建筑物的定位系统的精度可能要比这个精
+度高, 同时GPS 提供的是经度/纬度数据, 而室内的
+主动式胸卡(active badge)是通过红外识别器来提供
+位置数据, 再由红外识别器映射到建筑物中的相对
+位置.在建立觉察上下文计算的软件支持环境过程
+中需要解决的关键问题是
+(1)上下文信息的建模.对于各种上下文, 由于
+它们的特性不同所以就有各种的表达和模型.当前
+几乎所有的系统都采用自己的方法来建立上下文信
+息的模型.这样就不可能相互交换上下文的信息或
+根据一个系统感知到的上下文变化来通知另外系统
+中的应用程序.现在需要的是能表示各种上下文信
+息的通用数据结构. 
+(2)系统结构.与各种上下文传感器系统进行
+交互, 把有关的上下文解释为所希望的格式并以合
+适的方式加以利用都涉及大量的工作.所以有必要
+把应用开发与上下文的感知相分开, 这对建立可适
+用于各种应用的通用系统来说也是至关重要的.为
+了把低层的传感数据处理与高层的应用分开, 需要
+引入中间层.它的作用是收集原始的传感器数据, 把
+这些数据转换成应用程序能理解的格式并把它们发
+送到对它有兴趣的应用程序.这时可有两种结构形
+式:集中式结构和分布式结构.集中式结构:最简单
+的方式是可向应用程序提供上下文信息的中央上下
+文服务器.例如, 文献[ 23] 中有动态环境服务器, 用
+于管理一组变量的名称和值(表示一个环境), 并向
+预先通过注册表示需要此上下文的客户发送最新的
+上下文信息.集中式的方式通常会有尺度的问题
+(scalability).分布式结构:分布式结构把上下文分布
+1046 计　　算　　机　　学　　报2003 年
+
+保存在若干个地方, 以避免可能的瓶颈问题.但分布
+式结构会增加系统的计算和通信负载. 
+如果要从应用程序的工作环境中访问上下文信
+息就需要利用被称为“ 上下文工具”(context w idget)
+的软件模块.每个“上下文工具”有一个状态(即
+一组属性)和一个行为(即一组由上下文变化触发的
+回调函数).“上下文工具”从传感器获得上下文信息
+并把它们传送到解释器或服务器用于集成.解释器
+和服务器向要求访问的应用程序提供简单的API . 
+这方面的研究比较典型的项目有Stick-E Notes
+[ 24] , 
+Context Toolkit
+[ 25] , Contex t Fabric
+[ 26] . 
+4 　普适计算的系统软件
+(Software Infrastructure) 
+4 .1 　普适计算系统软件的需求
+普适计算的系统软件构成普适计算的基础设施
+的软件部分, 它对普适计算中大量的联网的设备、物
+体、计算实体进行管理, 为它们之间的数据交换、消
+息交互、服务发现、任务协调、任务迁移等等提供系
+统级的支持.普适计算的系统软件必须能在我们日
+常生活的空间中而不是一个特定的环境中提供上述
+各种功能和服务, 这是一个组成、结构都经常变化的
+工作环境, 并且与此相关的硬件经常是异构的、容易
+出错和只具有有限的资源.这就对普适计算的系统
+软件技术提出了极大的挑战[ 27] .虽然移动计算和分
+布式计算研究已经解决了其中一部分问题, 但距普
+适计算情况下的需要来说还有很大差距.普适计算系
+统软件区别于其它分布式系统的两个主要的需求是: 
+(1)物理的集成(physical integ ration).在普适
+计算系统中涉及计算节点与物理世界的某种集成. 
+例如, 考虑一个智能会议室(smart meeting room), 
+其中的椅子嵌入了压力传感器、白板嵌入了可以自
+动数字化其上的笔迹的传感器、投影机嵌入了网络
+传输能力[ 28] , 这样房间可以感知会议中用户的存在
+和位置, 当他们坐在桌子旁或在白板旁边发言时能
+主动提供合适的服务, 房间中任一个PDA 都可以把
+自己的显示重定向到投影机. 
+(2) 自发的互操作(spontaneous interoperation).
+一个普适计算系统可以划分为两部分, 一部
+分是基础设施(inf rast ructure), 一部分是移动设备. 
+移动设备随着人的移动在不同的环境的基础设施中
+进出, 这样就造成了系统环境的不断变化;同样基础
+设施的部件的维护、升级也是造成系统环境变化的
+另一个原因.普适计算系统中的软件部件应能在这
+种变化的环境中进行自发的互操作, 即不需人为地
+重新设置和添加软件模块, 模块之间就可以自发地
+建立关联和进行功能上的协作. 
+移动计算领域中对信息内容及访问设备的异构
+性的自适应研究已经解决得较好, 但仍不足以满足
+普适计算的自发的、互操作的要求, 因为在普适计算
+系统中还存在着大量的功能异构性.举例来说, 一个
+来自外单位的访问者带着他的PDA 进入如前所述
+的智能会议室时, 他的PDA 事先可能根本没有预料
+到房间中的投影机可以被利用, 这时我们希望访问
+者不需要任何手工的配置, 就可用PDA 把他的讲稿
+发送到房间的投影仪上. 
+4 .2 　普适计算系统软件的关键问题
+(1)发现(discover).当用户把一个新设备带入
+一个空间或在已有的设备上采用新的模块时, 在此
+设备/模块和其它可用的服务和设备之间是如何相
+互地发现以及在它们之间需要进行哪些交互.同时
+普适计算系统是一个逐渐扩展的系统, 这个过程应
+该不要求重新启动系统, 或重写已有代码, 这也是以
+发现机制作为基础的.目前已经有一些这方面的技
+术基础, 如JINI , UpnP 等. 
+(2)自适应(adaptation).普适计算系统中各种
+设备拥有的资源是不同的和变化的.从最小的
+MEMS 系统到嵌入计算能力的物体, 到可携带计算
+设备, 再到基础设施中的部件, 它们在计算能力、存
+储容量、电池容量、交互手段等因素上都有着很大的
+差异;设备在不同的环境中移动时, 可用的无线网络
+的带宽也是不同的.这就需要解决自适应的问题.它
+包括内容的转化和交互界面的转化两部分.前者解
+决数据传输过程中因为资源的限制而对数据做的处
+理;后者是因为设备的交互机制的不同, 需要把同一
+个交互接口映射到不同的交互机制下完成, 比如可
+以想象以后的便携设备小到无法使用显示屏, 就必
+须把输出重定向到周围环境中合适的输出设备或转
+为语音输出.Stanford 的I-craf ter 框架[ 29] 就是研究
+界面元素如何在不同的设备上互相转换的机制. 
+(3)对物理实体的管理.因为在普适计算系统
+中, 物理世界中的物体都同时具有信息空间中的意
+义, 普适计算的系统软件就必须对这些物理实体具
+有一定的管理能力.UIUC 的GaiaOS
+[ 30] 研究就认为
+普适计算的系统软件就是一种物理空间的操作系
+统, 它与目前的操作系统的不同之处就是它需要把
+物理实体也管理起来.我们认为这里的管理有两层
+含义:(a)把物理实体看作一种资源, 需要建立对这
+些资源的位置、结构、功能的表示, 而且需要反应动
+态的实际情况.这需要觉察上下文计算的支持.(b) 
+9 期 徐光 等:普适计算 1047
+
+当物理实体嵌入有传感、计算、效应能力时, 必须提供
+对它们的高层接口, 即相当于传统的驱动程序. 
+(4)模块间协调机制(inter-module coo rdination).
+普适计算系统是一个分布的系统, 如何把各
+种分布的模块之间纷繁复杂的互联、通信、协作以一
+种统一和有机的方式组织、管理起来, 而使系统展示
+出一个协调的行为和功能, 这就是协调机制的作用. 
+目前已有的各种分布式组件结构如DCOM 、CORBA 
+和EJB 等都可以认为是一种协调机制, 但它们直接
+用来支持普适计算系统是不合适的, 因为用对象来
+抽象普适计算中的模块是不合适的[ 31] .Multi-Agent 
+系统目前被公认为是一种较合适的选择方案.在此
+基础上开发的有MIT 的Metaglue
+[ 32] 、SRI 的
+OAA
+[ 33] 和我们的Smart Plat form
+[ 31] 等. 
+(5)鲁棒性.普适计算系统, 特别是在使用了无
+线通信和人携带设备在不同空间中移动的情况下, 
+将会面临与使用有线分布式系统时相比出错频率大
+幅度增加的情况.在自发互操作中, 模块间的联系会
+经常不可预见地丢失和恢复.在普适计算系统中, 各
+种暂时的故障不应该被作为错误情况而导致系统退
+出或崩溃, 而需要设计能把这种暂时的故障看做一
+种正常的动态的工作上下文的功能和技术.虽然在
+分布式系统的研究中也包括了容错计算, 但它们主
+要是基于资源冗余的方法, 并不适用于资源缺少的
+情况. 
+(6)安全性(security).普适计算系统的移动设
+备和基础设施之间自发的互操作带来了新的安全问
+题, 如何保护它们不受到潜在的、恶意的交互对方的
+损害? 例如, 在智能房间中的某些服务可能受到恶
+意来访者设备的攻击.与此相似, 用户带入环境的
+PDA 上可能有一些机密材料需要受到保护.而普适
+计算下物理空间和信息空间的高度融合更对个人的
+隐私造成了潜在的威胁.当办公室里布置了人员定
+位设施后, 如何保证人们的位置信息不被恶意地利
+用.当人们不希望自己的位置被别人知道时, 能否确
+保做到这一点.解决这些问题, 不仅需要技术手段的
+支持, 而且需要新的商业模型、市场力量、法律等方
+面的支持[ 34] . 
+5 　智能空间(Smart Space) 
+5 .1 　智能空间的定义
+如前所述, 普适计算中信息空间和物理空间的
+融合可以在不同尺度上得到体现, 其在房间、建筑物
+这个尺度上的体现就是智能空间, 并且它可以不断
+连接扩大至全球.美国国家标准和技术学会(NIST) 
+给出的智能空间的定义是“一个嵌入了计算、信息设
+备和多模态的传感器的工作空间, 其目的是使用户
+能非常方便地在其中访问信息和获得计算机的服务
+来高效地进行单独工作和与他人的协同工作”[ 35] . 
+目前国际上对智能空间的研究开展得相当广泛, 
+如MIT AI Lab 的Intelligent Room
+[ 1] , Stanfo rd 的Interactive 
+Workspace
+[ 36] ,GIT 的Aw are Home
+[ 37] ,Microsof 
+t Research 的Easy living
+[ 38] ,GMD 的iLand
+[ 39] 
+等等. 
+智能空间应具备的功能和为用户提供的服务包括: 
+(1)能识别和感知用户以及他们的动作和目
+的, 理解和预测用户在完成任务过程中的需要; 
+(2)用户能方便地与各种信息源进行交互; 
+(3)用户携带的移动设备可以无缝地与智能空
+间的基础设施交互; 
+(4)提供丰富的信息显示; 
+(5)提供对发生在智能空间中的经历(experience)
+的记录, 以便在以后检索回放; 
+(6)支持空间中多人的协同工作以及与远程用
+户的沉浸式的协同工作. 
+智能空间的应用价值可以直接体现在其具体用
+途上.如智能会议室、作战指挥室、能照料老人的智
+能家居等[ 40] .Kindberg 在文献[ 41] 中指出将来不太
+可能存在一个全球统一的普适计算系统, 而是存在
+许多因为管理区划、地域区划和文化区划而分离的
+有明确边界的智能空间系统, 这些智能空间系统间
+可以有一定的交互, 人和各种可携带设备可以透明
+地在它们之间移动.这说明了从实施智能空间入手
+是通向全面实现普适计算的最可能的途径.下面我
+们将给出我们的应用实例. 
+5 .2 　智能远程教室———智能空间的一个应用实例
+普适计算研究中的一个重要问题是如何把这项
+基础研究与当前的应用相结合.我们认为远程教育
+是一个很好的结合点.因此, 建立了基于智能空间的
+远程智能教室实验系统[ 8] , 作为对智能空间和理论
+和应用研究的试验床.此空间具有以下特点: 
+(1)基于多模态信息的自然人机交互.教师的
+身份通过对人脸图像和讲话声音的识别来实现.教
+师就像在普通教室中那样通过语音和手势就可进行
+教学, 而无需坐在计算机面前.教师的操作包括调用
+课件、在电子黑板上作注释、与远方的学生交流等. 
+此外, 在此智能空间中还引入基于了虚拟人像(avatar)
+技术的一个虚拟助理角色, 由它代表智能空间
+来协助用户与智能空间的交互. 
+(2)分布侍候式服务(attentive service).智能空
+间能检测教室中发生的事件, 并根据对此事件的理
+1048 计　　算　　机　　学　　报2003 年
+
+解主动地提供相应的服务.教师在教学中可能有以下
+场景:手持教具讲解、面向电子黑板解释其上内容等. 
+系统将根据对教师动作的理解, 在不同的场景下向远
+方的学生转发相应的视频镜头或电子黑板内容. 
+(3)经历(experience)的自动记录:系统自动记
+录在远程智能教室中发生的所有事件, 其中包括学
+生的提问、教师的演讲和在黑板上的注释等, 并以结
+构化的多媒体流的形式保存.这是一个以时间或事
+件为索引的结构化的文件, 既可作为课件也可作为
+上下文历史供以后使用. 
+(4)计算和通信服务是分布和不可见的.整个
+系统是建立在一个自主开发的多代理(multi-agent) 
+分布式系统———Smart Plat form 上的.在此系统中
+计算资源是共享的, 而不是私有的.通过传感器输入
+的信息和提出的相应计算任务不是固定在某台计算
+机上, 而是由系统根据当时的情况来调度.这样可以
+很好地解决多项计算任务, 例如语音与手势数据的
+实时处理同时进行的问题. 
+(5)此系统结合了桌面会议系统、异地协同编
+著系统的功能, 因此, 可支持远程的协同工作, 如协
+同教学、协同设计等应用. 
+传统的远程教育系统中的教师是面向计算机的
+屏幕, 而不是学生, 这阻碍了教师与学生之间的面对
+面的交流.在基于智能空间的远程教育系统中教师
+可面向学生进行教学, 同时又可充分地享受信息访
+问和交互的服务.把远程教育技术提高到一个新的
+水平. 
+6 　结　论
+普适计算把计算和信息融入人们的生活空间, 
+使我们生活的物理世界与在信息空间中的虚拟世界
+融合成为一个整体.人们生活其中可随时、随地得到
+信息访问和计算服务, 从根本上改变了人们对信息
+技术的思考, 也改变了我们整个生活和工作的方式. 
+普适计算是对计算模式的革新, 对它的研究虽然还
+刚刚开始, 但是它已显示了巨大的生命力和深远的
+影响.普适计算的新思维极大地活跃了学术思想, 推
+动了对新型计算模式的研究.在此方向上已出现了
+许多诸如calm computing(平静计算)[ 42] 、everyday 
+computing(日常计算)[ 43] 、proactive computing (主
+动计算)[ 13] 等新的研究方向.这说明普适计算是一
+个不断发展和充满朝气的研究领域.我们需要抓住
+时机开展普适计算的基础理论和方法的研究, 这样
+才能在战略性领域中做出我们的创造性贡献.从另
+一方面看, 从根本上讲, 普适计算是为了使人们更方
+便地得到信息访问和计算服务.它使计算的应用又
+可能扩展到前所未有的宽度和深度.因此, 普适计算
+的研究又必须紧密地结合应用, 不断地开拓应用领
+域将使普适计算研究获得强大的推动力. 
+参考文献
+1 Coen M .The future of human-comput er int eraction or how I 
+learned t o stop w orrying and love my int elligent room .IEEE Intelligen 
+t System s, 1999 , 4(3 ～ 4):8 ～ 19 
+2 Weiser M .T he computer for the twenty-first century .Scient ific 
+American , 1991 , 265(3):94～ 104 
+3 Dertouzos M .The future of computing .Scien tific American , 
+1999 , 282(3):52 ～ 63 
+4 Norman D.The Invisible Comput er .Camb ridge, M ass :MIT 
+Press , 1999 
+5 Garlan D , Siewiorek D P , Smailagic A , St eenkist e P.Project aura 
+:Tow ard di straction-f ree pervasive computing .IEEE Pervasi ve 
+Comput ing , 2002 , 1(4 ～ 6):22 ～ 31 
+6 Salz P .The di sappearing compu ter.Time Europe , 2000 , 155 
+(8):1 ～ 8 
+7 Vernier F, Leash N , Shen C .Visualizat ion techniques for ci rcular 
+tabletop int erfaces .ME RL Cam bridge Research , MA , USA : 
+Technical Report:T R2002-01 , 2002 
+8 Xie Wei-Kai , Shi Yuan-Chun , Xu Guan-You . Smart classroom 
+———An intelligen t environment for t ele-education .In :Proceedings 
+of the 2nd IE EE Pacif ic-Rim Conference on Multimedia , 
+Beijing, China, 2001 .662 ～ 668 
+9 Wilson J .Tow ard things that thinks for next millennium .IEEE 
+Comput er , 2000 , 33(1):72 ～ 76 
+10 Kindberg T , Barton J , Morgan J et a l .People, places , things : 
+Web presence for the real world .In :Proceedings of the 3 rd IEEE 
+Workshop on Mobile Computing System s and Applications (WMCSA' 
+00), Mont erey CA, USA , 2000 .19 ～ 30 
+11 Chen Y et al .Flexible act ive-mat rix elect ronic ink display .Nature, 
+2003 , 423(5):136 
+12 Pinhanez C S .The everyw here displays projector :a device to create 
+ubiquitous graphical int erfaces .In :Proceedings of the 3rd International 
+Conf erence on Ubiqui tous Computing , At lant a, USA , 
+2001 .315 ～ 331 
+13 Tennenhouse D.Proact ive computing .Communicat ions of The 
+ACM , 2000 , 43(5):43 ～ 50 
+15 Beigl M , Gellersen H W , S chmidt A .MediaCups :Experience 
+wi th design and use of com put er-augment ed everyday object s . 
+Comput er Netw orks , 2001 , 35(4):401 ～ 409 
+14 Schmidt A .Implicit human comput er int eraction through cont ext . 
+Personal Technologies , 200 , 4(6):191 ～ 199 
+16 Ishii H , Ullmer B .Tangible bit s :T ow ards seamless interfaces betw 
+een people , bit s and atoms .In :Proceedings of CHI' 97 , Atlanta 
+, USA , 1997 .234 ～ 241 
+17 Sat yanarayanan M .Pervasive computing :vision and challenge . 
+IEEE Personal Communications , 2001 , 8(8):10 ～ 17 
+18 Pascoe J , Morse D , Ryan N .Developing personal t ech nology for 
+the f ield .Personal Technologi es , 1998 , 2(3):28 ～ 36 
+19 Abowd G D, Schilit B N .Ubiqui tous computing :The impact on 
+future interaction paradigms and hci research .In :Proceedings of 
+9 期 徐光 等:普适计算 1049
+
+CHI' 97 Workshop2 , At lant a, USA , 1997 .Available at ht tp :// 
+w w w .acm . org/ sigs/ sigchi/ chi97/ proceedings/ w orkshop/ gda. 
+h tm 
+20 Abow d G D, Dey A K , Brow n P J , Davies N , Smith M , S teggles 
+P .Tow ards a bet ter understanding of cont ext and cont ext-awareness 
+.In :Gellersen H W ed.Handheld and Ubiquitous Com puting 
+.Berlin :Springer , 1999 .304 ～ 307 
+21 Castro P, M untz R .M anaging contex t dat a f or smart spaces . 
+IE EE Personal Communicat ions , 2000 , 7(5):44 ～ 46 
+22 S chmidt A et a l .Advanced interaction in cont ext .In :Proceedings 
+of the 1st International Symposium on Handheld and Ubiquit 
+ous Comput ing, Karlsruhe, Germany , 1999 .89 ～ 101 
+23 S chili t W N.A syst em architectu re for cont ext-aw are mobi le computing[ 
+Ph D disssertation] .Department of Comput er Science, 
+Columbia Uni versit y , USA , 1995 
+24 Pascoe J .The stick-e note architecture:ext ending the interface 
+beyond the user .In :Proceedings of Int ernat ional Conference on 
+Int elligent User Int erfaces , Orlando , USA, 1997 .261 ～ 264 
+25 Dey A K , Salber D, Abowd G D.A conceptual framework and a 
+t oolkit f or supporting the rapid prot otyping of cont ext-aw are applications.
+Human-Computer Interact ion , 2001 , 16(2 ～ 4):97 ～ 
+166 
+26 Hong J I , Landay J A.An inf rast ructure approach t o contextaware 
+computing .Human-Com put er Interaction , 2001 , 16(2 ～ 
+4).Available at ht tp :// guir .berkeley .edu/ project s/ cfabric/ pubs/ 
+cont ext-essay-final.pdf 
+27 Abow d G D.Sof tw are engineering issues f or ubiqui tous com puting 
+.In :Proceedings of International Conf erence on Softw are Engineering 
+(ICSE-99), Los Angeles , USA , 1999 .75～ 84 
+28 Thayer S M , St eenkist e P .An archit ecture f or the integration of 
+physical and inf ormational spaces .In :Proceedings of International 
+Conference on Architecture of Computing Syst ems (ARCS' 02), 
+Karlsruhe, German , 2002 .7 ～ 20 
+29 Ponnekant i S , Lee B , Fox A et al .ICraf ter :A service framework 
+f or ubiquitous compu ting environments .In :Proceedings of the 3rd 
+Int ernational Conference on Ubiquit ous Computing , At lant a, 
+USA , 2001 .56 ～ 75 
+30 Manuel Román , Christopher K Hess et al .A middlew are inf rast 
+ructure to enable active spaces .IEEE Pervasive Computing , 
+2002 , 1(4):74 ～ 83 
+31 Xi e Wei-Kai , Shi Yuan-Chun , Xu Guan-You , Mao Yan-Hua. 
+Smart plat form :A sof tw are inf rastructure f or smart space (siss). 
+In :Proceedings of the 4th International Conference on Mult imodal 
+Interfaces , Pit tsburgh , USA , 2002 .429 ～ 434 
+32 Phi lips B A .Met aglue:A programming language f or mul ti-agent 
+systems[ MS dissert ation] .AI Laboratory , MIT , USA , 2000 
+33 Mart in D , Cheyer A , Moran D .The open agent archit ecture:A 
+f ramew ork for building dist ribut ed sof tw are syst ems .Applied Artif 
+icial Int elligence :An Int ernat ional Jou rnal, 1999 , 13(1 ～ 2): 
+91 ～ 128 
+34 Lessig L.The archi tecture of privacy .In :Proceedings of Taiw an 
+NET' 98 , Taipei , China, 1998 .Available at h ttp :// cyberlaw . 
+stanford .edu/ lessi g/ cont ent/ articles/ works/ archit ecture-priv .pdf 
+35 Rosenthal L , Stanford V .NIS T inf ormation technology laboratory 
+pervasive computing init iati ve .In :Proceedings of IEEE 9th International 
+Workshops on Enabling Technologi es :Inf rast ructure for 
+Collaborat ive En terprises , NIS T , USA, 2000 .30 ～ 36 
+36 Johanson B, Fox A, Winograd T .The interacti ve workspaces 
+project:experiences w ith ubiquit ous comput ing rooms .IEEE Pervasi 
+ve Compu ting , 2002 , 1(2):67 ～ 74 
+37 Kidd C D , Orr R, Abow d G D et al .The aw are home:A living 
+laboratory f or ubiquitous computing research .In :Proceedings of 
+the International Workshop on Cooperati ve Buildings , Pit tsburgh , 
+Pennsylvania , 1999 .191 ～ 198 
+38 Brumit t B , Meyers B, Krumm J , Kern A, S hafer S .Easy Living : 
+Technologi es for intelligent envi ronment s .Handheld and Ubiquitous 
+Computing , Bristol , UK , 2000 .30 ～ 36 
+39 St reitz N A , Tandler P , Mǜ ller-Tomfelde C , Konomi S . 
+Roomw are :Tow ards the next generat ion of human-compu ter interaction 
+based on an integ rated design of real and virtual worlds . 
+In :Carroll J ed.Human-Computer Interaction in the New Millenium 
+.Addison-Wesley , 2001 .553 ～ 578 
+40 St anford V.Using pervasive compu ting t o deliver elder care . 
+IEEE Pervasive Comput ing , 2002 , 1(1 ～ 3):10 ～ 13 
+41 Kindberg T , Fox A .System sof tware for ubiqui tous com put ing . 
+IEEE Pervasive Comput ing , 2002 , 1(1 ～ 3):70 ～ 81 
+42 Rekimot o J et al .Adding another communication channel to reality:
+Experience w ith a chat-augmented conference.In :Proceedings 
+of ACM S IGCHI Conference on Human Factors in Comput ing 
+Systems , Los Angeles , USA, 1998 .384 ～ 391 
+43 Voida S , Mynatt E D , MacIntyre B , Corso G M .In tegrat ing vi rtual 
+and physical cont ext to support k now ledge w orkers.IEEE 
+Pervasi ve Computing , 2002 , 1(3):73 ～ 79 
+XU Guang-You, born in 1940, the 
+chair professor of the Depar tment of Computer 
+Science , Tsing hua University , superviso 
+r .His research interests cover computer 
+vision, human computer interactio n 
+and multimedia computing .Co ntact him 
+at xgy -dcs@tsinghua .edu.cn . 
+SHI Yuan-Chun, born in 1967 , Ph .D., pro fesso r .Her research 
+interests include pervasive computing , human computer 
+communication technology and distributed multimedia processing 
+.Contact her at shiyc @tsinghua .edu.cn . 
+XIE Wei-Kai, born in 1976, Ph .D., joined IBM China 
+Research Lab at Beijing as a research scientist .His research interests 
+include softw are infrastructure for Smart Space , fo rmal 
+contex t data representation and context reasoning model in co ntext-
+aware computing .Contact him at xw k @media .cs.tsinghua 
+.edu .cn. 
+1050 计　　算　　机　　学　　报2003 年
+

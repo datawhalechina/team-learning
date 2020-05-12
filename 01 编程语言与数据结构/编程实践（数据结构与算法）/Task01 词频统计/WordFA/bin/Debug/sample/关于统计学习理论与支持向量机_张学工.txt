@@ -1,0 +1,513 @@
+第26卷　第1期
+2000年1月
+自　动　化　学　报
+ACTA AUTOM ATIC A SINICA 
+Vo l. 26, No. 1 
+Jan. , 2000 
+综述与评论
+1)本文受到国家自然科学基金赞助,项目编号为69885004. 
+收稿日期　1998-08-24　收修改稿日期　1999-04-27 
+关于统计学习理论与支持向量机1) 
+张学工
+(清华大学自动化系,智能技术与系统国家重点实验室　北京　100084) 
+摘　要　模式识别、函数拟合及概率密度估计等都属于基于数据学习的问题,现有方法的重
+要基础是传统的统计学,前提是有足够多样本,当样本数目有限时难以取得理想的效果.统计
+学习理论( SLT)是由Vapnik等人提出的一种小样本统计理论,着重研究在小样本情况下的
+统计规律及学习方法性质. SLT为机器学习问题建立了一个较好的理论框架,也发展了一种
+新的通用学习算法—— 支持向量机( SVM) ,能够较好的解决小样本学习问题.目前, SLT和
+SVM已成为国际上机器学习领域新的研究热点.本文是一篇综述,旨在介绍SLT和SVM的
+基本思想、特点和研究发展现状,以引起国内学者的进一步关注. 
+关键词　统计学习理论,支持向量机,机器学习,模式识别. 
+INTRODUCTION TO STATISTICAL LEARNING THEORY 
+AND SUPPORT VECTOR MACHINES 
+ZHANG Xuegong 
+(Dept . of Au tomat ion , Tsinghua University,Beij ing　100084) 
+( State Key Laboratory of Intell igen t Technology and Systemsof China ) 
+Abstract　　Data-based machine learning covers a wide rang e of topics f rom pat tern 
+recognition to function reg ression and densit y estimation. Mos t of the existing 
+methods are based on t raditional s tatis tics, which provides conclusion only f or the 
+situation where sample si ze is tending to infinit y. So they may not w ork in practical 
+cases of limit ed samples. Statis tical Learning Theo ry or SL T is a small-sample 
+s tatistics by Vapniket al . , which concerns mainly the s tatis tic principles when samples 
+are limi ted, especially the properties of learning procedure in such cas es. SL T 
+provides us a new framework fo r the general learning problem, and a novel pow erful 
+lea rning method called Support Vect or Machine or SVM, which can solv e smallsample 
+learning problems bet ter. It is believed that the s tudy of SL T and SVM is 
+becoming a new ho t area in the fi eld of machine learning. This review int roduces the 
+basic ideas of SLT and SVM, their major charact eristics and some current research
+
+trends. 
+Key words　Statistical learning theory, support vecto r machine, machine learning , 
+pat tern recognition. 
+1　引言
+基于数据的机器学习是现代智能技术中的重要方面,研究从观测数据(样本)出发寻
+找规律,利用这些规律对未来数据或无法观测的数据进行预测. 包括模式识别、神经网络
+等在内,现有机器学习方法共同的重要理论基础之一是统计学.传统统计学研究的是样本
+数目趋于无穷大时的渐近理论,现有学习方法也多是基于此假设.但在实际问题中,样本
+数往往是有限的,因此一些理论上很优秀的学习方法实际中表现却可能不尽人意. 
+与传统统计学相比,统计学习理论( Sta tistica l Learning Theory 或SLT)是一种专门
+研究小样本情况下机器学习规律的理论. V. Va pnik 等人从六、七十年代开始致力于此方
+面研究[1 ] ,到九十年代中期,随着其理论的不断发展和成熟,也由于神经网络等学习方法
+在理论上缺乏实质性进展,统计学习理论开始受到越来越广泛的重视[ 2, 3] . 
+统计学习理论是建立在一套较坚实的理论基础之上的,为解决有限样本学习问题提
+供了一个统一的框架. 它能将很多现有方法纳入其中,有望帮助解决许多原来难以解决的
+问题(比如神经网络结构选择问题、局部极小点问题等) ; 同时,在这一理论基础上发展了
+一种新的通用学习方法— — 支持向量机( Suppo rt Vector Machine或SVM) ,它已初步表
+现出很多优于已有方法的性能. 一些学者认为, SLT和SVM正在成为继神经网络研究之
+后新的研究热点,并将有力地推动机器学习理论和技术的发展[3 ] . 
+我国早在八十年代末就有学者注意到统计学习理论的基础成果[4 ] ,但之后较少研究, 
+目前只有少部分学者认识到这个重要的研究方向. 本文旨在向国内介绍统计学习理论和
+支持向量机方法的基本思想和特点,以使更多的学者能够看到它们的优势从而积极进行
+研究.文章第二节给出机器学习问题的一般表示,并简要讨论现有方法的一些问题; 第三
+节介绍SLT的基本思想和最有影响的结论; 第四节介绍SVM方法的原理、应用及由此
+发展出的其它方法; 第五节是讨论. 
+2　机器学习的基本问题
+2. 1　问题的表示
+机器学习的目的是根据给定的训练样本求对某系统输入输出之间依赖关系的估计, 
+使它能够对未知输出作出尽可能准确的预测. 可以一般地表示为: 变量y 与x 存在一定
+的未知依赖关系,即遵循某一未知的联合概率F (x , y ) , (x 和y 之间的确定性关系可以看
+作是其特例) ,机器学习问题就是根据n个独立同分布观测样本
+( x 1 , y1 ) , ( x2 , y2 ) ,… , (xn , yn ) , ( 1) 
+在一组函数{ f (x ,w ) }中求一个最优的函数f (x , w0 )对依赖关系进行估计,使期望风险
+R ( w ) =∫L (y , f ( x , w ) ) dF (x , y ) ( 2) 
+　 1期 张学工:关于统计学习理论与支持向量机 33
+
+最小.其中, { f (x ,w ) }称作预测函数集,w 为函数的广义参数, { f ( x ,w ) }可以表示任何函
+数集; L ( y , f ( x ,w ) )为由于用f ( x , w )对y 进行预测而造成的损失,不同类型的学习问题
+有不同形式的损失函数.预测函数也称作学习函数、学习模型或学习机器. 
+1)这里暂时没有讨论非监督模式识别问题. 实际上,如何在非监督模式识别问题中应用统计学习理论正是当前值
+得研究的课题之一. 
+有三类基本的机器学习问题,即模式识别、函数逼近和概率密度估计.对模式识别问
+题,输出y 是类别标号1) ,两类情况下y= { 0, 1}或{ 1, - 1} ,预测函数称作指示函数,损失
+函数可以定义为
+L ( y , f (x , w) ) = 
+0,　if y = f (x , w ) , 
+1,　if y ≠ f (x , w ) , 
+( 3) 
+使风险最小就是Bay es决策中使错误率最小.在函数逼近问题中, y 是连续变量(这里假
+设为单值函数) ,损失函数可定义为
+L ( y , f (x ,w ) ) = (y - f (x , w ) ) 2 , ( 4) 
+即采用最小平方误差准则. 而对概率密度估计问题,学习的目的是根据训练样本确定x 
+的概率密度. 记估计的密度函数为p (x , w ) ,则损失函数可以定义为
+L (p (x ,w ) ) = - logp (x ,w ) . ( 5) 
+2. 2　经验风险最小化
+在上面的问题表述中,学习的目标在于使期望风险最小化,但是,由于我们可以利用
+的信息只有样本( 1) , ( 2)式的期望风险并无法计算,因此传统的学习方法中采用了所谓经
+验风险最小化( ERM)准则,即用样本定义经验风险
+Remp (w ) = 
+1
+nΣn 
+i= 1 
+L ( yi , f (xi ,w ) ) , ( 6) 
+作为对( 2)式的估计,设计学习算法使它最小化.对损失函数( 3) ,经验风险就是训练样本
+错误率; 对( 4)式的损失函数,经验风险就是平方训练误差; 而采用( 5)式损失函数的ERM 
+准则就等价于最大似然方法. 
+事实上,用ERM准则代替期望风险最小化并没有经过充分的理论论证,只是直观上
+合理的想当然做法,但这种思想却在多年的机器学习方法研究中占据了主要地位. 人们多
+年来将大部分注意力集中到如何更好地最小化经验风险上,而实际上,即使可以假定当n 
+趋向于无穷大时( 6)式趋近于( 2)式,在很多问题中的样本数目也离无穷大相去甚远.那么
+在有限样本下ERM准则得到的结果能使真实风险也较小吗? 
+2. 3　复杂性与推广能力
+ERM准则不成功的一个例子是神经网络的过学习问题. 开始,很多注意力都集中在
+如何使Remp (w )更小,但很快就发现,训练误差小并不总能导致好的预测效果. 某些情况
+下,训练误差过小反而会导致推广能力的下降,即真实风险的增加,这就是过学习问题. 
+之所以出现过学习现象,一是因为样本不充分,二是学习机器设计不合理,这两个问
+题是互相关联的. 设想一个简单的例子,假设有一组实数样本{ x , y } , y 取值在[0, 1 ]之间, 
+那么不论样本是依据什么模型产生的,只要用函数f (x ,T)= sin(Tx )去拟合它们(T是待
+定参数) ,总能够找到一个T使训练误差为零,但显然得到的“最优”函数并不能正确代表
+34 自　　动　　化　　学　　报26 卷
+
+真实的函数模型.究其原因,是试图用一个十分复杂的模型去拟合有限的样本,导致丧失
+了推广能力. 在神经网络中,若对有限的样本来说网络学习能力过强,足以记住每个样本, 
+此时经验风险很快就可以收敛到很小甚至零,但却根本无法保证它对未来样本能给出好
+的预测. 学习机器的复杂性与推广性之间的这种矛盾同样可以在其它学习方法中看到. 
+文献[ 3]给出了一个实验例子,在有噪声条件下用模型y= x 2产生10个样本,分别用
+一个一次函数和一个二次函数根据ERM原则去拟合,结果显示,虽然真实模型是二次, 
+但由于样本数有限且受噪声的影响,用一次函数预测的结果更好.同样的实验进行了100 
+次, 71% 的结果是一次拟合好于二次拟合. 
+由此可看出,有限样本情况下, 1)经验风险最小并不一定意味着期望风险最小; 2)学
+习机器的复杂性不但应与所研究的系统有关,而且要和有限数目的样本相适应.我们需要
+一种能够指导我们在小样本情况下建立有效的学习和推广方法的理论. 
+3　统计学习理论的核心内容
+统计学习理论就是研究小样本统计估计和预测的理论,主要内容包括四个方面[2 ]: 
+1) 经验风险最小化准则下统计学习一致性的条件; 
+2) 在这些条件下关于统计学习方法推广性的界的结论; 
+3) 在这些界的基础上建立的小样本归纳推理准则; 
+4) 实现新的准则的实际方法(算法) . 
+其中,最有指导性的理论结果是推广性的界,与此相关的一个核心概念是VC维. 
+3. 1　VC维
+为了研究学习过程一致收敛的速度和推广性,统计学习理论定义了一系列有关函数
+集学习性能的指标,其中最重要的是V C维(V apnik-Cherv onenki s Dimensio n) . 模式识别
+方法中V C维的直观定义是: 对一个指示函数集,如果存在h 个样本能够被函数集中的函
+数按所有可能的2
+h 种形式分开,则称函数集能够把h 个样本打散; 函数集的V C维就是它
+能打散的最大样本数目h.若对任意数目的样本都有函数能将它们打散,则函数集的VC 
+维是无穷大. 有界实函数的V C维可以通过用一定的阈值将它转化成指示函数来定义. 
+V C维反映了函数集的学习能力, V C维越大则学习机器越复杂(容量越大) .遗憾的
+是,目前尚没有通用的关于任意函数集V C维计算的理论,只对一些特殊的函数集知道其
+V C维.比如在n维实数空间中线性分类器和线性实函数的V C维是n+ 1,而上一节例子
+中f (x ,T)= sin(Tx )的V C维则为无穷大. 对于一些比较复杂的学习机器(如神经网络) , 
+其VC维除了与函数集(神经网结构)有关外,还受学习算法等的影响,其确定更加困难. 
+对于给定的学习函数集,如何(用理论或实验的方法)计算其V C维是当前统计学习理论
+中有待研究的一个问题[5 ] . 
+3. 2　推广性的界
+统计学习理论系统地研究了对于各种类型的函数集,经验风险和实际风险之间的关
+系,即推广性的界[2 ] . 关于两类分类问题,结论是: 对指示函数集中的所有函数(包括使经
+验风险最小的函数) ,经验风险Remp ( w )和实际风险R ( w )之间以至少1- Z的概率满足如
+下关系[6 ]: 
+　 1期 张学工:关于统计学习理论与支持向量机 35
+
+R (w ) ≤ Remp (w ) + 
+h ( ln( 2n /h ) + 1) - ln(Z/4) 
+n 
+, ( 7) 
+其中h 是函数集的V C维, n 是样本数. 
+这一结论从理论上说明了学习机器的实际风险是由两部分组成的: 一是经验风险(训
+练误差) ,另一部分称作置信范围,它和学习机器的V C维及训练样本数有关. 可以简单地
+表示为
+R (w ) ≤ Remp (w ) + H(h /n ) . ( 8) 
+它表明,在有限训练样本下,学习机器的VC维越高(复杂性越高)则置信范围越大,导致
+真实风险与经验风险之间可能的差别越大.这就是为什么会出现过学习现象的原因.机器
+学习过程不但要使经验风险最小,还要使V C维尽量小以缩小置信范围,才能取得较小的
+实际风险,即对未来样本有较好的推广性. 
+1)比如最近邻法,可以很简单地证明它的V C维为无穷大,但它却在很多情况下有较好的推广性, 说明统计学习
+理论中关于推广性界的理论并不能解决机器学习中的所有问题,很多问题仍值得深入研究. 
+需要指出,推广性的界是对于最坏情况的结论,在很多情况下是较松的,尤其当VC 
+维较高时更是如此(文献[6 ]指出当h /n> 0. 37时这个界肯定是松弛的,当V C维无穷大
+时这个界就不再成立1) ) .而且,这种界只在对同一类学习函数进行比较时有效,可以指导
+我们从函数集中选择最优的函数,在不同函数集之间比较却不一定成立. Va pnik指出[2 ] , 
+寻找更好地反映学习机器能力的参数和得到更紧的界是学习理论今后的研究方向之一. 
+3. 3结构风险最小化
+图1　有序风险最小化示意图
+从上面的结论看到, ERM原则在样本有限时
+是不合理的,我们需要同时最小化经验风险和置
+信范围. 其实, 在传统方法中,选择学习模型和算
+法的过程就是调整置信范围的过程,如果模型比
+较适合现有的训练样本(相当于h /n 值适当) ,则
+可以取得比较好的效果. 但因为缺乏理论指导,这
+种选择只能依赖先验知识和经验,造成了如神经
+网络等方法对使用者“技巧”的过分依赖. 
+统计学习理论提出了一种新的策略,即把函
+数集构造为一个函数子集序列,使各个子集按照
+V C维的大小(亦即H的大小)排列; 在每个子集
+中寻找最小经验风险,在子集间折衷考虑经验风险和置信范围,取得实际风险的最小,如
+图1所示. 这种思想称作结构风险最小化( Structural Risk Minimization或译有序风险最
+小化[4 ] )即SRM准则.统计学习理论还给出了合理的函数子集结构应满足的条件及在
+SRM准则下实际风险收敛的性质[2 ] . 
+实现SRM原则可以有两种思路,一是在每个子集中求最小经验风险,然后选择使最
+小经验风险和置信范围之和最小的子集.显然这种方法比较费时,当子集数目很大甚至是
+无穷时不可行.因此有第二种思路,即设计函数集的某种结构使每个子集中都能取得最小
+的经验风险(如使训练误差为0) ,然后只需选择选择适当的子集使置信范围最小,则这个
+36 自　　动　　化　　学　　报26 卷
+
+子集中使经验风险最小的函数就是最优函数.支持向量机方法实际上就是这种思想的具
+体实现. 文献[3]中讨论了一些函数子集结构的例子1) 和如何根据SRM准则对某些传统
+方法进行改进的问题. 
+1)应当指出, SRM准则并没有指出如何选择函数子集结构,而且由于尚没有一般地关于V C维计算的理论和方
+法,构造函数子集的一般方法也是一个需要进一步研究的问题. 
+4　支持向量机
+支持向量机简称SVM,是统计学习理论中最年轻的内容,也是最实用的部分. 其核心
+内容是在1992到1995年间提出的[7, 8, 9, 2 ] ,目前仍处在不断发展阶段. 
+4. 1　广义最优分类面
+图2　线性可分情况下的最优分类线
+SVM是从线性可分情况下的最优分类面发
+展而来的,基本思想可用图2的两维情况说明. 图
+中,实心点和空心点代表两类样本, H为分类线, 
+H1 , H2分别为过各类中离分类线最近的样本且平
+行于分类线的直线,它们之间的距离叫做分类间
+隔( margin) . 所谓最优分类线就是要求分类线不
+但能将两类正确分开(训练错误率为0) , 而且使
+分类间隔最大. 分类线方程为x w+ b= 0, 我们
+可以对它进行归一化,使得对线性可分的样本集
+(xi , yi ) , i= 1,… , n , x∈ Rd , y∈ {+ 1, - 1} ,满足
+yi [ (w xi ) + b ] - 1≥ 0,　i = 1,… , n. ( 9) 
+此时分类间隔等于2 / w ,使间隔最大等价于使 w 2最小.满足条件( 9)且使1
+2 w 2最小的
+分类面就叫做最优分类面, H1 , H2上的训练样本点就称作支持向量. 
+使分类间隔最大实际上就是对推广能力的控制,这是SVM的核心思想之一. 统计学
+习理论指出[2 ] ,在N 维空间中,设样本分布在一个半径为R 的超球范围内,则满足条件 
+w ≤ A 的正则超平面构成的指示函数集f (x ,w, b)= sg n{ (w x )+ b } ( sg n(　)为符号函
+数)的V C维满足下面的界
+h ≤ min( [R2A2 ] ,N ) + 1. ( 10) 
+因此使 w 2最小就是使V C维的上界最小,从而实现SRM准则中对函数复杂性的选择. 
+利用Lag range优化方法可以把上述最优分类面问题转化为其对偶问题[6 ] ,即在约束
+条件
+Σn 
+i= 1 
+yiTi = 0 ( 11a ) 
+和
+Ti ≥ 0,　i = 1,… , n ( 11b) 
+下对Ti 求解下列函数的最大值
+　 1期 张学工:关于统计学习理论与支持向量机 37
+
+Q(T) = Σn 
+i= 1
+Ti - 1
+2Σn 
+i, j= 1
+TiTj yi yj (xi xj ) , ( 12) 
+Ti 为与每个样本对应的Lag rang e乘子. 这是一个不等式约束下二次函数寻优的问题,存
+在唯一解. 容易证明,解中将只有一部分(通常是少部分)Ti 不为零,对应的样本就是支持
+向量.解上述问题后得到的最优分类函数是
+f (x ) = sg n{ (w x ) + b } = sgn Σn 
+i= 1 
+T*
+1 yi (xi x ) + b* , ( 13) 
+式中的求和实际上只对支持向量进行. b* 是分类阈值,可以用任一个支持向量(满足( 9) 
+式中的等号)求得,或通过两类中任意一对支持向量取中值求得. 
+在线性不可分的情况下,可以在条件( 9)中增加一个松弛项ai≥ 0,成为
+yi [ (w xi ) + b ] - 1+ ai ≥ 0,　i = 1,… , n , ( 14) 
+将目标改为求( w ,a)= 
+1
+2 w 2+ C Σn 
+i= 1
+ai 最小,即折衷考虑最少错分样本和最大分类间
+隔,就得到广义最优分类面. 其中,C> 0是一个常数,它控制对错分样本惩罚的程度.广义
+最优分类面的对偶问题与线性可分情况下几乎完全相同,只是条件( 11b)变为
+0≤ Ti ≤ C,　i = 1,… , n. ( 15) 
+4. 2　支持向量机
+对于N 维空间中的线性函数,其V C维为N+ 1,但根据式( 10)的结论,在 w ≤ A 的
+约束下其V C维可能大大减小,即使在十分高维的空间中也可以得到较小V C维的函数
+集(比如文[2 ]中介绍了在1013维空间中取得V C维在103左右的分类面的例子) ,以保证有
+较好的推广性. 同时我们看到,通过把原问题转化为对偶问题,计算的复杂度不再取决于
+空间维数,而是取决于样本数,尤其是样本中的支持向量数.这些特点使有效地对付高维
+问题成为可能. 
+对非线性问题,可以通过非线性变换转化为某个高维空间中的线性问题,在变换空间
+求最优分类面. 这种变换可能比较复杂,因此这种思路在一般情况下不易实现. 但是注意
+到,在上面的对偶问题中,不论是寻优函数( 12)还是分类函数( 13)都只涉及训练样本之间
+的内积运算(xi xj ) ,这样,在高维空间实际上只需进行内积运算,而这种内积运算是可以
+用原空间中的函数实现的,我们甚至没有必要知道变换的形式. 根据泛函的有关理论,只
+要一种核函数K (xi , xj )满足Mercer条件,它就对应某一变换空间中的内积[2 ] . 
+因此,在最优分类面中采用适当的内积函数K (xi , xj )就可以实现某一非线性变换后
+的线性分类,而计算复杂度却没有增加,此时目标函数( 12)变为
+Q(T) = Σn 
+i= 1
+Ti - 
+1
+2Σn 
+i , j= 1
+TiTj yi yjK (xi , xj ) , ( 16) 
+而相应的分类函数也变为
+f (x ) = sg n(Σn 
+i= 1
+T*i
+yiK ( xi , x ) + b* ) , ( 17) 
+这就是支持向量机. 
+概括地说,支持向量机就是首先通过用内积函数定义的非线性变换将输入空间变换
+到一个高维空间,在这个空间中求(广义)最优分类面. SVM分类函数形式上类似于一个
+神经网络,输出是中间节点的线性组合,每个中间节点对应一个支持向量,如图3所示. 
+38 自　　动　　化　　学　　报26 卷
+
+图3　支持向量机示意图
+4. 3　核函数
+SVM 中不同的内积核函数将形成不同
+的算法,目前研究最多的核函数主要有三类, 
+一是多项式核函数
+K (x , xi ) = [ (x xi ) + 1 ]
+q 
+, ( 18) 
+所得到的是q 阶多项式分类器; 二是径向基
+函数( RBF) 
+K ( x , xi ) = ex p - |x - xi|2 
+e2 , ( 19) 
+所得分类器与传统RBF方法的重要区别是, 
+这里每个基函数中心对应一个支持向量, 它
+们及输出权值都是由算法自动确定的. 也可
+以采用Sigmoid函数作为内积,即
+K (x , xi ) = ta nh(v ( x x i ) + c ) , ( 20) 
+这时SVM实现的就是包含一个隐层的多层感知器,隐层节点数是由算法自动确定的,而
+且算法不存在困扰神经网络方法的局部极小点问题. 
+4. 4　用于函数拟合的SVM 
+SVM方法也可以很好地应用于函数拟合问题中[10～ 12 ] ,其思路与在模式识别中十分
+相似. 首先考虑用线性回归函数f (x )= w x+ b拟合数据{xi , yi } , i= 1,… , n , xi∈ Rd , yi∈ 
+R 的问题,并假设所有训练数据都可以在精度X下无误差地用线性函数拟合,即
+yi - w xi - b ≤ X, 
+w xi + b - yi ≤ X,
+　i = 1,… , n. ( 21) 
+与最优分类面中最大化分类间隔相似,这里控制函数集复杂性的方法是使回归函数最平
+坦,它等价于最小化1
+2 w 2 . 考虑到允许拟合误差的情况,引入松弛因子ai≥ 0和a*
+i ≥ 0, 
+则条件( 21)变成
+yi - w xi - b≤ X+ ai , 
+w xi + b - yi ≤ X+ a*
+i ,
+　i = 1,… , n. ( 22) 
+优化目标变成最小化1
+2 w 2+ CΣn 
+i= 1 
+(ai+ a*
+i ) ,常数C> 0控制对超出误差X的样本的惩罚
+程度.采用同样的优化方法可以得到其对偶问题.在条件
+Σn 
+i= 1 
+(Ti - T*i
+) = 0, 
+0≤ Ti ,T*i 
+≤ C,　i = 1,… , n 
+( 23) 
+下,对Lag ra nge因子Ti ,T*i最大化目标函数
+W (T,T* ) = - XΣn 
+i= 1 
+(T*i 
++ Ti ) + Σn 
+i= 1 
+yi (T*i 
+- Ti ) - 
+1
+2Σn 
+i , j= 1 
+(T*i 
+- Ti ) (T*
+j - Tj ) (xi xj ) , 
+( 24) 
+得回归函数为
+f ( x ) = (w x ) + b = Σn 
+i= 1 
+(T*i
+- Ti ) (x i x ) + b* . ( 25) 
+　 1期 张学工:关于统计学习理论与支持向量机 39
+
+　　与模式识别中的SVM方法一样,这里Ti ,T*i
+也将只有小部分不为0,它们对应的样本
+就是支持向量,一般是在函数变化比较剧烈的位置上的样本; 而且这里也是只涉及内积运
+算,只要用核函数K (xi , xj )替代( 24) , ( 25)中的内积运算就可以实现非线性函数拟合. 
+4. 5　核函数主成分分析
+SVM方法中一个重要启示是用内积运算实现某种非线性变换,这种思想也可以在其
+它问题中得到的应用,比较成功的例子就是用核函数实现非线性主成分分析[13, 14 ] ,它是
+传统主成分分析( PCA)方法的推广. 
+对于样本集{x1 ,… , xn } ,主成分方向是矩阵C = 
+1 
+nΣn 
+i= 1 
+xi xT 
+i 的特征向量. 对x 进行非
+线性变换O(x ) ,可得C- = 
+1 
+nΣn 
+i= 1
+O(xi )O(xi ) T , 其特征向量v 就是原样本集的非线性主成分
+方向,满足λv = C - 
+v . 将每个样本与该式内积,得
+λO(xk ) v = O(xk ) C - 
+v , k = 1,… , n. ( 26) 
+可以证明,特征向量v 可以写成v = Σn 
+i= 1
+TiO(xi ) , 将它代入( 26)式中,并定义矩阵
+K = {Ki j } = { (O(xi ) O(x j ) ) } = {K ( xi , x j ) } , ( 27) 
+(Kij为矩阵的第i 行第j列个元素) ,可以得到
+nλa = Ka , ( 28) 
+其中a= [T1 ,… ,Tn ]T. 从矩阵K 的特征向量a 即可求出C-的特征向量v ,即O(x )空间的主
+成分方向. 对于原空间中的任意向量x ,它在变换空间中的主成分是O(x )在主成分方向v 
+上的投影,即
+v O(x ) = Σn 
+i= 1
+TiO(xi ) O(x ) = Σn 
+i= 1
+TiK (xi , x ) . ( 29) 
+显然,与SVM算法中类似,这里得到的非线性主成分方法只需在原空间中计算用作内积
+的核函数K (xi , xj ) ,而无需真正计算对应的非线性变换,因此称作核函数主成分分析. 
+4. 6　应用研究
+比较遗憾的是,虽然SVM方法在理论上具有很突出的优势,但与其理论研究相比, 
+应用研究尚相对比较滞后,目前只有较有限的实验研究报道,且多属仿真和对比实验[15 ] . 
+SVM的应用应该是一个大有作为的方向. 
+在模式识别方面最突出的应用研究是贝尔实验室对美国邮政手写数字库进行的实
+验[2, 8 ] ,这是一个可识别性较差的数据库,人工识别平均错误率是2. 5% ,用决策树方法识
+别错误率是16. 2% ,两层神经网络中错误率最小的是5. 9% ,专门针对该特定问题设计的
+五层神经网络错误率为5. 1% (其中利用了大量先验知识) ,而用三种SVM方法(采用式
+( 18)～ ( 20)的核函数)得到的错误率分别为4. 0%、4. 1% 和4. 2% ,且其中直接采用了16× 
+16的字符点阵作为SVM的输入,并没有进行专门的特征提取. 实验一方面说明了SVM 
+方法较传统方法有明显的优势,同时也得到了不同的SVM方法可以得到性能相近的结
+果(不像神经网络那样依赖于模型的选择) .实验还观察到,三种SVM求出的支持向量中
+有80% 以上是重合的,它们都只是总样本中很少的一部分,说明支持向量本身对不同方法
+具有一定的不敏感性(遗憾的是这些结论仅仅是有限的实验中观察到的现象,如果能得到
+证明,将会使SVM的理论和应用有更大的突破) . 围绕这一字符识别实验,还提出了一些
+40 自　　动　　化　　学　　报26 卷
+
+对SVM的改进,比如引入关于不变性的知识[16, 17 ]、识别和去除样本集中的野值[ 18]、通过
+样本集预处理提高识别速度[19 ]等,相关的应用还包括SVM与神经网络相结合对笔迹进
+行在线适应[20 ] . 除此之外, MIT用SVM进行的人脸检测实验也取得了较好的效果,可以
+较好地学会在图像中找出可能的人脸位置[21～ 23 ] . 其它有报道的实验领域还包括文本识
+别[23, 24 ]、人脸识别[ 25]、三维物体识别[26 ]、遥感图像分析[ 27]等. 
+在函数拟合方面,主要实验尚属于原理性研究,包括函数逼近、时间序列预测及数据
+压缩[10～ 12, 28, 29]等. 
+其它有关研究还有对SVM中优化算法实现的研究[30, 31, 23 ]、改进的SVM方法[ 32, 33]甚
+至硬件实现研究[34 ]等. 
+5　讨论
+由于统计学习理论和支持向量机建立了一套较好的有限样本下机器学习的理论框架
+和通用方法,既有严格的理论基础,又能较好地解决小样本、非线性、高维数和局部极小点
+等实际问题,因此成为九十年代末发展最快的研究方向之一,其核心思想就是学习机器要
+与有限的训练样本相适应. 本文对它们的基本思想、方法及研究方向进行了介绍,希望使
+读者对这一领域有一个基本的了解. 统计学习理论虽然已经提出多年,但从它自身趋向成
+熟和被广泛重视到现在毕竟才只有几年的时间,其中还有很多尚未解决或尚未充分解决
+的问题,在应用方面的研究更是刚刚开始. 我们认为,这是一个十分值得大力研究的领域. 
+参考文献
+1　Vapnik V N. Estimation of Dependencies Based on Empirical Data. Berlin: Springer-Verlag, 1982 
+2　Vapnik V N. The Nature of Stati stical Learning Theory, N Y: Springer-Verlag, 1995 
+张学工译. 统计学习理论的本质.北京: 清华大学出版社, 1999(待出版) 
+3　Cherkas sky V , Mulier F . Learning f rom Data: Concepts , Theo ry and M ethods. NY: John Viley & Sons, 1997 
+4　边肇祺等. 模式识别. 北京: 清华大学出版社, 1988 
+5　Vapnik V, Levin E, Le Cun Y. Measuring th e VC-dimension of a learning machine. Neural Compu tation , 1994, 
+6: 851～ 876. 
+6　Burges C J C. A tutorial on sup po rt vector machines for pat tern recognition. Data Minin g and Knowledge Discovery 
+, 1998 2(2) 
+7　Bos er B, Guyon I, Vapnik V. A t raining algori thm for optimal margin clas si fiers , Fif th Ann ual Worksh op on 
+Computational Learning Th eory. Pi tt sb urgh: ACM Press , 1992 
+8　Cortes C, Vapnik V. Suppor t-vecto r netwo rk s. Machine Learnin g , 1995, 20: 273～ 297 
+9　Sch o lkopf B, Bu rg es C, Vapnik V. Ext racting sup po rt data for a given task. In: Fayyad U M, Uthu rusamy R 
+( eds. ) . Proc. of Fi rst In tl. Conf . on Knowledg e Discov ery & Data Mining , AAAI Press, 1995, 262～ 267 
+10　Vapnik V, Golowich S, Smola A, Support vector meth od for functio n approximation, regres sion es timation, and 
+signal proces sing. In: Mozer M, Jordan M, Petsche T ( eds ) . Neu ral Information Proces sing Systems, MIT 
+Press , 1997, 9 
+11　Mǜ ller K-R, Smola A J, Ra t sch G et al . Predicting time series wi th support v ector machines. In: Proc. of 
+ICANN '97, Springer Lecture Notes in Compu ter Science, 1997, 999～ 1005 
+12　Drucker H, Bu rges C, Kau fman L et al . Sup po rt vector regres sion machines. In: Mozer M, Jordan M, Pet sch e T 
+( eds ) . Neu ral Information Processing Sys tems, MI T Pres s, 1997, 9 
+　 1期 张学工:关于统计学习理论与支持向量机 41
+
+13　Sch o lkopf B, Smola A, Mǜ ller K-R. Kernel principal compon ent analysi s. In: Proc. of ICANN '97, 1997, 583～ 
+589 
+14　Sch o lkopf B, Smola A, Mǜ ller K-R. Nonlinear componen t analysi s as kern el eigenv alue problem. Neural Computat 
+ion , 1998, 10( 5): 1299～ 1319 
+15　Scho lkopf B, Sung K-K, Bu rges Cet al . Comparing su pport vector machines with Gaussian k ernels to radial basi s 
+fu nction classif iers. I EEE Trans. on Signal Processin g , 1997, 45( 11): 2758～ 2765 
+16　 Sch olkopf B, Burges C, Vapnik V. Incorporating invariances in su pport v ector learning machines , In: von der 
+Malsbu rg C, von Seelen W, Vorbrǜ ggen J Cet al ( eds) . Art ificial Neural Networks-ICANN '96, Spingers Lectu re 
+Notes in Computer Science, Berlin , 1996, 1112: 47～ 52 
+17　Scho lkopf B, Simard P, Smola A et al . Prior k nowledge in su pport vector kernels. NIPS '97, 1997 
+18　Guyon I, Matic N, Vapnik V. Discovering informative patterns and data cleaning. In: Fayyad U M , Piatet sky- 
+Shapi ro G, Smyth P et al ( eds ) . Adv ances in Knowledge Di scovery & Data Mining, MI T Pres s, 1996, 181～ 203 
+19　 Burges C, Sch olkopf B. Improving the accuracy and speed of support vector machines. In: Mo zer M, Jordan M, 
+Pet sch e T ( eds ) . Neural Information Processing Sys tems, M IT Pres s, 1997, 9 
+20　Matic N , Guyon I, Denker J et al . Writer adaptation for on-line handwrit ten character recogni tion. In: 2nd Int l. 
+Conf. on Pat tern Recogni tion and Document Analysi s, 1993, 187～ 191 
+21　Oren M, Papageorgiou C, Sinha P et al . Pedest rian detectio n using wavelet templates, In: Proc. of CV PR'97, 
+Puerto Rico , 1997 
+22　Hearst M A, Scho lkopf B, Dumai s S et al . Trends and cont rov ersies-support vector machines, I EEE Intel ligent 
+Systems , 1998, 13( 4): 18～ 28 
+23　Osuna E, Freund R, Girosi F. Training su pport vector machines:
+an applicat ion to face detect ion. In: Proc. of 
+CVPR '97, Puerto Rico, 1997 
+24　卢增祥,李衍达. 交互SVM学习算法及其在文本信息过滤中的应用. 清华大学学报, 1999(待发表) 
+25　Lu Ch unyu , Yan Pingfan, Zhang Ch angsh ui, Zhou Jie. Face recog ni tio n u sing suppor t v ector machine. In: Proc. 
+of ICNNB'98, Bei jing, 1998, 652～ 655 
+26　Blanz V, Scho lkopf B, Bǜ l thof f H. et al . Comparis on of view-based ob ject recognition algo ri thms using reali stic 
+3D models , In: von d er Mal sbu rg C, v on Seelen W, Vorbrǜ ggen J Cet al ( eds) . Artif icial Neural Networks—— 
+ICANN '96, Spingers Lectu re No tes in Computer Science, Berlin, 1996, 1112: 251～ 256 
+27　Brown M , Lewis H G, Gunn S R. Linear spectral mixture mod els and suppor t v ector machines fo r remote sensing, 
+( submit ted to) I EEE Trans. Geoscience an d Remote Sensin g , 1998 
+28　Mukherjee S, Osuna E, Gi rosi F. Nonlinear p redict ion of chaotic time series using a suppo rt vecto r machin e. In: 
+Proc. of NNSP'97, 1997 
+29　Kwok J T-Y, Suppor t v ector mixture for classif ication and reg ression p rob lems. ICPR'98, 1998 
+30　Bennett K, Mangasarian O. Robus t linear programming di scrimination of two linearly inseparab le set s. 
+Opt imizat ion Metho ds and So f tware , 1992, 1: 23～ 34 
+31　Osuna E, Freund R, Gi rosi F. An improved t raining algori thm for suppo rt vector machines. In: Proc. of NNSP'97, 
+1997 
+32　Bennet t K P, Demiriz A. Semi-supervis ed suppo rt v ector machines. In: Proc. of NIPS '98, 1998 
+33　Zhang Xu egong. Using class-cen ter vectors to bui ld support vector machines. In: Proc. of NNSP'99. 1999: 3～ 11 
+34　Anguita D, Ridella S, Rovet ta S. Ci rcuital implementat ion of support vecto r machines. Electronics Let ters , 1998, 
+34( 16): 1596～ 1597 
+张学工　1965年生, 1994年于清华大学获博士学位,现为清华大学自动化系副研究员,主要研究方
+向为模式识别的理论与方法、智能信息处理与融合技术及其在地球物理勘探等领域中的应用. 
+42 自　　动　　化　　学　　报26 卷
+

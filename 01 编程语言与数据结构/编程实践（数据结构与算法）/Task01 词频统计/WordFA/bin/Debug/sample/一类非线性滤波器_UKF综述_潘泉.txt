@@ -1,0 +1,1112 @@
+第20 卷第5 期
+Vol. 20 No . 5 
+　控　制　与　决　策
+　Contr ol and Decision　
+2005 年5 月
+　Ma y 2005 
+　　收稿日期: 2004-05-29; 修回日期: 2004-09-15. 
+　　基金项目: 国家自然科学基金项目( 60172037) ; 陕西省科学技术研究发展计划项目( 2003k06-G15) ; 西北工业大学
+引进高层次人才科研启动费项目. 
+　　作者简介: 潘泉( 1961—) , 男, 重庆人, 教授, 博士生导师, 从事信息融合理论与应用、自适应滤波、估计与控制等研
+究; 杨峰( 1977—) , 男, 陕西西安人, 博士生, 从事多传感信息融合理论、机动目标跟踪等研究. 
+　　文章编号: 1001-0920( 2005) 05-0481-09 
+一类非线性滤波器—— UKF 综述
+潘　泉, 杨　峰, 叶　亮, 梁　彦, 程咏梅
+( 西北工业大学自动化学院, 陕西西安710072) 
+摘　要: 回顾了UKF 算法的发展, 从一般意义讨论了UT 变换算法和采样策略的选择依据, 并给出了UKF 算法描
+述. 从条件函数和代价函数入手, 在给出多种采样策略的基础上对UKF 采样策略进行了分析和比较. 最后对UKF 
+算法未来可能的研究方向进行了探讨. 
+关键词: 非线性滤波器; unscented 卡尔曼波滤器; UT 变换; 采样策略
+中图分类号: T P273　　　　文献标识码: A 
+Survey of a kind of nonlinear filters—UKF 
+PA N Quan, YAN G Feng, YE L iang, LI A N G Yan, CH EN G Yong -mei 
+( Co llege of Automatio n, No rt hw ester n Po ly technical Univer sity , Xi′a
+n 710072, China. Cor respondent : YANG 
+Feng , E-mail: fly ing _ y ang feng@ ho tmail. com) 
+Abstract: The adv ances of unscented Kalman filter ( U KF) ar e fir st ly r eviewed. T he combinat ion of the Kalma n 
+linear filter ing w it h t he unscented tr ansfo rm atio n ( UT ) is discussed in g eneral sense. UKF and its t ypical sampling 
+st rateg ies ar e given and analyzed. Finally, the po ssible future dir ectio ns o f the UKF ar e also discussed. 
+Key words: no nlinear filtering; unscent ed Kalman filt er; unscent ed tr ansformatio n; sampling str ategy 
+1　引　　言
+　　在许多实际应用问题中, 状态方程或量测方程
+为非线性而噪声为非高斯情况时, 滤波问题也表现
+为非线性. 解决非线性滤波问题的最优方案需要得
+到其条件后验概率的完整描述, 然而这种精确的描
+述需要无尽的参数而无法实际应用[ 1] , 为此人们提
+出了大量次优的近似方法[ 2, 3] . 对于非线性滤波问题
+的次优近似, 有两大途径: 
+1) 将非线性环节线性化, 对高阶项采用忽略或
+逼近措施; 
+2) 用采样方法近似非线性分布. 
+对非线性函数进行线性化近似, 对高阶项采用
+忽略或逼近是解决非线性问题的传统途径. 其中最
+广泛使用的是扩展卡尔曼滤波器( EKF) [ 4, 5] . EKF 
+通过对非线性函数的T aylor 展开式进行一阶线性
+化截断, 从而将非线性问题转化为线性. 尽管EKF 
+得到了广泛的使用, 但它存在如下不足: 
+1) 当非线性函数T aylor 展开式的高阶项无法
+忽略时, 线性化会使系统产生较大的误差, 甚至于滤
+波器难以稳定[ 6] ; 
+2) 在许多实际问题中很难得到非线性函数的
+雅克比矩阵求导; 
+3) EKF 需要求导, 所以必须清楚了解非线性
+函数的具体形式, 无法作到黑盒封装, 从而难以模块
+化应用. 
+目前, 虽然对EKF 有众多的改进方法[ 2, 3, 7] , 如
+高阶截断EKF[ 2, 7] , 迭代EKF[ 3] 等, 但这些缺陷仍然
+难以克服. 
+由于近似非线性函数的概率密度分布比近似非
+线性函数更容易, 使用采样方法近似非线性分布来
+解决非线性问题的途径在最近得到了人们的广泛关
+DOI：10.13195/j.cd.2005.05.2.panq.001
+
+注. 粒子滤波器( PF) [ 8～10] 使用参考分布, 随机产生
+大量粒子; 然后将这些粒子通过非线性函数变换得
+到的值, 通过一定的策略统计组合, 得到系统的估
+计. 该方法解决了EKF 所存在的问题, 但要得到高
+精度的估计, 需要较多数目的粒子, 即使在二维、三
+维情况下, 也要达到数以千计[ 11] , 从而产生较大的
+计算量, 很难满足实时性的需要. 同时, 粒子经过迭
+代后会产生退化问题. 尽管目前已有一些降低粒子
+退化的方法, 如重采样方法SIS 等[ 8, 10] , 但仍无法彻
+底解决. 
+UKF[ 12～21] 是另外一大类用采样策略逼近非线
+性分布的方法. U KF 以U T 变换为基础, 采用卡尔
+曼线性滤波框架, 具体采样形式为确定性采样, 而非
+PF 的随机采样. U KF 采样的粒子点( 一般称为
+Sigma 点) 的个数很少, 具体个数根据所选择的采样
+策略而定. 最常用的是2n+ 1 个Sigma 点对称采
+样[ 12 ] . UKF 的计算量基本与EKF 算法相当, 但性能
+优于EKF[ 12] , 并且采用的是确定性采样, 从而避免
+了PF 的粒子点退化问题. 通过分析, UKF 算法具有
+如下特点: 
+1) 对非线性函数的概率密度分布进行近似, 而
+不是对非线性函数进行近似; 
+2) 非线性分布统计量的计算精度至少达到2 
+阶[ 13 , 18] , 对于采用特殊的采样策略, 如高斯分布4 阶
+采样和偏度采样等可达到更高阶精度[ 14] ; 
+3) 不需要求导计算Jaco bian 矩阵[ 12] ; 
+4) 可处理非加性噪声情况以及离散系统, 扩展
+了应用范围; 
+5) 计算量与EKF 同阶次[ 15] ; 
+6) 由于采用确定性采样策略, 而非PF 的随机
+采样, 避免了粒子衰退问题. 
+由于U KF 的上述特点, U KF 日益得到关注, 其
+应用领域也不断扩展[ 22～74] . U KF 首先被应用于导
+航、跟踪方面, 如导弹再入问题[ 13, 24] 、自治机器人定
+位[ 25 ] 、地面车辆导航[ 12, 20] 和图像跟踪[ 29] 等. 最近在
+随机信号处理[ 28] 、语音识别和增强[ 28, 30] 等方面也有
+应用. Merw e 将U KF 和目前流行的非线性估计算
+法par ticle f ilter 方法结合, 提出了unscented par ticle 
+filter 算法[ 32] . Julier 在提出U KF 时使用的仿真实
+例就是导弹再入问题, 用UKF 处理状态方程中的强
+非线性[ 13] . Rist ic 对U KF 在导弹再入问题中的性能
+进行了分析[ 24] . Brunke 将UKF 用于自治机器人定
+位, 处理定位中的非线性变换问题[ 25] . Julier 用UKF 
+处理车辆导航中状态方程的强非线性[ 12, 20] . Cheng 
+等将UKF 算法应用于椭圆轮廓物体( 如人脸) 的跟
+踪中[ 29] , 取得了优于EKF 的跟踪效果. 另外, 
+MITRE 公司的研究人员将U KF 算法用于导弹发
+射阶段参数估计问题[ 33] , 取得了比EKF 算法更好的
+估计精度. Romanenko 将UKF 应用于热化学反应
+中[ 39] ; 黄强宇将UKF 应用于小行星软着陆问题[ 49] ; 
+李培华将UKF 应用于复杂背景条件下的轮廓跟
+踪[ 50] ; Camps 等将UKF 应用于Car atheodor y-fejer 
+多帧视觉跟踪[ 52] ; Crassidis 将U KF 用于飞机姿态
+估计. 还有人将UKF 应用于CDMA 系统中, 以处理
+联合通道系数和时延[ 67] . 作者将UKF 的应用领域
+扩展到空间配准问题, 并结合具体配准问题对多种
+采样策略进行了比较和分析[ 69] , 同时, 还将UKF 应
+用于多尺度估计, 取得了较好效果. 
+U KF 最近在应用领域不断拓宽[ 12～67, 71～74] , 但
+对于U KF 的各种采样策略形式, 尚没有较为深入的
+分析, 对于采样策略的分析已滞后于其应用研究. 为
+此, 本文回顾了U KF 算法的发展, 从一般意义讨论
+了U T 变换算法和采样策略选择依据, 并给出了
+U KF 算法描述. 在UKF 算法中从条件函数和代价
+函数入手, 对不同的采样策略进行分析和比较. 最后
+对U KF 算法未来可能的研究方向进行了讨论. 
+2　问题描述
+　　考虑如下非线性系统: 
+x ( k + 1) = f [ x ( k) , u( k) , v( k) ] , ( 1) 
+z ( k) = h[ x ( k) , u( k ) , w ( k ) ] . ( 2) 
+式中: x ( k ) 为k 时刻系统的n 维状态向量, u( k) 为输
+入向量, v ( k) 为q 维零均值过程噪声向量, z ( k ) 为量
+测向量, w ( k) 为m 维零均值量测噪声. v( k) 与w ( k) 
+线性无关, 且满足
+E{ v ( i) v T( j ) } = DijQ( i) , Pi, j ; 
+E{w ( i ) w T ( j ) } = DijR ( i ) , Pi , j . 
+　　卡尔曼滤波器在其更新规则中仅用到状态的
+前两阶信息( 均值和协方差) , 因此卡尔曼滤波器具
+有如下优点[ 68] : 
+1) 未知分布的均值和协方差的获得仅需要保
+存较少的信息量, 但却能支持大多数的操作过程, 如
+确定搜索目标的区域等; 
+2) 均值和协方差具有线性传递性; 
+3) 均值和协方差估计的集合能用来表征分布
+的附加特征, 例如重要模式等. 
+正是由于以上优点, 人们仍然希望在非线性滤
+波方法中应用卡尔曼线性估计形式[ 2, 3, 7] . 
+卡尔曼滤波包括两个步骤: 预测与更新. 假设
+xd( i.j ) 是利用从开始到j 时刻的量测信息Z
+j = 
+[ z ( 1) , ., z ( j ) ] 而得到的x ( i ) 的估计, 估计的协方
+差为P ( i .j ) . 给定xd( k .k) , 则预测与更新公式如
+下[ 15] : 
+482 控　　制　　与　　决　　策第20 卷
+
+预测方程为
+xd( k + 1.k) = 
+E { f [ xd( k.k) , u( k ) , v( k ) ] .Zk } , 
+P ( k + 1.k ) = 
+E { ( x ( k + 1) - xd( k + 1.k) ) ( x ( k + 
+1) - xd( k + 1.k) ) T.Z.k } , 
+zd( k + 1.k) = E { h( xd( k + 1.k) .Zk} , 
+P v v( k + 1.k ) = 
+E { ( z ( k + 1) - zd( k + 1.k ) ) ( z ( k + 
+1) - zd( k + 1.k) ) T.Zk } ; ( 3) 
+更新方程为
+v ( k + 1) = z ( k + 1) - zd( k + 1.k) , 
+W( k + 1) = P z v( k + 1.k) P - 1 
+vv ( k + 1.k) , 
+xd( k + 1.k + 1) = 
+xd( k + 1.k) + W( k + 1) v ( k + 1) , 
+P ( k + 1.k + 1) = 
+P ( k + 1.k ) - W ( k + 1) P vv ( k + 
+1.k) W
+T ( k + 1) . ( 4) 
+　　当可以获取预测方程中的数学期望值时, 整个
+更新方程均可以线性计算. 当f ( .) 和h( .) 均为线
+性时, 则是完整的卡尔曼滤波公式. f ( .) 和h( .) 为
+非线性时, 当只有已知条件Zk 下的状态x ( k) 的分
+布时, 才能得到上述统计量的值. 然而, 这种状态分
+布却没有一般形式. 要应用卡尔曼线性滤波公式, 则
+问题可转化为下面针对均值和协方差估计的非线性
+变换问题. 
+2. 1　均值和协方差的非线性变换
+假设随机变量x 为n 维向量, 均值为x
+-, 协方差
+为Px x , 要预测m 维随机变量y 的均值y
+- 和协方差
+Py y, y 与x 的关系由如下非线性变换定义: 
+y = f ( x ) . ( 5) 
+对式( 5) 在x- 点进行T aylor 展开, 有
+y = f ( x- + e) = 
+f ( x
+-) + f ( 1) e1 + 
+f ( 2) e2 
+2! 
++ 
+f ( 3) e3 
+3! 
++ .. ( 6) 
+式中: f (i) 为x 在x
+- 点的i 阶偏导值, e 为x 在x
+- 的邻
+域偏值. 则y 的均值y
+- 和协方差P yy 为
+y
+- = E( y ) = 
+E f ( x
+-) + f 
+( 1) 
+e
+1 + 
+f ( 2) e2 
+2! 
++ 
+f ( 3) e3 
+3! 
++ . , 
+P yy = E ( ( y - y
+-) ( y - y
+-T ) ) = 
+E f ( 1) e1 + 
+f ( 2) e2 
+2! 
++ 
+f ( 3) e3 
+3! 
++ . ( .) T . ( 7) 
+　　如果可以精确得到f ( .) 的各阶偏导, 则可以得
+到y
+- 和Pyy 的真实统计量. 但在实际系统中, 这一点
+是很难满足的, 一般实际系统仅可获得f ( .) 的前两
+阶统计量. 因此, 一般只能获取y- 和Py y 近似值. 
+对于EKF 而言, 仅用到f ( .) 中Tay lor 展开式
+的第1 项, 得到y
+- 和Pyy 的近似值为[ 2, 3] 
+y
+- = f ( x
+-) , 
+P yy = E ( f 
+( 1) 
+e
+1 . ( f 
+( 1) 
+e
+1) T ) = 
+f ( 1) .P xx . ( f ( 1) ) T. ( 8) 
+　　在引言中介绍了EKF 存在的不足, 正是由于这
+些不足, 人们寻求y
+- 和Py y 的更精确的近似. UT 变
+换采用确定性采样策略, 用多个粒子点逼近f ( .) 的
+概率密度分布, 从而得到y
+- 和Pyy 更高阶的近似. 
+2. 2　UT 变换
+U T 变换基于先验知识[ 12, 14] : 近似非线性函数
+的概率密度分布比近似其函数更容易. 具体变换方
+法可用图1 解释. 在确保采样均值和协方差为x- 和
+P xx 的前提下, 选择一组点集( Sigma 点集) , 将非线
+性变换应用于采样的每个Sigma 点, 得到非线性转
+换后的点集. y
+- 和P yy 是变换后Sigma 点集的统计
+量. 
+图1　UT 变换原理LTU[13～ 15] 
+为了说明问题, 下面给出一般意义下的UT 变
+换算法( 可应用任何Sigma 采样策略) . 一般意义下
+U T 变换算法框架的步骤如下: 
+1) 根据输入变量x 的统计量x
+- 和P xx , 选择一种
+Sigma 点采样策略, 得到输入变量的Sigma 点集
+{ Vi } , i = 1, ., L , 以及对应的权值W
+m
+i 和W
+c
+i . 其中: 
+L 为所采用的采样策略的采样Sigma 点个数, W
+m
+i 为
+均值加权所用权值, Wci
+为协方差加权所用权值. 如
+果不采用比例修正, 则Wmi
+= Wci
+= Wi . 
+2) 对所采样的输入变量Sigma 点集{ Vi} 中的
+每个Sigma 点进行f ( .) 非线性变换, 得到变换后的
+Sigma 点集{ yi } . 
+y i = f ( Vi ) , i = 1, ., L . ( 9) 
+　　3) 对变换后的变Sigma 点集{ y i} 进行加权处
+理, 从而得到输出变量y 的统计量y
+- 和P yy . 具体的
+权值仍然依据对输入变量x 进行采样的各个Sigma 
+点的对应权值. 
+　　　　y
+- = Σ
+L - 1 
+i= 0 
+W
+mi 
+y i , 
+　　　　P yy = Σ
+L - 1 
+i= 0
+W
+c
+i ( y i - y
+-) ( y i - y
+-) T . ( 10) 
+第 5 期 潘 泉等: 一类非线性滤波器——UKF 综述 483
+
+　　文献[ 13, 18] 对UT 变化的精度给出了具体证
+明, 得到y
+- 和Py y 的近似值为
+y
+- = f ( x
+-) + E( f ( 2) e2 ) , 
+P yy = f ( 1) . Px x . ( f ( 1) ) T . ( 11) 
+　　从式( 11) 可以看出, UKF 的均值精度较EKF 
+高一阶( 噪声均值为零) , UKF 方差与EKF 同阶. 
+UT 变换的特点如下: 
+1) 对非线性函数的概率密度分布进行近似, 而
+不是对非线性函数进行近似, 不需要知道非线性函
+数的显式表达式; 
+2) 非线性函数统计量的精度至少达到2 
+阶[ 13 , 18] , 对于采用特殊的采样策略, 如高斯分布4 阶
+采样和偏度采样等可达到更高阶精度[ 14] ; 
+3) 计算量与EKF 同阶[ 15] ; 
+4) 不需要求导计算Jaco bian 矩阵, 可以处理非
+可导的非线性函数. 
+在UT 变换算法中, 最重要的是确定Sigma 点
+采样策略, 也就是确定使用Sigma 点的个数、位置以
+及相应权值. Sigma 点的选择应确保其抓住输入变
+量x 的最重要的特征. 假设p x ( x ) 是x 的密度函数, 
+Sigma 点选择遵循如下条件函数来确保其抓住x 的
+必要特征[ 13] : 
+g[ { V i} , p x ( x ) ] = 0. ( 12) 
+　　在满足如上条件的前提下, Sigma 点的选择可
+能仍有一定自由度. 代价函数c[ { V i} , p x ( x ) ] 可用来
+进一步优化Sigma 点的选取[ 13] . 代价函数的目的是
+进一步引入所需要的特征, 但并不要求完全满足所
+引入特征. 随着代价函数值的增大, 采样策略的精度
+将降低. 将条件函数和代价函数结合起来, 就可以得
+到Sigma 点采样策略的一般性选择依据: 在g[ { V i} , 
+p x ( x ) ] = 0 的条件下, 最小化c[ { V i} , p x ( x ) ] . 
+目前已有的Sigma 点采样策略有对称采
+样[ 12 ～15] 、单形采样[ 17, 20]、3
+阶矩偏度采样[ 16] 以及高
+斯分布4 阶矩对称采样等[ 14] . 其后, 为了确保输出变
+量y 协方差的半正定性, 提出了对上述基本采样策
+略进行比例修正的算法框架[ 21] . 目前应用中最普遍
+使用的还是对称采样以及应用比例修正框架的比例
+对称采样. 
+3　UKF 算法
+　　在上述卡尔曼滤波算法中, 对于一步预测方
+程, 使用UT 变换来处理均值和协方差的非线性传
+递, 就成为UKF 算法[ 28, 68] . 
+在U KF 算法中, 由于具有噪声项, 需要对状态
+进行扩维处理[ 28, 68] . 针对式( 1) 和( 2) 定义的系统, 
+令x a = [ x T 　v T　w T] T , 具体算法流程如下: 
+状态初始条件为
+xd
+0 = E( x 0 ) , 
+P 0 = E ( ( x 0 - xd
+0 ) ( x 0 - xd
+0) T ) ; ( 13) 
+状态的初始条件扩维, 即
+xda0
+= E( xa0
+) = [ xd
+0 ; 0; 0] , 
+P a0
+= E ( ( xa0
+- xda0
+) ( xa0
+- xda0
+) T ) = 
+　　
+P0 0 0 
+0 Q 0 
+0 0 R 
+. ( 14) 
+　　1) Sigma 点采样
+采用某种采样策略, 得到k 时刻状态估计的
+Sigma 点集{ Vai 
+( k .k) } , i = 1, ., L , 其中L 为所采用
+的采样策略的采样Sigma 点个数. 需要注意的是, 此
+时的状态维数为n + q+ m. Vxi
+为粒子V ai
+的前n 维组
+成的列向量, V v
+i 为粒子Va
+i 的n + 1 维到n + q 维组成
+的列向量, Vwi
+为粒子Vai
+的n + q + 1 维到n + q + 
+m 维组成的列向量. 
+2) 预测方程
+V xi
+( k + 1.k) = 
+f [ Vxi
+( k.k ) , u( k) , Vvi
+( k ) ] , ( 15a) 
+xd( k + 1.k) = Σ
+L - 1 
+i= 0 
+W
+m
+i V x
+i ( k + 1.k) , ( 15b) 
+P ( k + 1.k ) = 
+Σ
+L - 1 
+i= 0 
+Wci
+( Vxi
+( k + 1.k ) - xd( k + 
+1.k ) ) ( Vxi( k + 1.k) - xd( k + 1.k) ) T, ( 15c) 
+z i ( k + 1.k) = 
+h[ Vxi
+( k + 1.k) , u( k) , Vwi
+( k + 1) ] , ( 15d) 
+zd( k + 1.k) = Σ
+L - 1 
+i= 0 
+Wmi
+z i ( k + 1.k ) , ( 15e) 
+P vv ( k + 1.k ) = 
+Σ
+L - 1 
+i= 0 
+Wci
+( z i( k + 1.k) - zd( k + 
+1.k ) ) ( z i( k + 1.k ) - zd( k + 1.k) ) T, ( 15f ) 
+P xv( k + 1.k) = 
+Σ
+L - 1 
+i= 0 
+W
+c
+i ( Vx
+i ( k + 1.k ) - xd( k + 
+1.k ) ) ( z i( k + 1.k ) - zd( k + 1.k) ) T. ( 15g ) 
+　　3) 更新方程
+W( k + 1) = 
+Px v( k + 1.k ) P- 1 
+v v ( k + 1.k ) , ( 16a) 
+xd( k + 1.k + 1) = 
+xd( k + 1.k ) + W( k + 1) ( z ( k + 
+1) - zd( k + 1.k) ) , ( 16b) 
+P ( k + 1.k + 1) = 
+P ( k + 1.k) - W( k + 1) Pv v( k + 
+484 控　　制　　与　　决　　策第20 卷
+
+　　　　1.k ) W
+T( k + 1) . ( 16c) 
+　　在UKF 算法公式中, 状态是按扩维处理的, 
+Sigma 粒子的个数会比较多. 以对称采样为例, L = 
+2( n + q + m) + 1. 随着维数的增大, 计算量上升得
+比较快. 
+当系统过程噪声w ( k) 和量测噪声v ( k) 为加性
+噪声时, 针对加性噪声, 可以得到简化U KF 算
+法[ 28 ] . 简化UKF 算法只对状态进行Sigma 点采样, 
+而将过程噪声和量测噪声的信息提出来处理[ 28] . 
+从处理一般情况的扩维U KF 算法和处理加性
+噪声的简化UKF 看, 加性噪声简化U KF 的Sigma 
+点较处理一般情况的扩维UKF 要少许多. 对于对称
+采样, 简化UKF 的Sigma 点个数为L = 2n + 1, 非
+简化U KF 为L = 2( n + q + m) + 1. 对于单形采样
+而言, 简化U KF 的Sigma 点个数为L = n + 2, 非简
+化UKF 为L = ( n + q + m) + 2. 由上述分析可知, 
+简化U KF 的计算量较之扩维U KF 大大降低. 
+在上述UKF 算法中, 应用不同采样策略的区别
+仅在于算法的第1) 步和后续计算的Sigma 点个数
+L . 下面给出UKF 算法中采用不同采样策略的讨
+论. 
+3. 1　对称采样[ 15] 
+在仅考虑x 的均值x
+- 和协方差Pxx 的情况下, 将
+x
+- 和P xx 由L = 2n + 1 个对称Sigma 点近似, 得到条
+件函数
+g[ ( { Vi } , p x ( x ) ] = 
+Σ
+2n 
+i= 0 
+Wi - 1 
+Σ
+2n 
+i= 0
+Wi Vi - x
+- 
+Σ
+2n 
+i= 0
+Wi( Vi - x
+-) ( Vi - x
+-) T - P xx 
+. 
+求解得到Sigma 点为
+{ Vi } = [ x
+-　x
+- + C P xx 　x
+- - C P xx ] , 　
+( 17) 
+其中C= n + J. 对应的权值为
+Wi = 
+J/ ( n + J) , i = 0, 
+1/ 2( n + J) , i ≠ 0. 
+( 18) 
+其中: J为比例参数, 可用于调节Sigma 点和x
+- 的距
+离, 仅影响二阶之后的高阶矩带来的偏差; 
+( ( n + J) Pxx ) i 为( n + J) P xx 的平方根矩阵的第i 
+行或列; Wi 为第i 个Sigma 点权值, 且有Σ
+2n 
+i= 0 
+Wi = 1. 
+对称采样的计算量基本与EKF 相当, 均为O( n3 ) . 
+在对称采样中, Sigma 点除中心点外, 其他
+Sigma 点的权值相同, 且到中心点的距离也相同. 这
+说明在对称性采样中, 除中心点外的所有Sigma 点
+具有相同的重要性, 而且从Sigma 点的分布可以看
+到, Sigma 点是空间中心对称和轴对称的. 对称采样
+确保任意分布的近似精度达到T aylo r 展开式2 阶截
+断. 这种Sigma 点选取策略使得高于1 阶的x 奇次中
+心矩为0. 这一点使其比较吻合高斯分布的特征, 对
+于高斯分布, 可达到Tay lor 展开式3 阶截断. 对于J 
+值的选取, 应进一步考虑x 分布的高阶矩, 也就是考
+虑代价函数c[ { Vi } , p x ( x ) ] . 对于高斯分布, 考虑4 
+阶矩的统计量, 求解c[ { Vi } , p x ( x ) ] = 0 得到J的有
+效选取为n + J= 3[ 15] . 由于J值可取正值或负值, 
+当J为负时, 无法保证式( 32) 的半正定性. 对式( 29) 
+进行如下修改[ 18] : 
+Pv v = Σ
+L- 1 
+i= 0
+W
+c
+i ( z i - z 0 ) ( z i - z 0 ) T. ( 19) 
+3. 2　单形采样[ 17, 20] 
+在对称采样中, Sigma 点的个数为L = 2n + 1. 
+在对实时性要求比较高的系统中, 要求进一步减少
+Sigma 点的数目, 从而降低计算负载. 根据文献[ 20] 
+的分析, 对于一个n 维分布状态空间, 最少需要n + 
+1 个点才能确定. 在单形采样策略中, Sigma 点的个
+数为L = n + 2( 考虑中心点) . 需要注意的是, 在单
+形采样策略中, Sigma 点分布不是中心对称的. 目前
+的单形采样策略有两种: 最小偏度单形采样[ 20] 和超
+球体单形采样[ 17] . 
+最小偏度单形采样要求在匹配前两阶矩的前提
+下使得3 阶矩( 即偏度) 最小. 根据这一要求, 代入前
+面所给出的Sigma 点采样策略的选择依据: 在
+g [ ( V i} , p x ( x ) ] = 0 的条件下, 最小化c[ { Vi } , 
+p x ( x ) ] , 求解得到Sigma 点集如下[ 20] : 
+1) 选择0 ≤ W0 < 1. 
+2) Sigma 权值为
+Wi = 
+1 - W0 
+2n , i = 1, 2; 
+2i- 1
+W1 , i = 3, ., L . 
+( 20) 
+　　3) 迭代初始向量( 对应于状态为1 维情况) 
+V1
+0 = [ 0] , V1
+1 = - 
+1 
+2W1 
+, V 1
+2 = 
+1 
+2W1 
+. 
+( 21) 
+　　4) 对于输入维数j = 2, ., n 时, 迭代公式为
+第 5 期 潘 泉等: 一类非线性滤波器——UKF 综述 485
+
+Vj + 1 
+i = 
+V j
+0 
+0 
+, i = 0; 
+Vj
+i 
+- 
+1 
+2Wj + 1 
+, i = 1, ., j ; 
+0
+1 
+2Wj + 1 
+, i = j + 1. 
+( 22) 
+　　5) 对所生成的Sigma 点加入x 的均值和协方差
+信息
+Vi = x
+- + ( Px x ) Vj
+i . ( 23) 
+　　由上述采样点公式, 在最小偏度单形采样中, 
+所选择的Sigma 点的权值和距离都是不同的, 也就
+是说各个Sigma 点的重要性是不同的. 低维扩维形
+成的Sigma 点的权重较高维直接形成的Sigma 点权
+重大, 而且距中心点更近. 随着维数的增大, 有些
+Sigma 点的权值会变得很小, 距中心点的距离也会
+很远. 最小偏度单形采样的Sigma 点分布不是中心
+对称的, 但服从轴对称. 公式推导是依照3 阶矩为0 
+进行推导的, 也就是分布的3 阶矩为0, 确保了对于
+任意分布达到2 阶截断精度, 对于高斯分布达到3 
+阶截断精度. 
+超球体单形采样只要求匹配前两阶矩, 但要求
+除中心点外的其他Sigma 点权值相同, 而且与中心
+点距离相同. 在如上要求下, Sigma 点分布在空间上
+呈现超球体状, 所以称之为超球体单形采样. 将上述
+条件代入g[ { Vi} , p x ( x ) ] = 0 中, 可确定Sigma 点如
+下[ 17 ] : 
+1) 选择0 ≤ W0 < 1. 
+2) Sigma 权值为
+Wi = ( 1 - W0 ) / ( n + 1) . ( 24) 
+　　3) 迭代初始向量( 对应于状态为1 维情况) 
+V10
+= [ 0] , V11
+= - 1
+2W1 
+, V12
+= 
+1 
+2W 1 
+. 
+( 25) 
+　　4) 对于输入维数j = 2, ., n 时, 迭代公式为
+Vj
+i = 
+V j- 1 
+0
+0 
+, i = 0; 
+Vj - 1 
+i 
+- 
+1 
+j ( j + 1) W1 
+, i = 1, ., j ; 
+0
+1 
+j ( j + 1) W 1 
+, i = j + 1. 
+( 26) 
+　　5) 对所生成的Sigma 点加入x 的均值和协方差
+信息
+V i = x- + ( P xx ) Vj
+i . ( 27) 
+　　由上述采样点公式, 在超球体单形采样中, 除
+中心点外的所有Sigma 点的权值和到中心点的距离
+是相同的. 这说明除中心点外的所有Sigma 点具有
+相同的重要性. 超球体单形采样不是中心对称的. 公
+式推导是依照前两阶矩进行推导的, 推导中分布的
+3 阶矩不为0, 确保了对于任意分布达到2 阶截断精
+度, 对于高斯分布也不例外. 显然, 如果分布是高斯
+分布, 对称采样以及最小偏度采样的精度高于超球
+体采样1 阶. 
+当输入变量的维数n = 1 时, 最小偏度采样和
+超球体采样的Sigma 点分布是一致的. 在单形采样
+中, 仅需确定的参数为W0, 也就是x 的均值点的
+Sigma 点权值. 当W0 = 0 时, 说明没有使用均值点
+的Sigma 点, L 退化为n + 1 个Sigma 点. 
+3. 3　比例修正[ 21] 
+上述采样中, Sigma 点到中心x
+-的距离随x 的维
+数的增加而越来越远, 会产生采样的非局部效应, 对
+于许多非线性函数( 如指数函数和三角函数等) 会
+产生一些问题, 如J为负, 则导致式( 6) 半正定性不
+满足[ 21] . 尽管有修正算法[ 18] , 但该方法要用到高阶
+矩信息, 而且仅验证了对于对称采样策略修正的有
+效性, 对其他采样策略( 如单形采样) 则无法保证. 
+文献[ 21] 提出了比例采样, 可有效地解决采样非局
+部效应问题, 并可适用于修正多种采样策略. 比例采
+样修正算法如下: 
+V′i = V0 + A( V i - V0 ) ; 
+Wmi
+= 
+W0 / A2 + ( 1/ A2 - 1) , i = 0, 
+Wi / A2, i ≠ 0; 
+Wci
+= 
+W
+m0 
++ ( W0 + 1 + B - A2) , i = 0, 
+Wmi
+, i ≠ 0. 
+( 28) 
+式中: A为正值的比例缩放因子, 可通过调整A的取
+值来调节Sigma 点与x
+- 的距离; B为引入f ( .) 高阶
+项信息的参数, 当不使用f ( .) 高阶项信息时, B = 
+2[ 21] . 
+将比例修正算法应用于对称采样中, 得到比例
+对称采样方法[ 28] . 具体的Sigma 点采样公式为
+{ V i} = [ x
+-　x
+- + C Px x 　x
+- - C Pxx ] . 　
+( 29) 
+式中: K= n + K, K= A2( n + J) - n. 
+Wmi
+= 
+K/ ( n + K) , i = 0, 
+1/ 2( n + K) , i ≠ 0; 
+486 控　　制　　与　　决　　策第20 卷
+
+Wci
+= 
+K/ ( n + K) + ( 1 - A2 + B) , i = 0, 
+1/ 2( n + K) , i ≠ 0. 
+　　比例对称采样中需要确定A, B和J共3 个参数. 
+文献[ 28] 给出了参数确定的一般取值范围: A确定x
+- 
+周围Sigma 点的分布, 通常设为一个较小的正数( 例
+如1 > A≥ 1e- 4) ; 对于高斯分布, B= 2 是最优的; 而
+J是一个比例参数, 通常设置为0 或3 - n. 
+3. 4　其他采样策略
+针对输入变量为高斯分布情况, 为了进一步提
+高精度, 文献[ 14] 给出了一种高斯分布4 阶矩对称
+采样方法, 使用L = 2n
+2 + 1 个Sigma 点近似, 其计
+算复杂度为O( n4 ) . 该方法将精度提高到4 阶矩, 将
+误差限制于6 阶矩, 但计算量也增大了许多. 
+对于达到任意分布的3 阶精度, Julier[ 16] 给出了
+利用3 阶矩信息的偏度采样的方法, 以保证前3 阶
+矩精度. 但计算过于复杂, 目前很少使用. 
+4　展　　望
+　　U KF 算法及其基础UT 变换是一个较新的研
+究领域, 目前虽取得了一些理论成果( 如多种采样策
+略[ 12 ～21] 、U T 变换的精度证明[ 18] 等) , 但尚有以下几
+方面问题值得关注: 
+1) 对UKF 算法的稳定性问题进行研究. 目前
+虽然可以得到U T 变换的精确证明, 但对于UT 变化
+与卡尔曼滤波相结合来处理非线性问题的U KF 算
+法尚不能象EKF 那样给出稳定性分析. 
+2 ) U KF 算法和U T 变换在处理非线性问题时
+具有普遍性. 如果针对特定的一类非线性问题, 则有
+可能利用一些特定领域的知识, 以获取这一类具体
+问题更为有效的解决方法. 
+3) 采样策略自适应研究. 可根据系统的性能指
+标( 计算复杂度、精度要求和存储量等) 对采样策略
+进行自适应选取, 从而将滤波问题转化为优化问题. 
+4) 研究U KF 算法的复杂度和性能分析. 
+5　结　　语
+　　本文对UKF 算法的优点进行了分析和总结, 对
+其应用领域进行了讨论. 并从条件函数和代价函数
+入手, 对目前几种典型的采样策略以及Sigma 点的
+分布特征进行了分析和探讨, 给出了UKF 算法应用
+具体采样策略的优缺点. 随着研究的进一步深入, 
+UKF 算法将应用到更多的领域. 需要指出的是, 目
+前国内已有不少学者在这一领域开展了卓有成效的
+工作[ 29, 49, 50, 71～74] , 但大多属于U KF 的应用研究. 
+参考文献( References) 
+[ 1] Kushner H J. Dy namical equa tio ns for optimum 
+no nlinear filtering [ J ] . J of Diff er ential Equations, 
+1967, 26( 3) : 179-190. 
+[ 2] May beck P S. Stochastic mod els estimation and contr ol 
+[M ] . New Yor k: Academic, 1982. 
+[ 3] Jazw inski A H. Stochastic p r ocesses and f ilter ing theory 
+[M ] . New Yor k: Academic, 1970. 
+[ 4] Uhlm ann J K. Algo rit hm for multiple tar g et tr acking 
+[ J] . A mer ican Science, 1992, 80( 2) : 128-141. 
+[ 5] Sor enso n H W. K alman f ilter ing : Theory and 
+app lication[ M] . New Yor k: IEEE Press, 1985. 
+[ 6] Lerr o D, Bar-Shalom Y K. Tr acking w it h Debiased 
+Consistent Co nver ted Measurem ent v s. EKF[ J] . IE EE 
+Tr ans on Aer osp ace and Electr onics Sy stems , 1993, 29 
+( 3) : 1015-1022. 
+[ 7] Caba llero-Gil P, F.s
+ter-Sabater A. A wide family of 
+nonlinea r filter functio ns w it h a lar ge linear span [ J] . 
+I nf ormation Sciences, 2003, 164( 1-4) : 197-207. 
+[ 8] Go rdon N J, Salmond D J, Sm ith A F M. No vel 
+appr oach t o no nlinear / no n-Gaussian Bayesia n state 
+estimation [ J ] . IEEE P roc on Radar and Signal 
+Pr ocessing , 1993, 140( 2) : 107-113. 
+[ 9] Doucet A, De Freitas A, Gor do n N. Sequential monte 
+car lo methods in p r actice [ M ] . New Yo rk: Spring er- 
+Verlag , 2001. 
+[ 10] Ar ulampalam S, Ma skell S, Go rdon N, et al. A 
+tuto rial on pa rticle filter s for online nonlinea r/ no n- 
+Gaussian Bayesian tr acking [ J] . IEEE Tr ans on Signal 
+P roces sing, 2002, 50( 2) : 174-188. 
+[ 11] T hrun S, Fox D, Bur g ard W, et al. Ro bust m onte 
+car lo lo calization for mobile ro bots [ J ] . Ar tif icial 
+I ntelligence, 2001, 128( 1-2) : 99-141. 
+[ 12] Julier S J, Uhlmann J K, Dur rant-Why ten H F. A 
+new appro ach fo r filter ing nolinear sy stem [ A] . P r oc 
+of the Amer ican Contr ol Conf [ C ] . Washingto n: 
+Seatt le, 1995: 1628-1632. 
+[ 13] Julier S J, Uhlmann J K. A genera l metho d for 
+appro ximating no nlinear tra nsfo rmations of pr obabilit y 
+distr ibutio ns [ EB/ OL ] . ht tp: / / w ww . r obo ts. ox . ac. 
+uk/ ～siju/ wo rk/ publicatio ns/ Unscented. zip, 1997-09- 
+27. 
+[ 14] Julier S J, Uhlm ann J K. A consistent, debiased 
+met ho d for conver ting between polar and Car tesian 
+co or dinat e sy stems[ A] . T he P roc of A eroS ense: T he 
+11th I nt Symp os ium on A er osp ace/ Def ense S ensing , 
+S imulation and Contr ols[ C] . Or la ndo , 1997: 110 -121. 
+[ 15] Julier S J, Uhlmann J K. A new ex tension of the 
+Kalman filter t o nonlinear systems [ A] . The Pr oc of 
+A er oSense: 11th I nt Symp osium A er osp ace/ Def ense 
+S ensing, Simulation and Contr ols[ C] . Or lando , 1997: 
+54-65. 
+[ 16] Julier S J. A skewed appr oach to filtering [ A ] . T he 
+P roc of A er oSense: 12th I nt Symp osium A er osp ace/ 
+第 5 期 潘 泉等: 一类非线性滤波器——UKF 综述 487
+
+Def ense Sens ing Simulation Contr ol [ C ] . Or lando, 
+1998: 271-282. 
+[ 17] Julier S J. The spher ical simplex unscented 
+tr ansfo rmat ion [ A ] . A mer ican Contr ol Conf [ C ] . 
+Denver , 2003: 2430-2434. 
+[ 18] Julier S J, Uhlmann J K, Dur rant-Whyt e H F. A new 
+appr oach for the nonlinear tr ansfo rmatio n o f means 
+and cova ria nces in filter s and estimator s [ J] . IEEE 
+Tr ans on A utomatic Contr ol, 2000, 45( 3) : 477-482. 
+[ 19] Lefebv re T, Br uyninckx H, De Schutt er J. Comm ent 
+on" a new method fo r the nonlinear tr ansfo rma tio n of 
+means and cov ariances in filter s and estimat or s" [ J ] . 
+IEEE T rans on A utomatic Contr ol , 2002, 47( 8) : 1406- 
+1408. 
+[ 20] Julier S J, Uhlma nn J K. Reduced sigma point filter s 
+for the pr opag atio n of means and co var iances thr oug h 
+nonlinear tra nsfo rmat ions [ A ] . Pr oc of American 
+Control Conf [ C] . Jefferson Cit y, 2002: 887-892. 
+[ 21] Julier S J. The scaled unscented t ransformation [ A ] . 
+Pr oc of A mer ican Contr ol Conf [ C ] . Jeffer so n Cit y, 
+2002: 4555-4559. 
+[ 22] Far ina A, Ristic B, Benv enuti D. Tr acking a ballistic 
+tar get : Compariso n of sever al no nlinear filter s [ J ] . 
+IEEE T rans on A er osp ace and Electr onic Sy stems, 
+2002, 38( 3) : 854-867. 
+[ 23] Vijay K C, Ra jag opal R, Ravi K N. An optimal 
+integ rated tr acing ( IT S ) fo r passive DOA t racking 
+using unscent ed Kalman filter [ A ] . I nf ormation, 
+Decision and Contr ol, 2002[ C] . Adelaide, 2002: 253- 
+258. 
+[ 24] Ristic B, Far ina A, Benvenuti D, Ar ulampalam M S. 
+Per formance bo unds and compar iso n o f nonlinear 
+filters fo r tr acking a ballistic o bject o n re-entr y Radar 
+[ J ] . IEE P roc on Radar , S onar and N av ig ation, 
+2003, 150( 2) : 65-70. 
+[ 25] Br unke S, Cam pbell M. Estimat ion archit ect ur e fo r 
+futur e autonomous vehicles [ A ] . P roc of American 
+Control Conf [ C] . Jefferson Cit y, 2002: 1108-1114. 
+[ 26] Wan E A, Van der Mer ve R. The unscented Kalman 
+filter for no nlinear est imation[ A] . Pr oc of Symp osium 
+2000 on Adap tiv e Sy stems f or Signal P rocess ing, 
+Communication and Contr ol [ C ] . Lake Louise, 
+Alber ta, 2000: 153-158. 
+[ 27] Ristic B, Arulampalam M S. T racking a maneuver ing 
+tar get using ang le-only measur ement s: Algo rithms 
+and perfo rmance[ J] . Signal Pr ocessing , 2003, 83( 6) : 
+1223-1238. 
+[ 28] Wan E A, Van der Merw e R. The unscented Kalman 
+filter , in Ka lman filter ing and neural netw or ks [ DB/ 
+OL ] . http: / / w w w . cse. og i. edu/ PacSoft / pro jects/ 
+sec/ wa n01b. ps, 2004-03-10. 
+[ 29] Chen Y Q, Hua ng T, Yong R. Par ametr ic conto ur 
+tr acking using unscented Kalman filt er [ A ] . 2002 I nt 
+Conf on Image P r oc[ C] . New Yo rk, 2002: 613-616. 
+[ 30] Van der Merwe R, Wan E A. The squar e-r oo t 
+unscented Kalman filter for stat e and par ameterestimatio 
+n [ A] . I nt Conf on Acoustics, Sp eech, and 
+S ig nal Pr oc[ C] . Salt Lake City , 2001: 3461-3466. 
+[ 31] Steng er B, Mendo nc 
+, 
+a P R S, Cipolla R. Model-based 
+hand tracking using an unscented Kalman filter [ A] . 
+P roc B ritish Machine V is ion Conf ( BM VC 2001) [ C] . 
+Nchest er, 2001: 63-72. 
+[ 32] Rudolph der M erw e, Doucet A, De Fr eitas N, et al. 
+T he unscented par ticle filter [ A] . Ad vances in N eur al 
+I nf ormation Pr oc Sy stems ( N IPS 13 ) [ C ] . http: / / 
+speech . bme. og i. edu/ publica tio ns/ ps/ m erw e00a. pdf, 
+2004-03-10. 
+[ 33] James R, Van Zandt. Bo ost phase tr acking with an 
+unscented filter [ A] . Signal and Data P roc of Small 
+T ar gets 2002 [ C] . Orlando , 2002, 4728: 263-274. 
+[ 34] Van der Merw e R, Wa n E A. Efficient derivative-fr ee 
+Kalman filter s for online learning [ A] . ESA N N'2001 
+P roc - E ur op ean Symp osium on A rtif icial N eur al 
+N etw or ks Br uges[ C] . Belg ium, 2001: 205-210. 
+[ 35] Wan E A, Van der Merwe R, Nelson A T. Dual 
+estimatio n and the unscented tr ansfo rm atio n [ A ] . 
+A dv ances in Neural I nf ormation P roce Sy stems 12[ C] . 
+M IT Press, 2000: 666-672. 
+[ 36] Rudolph der M erw e, Doucet A, De Fr eitas N, et al. 
+T he unscented part icle filter [ EB/ OL ] . http: / / 
+speech . bm e. o gi. edu/ publicatio ns/ ps/ merw e00. pdf, 
+2004-03-10. 
+[ 37] Van der Merwe R, Wan E A, Sigma-po int Kalman 
+filter s fo r pro ba bilist ic infer ence in dy namic state-space 
+mo dels[ DB/ OL] . htt p: / / w ww . ir o . umo nt real. ca / ～ 
+keg l/ CRMWor ksho p/ pr o gr am. html, 2004-03-10. 
+[ 38] T enne D, Sing h T. the hig her or der unscented filter 
+[ A] . 2003 A mer ican Control Conf [ C] . Denv er , 2003: 
+2441-2446. 
+[ 39] Romanenko R, Cast ro J A A M . T he unscent ed filter 
+as an alter nativ e to the EKF for nonlinear state 
+estimatio n: A simulation case study [ J ] . Comp uter s 
+and Chemical Engineer ing, 2004, 28( 3) : 347-355. 
+[ 40] VanDy ke M C, Schw artz J L, Hall C D. Unscented 
+Kalman filter ing fo r spa cecr aft attit ude st ate and 
+par ameter estimatio n [ DB/ OL ] . htt p: / / ww w . spaceflig 
+ht. or g / AAS_ meetings/ 2004_ winter / w 2004_ 
+pr og ram. pdf, 2004-03-10. 
+[ 41] Yong R, Chen Y Q. Better pro po sal dist ributions: 
+Object tracking using unscented part icle filter [ A ] . 
+P roc of the 2001 IEEE Comp uter S ociety Conf on 
+488 控　　制　　与　　决　　策第20 卷
+
+Comp uter Vision and P atter n Recognition, 2001 [ C ] . 
+Kauai, HI, 2001: Ⅱ-786-Ⅱ-793. 
+[ 42] Wada M, Yoo n K S, Hashimo to H. No nlinear filter 
+ro ad v ehicle mo del development [ A ] . 2001 IEEE 
+I ntelligent Tr ansp or tation Sy stems Conf Pr oceedings 
+[ C] . Oakland, 2001: 734-739. 
+[ 43] Cho i J, Lima A C D C, Haykin S. Unscented Kalman 
+filter-tr ained recur rent neur al equalizer for t imevar 
+ying channels [ A ] . ICC′03 IEEE I nt Conf on 
+Communication 2003 [ C] . Ancho rag e, 2003, 26 ( 1) : 
+3241-3245. 
+[ 44] Stenger B, Mendonca P R S, Cipo lla R. Mo del-based 
+3D tr acking o f an ar ticulat ed hand [ A] . Pr oc of the 
+2001 IEEE Comp uter S ociety Conf on Comp uter V ision 
+and Patter n Recog nition[ C] . Kauai, 2001, 2: Ⅱ-310- 
+Ⅱ-315. 
+[ 45] Gil P, Henriques J, Car valho P, et al. Adapt ive 
+neur al model-based pr edictiv e co ntro l of a so lar pow er 
+plant [ A] . P r oc of the 2002 I nt J oint Conf on N eur al 
+Netw ork s[ C] . Honolulu, 2002: 2098-2103. 
+[ 46] Seyo on Tak, Oh-yo ung Song , Hyeo ng-Seo k Ko. 
+Spacetime sw eeping: An inter activ e dynamic 
+constraint so lv er [ A] . Pr oc of the Comp uter Animation 
+[ C ] . Washing to n: IEEE Computer So ciety , 2002: 
+261-270. 
+[ 47] Li P H, Zha ng T W, Ar thur E C P. Visual co nt our 
+tr acking based on par ticle filt ers[ J] . Image and V ision 
+Comp uting , 2003, 21( 1) : 111-123. 
+[ 48] Julier S J. Skewed appr oach to filter ing [ A] . S PIE 
+Conf on Signal and Data P rocessing of Small T ar gets 
+1998[ C] . Or lando , 1998, 3373: 271-282. 
+[ 49] Huang X Y, Cui H T, Cui P Y. An aut onomo us 
+optical navigat ion and g uidance fo r so ft landing o n 
+astero ids[ J] . Acta A stronautica, 2004, 54( 10) : 763- 
+771. 
+[ 50] Li P H, Zhang T W, M a B. Unscented Kalman filter 
+for visual curv e t racking [ J ] . Image and V ision 
+Comp uting , 2004, 22( 2) : 157-164. 
+[ 51] Zav eri M A, Desai U B, M erchant S N. T racking 
+multiple maneuv ering po int t arg ets using multiple 
+filter bank in infrar ed imag e sequence[ A] . ICA SS P, 
+IEEE I nt Conf on Acoustics, Sp eech and S ig nal Pr oc 
+[ C] . Hong Ko ng , 2003, 2: 409-412. 
+[ 52] Camps O, Lim H, Mazza ro C, et al. A car atheodor yfejer 
+appro ach to r obust multiframe tr acking[ A] . Pr oc 
+of the IEEE I nt Conf on Comp uter Vision[ C ] . Nice, 
+2003: 1048-1055. 
+[ 53] Lee D J, Alfr iend K T . Pr ecise r eal-time o rbit 
+estimation using the Unscent ed Kalman Filt er [ J ] . 
+Ad vances in the A stronautical S ciences , 2003, 114( S) : 
+1835-1854. 
+[ 54] Cr assidis J L, Markley F L. U nscented filt ering for 
+spacecr aft attit ude est imation [ J ] . J of Guidance, 
+Contr ol, and Dy namics, 2003, 26( 4) : 536-542. 
+[ 55] LaVio la J, Joseph J. A compar iso n o f unscented and 
+ex tended Kalm an filt ering for estim ating quater nion 
+mo tio n[ A ] . P roc of the American Contr ol Conf [ C] . 
+Co lo rado : IEEE Pr ess, 2003: 2435-2440. 
+[ 56] Chen L J, Seer eer am S , Mehra R K. Unscented 
+Kalman filt er for multiple spacecraft fo rmatio n flying 
+[ A ] . P roc of the A mer ican Contr ol Conf [ C ] . 
+Co lo rado , 2003: 1752-1757. 
+[ 57] Akin B, Or guner U, Er sak A. St ate est imation of 
+induct ion mo tor using unscented Kalman filter [ A ] . 
+IE EE Conf on Contr ol Ap p lications [ C ] . I st anbul, 
+T ur key , 2003: 915-919. 
+[ 58] Saulso n B, Chang K C. Compar iso n o f no nlinear 
+estimatio n for ballist ic missile tr acking [ A ] . Pr oc of 
+S PIE - The I nt S ociety f or Op tical Engineer ing [ C] . 
+Washingto n, 2003: 13-24. 
+[ 59] Van der Merwe R, Wan E A. Sigma-po int Kalman 
+filter s for integ rated na vig atio n [ DB/ OL ] . http: / / 
+speech . bme. og i. edu/ publica tio ns/ ps/ m erw e04a. pdf, 
+2004-08-13. 
+[ 60] Lig htsey E G, Crassidas J L. Real time attit ude 
+independent GPS integer ambiguity r eso lution [ J ] . 
+A dv ances in the Astr onautical Sciences, 2003, 115( S) : 
+134-152. 
+[ 61] Azizi F, Ho ushang i N. Sensor s integ ra tio n fo r mobile 
+r obo t posit ion determ inatio n [ A] . Pr oc of the IE EE 
+I nt Conf on Sy stems , M an and Cy ber netics [ C ] . 
+Washingto n: Hyat t Reg ency , 2003: 1136-1140. 
+[ 62] Popescu C A, Wong Y S. Nonlinear st atistical 
+appro ach for aero elastic r espo nse pr edictio n[ J] . J of 
+Guidance, Contr ol, and Dy namics, 2003: 26( 4) : 565- 
+571. 
+[ 63] Popescu C, Wo ng Y S . The unscented and ex tended 
+Kalman filter fo r systems with po ly nomial resto ring 
+fo rces [ A] . Collection of Technical Pap er s - AI AA / 
+A SME / A S CE / A H S / A SC S tructur es , S tructur al 
+Dy namics and M ater ials Conf [ C] . Nor folk, 2003: 100- 
+110. 
+[ 64] Hashimo to M , Ishida Y, Oba F. 3D dead recko ning 
+fo r mo dula r vehicle based o n decentr alized data 
+associatio n [ J] . N ip p on K ikai Gakkai Ronbunshu, C 
+H en/ Tr ansactions of the J ap an S ociety of M echanical 
+Engineers , Part C, 2003, 69( 1) : 164-171. 
+[ 65] Sitz A, Schw arz U , Kurths J, et a l. Estimat ion of 
+par ameter s and uno bser ved components for no nlinear 
+sy st em s fr om no isy t ime series[ J] . P hy sical R ev iew E 
+( Statistcal, N onlinear , and Sof t M atter Dhy sics ) , 
+2002, 66( 1) : 016210/ 1-9. 
+( 下转第494 页) 
+第 5 期 潘 泉等: 一类非线性滤波器——UKF 综述 489
+
+5　结　　论
+　　本文提出的智能群体模型的建立仅依赖于相互
+可检测到的个体之间的局部信息. 对于任意规模、随
+机分布的智能群体, 只要群体内个体之间存在任意
+一条可观测链, 采用本文提出的个体局部控制算法, 
+便能实现群体的稳定全局集聚行为, 体现出了较强
+的简单性、适应性、鲁棒性以及可扩展性. 
+参考文献( References) 
+[ 1] Br eder C M. Equations descr iptiv e o f fish scho ols and 
+other a nimal ag gr egations[ J] . Ecology , 1954, 35( 3) : 
+361-370. 
+[ 2] War bur ton K, Lazarus J. Tendency-dist ance mo dels of 
+so cial cohesio n in animal gr oups [ J ] . J of T heoretical 
+B iology , 1991, 150( 4) : 473-488. 
+[ 3] Jin K, Liang P, Beni G. st ability o f sy nchr onized 
+distr ibuted contr ol o f discrete swa rm structures [ A ] . 
+P roc of IEEE I nt Conf on Robotics and A utomation[ C] . 
+San Diego , 1994: 1033-1038. 
+[ 4] Beni G, Liang P. Patter n reco nfigur atio n in sw arms 
+co nv erg ence of a distr ibuted asy nchr onous and bo unded 
+iter ativ e algo rithm [ J ] . IEEE T rans on Robotics and 
+A utomation, 1996, 12( 3) : 485-490. 
+[ 5] Gazi V, Passino K M. Stability analysis of swarms[ A] . 
+P r oc of the A mer ican Contr ol Conf [ C ] . Anchor ag e, 
+2002: 1813-1818. 
+[ 6] Gazi V, Passino K M . Sta bility analy sis of social 
+for aging sw arms[ J] . IEEE T rans on Sy stems, M an, 
+and Cy bernetics-Par t B : Cyber netics, 2004, 34 ( 1) : 
+539-557. 
+[ 7] 刘书桂, 杨芳, 陶晋. 计算几何在测试计量技术中的应用
+— 求解最小外接圆[ J] . 工程图学学报, 2000, 21( 3) : 83- 
+89. 
+( Liu S G, Yang F, Tao J. Evaluatio n o f minimum 
+circumscr ibed cir cle form er ro r by computa tio nal 
+g eom et ry appr oach [ J ] . J of Engineer ing Grap hics , 
+2002, 21( 3) : 83-89. ) 
+[ 8] 葛根焰, 汤建勋. 最小外接圆法和最大内切圆法圆度评
+估的快速算法[ J] . 计量与测试技术, 1996, 23( 5) : 11- 
+12. 
+( Ge G Y, Tang J X. Quick algo rithm o f circular it y 
+ev aluation ba sed on minim al cir cum circle and max imal 
+inscribed circle metho ds[ J] . Metr ology & Measur ement 
+T echnique, 1996, 23( 5) : 11-12. ) 
+　　( 上接第489 页) 
+[ 66] Bo rg es G A, Aldon M A. A decoupled a ppro ach fo r 
+simult aneo us st ochastic mapping and mo bile r obot 
+lo calizat ion [ A] . IEEE I nt Conf on I ntelligent Robots 
+and Sys tems[ C] . Sw itzer land, 2002: 558-563. 
+[ 67] Caffery J J, Stuber G L. Nonlinear multiuser 
+pa rameter estimat ion and tr acking in CDM A sy st ems 
+[ J] . IEE E T rans on Communications, 2000, 48( 12) : 
+2053-2063. 
+[ 68] Julier S J, U hlmann J K. Unscent ed filt ering and 
+nonlinear est imation [ J] . Pr oc of the IEEE A er osp ace 
+and Electr onic Sy stems, 2004, 92( 3) : 401-422. 
+[ 69] Ya ng F, Ye L, Pan Q, et al. UT met ho d fo r space 
+alignment pro blem[ A] . The 23th Chinese Control Conf 
+[ C] . Wux i, 2004: 281-285. 
+[ 70] 王淑一, 程杨, 杨涤, 等. UKF 方法及其在跟踪问题中
+的应用[ J] . 飞行力学, 2003, 21( 2) : 59-62. 
+(Wang S Y, Chen Y, Yang D, et al. UKF and it s 
+applicatio n t o bearing-o nly tr acking pro blem [ J ] . 
+Chinese J of F ight Dy namics, 2003, 21( 2) : 59-62. ) 
+[ 71] 蔡洪. Unscent ed Kalman 滤波用于再入飞行器跟踪
+[ J] . 飞行器测控学报, 2003, 21( 2) : 59-62. 
+( Cai H. Unscent ed Kalman filt ering fo r reentr y 
+vehicle t racking [ J ] . Chinese J of Air cr af t 
+Measurement and Control, 2003, 22( 3) : 12-16. ) 
+[ 72] 武延鹏, 尤政, 任大海. 采样Kalman 滤波器在天文卫星
+定姿滤波中的应用[ J] . 清华大学学报( 自然科学版) , 
+2003, 43( 8) : 1013-1016. 
+( Wu Y P, Yo u Z, Ren D H. Unscent ed Kalm an filter 
+applicat ion in a st ro nomical satellite attit ude 
+determinatio n [ J] . Chinese J of T singhua Univ er sity 
+( SCI & T EC) , 2003, 43( 8) : 1013-1016. ) 
+[ 73] 周兆庚, 郝群, 沙定国. U-卡尔曼滤波在状态估计中的
+应用[ J] . 仪器仪表学报, 2004, 24( 增4) : 440-442. 
+( Zho u Y G, Hao Q, Sha D G. Application of 
+unscented Kalman filt er o n the stat e estimat ion [ J] . 
+Chinese J of I nstrument and M eter, 2004, 24 ( S4) : 
+440-442. ) 
+[ 74] 管旭军, 芮国胜. 基于UKF 的单站无源定位算法[ J] . 电
+光与控制, 2004, 11( 2) : 34-36. 
+( Guan X J, Rui G S. Algo rithm fo r passive locating 
+by sing le statio n with application o f UKF[ J] . Chinese 
+J of Electr onics Op tics and Contr ol, 2004, 11( 2) : 34- 
+36. ) 
+494 控　　制　　与　　决　　策第20 卷
+

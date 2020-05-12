@@ -1,0 +1,716 @@
+编者按:在人类接收的信息中有80%来自视觉或者说为图像(Image)信息, 这包括图像、图形(动画)、视频、文本、数据
+等, 这是人类最有效和最重要的信息获取和交流方式。随着计算机的普及, 人们越来越多地利用计算机来帮助人类
+获取与处理视觉(图像)信息。图像技术是对视觉图像获取与加工处理技术的总称。
+图像技术近年来受到人们广泛的关注, 它包括图像的采集获取;图像编码存储和传输;图像的产生、显示与变
+换;图像的分割, 图像的特征提取与测量;图像数据库的建立、索引和抽取;图像的分类、表示和识别;图像的模型匹
+配;图像的质量评价;图像的解释与理解等。根据抽象程度和处理方法的不同, 图像技术可分为三个层次:图像处
+理, 图像分析和图像理解。这三个层次的有机结合也可称为图像工程。
+图像处理是较低层的操作, 主要在图像像素级上进行处理。比较狭义的图像处理主要包括对图像分割以改善
+视觉效果, 或对图像压缩编码以减少传输时间或存储容量。图像分析则是进入中层的操作, 分割和特征提取把原来
+以像素描述的图像转变成简洁的非图形式的符号描述。即图像分析是一个图像进而数据出的处理, 数据可以是特
+征测量的结果, 或是基于测量的符号表示。图像理解也经常被称为计算机视觉, 这主要是高层操作。图像理解进一
+步研究图像中的目标和它们之间的联系, 其处理过程与方法与人类的思维推理往往有不少类似之处。
+根据以上所述, 本专辑有以下文章: 
+①图像分割研究综述;②视觉计算———人类感知能力的延伸;③数字图像的质量评价;④基于数码相机的图
+像采集系统;⑤神经递质释放的计算机图像分析系统;⑥ 计算机视觉技术在智能交能系统中的应用;⑦ 点光源视
+景图像的控制与实现
+图像分割研究综述＊ 
+Study Surveys on Image Segmentation
+北京工业大学信号与信息处理研究室(100022)　王爱民　沈兰荪
+【摘要】图像分割是指将一幅图像分解为若干互不交迭区
+域的集合, 是图像处理与机器视觉的基本问题之一。本
+文对常见的分割方法按照数据驱动与模型驱动两大类型
+进行了综述, 并介绍了图像分割中的物理模型与随机场
+模型、半自动分割策略、图像分割的定量评价方法等。
+关键词:图像分割, 图像模型, 半自动分割, 分割评价
+Abstract:Image segmentation denotes a process by which a 
+raw image is partitioned into nonoverlapping regions .The image 
+segmentation problem is treated as a key issue in image 
+processing and machine vision .The current methods based on 
+two categories , data and model-driven segmentation are surveyed 
+.In addition , the other points related to segmentation , including 
+physics-based image model , random field image model 
+, semiautomatic segmentation , and quantitative evaluation of 
+segmentation , etc .are reviewed . 
+Key words :image segmentation , image model , semiautomatic 
+segmentation , evaluation of segmentation 
+　　图像分割是图像处理与机器视觉的基本问题之一, 
+＊国家自然科学基金和863 计划资助项目
+其要点是:把图像划分成若干互不交迭区域的集合, 这些
+区域要么对当前的任务有意义, 要么有助于说明它们与
+实际物体或物体的某些部分之间的对应关系。
+图像分割的应用非常广泛, 几乎出现在有关图像处
+理的所有领域, 并涉及各种类型的图像。例如, 在遥感应
+用中, 合成孔径雷达图像中目标的分割[ 1] ;遥感云图中不
+同云系和背景分布的分割[ 2, 3] 等。在医学应用中, 脑部
+MR图像分割成灰质(GM)、白质(WM)、脑脊髓(CSF)等脑
+组织和其他非脑组织区域(NB)[ 4] 等。在交通图像分析
+中, 把车辆目标从背景中分割出来[ 5] 等。在面向对象的
+图像压缩和基于内容的图像数据库查询中, 将图像分割
+成不同的对象区域
+[ 6, 7] 。在这些应用中, 分割通常是为了
+进一步对图像进行分析、识别、压缩编码等, 分割的准确
+性直接影响后续任务的有效性, 因此具有十分重要的意
+义。
+按照通用的分割定义, 分割出的区域需同时满足均
+匀性和连通性的条件。其中均匀性是指该区域中的所
+有像素点都满足基于灰度、纹理、彩色等特征的某种相
+似性准则;连通性是指在该区域内存在连接任意两点的
+路径。设F 表示一幅图像中所有像素的集合, P (·)是
+有关均匀性的假设, 分割定义为把F 划分成若干子集
+(S1 , S 2 , …, Sn), 其中每一个子集都构成一个空间连通
+区域, 即
+图像分割研究综述 · 1 ·
+
+Y n 
+i =1
+Si =F 　且　SiISj = Υ, i ≠ j (1) 
+且P(·)满足
+P(Si)= true , i (2) 
+和
+P(SiYSj)= false , 若Si 与Sj 在空间相邻(3) 
+　　符合上述定义的分割计算十分复杂和困难, 图像处
+理和机器视觉界的研究者们为此付出了长期的努力。
+迄今为止, 大部分研究成果都是针对某一类型图像、某
+一具体应用的分割, 通用方法和策略仍面临着巨大的困
+难。本文将对图像分割的研究现状和发展趋势进行综
+述, 与已有的分割综述[ 8 ～ 11] 相比, 本文的特色在于: 
+(1)根据使用知识的特点与层次, 将图像分割为数
+据驱动与模型驱动两大类型进行综述。其中数据驱动
+分割直接对当前图像数据进行操作, 虽然也可使用有关
+先验知识, 但不依赖于知识;模型驱动分割则直接建立
+在先验知识的基础上。这样分类更符合当前图像分割
+的技术要点。
+(2)由于数据驱动分割中的多数方法较为传统, 在
+以往综述中均有详细介绍, 本文重点介绍以模型驱动的
+分割方法。
+(3)介绍基于动态轮廓模型、组合优化模型的分
+割, 以及分割中的物理模型、半自动分割等以往综述未
+涉及到的内容。
+(4)介绍近年来出现的新的分割定量评价测度。
+1 　数据驱动的分割
+常见的数据驱动分割包括基于边缘检测的分割、基
+于区域的分割、边缘与区域相结合的分割等。
+1 .1 　基于边缘检测的分割[ 13～ 19] 
+基本思想是先检测图像中的边缘点, 再按一定策略
+连接成轮廓, 从而构成分割区域。其难点在于边缘检测
+时抗噪性和检测精度的矛盾, 若提高检测精度, 则噪声
+产生的伪边缘会导致不合理的轮廓;若提高抗噪性, 则
+会产生轮廓漏检和位置偏差。为此, 人们提出各种多尺
+度边缘检测方法
+[ 14, 17 ～ 19] , 根据实际问题设计多尺度边
+缘信息的结合方案, 以较好地兼顾抗噪性和检测精度, 
+但仍不能从根本上克服此矛盾。此外, 基于低层信息的
+轮廓跟踪也是一个难题。
+1 .2 　基于区域的分割[ 20 ～ 38] 
+基本思想是根据图像数据的特征将图像空间划分
+为不同的区域。常用的特征包括:直接来自原始图像的
+灰度或彩色特征;由原始灰度或彩色值变换得到的特
+征。方法有阈值法、区域生长法、聚类法、松弛法等。
+阈值法[ 20～ 24] 通过设定不同的特征阈值, 将像素点
+分为若干类。其难点在于阈值的设定方法, 对传统阈值
+法的改进包括局部阈值、模糊阈值、随机阈值等方法。
+聚类法[ 25～ 31] 在特征空间对像素点集进行聚类, 包
+括硬聚类、概率聚类、模糊聚类等。由于缺乏对像素空
+间拓扑关系的考虑, 往往还需进行后处理才能完成分
+割。聚类准则是聚类分割的关键。
+区域生长方法[ 32 ～ 35] 从若干种子点或种子区域出
+发, 按照一定的生长准则, 对邻域像素点进行判别并连
+接, 直到完成所有像素点的连接。其中种子点可采用人
+机交互或自动方法设定。这种方法的关键在于种子点
+的位置、生长准则和生长顺序等。
+松弛法[ 36～ 38] 是一种动态调优的标号方法, 包括概
+率松弛、模糊松弛等。把对应于不同目标的标号分别赋
+给图像中每个像素, 根据相邻像素之间的相容性, 通过
+迭代调整标号, 直到收敛。其关键在于标号相容模型和
+迭代方法的收敛性。
+1 .3 　边缘与区域相结合的分割[ 39～ 41] 
+边缘检测能够获得灰度或彩色值的局部变化强度, 
+而区域分割能够检测特征的相似性与均匀性。边缘与
+区域组合分割的主要思想是结合二者的优点, 通过边缘
+点的限制, 避免区域的过分割;同时, 通过区域分割补充
+漏检的边缘, 使轮廓更加完整。例如:先进行边缘检测
+与连接, 再比较相邻区域的特征(灰度均值、方差等), 若
+相近则合并[ 39, 40] ;对原始图像分别进行边缘检测和区域
+生长, 获得边缘图和区域片段图后, 再按一定的准则融
+合, 得到最终分割结果[ 41] 。
+2 　模型驱动的分割
+常见的模型驱动分割包括基于动态轮廓(Snakes)模
+型、组合优化模型、目标几何与统计模型的分割方法。
+2 .1 　基于Snakes 模型的分割[ 42～ 50] 
+Snakes 模型用于描述分割目标的动态轮廓, 由Kass 
+首先提出[ 42] , 可表示为
+v(s , t)=[ x(s , t), y(s , t)] (4) 
+式中, s ∈[ 0 , 1] 为轮廓的曲率参数, t 为时间参数。基于
+Snakes 模型的分割是通过对能量函数的动态优化来逼
+近目标的真实轮廓, 其能量函数定义如下: 
+Esnake =∫1
+0
+Einternal +Eimage +Econstraint (5) 
+其中, Einternal称作内力, 表示与轮廓的平滑性、连续性等
+形状特征有关的能量;Eimage称作图像力, 表示轮廓点与
+图像局部特征吻合的能量;E constraint称作约束力, 代表各
+种人为定义的约束条件。
+一般地, 内力可以表示为
+Einternal = α v 
+s 
+2 
++β 2v 
+s2 (6) 
+其中, 参数α控制轮廓的连续性约束, 若α较小, 则
+Einternal对轮廓的连续程度不敏感;β 控制平滑程度约束, 
+若β 较小, 则Einternal对轮廓的平滑程度不敏感。图像力
+的形式为
+Eimage = ω1 I(x , y)+ ω2 I(x , y) 2 + Λ (7) 
+其中, ω1 称作线特征系数, 控制对轮廓所在区域的图像
+强度的约束;ω2 称作边缘特征系数, 控制对轮廓所在区
+域的强度梯度的约束。约束力可根据具体的应用需求
+来定义, 用于在模型中加入各种人为约束控制, 例如轮
+· 2 · 《测控技术》2000 年19卷第5期
+
+廓应该避开的区域等。
+由于Snakes 模型的能量函数采用积分运算, 具有较
+好的抗噪性, 对目标的局部模糊也不敏感, 因而适用性
+很广。但这种分割方法容易收敛到局部最优, 因此要求
+初始轮廓应尽可能靠近真实轮廓;此外, 收敛速度较慢。
+为克服局部最优问题, 文献[ 43] 采用一个两层感知
+器网络来近似所需轮廓点的特征;文献[ 44] 采用了内外
+两个初始轮廓, 迭代过程中对能量函数较大的轮廓增加
+驱动力, 使其靠近另一个轮廓, 直到两个轮廓收敛到同
+一个解, 从而增加了逃离局部最优的能力, 允许初始轮
+廓远离真实轮廓。为加快算法的收敛速度, 提出了基于
+邻域搜索的Greedy 算法
+[ 45] , 快速Greedy 算法
+[ 46] 。
+对Snakes 模型和分割算法的其他改进还有:增加了
+一个与形状有关的约束项, 并对Greedy 算法进行了改
+进, 增加了算法的稳定性
+[ 47] ;通过在模型中增加一个膨
+胀力, 使轮廓能够更好地避开伪边缘[ 48] ;增加了有关区
+域信息的约束条件, 并采用模拟退火算法以得到全局最
+优解
+[ 49] ;提出了一种拓扑自适应的Snakes 模型, 能够得
+到具有分支或由若干闭合曲线构成的复杂轮廓[ 50] 。
+2 .2 　基于组合优化模型的分割[ 51, 52] 
+近年来对通用分割方法的研究倾向于将分割看作
+一个组合优化问题, 并采用一系列优化策略完成图像分
+割任务。主要思路是在分割定义的约束条件之外, 根据
+具体任务再定义一个优化目标函数, 所求分割的解就是
+该目标函数在约束条件下的全局最优解。
+在具有代表性的两篇文献[ 51, 52] 中, 文献[ 51] 将
+图像分割的目标函数定义为
+E =ω1
+(ΣR 
+i =1 
+σ2i
+)+ω2
+Ce (8) 
+其中, σi 
+2 为区域i 中的灰度方差;R 为分割区域数量; 
+Ce 为与边缘结构有关的约束项;ω1 、ω2 为权值。该目标
+函数中的第一项保证分割出的区域内部具有灰度相似
+性;第二项对分割后的边缘轮廓进行约束, 对于大小为
+M ×N的图像, 有
+Ce = ΣM 
+i =1 ΣN 
+j =1 
+Ce(i , j) (9) 
+其中
+Ce(i , j)= Σ5 
+k =1
+wkCk (10) 
+式中,Ck(k =1 , … , 5)分别代表5 种边缘损失项:C1 与
+局部灰度不连续性有关, 保证边缘轮廓符合灰度突变
+性;C2 与边缘轮廓的粗细程度有关, 使边缘尽可能细
+化;C3 保证边缘轮廓的平滑性;C4 与边缘轮廓的连通性
+有关, 以去除边缘分支和片段;C5 与边缘点数量有关, 
+以避免过分割。
+文献[ 52] 中定义的目标函数形式为
+E(u , B)=∫Ψ
+r (1 -B)2 +∫Ψ
+B2 (11) 
+其中, Ψ为图像空间域;u 为分割后的近似图像;B 表示
+边界函数;r 为留数项, 与Au -g 和 u 有关(A 为某种
+变换算子), 有多种定义方法, 如
+r = ω1(Au - g)2 + ω2 ‖ u ‖ (12) 
+式中, g 为原图像。
+以组合优化的观点处理分割问题, 主要是利用一个
+目标函数综合表示分割的各种要求和约束, 将分割变为
+目标函数的优化求解。以上介绍的两种目标函数均结
+合了图像的区域和边缘约束条件, 构成了通用的优化模
+型框架, 能够满足一般的分割要求, 但其中的参数估计
+方法还有待于进一步研究。
+由于目标函数通常是一个多变量函数, 基于梯度下
+降的优化法虽能快速收敛, 却容易陷入局部最优解。为
+此可采用随机优化方法, 文献[ 51] 对遗传算法(GA)、随
+机退火算法(SA 、MCA 、RCA 等)、组合遗传算法(SA-GA 、
+MCA-GA 、RCA-GA)等进行了比较研究。
+2 .3 　基于目标几何与统计模型的分割[ 5, 53～ 60] 
+这是将目标分割与识别集成在一起的方法, 常称作
+目标检测或提取。基本思想是将有关目标的几何与统计
+知识表示成模型, 将分割与识别变为匹配或监督分类。
+常用的模型有模板、特征矢量模型、基于连接的模型等。
+模板通常是根据目标的几何形状特征定义的, 有固
+定和可变两种类型。人脸检测中的“特征脸”就是一种典
+型的模板[ 53] 。成像条件的变化会影响图像中物体的形
+状, 因此基于固定模板的分割适应性较差, 目前的解决方
+案有两种:充分考虑可能出现的各种成像条件, 对一种目
+标定义多个不同的模板[ 54] ;或者采用可变模板[ 5, 55, 56] 。
+基于特征矢量模型的分割采用了传统的统计分类思
+想, 对训练图像集进行特征提取后构成目标的特征矢量
+模型, 分割时对输入图像的像素或区域进行基于最近距
+离的监督分类, 以检测所需目标的位置。文献[ 54] 在人脸
+检测中采用了35 维的特征矢量和基于Mahalanobis 距离
+的线性判别分析, 特征矢量主要由人脸各器官部位的方
+向性边缘特征构成。文献[ 57] 选用具有旋转、平移和缩放
+不变性的7 个几何不变矩来构成描述区域特征的矢量。
+基于连接模型的分割则采用网络构成目标的模型, 
+通过学习确定网络的结构和参数。Bayesian 信任度网络
+结合了分割目标的几何与统计特征, 是最近提出的一种
+连接模型[ 58] 。更常见的是神经网络模型, 例如:在云图
+的分割中采用了概率神经网络(PNN)[ 2] ;在人手的分割
+中使用了局部线性神经网络(LLM)[ 59] ;文献[ 60] 则用若
+干BP 网络并联而成的组合连接模型, 将SPOT 地面遥感
+图像分割为多类目标的集合。
+总之, 几何与统计模型驱动的分割能够同时完成部
+分或全部识别任务, 具有较高的效率。然而由于成像条
+件变化, 实际图像中的目标往往与模型有一定的区别, 
+需要面对误检与漏检的矛盾, 此外, 匹配时的搜索步骤
+颇为费时。
+3 　图像分割中的物理模型与随机场模型
+分割中经常用到图像的各种表像模型, 其中最著名
+图像分割研究综述 · 3 ·
+
+的是物理模型和随机场模型。需要指出的是, 此处模型
+的含义与上一节不同, 后者专指基于先验知识的分割目
+标模型, 而表像模型是对图像本身的一种描述格式。
+3 .1 　图像分割中的物理模型[ 61～ 65] 
+从成像过程来看, 图像数据取决于物体表面的物理
+特征、光照条件、成像设备的光学特性等因素, 描述这种
+关系的模型即称作图像的物理模型。传统的分割方法
+依赖于灰度、彩色、纹理等低层次特征, 图像中普遍存在
+的阴影、光斑等常影响分割的准确性。此外, 同一物体
+的表面由于朝向不同也常发生亮度的变化, 这种变化与
+不同物体间的变化往往很难区分。而基于物理模型的
+分割能够识别阴影、光斑, 也能够描述表面的朝向, 从而
+提高分割的鲁棒性和准确性。
+物理模型可分为物理光学和几何光学两种类型。物
+理光学模型利用波动方程描述光的入射与反射特性(如
+Beckmann-Spizzichino 模型),具有严格的解析意义,但过于
+复杂而不便应用[ 61] ;几何光学模型采用反射与折射定律
+并进行了简化, 是图像物理模型的主要应用形式, 其中最
+著名的是Shafer 提出的二分光反射模型
+[ 62] , 它将物体的
+反射谱函数L(λ, i , e , g)表达为面反射分量Ls(λ, i , e , 
+g)和体反射分量Lb(λ, i , e , g)的线性叠加
+L(λ, i , e , g)= Ls(λ, i , e , g)+ Lb(λ, i , e , g) (13) 
+其中, Ls(λ, i , e , g)表示入射光在物体表面发生的反射
+谱函数;Lb(λ, i , e , g)表示入射光透入物体内部后经多
+次折射又出射的谱函数;参数i 、e 、g 分别表示入射角、
+反射角与相位, λ为光波长参数。
+第一个基于物理模型的分割方法由Klinker 等提
+出[ 63] , 采用的即是上述二分光反射模型。实验表明:使
+用物理模型能够有效克服阴影与亮斑的影响, 获得精确
+的分割边界。但由于采用了具有一定局限性的“斜T” 
+型反射模型(只适用于非金属表面)和单色照明假设, 因
+而应用受到限制。对此进行的改进有:文献[ 64] 采用
+HIS 彩色特征和直方图分析以改进参数估计, 并在成像
+时加入参考白以消除非单色照明的影响;文献[ 65] 提出
+了用于金属表面的单色反射模型, 并与二分光反射模型
+相结合, 扩大了分割算法的应用范围。
+正如文献[ 63] 中所指出的那样, 基于物理模型的分
+割的主要困难是:一方面, 建立物理模型需先将图像分
+割成不同的表面区域;另一方面, 分割又需要精确的物
+理模型作指导。为克服这个矛盾, 可以先从整幅图像区
+域开始应用模型, 再不断将区域分裂和修正;或者先从
+很小的区域开始, 迭代进行区域合并与生长, 直到模型
+与分割区域能够较好地吻合。从这个意义上看, 文献
+[ 65] 采用的是前者, 而文献[ 63] 采用了后者。
+基于物理模型的分割目前仍然具有很大的局限性, 
+现有的方法都具有一定的约束条件。尽管如此, 图像的
+物理模型改变了图像处理依赖于低层次特征和统计信
+号处理的局限性, 而且能够在分割的同时得到关于分割
+场景的物理解释, 是一个值得重视的研究方向。
+3 .2 　图像分割中的随机场模型[ 4, 66～ 70] 
+纹理图像的分割中广泛采用了Morkov 随机场
+(MRF)模型。MRF 是一种条件概率模型, 可以描述图像
+中各点与其邻域的相关性。令S 表示图像格, 定义S 
+上的邻域系统
+N ={Ni i ∈ S} (14) 
+其中, Ni 为像素点i 的邻域集, 满足i Ni 和i ∈Nj 当且
+仅当j ∈ Ni 。令C ={f1 , f2 , Λ, fn}代表标号集, F ={F1 , 
+F2 , Λ, Fn}代表定义于S 上的随机变量集, 如果满足以
+下两个条件: 
+P(F = f)> 0, f ∈ C 
+P(Fi = fi |fS -{i})= P(Fi = fi |fN
+i) (15) 
+则F 称作定义于S 上、关于邻域系统N 的一个MRF 。
+MRF 模型能够区分不同的纹理分布, 特别适用于纹
+理图像的分割。使用MRF 模型的关键在于参数估计问
+题[ 66] , 分割性能往往取决于参数估计的准确程度。如
+果存在足够的先验知识或训练图像集, 能够比较准确地
+估计参数。否则同物理模型一样, 面临参数估计与分割
+相互制约的矛盾。为此通常也采用分割、参数估计轮流
+迭代进行的方法, 例如:先初始化参数, 在此基础上分
+割;利用分割结果进一步估计参数, 然后再分割;直到满
+足收敛条件。
+4 　图像分割的半自动方法
+从人工参与程度来看, 图像分割可分为人工、半自
+动、自动等三种类型。其中人工分割完全由操作者利用
+鼠标等工具勾画出分割区域的轮廓, 费时费力, 且容易
+受操作者主观因素的影响, 重复性差。自动分割不需人
+机交互, 但适应性差, 很难实现对一批图像同时获得满
+意的分割效果。半自动分割将人机交互与自动分割相
+结合, 能够适应不同的图像和需求, 且有效降低计算复
+杂度, 是目前极受重视的实用化分割方法。
+目前半自动分割中人机交互的方式有: 
+(1)勾画目标的大致轮廓, 构成自动分割的初始
+化, 如很多基于Snakes 模型的分割系统[ 42 ～ 50] ; 
+(2)根据特定的图像和任务调整算法参数。实际
+上, 多数分割算法都需要针对具体图像和任务确定参数
+的选取问题, 包括设定阈值、分割目标的数目等。例如, 
+文献[ 71] 采用局部兴奋全局抑制的振荡网络(LEGION) 
+进行医学图像的分割, 其中灰度级与公差范围的映射函
+数由人工决定, 该函数决定了分割区域中像素灰度变化
+的容许程度;此外, LEGION 网络的三个参数也由人工决
+定, 这些参数关系到对分割区域的数量和大小的限制。
+(3)在分割过程中加入人工交互环节。例如文献
+[ 72] 提出的半自动肺部组织图像分割方法, 首先通过人
+工设定或自动产生若干种子点, 然后利用Voronoi 图将
+图像划分为若干区域, 再利用监督分类的方法将其分为
+目标区(肺部组织)和背景区, 并判断出两类交界的边缘
+区域, 通过增加种子点并重复上述过程, 使边缘区域得
+· 4 · 《测控技术》2000 年19卷第5期
+
+到更加精细的划分, 直到获得准确的目标区轮廓。在区
+域分类的步骤中引入人工交互, 同时采用人工控制迭代
+分割的次数。
+总之, 从实用化的角度看, 自动分割还是一个需长
+期努力的方向。目前更为现实的是在自动分割前或分
+割过程中加入人机交互的半自动分割, 其发展方向为尽
+可能少和简便的人工交互。
+5 　分割方法的定量评价
+对图像分割进行定量评价的关键是客观地评价测
+度。有关综述可以参见文献[ 73] 。根据是否使用参考
+图像, 评价方法可分为两种类型。
+(1)不使用参考图像的评价方法, 评价测度一般与
+区域、轮廓特征有关。例如:文献[ 74] 提出了一种评价
+过分割(分割区域过多)与欠分割(分割区域过少)程度
+的客观测度, 对分割出的任意两个区域C1 与C2 , 定义
+分割价值函数如下: 
+g(C1 , C2)= true , Dif(C1 , C2)> Mint(C1 , C2) 
+false , otherwise 
+(16) 
+其中,Dif(C1 , C2)表示这两个区域空间相邻像素点的灰
+度(或彩色)变化程度, Mint(C1 , C2)表示两区域内部灰
+度(或彩色)的均匀性。如果分割图像中存在使g(C1 , 
+C2)为false 的区域对, 则为过分割;反之, 如果再进行区
+域分裂, 还可产生不是过分割的结果, 则为欠分割。最
+优的分割结果应既不是过分割, 也不是欠分割。此外, 
+文献[ 38] 提出了一种基于区域一致性的测度
+Uα= 1 - Σ R
+i ∈ α
+ωi σ2i 
+M 
+(17) 
+其中, Ri 代表第i 个分割区域, ωi 为权值, σi
+2 为区域i 
+的灰度方差,M 取决于不同区域间的灰度差。
+这一类评价方法的优点是不需与参考图像做比较, 
+但评价结果是否符合主观评价则取决于具体应用对象。
+(2)第二类评价方法是将分割结果与人工分割的
+参考图像进行对比评价。例如:文献[ 75 , 76] 提出的一
+种综合评价测度:最终测量精度(UMA), 取决于对参考
+图和实际分割图中各种目标特征的测量值的差。使用
+的目标特征有:目标的面积、圆形性、离心率、形状参数、
+周长等。文献[ 35] 将分割误差定义为
+APM = α· FS +β · PS +γ· NLE (18) 
+其中, FS 为错分率;PS 为漏分率;NLE 为边界偏离误
+差;α、β 、γ为加权系数。文献[ 71] 采用目标错误率与非
+目标错误率作为评价测度, 前者定义为错分(参考图中
+不属于目标, 而待评方法将其分割为该目标)的像素点
+数与参考图像中该目标的像素点总数之比, 后者定义为
+漏分(参考图中属于目标, 而待评方法将其分割为其他
+区域)的像素点数与参考图像中该目标的像素点总数之
+比, 好的分割结果应同时具有较低的目标错误率与较低
+的非目标错误率。
+这一类评价方法更加符合实际需求, 然而人工分割
+的参考图像有时不够精确, 且带有主观性。
+6 　总结
+随着计算机速度与容量的快速进展, 近年来图像处
+理与机器视觉实用化系统硕果累累, 例如:基于内容的
+图像检索系统、智能监视系统、视觉引导的智能交通系
+统、手写体字符/ 人脸/指纹/ 虹膜识别系统等。然而, 有
+关的理论研究并没有取得突破性进展[ 77] 。
+图像分割是图像处理与机器视觉必不可少的重要环
+节, 也是图像理论发展的瓶颈之一。本文对近年来国内
+外图像分割技术的研究进行了综述, 从中可以看出, 知识
+在分割中具有重要意义。数据驱动的分割虽不依赖于知
+识, 但在应用中离不开知识的指导。模型驱动的分割则
+直接将基于知识的模型构成分割算法的基础, 使识别环
+节与分割环节密不可分。半自动分割通过人机交互适时
+地在算法中加入知识。因此, 知识参与分割过程的方法、
+基于知识构成模型的方法是图像分割研究的关键问题。
+参考文献
+1 　薛景浩, 章毓晋, 林行刚.SAR 图像基于Rayleigh 分布假设的最小误
+差阈值化分割.电子科学学刊, 1999 , 21(2):219～ 225 
+2 　Tian B, Shaikh M A, Azimi-Sadjadi M R, et al.A Study of Cloud Classification 
+withNeural Networks Using Spectral and Textural Features .IEEE Trans . 
+Neural Networks , 1999 , 10(1):138 ～ 151 
+3 　陈哲, 冯天谨.基于小波分形特征提取的图像分割方法.中国图象图
+形学报, 1999 , 4A(12):1072～ 1077 
+4 　Zhang Y , Smith S M, and Brady JM .Segmentation of brainMR images using 
+Markov Random Field .Proceedings of Medical Image Understanding and 
+Analysis' 99 , available on http ://www -ipg .umds .ac.uk/miua/ 
+5 　Marie-Pierre Dubuisson Jolly , Sridhar Lakshmanan , andAnil K .Jain .Vehicle 
+Segmentation and Classification Using Deformable Templates.IEEE 
+Trans .Pattern Analysis and Machine Intelligence , 1996 ,18(3):293 ～ 308 
+6 　Rob Koenen .MPEG-4 Overview .Available on http :// drogo .cselt.it/ mpeg/ 
+standards/ mpeg-4/mpeg-4.html 
+7 　Swanson M D, Tewfik A H .Fast Progressively Ref ined Image Retrieval . 
+Journal of Elect ronic Imaging , 1998 , 7(3):443 ～ 452 
+8 　Haralick R M , and Shapiro L G .SURVEY:Image Segmentation Techniques 
+.Computer Vision , Graphics , and Image Processing , 1985, 29 :100 
+～ 132 
+9 　Pal N R, and Pal S K.A Review on Image Segmentation Techniques .Pattern 
+Recognition , 1993 , 26(9):1277 ～ 1294 
+10　赵荣春, 迟耀斌, 朱重光.图像分割技术进展.第九届全国图象图
+形学学术会议论文集, 中国图象图形学会, 1998 :547 ～ 558 
+11　罗希平, 田捷, 诸葛婴等.图像分割方法综述.模式识别与人工智
+能, 1999 , 12(3):300 ～ 312 
+12 　Nalwa V and Binford T .OnDetecting Edges .IEEE Trans .Pattern Analysi s 
+andMachine Intelligence, 1986, 8(6):699～ 714 
+13 　Bomana M, Hohne K H , Tiede U , and Ri eme M .3-D segmentation of MR 
+images of the head for 3-D display .IEEE Trans .On Medical Imaging , 
+1990 , 9 :177 ～ 183 
+14 　Bergholm F.Edge focusing .IEEE Trans .Pattern Analysis andMachine Intelligence 
+, 1987 , 9(9):726 ～ 741 
+15 　应骏, 叶秀清, 顾伟康.一个基于知识的边沿提取算法.中国图象
+图形学报, 1999, 4A(3):239 ～ 242 
+16 　Michael H .F.Wilkinson .Optimizing Edge Detectors for Robust Automatic 
+Threshold Selection :Coping with Edge Curvature and Noise.Graphical 
+Models and Image Processing 1998, 60 :385～ 401 
+17 　Bhabatosh Chanda , Malay K .Kundu and Y.Vani Padmaja.A Multi-Scale 
+Morphologic Edge Detector .Pattern Recognition , 1998 , 31(10):1469～ 1478 
+图像分割研究综述 · 5 ·
+
+18 　Ziou D, Tabbone S .A multi-scale edge detector .Pattern Recognition , 
+1993 , 26(9):1305 ～ 1314 
+19 　Brown M A, Blackwell K T , and Khalak H G et al.Multi-Scale Edge Detection 
+and Feature Binding :An Int egrated Approach .Pattern recognition , 
+1998 , 31(10):1479 ～ 1490 
+20 　Brink A B .Gray level thresholding of images using a correlation criterion . 
+Pattern Recognition Letters , 1989 ,9 :335 ～ 341 
+21　Mardia K V and Hainsworth T J .A spatial thresholding method for image 
+segmentation.IEEE Trans .Pattern Analysis and Machine Intelligence , 
+1988 , 10 :919 ～ 927 
+22 　Pun T .A new method for gray level pi cture thresholding using the entropy of 
+the histogram .Signal Processing , 1980 , 2:223 ～ 237 
+23　靳宏磊, 朱蔚萍, 李立源, 陈维南.二维灰度直方图的最佳分割方
+法.模式识别与人工智能, 1999 , 12(3):329 ～ 333 
+24 　刘文萍,吴立德.图像分割中阈值选取方法比较研究.模式识别与
+人工智能, 1997 , 10(3):271 ～ 277 
+25 　Hall L O , BensaidA M , Clarke L P , and Velthuizen RP et al.A comparison 
+of neural network and fuzzy clustering techniques in segmenting magnetic 
+resonance images of the brain .IEEE Trans .Neural Networks , 1992 , 3 
+(5):672 ～ 681 
+26　Lin J-S , Cheng K-S and Mao C-W.A Fuzzzy Hopfield Neural Network f or 
+Medical Image Segmentation .IEEE Trans .Neural Science , 1996 , 43(4): 
+2389 ～ 2398 
+27 　Lim Y W andd Lee S U.On the Color Image Segmentation Algorithm Based 
+on the Thresholding and the Fuzzy c -Means Techniques .Pattern Recognition 
+, 1990 , 23(9):935 ～ 952 
+28 　Sang Ho Park , Il Dong Yun , and Sang Uk Lee.Color Image Segmentation 
+Based on 3-D Clustering :Morphological Approach .Pattern Recognition , 
+1998 , 31(8):1061 ～ 1076 
+29 　Philippe Schmid .Segment ation of Digitized Dermatoscopic Images by Two- 
+Dimensional Color Clustering.IEEE Trans .On Medi cal Imaging, 1999 , 18 
+(2):164 ～ 171 
+30 　陈燕新, 戚飞虎.基于竞争Hopfield 网络的自动聚类图像分割方法. 
+模式识别与人工智能, 1998 , 11(2):215 ～ 221 
+31 　胡世英, 周源华.模糊选择多分辨率Kohonen 聚类网络用于灰度图
+像分割.电子学报, 1999 ,27(10):34 ～ 37 
+32 　Tremeau A , and Borel N.A RegionGrowing andMerging Algorithm to Color 
+Segmentation .Pattern Recognition , 1997 ,30 :1191 ～ 1203 
+33 　Sandor T, Metcalf D , andKim Y J .Segmentation of BrainCT Images Using 
+the Concept of Region Growing .J .Biomed.Comput ., 1991(29):133 ～ 
+147 
+34 　Adams R and Bischof L.Seeded region growing .IEEE Trans .Pattern 
+Analysis andMachine Intelligence, 1994, 16 :641 ～ 647 
+35 　尹平, 王润生.基于边缘信息的分开合并图像分割算法.中国图象
+图形学报, 1998 ,3A(6):450～ 454 
+36　Wang J P .Stochastic Relaxation on Partitions with Connect ed Component s 
+and Its Application to Image Segmentation .IEEE Trans .Pattern Analysi s 
+and Machine Intelligence , 1998 , 20(8):619 ～ 636 
+37 　Peleg S .A New Probabilistic Relaxation scheme.IEEE Trans .Pattern 
+Analysi s and Machine Intelligence, 1980, 2 :362 ～ 369 
+38 　戴剑彬, 张大力.图像分析中的松弛标记法.中国图象图形学报, 
+1998 , 3A(2):96 ～ 99 
+39 Ron Schoenmakers .Integrated Methodology for Segment ation of Large Optical 
+Satellite Images in Land Appli cations of Remote Sensing.Luxembourg , Italy , 
+1995 . 
+40 　Pavlidi s T and Liow Y T.Integrating Region Growing and Edge Detection . 
+IEEE Trans .Pat tern Analysis andMachine Intelligence, 1990 , 12(3):225 
+～ 233 
+41　Zugaj D and Lattuati V .A New Approach of Color Images Segmentation 
+Based on Fusing Region and Edge Segmentat ion Outputs .Pattern Recognition 
+, 1998 , 31(2):105～ 113 
+42 　Kass M , Witkin A , and Terzopoulos D.Snakes:Active Contour Models . 
+Int.J .Computer Vision , 1988 , 1 :321 ～ 331 
+43 　Chiou G I and Hwang J N.A Neural Network -based Stochastic Active 
+contour model (NNS -SNAKE)for contour finding of distinct features . 
+IEEE Trans .OnMedi cal Imaging , 1995 , 4 :1407 ～ 1416 
+44 　Gunn S R, and NixonM S .A Robust Snake Implementation :A Dual Active 
+Contour.IEEE Trans .Pattern Analysis and Machine Intelligence , 
+1997 , 19(1):63 ～ 68 
+45 　Williams D J , and Shah M.A Fast algorithm for active contours and curvature 
+estimation .CVGIP:Image Understanding , 1992 , 55(1):14 ～ 26 
+46 　Lam K M , and Yan H .Fast greedy algorithm for active contours .Electronic 
+Letters , 1994 , 30(1):21 ～ 22 
+47 　刘剑函, 梁德群, 王红光, 田原.一种具有形状约束的快速Snake 
+类算法.中国图象图形学报, 1999 , 4A(8):644 ～ 648 
+48 　Cohen L D, and Cohen I .Finite element methods for active contour models 
+and ballons for 2D and 3D images .IEEE Trans .Pattern Analysis and Machine 
+Intelligence , 1993 , 15(11):1131 ～ 1147 
+49 　Poon C S , BraunM , Fahrig R.A.Ginige, and A.Dorrel .Segmentation 
+of medical images using an active contour model incorporating region -based 
+images features.SPIE Proceedings , 1994 , 2359 :90 ～ 97 
+50 　McInerney T, and Terzopoulos D.Topologi cally adaptable snakes .In Proc . 
+Fif th International Conf.on Computer Vi sion (ICCV' 95), Cambridge , 
+1995 :840～ 845 
+51　Bhandarkar S M, and Zhang Hui .Image Segmentation Using Evolutionary 
+Computat ion .IEEE Trans .On Evolutionary Computation , 1999 , 3(1):1 
+～ 21 
+52 　Hewer G A, Kenney C , and Manjunath B S .Variational Image Segmentation 
+Using Boundary Funct ions .IEEE Trans .On Image Processing, 1998 , 
+7(9):1269 ～ 1282 
+53 　TurkM and PentlandA .Eigenf aces for recognition .Journal Cognitive Neuroscience 
+, 1991, 3 :71～ 86 
+54 　Brunelli R and Poggio T .Face recognition :Features versus templates . 
+IEEE Trans .on Pattern Analysis andMachine Intelligence, 1993 , 15 :1042 
+～ 1052 
+55 　Nastar C ,Moghaddam B, and Pentland A .Flexible Images :Matching and 
+Recognition Using Learned Deformations .Computer Vision and Image Understanding, 
+1997, 65 :179 ～ 191 
+56　Zhu S C and Yuille A M.FORMS :A Flexible Object Recognition and 
+Modelling System.International Journal of Computer Vision , 1996, 20 :187 
+～ 212 
+57 　谌海新, 沈振康, 夏放怀.一种基于目标特征的多门限图像分割方
+法.电子学报, 1999 , 27(3):32 ～ 36 
+58 　Levitt T S , Hedgcock M W,Dye J W, et al.Bayesian inference for model - 
+based segmentation of computed radiographs of the hand .Artificial Intelligence 
+in Medicine , 1993 , 5(4):365 ～ 387 
+59 　Enno Littmann , and Helge Ritter .Adaptive Color Segmentation -A Compari 
+son of Neural and Statistical Methods .IEEE Trans .On Neural Networks 
+, 1997 , 8(1):175 ～ 185 
+60 　李厚强, 王宜主, 刘政凯.一种适用于多类别遥感图像分类的新方
+法.遥感学报, 1997 , 1(4):257 ～ 261 
+61 　Nayar S K ,Ikeuchi K , and Kanade T.Suface Reflection :Physical and Geometri 
+cal Perspectives .IEEE Trans .Pattern Analysis and Machine Intelligence, 
+1991 , 13(7):611 ～ 634 
+62 　Shafer S A .Using Color to Separate Ref lection Components .Color Research 
+and Application , 1985 , 10:210 ～ 218 
+63 　Klinker G J , Shafer S A, and Kanade T.A Physi cal Approach to Color Image 
+Understanding.International Journal of Computer Vision , 1990 , 4(1): 
+7～ 38 
+64 　Bajcsy R, Lee S W, and Leonardi sA .Color image segmentation with detection 
+of highlights and local illumination induced by inter -ref lection .Proc . 
+International Conference on Pattern Recognition , Atlantic City , NJ , 1990 , 
+785～ 790 
+65　Healey G .Using color for geometry -insensitive segmentation .Journal of 
+the Opti cal Society of America A, 1989 , 6(6):920 ～ 937 
+(下转第16 页) 
+· 6 · 《测控技术》2000 年19卷第5期
+
+=1 或S2 =0 , λ1 =1 时, IMSE 退化为MSE , 因此传统客
+观质量评价方法是该方法的特例。实验结果证明:该方
+法能较好地与人眼的主观视觉相符。
+图2 　兴趣权值
+基于视觉兴趣的测量方法为图像质量评价开辟了
+一条新路, 但目前该类方法还只是处于初期研究阶段, 
+仍有许多问题有待深入研究, 例如, 图像中感兴趣区如
+何确定;如果测试图像中包含多个感兴趣区, 如何确定
+这些区域的兴趣权值等。
+3 　结束语
+图像质量的正确评价对于整体图像信息工程的发
+展具有十分重要的意义, 笔者认为未来图像质量评价的
+发展方向可能有: 
+① 对人眼视觉特性, 特别是视觉心理特性进行深
+入研究, 并结合先进的图像分析和图像理解知识, 创建
+更加符合人眼视觉特性的HVS 模型; 
+②对彩色图像和视频序列图像提出相应的质量评
+价方法。
+可以相信, 随着多媒体信息技术的高速发展, 对图
+像质量评价的研究将越来越受到人们的重视。
+　　参考文献
+1 　Antoon M van Di jk , et al.Subjective quality assessment of compressed images 
+.Signal Processing , 1997 , 58:235 ～ 252 
+2 　魏政刚等.图像质量评价方法的历史、现状和未来.中国图像图形学
+报, 1998, 3(5):236 ～ 239 
+3 　Eskiciogln A M, et al.Image Quality measures and their performance .IEEE 
+Trans .Comm , 1995 , 43(12):2959 ～ 2965 
+4 　沈兰荪.图像编码与异步传输.北京:人民邮电出版社, 1998 
+5 　Karunaseka S A , et al.A di stortion measure for blocking artifacts in image 
+based on human visual sensitivity .IEEE Trans.IP ,1995 , 4(6):713 ～ 724 
+6 　Wen Xu , et al .Pi cture quality evaluation based on error segmentation . 
+SPIE , 1994 , 2308 :1454 ～ 1465 
+7 　Jayant N J , et al.Signal Compression based on models of human perception . 
+Proc.IEEE ,1993 , 81 :1385～ 1422 
+8 　周建鹏等.一种图像质量的感知测量方法.中国图像图形学报, 1998 , 
+3(3):200 ～ 204 
+9 　Talluri R, et al.A robust , scalable, object-based video compression technique 
+for very low bit-rate coding.IEEE Trans .Circ.Syst .Video Tech , 1997 , 7 
+(1):221 ～ 233 
+10 　汪孔桥, 沈兰荪.一种结合人脸检测的静止小波图像编码方法.电
+子学报, 1998 , 26(4):88～ 90 
+11 　汪孔桥, 沈兰荪, 邢昕.面向人脸检测与跟踪的极低比特率分级编
+码方法.已被电子学报接收, 待发表
+12 　汪孔桥, 沈兰荪, 邢昕.一种基于视觉兴趣性的图像质量评价方法. 
+已被中国图像图形学报接收, 待发表
+作者简介:汪孔桥, 1999 年获中国科技大学信号与信息处理专
+业博士学位, 现于诺基亚(中国)投资有限公司研发中心从事科
+研工作。主要研究对象有:图像处理, 模式识别等。
+(收稿日期:2000 -02)◆ 
+(上接第6 页) 
+66 　Fabien Salzenstein , and Wojciech Pieczynski.Parameter Estimation in Hidden 
+Fuzzy Markov Random Fields and Image Segmentation .Graphical Models 
+and Image Processing , 1997 , 59(4):205 ～ 220 
+67 　Rajapakse J C , Giedd J N, and Rapoport J L.Statistical approach to segmentation 
+of single-channel cerebral MRimages .IEEE Trans .On Medical 
+Imaging , 1997 , 16:176 ～ 186 
+68 　Phi lippe Andrey, and Philippe Tarroux .Unsupervised Segmentation of Mandom 
+Field Modeled Textured Images Using Selectionist Relaxation .IEEE 
+Trans .on Pattern Analysis and Machine Intelligence, 1998 , 20(3):252 
+69 　Zhang Yongyue, Stephen Smith , and Michael Brady.Segmentaion of Brain 
+MR Images Using Markov Random Field .Proceedings ofMedi cal Image Understanding 
+and Analysis' 99 , available on http:// www -ipg .umds .ac . 
+uk/ miua/ 
+70 　陆明俊, 王润生.基于MRF 模型的可靠的图像分割.电子学报, 
+1999 , 27(2):87 ～ 89 
+71 　Shareef N , Wang D L and Yagel R.Segmentation of Medical Images Using 
+LEGION.IEEE Trans .Medical Imaging , 1999 , 18(1):74～ 91 
+72 　Imielinska C, Downes M, Hosakere S , et al.2D Segmentation of Color 
+Anatomi cal Data.Proceedings of the First User Conference of the National 
+Library of Medicine' s Visible Human Project , October 8 -9th , 1996 , 
+Bethesda , MD 
+73 　Zhang Y J .A Survey on Evalat ion for Image Segmentation .Pattern Recognition 
+, 1996 , 29(8):1335 ～ 1346 
+74　Felzenszwalb P F , and Huttenlocher D P.Efficiently Computing a Good 
+Segmentation .available on http :// www .cs.cornell.edu/ vision/ segmentation 
+75 　章毓晋.客观的图像质量测度及其在分割评价中的应用.电子科
+学学刊, 1997, 19(1):1 ～ 5 
+76 　罗惠韬, 章毓晋.基于算法评价的分割算法优化思想及其系统实
+现.电子科学学刊, 1998 , 20(5):577 ～ 583 
+77 　Buhmann JM ,Malik J , and Perona P .Image recognition :Visual grouping , 
+recognition , and learning .PNAS , 1999 , 96(25):14203～ 14204 
+作者简介:王爱民, 女, 1993 年毕业于北京理工大学, 获硕士学
+位。现为北京工业大学信号与信息处理研究室博士研究生。
+主要研究方向为彩色图像处理、医学图像分析、模式识别等。
+沈兰荪, 男, 教授, 博士生导师, 1961 年毕业于北京邮电学院通
+信工程系, 曾任中国科技大学高技术学院副院长, 校学术委员
+会副主任。发表论文100 余篇, 出版专著11 本。现为北京工业
+大学信号与信息处理研究室主任。主要研究方向为智能化信
+息处理。
+(收稿日期:2000 -02)◆ 
+· 16 · 《测控技术》2000 年19卷第5期
+

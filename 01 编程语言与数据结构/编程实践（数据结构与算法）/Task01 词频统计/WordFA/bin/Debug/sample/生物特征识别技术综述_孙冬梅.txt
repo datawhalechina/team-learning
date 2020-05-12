@@ -1,0 +1,440 @@
+生物特征识别技术综述
+孙冬梅, 裘正定
+(北方交通大学信息所, 北京100044) 
+　　摘　要:　生物特征识别技术作为一种身份识别的手段, 具有独特的优势, 近年来已逐渐成为国际上的研究热点. 
+本文综述了各种生物特征识别技术的基本原理和一些关键技术, 对每种生物特征的优势和不足进行了分析, 并对生物
+特征识别技术中存在的问题和未来的研究方向进行了讨论. 
+关键词:　生物特征识别;身份识别;身份认证;人脸识别;指纹识别;虹膜识别;手形识别;掌纹识别;签
+名识别;说话人识别
+中图分类号:　TP391　　　文献标识码:　A　　　文章编号:　0372-2112 (2001)12A-1744-05 
+A Survey of the Emerging Biometric Technology 
+SUN Dong-mei ,QIU Zheng-ding 
+(Institute of Information Science, Northern Jiaotong University , Beijing 100044 , China) 
+Abstract :　An accurate automatic personal identification is critical to our highly inter-connected information society .Biometrics 
+refers to automatic identification of an individual based on her/his physiological or behavioral traits.Though biometrics is not an identification 
+panacea , it is beginning to provide very powerful tools for problems requiring positive identification .This paper attempts to summarize 
+important research issues in biometrics. 
+Key words:　biometrics;personal identification;verification;face recognition;fingerprint verification;hand shapes verification; 
+iris identification;retina identification;palmprint verification ;signature verification;speaker verification 
+1 　引言
+　　随着全球范围内电子商务的迅速兴起, 人们可以通过Internet 
+等开放式网络进行在线电子交易等商务活动.同时, 由
+于网络上存在着大量敏感的个人、军队、政府的信息, 这些信
+息只有得到授权的人才能进行访问, 因此网络安全成为网络
+发展的一个关键问题, 而身份鉴别作为网络安全的一个重要
+方面越来越受到人们的重视. 
+关于个人身份鉴别的问题可以分为两类:认证(verification)
+和识别(identification).认证指的是验证用户是否为他所
+声明的身份(Are you whom you claim?), 识别指的是确定用户
+的身份(Who are you ?).身份的鉴别主要基于:(1)持有物, 如
+各种证件;(2)所了解的信息, 如口令或密码;(3)生理或行为
+特征, 如指纹、手形、声音、签名等.第三种方法就是现在引起
+人们广泛兴趣的生物特征识别(biometrics)技术, 它是基于个
+人独特的生理或行为特征进行自动身份鉴别的技术[ 1] .因为
+生物特征不会像密码那样容易被忘记和破解, 也不会像持有
+物那样容易被窃取或转移, 因此人们认为生物特征识别将是
+一种更加可靠、方便、快捷的大众化身份识别手段. 
+人的任何生理或行为特征只要它满足下面的条件, 原则
+上就可以作为生物特征用于身份鉴别:(1)普遍性, 每个人都
+具有;(2)唯一性, 任何两个人都不一样;(3)稳定性, 这种特征
+至少在一段时间内是不变的;(4)可采集性, 可以定量测量.然
+而, 满足上述条件的生物特征对一个实际的系统却未必可行, 
+因为实际的系统还必须考虑:(1)性能, 即识别的准确性、速
+度、鲁棒性以及为达到所要求的准确性和速度所需要的资源; 
+(2)可接受性, 人们对于一种特定的生物特征识别在日常生活
+中的接受程度;(3)可欺骗性, 用欺诈的方法骗过系统的难易
+程度.
+因此, 一个实际的生物特征识别系统应做到:(1)在合理
+的资源需求下实现可接受的识别准确性和速度;(2)对人没有
+伤害而且可为人们所接受;(3)对各种欺诈方法有足够的鲁棒
+性.目前人们研究和使用的生物特征识别技术主要有:人脸识
+别、虹膜识别、手形识别、指纹识别、掌纹识别、签名识别、声音
+识别.
+典型的生物特征识别系统如图1 所示, 逻辑上包括两个
+模块:注册模块和识别模块.在注册模块中首先登记用户的姓
+名, 通过生物特征识别传感器得到用户的生物特征信息, 然后
+从获取的数据中提取出用户的特征模式, 创建用户模板, 存储
+在数据库中.在识别模块中同注册过程一样获取用户的生物
+特征信息, 提取出特征模式, 然后与事先注册在数据库中的模
+收稿日期:2000-11-24 ;修回日期:2001-07-26 
+基金项目:国家95 科技攻关项目(No.96-414-05-11) 
+　第12A 期
+2001 年12 月
+电　　子　　学　　报
+ACTA ELECTRONICA SINICA 
+Vol.29 　No.12A 
+Dec.　2001 
+　
+
+图1 　生物特征识别系统的基本结构
+板相匹配, 检验用户的身份.下面将对一些主要的生物特征识
+别技术分别加以介绍. 
+2 　主要的生物特征识别技术
+2.1 　人脸识别
+人脸识别是一个活跃的研究领域.虽然人脸识别的准确
+性要低于虹膜、指纹的识别, 但由于它的无侵害性和对用户最
+自然、最直观的方式, 使人脸识别成为最容易被接受的生物特
+征识别方式. 
+人脸识别主要有两方面工作:在输入的图像中定位人脸; 
+抽取人脸特征进行匹配识别.目前的人脸识别系统, 图像的背
+景通常是可控或近似可控的, 因此人脸定位相对而言容易解
+决.而人脸识别由于表情、位置、方向以及光照的变化都会产
+生较大的同类差异, 使得人脸的特征抽取十分困难.现在主要
+的人脸识别方法有:(1)基于脸部几何特征的方法;(2)基于特
+征脸的方法;(3)神经网络的方法;(4)局部特征分析的方法; 
+(5)弹性匹配的方法. 
+基于几何特征的识别是通过提取眼睛、眉毛、鼻子、嘴等
+重要器官的几何形状作为分类特征[ 2, 3] .特征脸是根据一组
+训练图像, 利用主元分析的方法, 构造主元子空间, 这种方法
+是一种最小距离分类器, 当光照和表情变化较小时性能很好, 
+但当其变化较大时性能会显著降低[ 4, 5] .神经网络方法是将
+图像空间投影到隐层子空间, 由于投影变换具有非正交、非线
+性的特性, 而且可根据不同的需求构造不同的网络, 因此识别
+效果较好[ 6 , 7] .局部特征分析方法是考虑到人脸显著的特征
+信息并不是均匀分布于整个脸部图像的, 可能少量的局部区
+域却传达了大部分的特征信息, 而且这些局部特征在投影前
+后的关系保持不变[ 8] .弹性匹配方法是将人脸建模为二维或
+三维网格表面, 应用塑性图形或可变形曲面匹配技术进行匹
+配[ 9 , 10] .在商用的人脸识别软件中, FaceIt 应用的是局部分析
+法,Viisage system 应用的是特征脸方法, TrueFace 应用的是神
+经网络方法. 
+2.2 　指纹识别
+指纹识别是最古老的生物特征识别技术, 在很多领域中
+都得到了成功的运用.指纹指的是指尖表面的纹路, 其中突起
+的纹线称为脊, 脊之间的部分称为谷.指纹的纹路并不是连
+续、平滑流畅的, 而是经常出现中断、分叉或转折, 这些断点、
+分叉点和转折点, 称为细节(minutiae), 就是这些细节提供了
+指纹唯一性的识别信息.指纹的识别主要包括三部分:特征抽
+取, 指纹分类, 匹配决策. 
+(1)特征提取:从输入的指纹图像中提取出细节, 包括, 方
+向场估计[ 11 ,12] 、脊线抽取及细化[ 11 , 13] 、细节抽取. 
+(2)指纹分类:在身份识别中, 为了提高识别速度, 通常先
+将指纹图像分类[ 14] .分类算法可采用:利用奇异点等标志信
+息[ 14] , 利用脊的方向和结构信息[ 14] , 应用句法模式识别方
+法.
+(3)匹配决策:决定两个指纹是否来自同一手指.匹配方
+法有:①基于串的匹配[ 13 , 16] , 将2D 的细节特征转换成1D 的
+串, 应用串匹配算法计算两个串的距离;②基于Hough 变换的
+匹配[ 11] , 首先估计变换的参数, 然后对准细节点, 在一个边界
+框内计算匹配的点数;③基于2D 动态规整的匹配[ 17] , 将被测
+指纹的细节进行规整来对准参考指纹, 以获得最大的匹配细
+节的数目. 
+2.3　虹膜识别
+虹膜是一个位于瞳孔和巩膜之间的环状区域.与其它的
+生物特征相比, 虹膜识别具有:高独特性, 虹膜的纹理结构是
+随机的, 其形态依赖于胚胎期的发育;高稳定性, 虹膜可以保
+持几十年不变, 而且不受除光线之外的周围环境的影响;防伪
+性好, 虹膜本身具有规律性的震颤以及随光强变化而缩放的
+特性, 可以识别出图片等伪造的虹膜;易使用性, 识别系统不
+与人体相接触;分析方便, 虹膜固有的环状特性, 提供了一个
+天然的极坐标系.在各种虹膜识别算法中, 以Daugman[ 18 , 19] 和
+Wildes[ 20 , 22] 提出的算法最为经典, 大多数商业系统都是基于
+这两种算法. 
+虹膜识别算法包括:虹膜定位, 虹膜对准, 模式表达, 匹配
+决策. 
+(1)虹膜定位:将虹膜从整幅图像中分割出来.为此必须
+准确定位虹膜的内外边界, 检测并排除侵入的眼睑.典型的算
+法是利用虹膜内外边界近似环形的特性, 应用图像灰度对位
+置的一阶导数来搜索虹膜的内外边界[ 18 , 20] . 
+(2)虹膜对准:确定两幅图像之间特征结构的对应关系. 
+Daugman 将原始坐标映射到一个极坐标系上, 使虹膜组织的
+同一部位映射到这个坐标系的同一点;Wildes 算法应用图像
+配准技术来补偿尺度和旋转的变化. 
+(3)模式表达:为了捕获虹膜所具有的独特的空间特征, 
+可以利用多尺度分析的优势.Daugman 利用二维Gabor 子波将
+虹膜图像编码为256 字节的“ 虹膜码” [ 21] .Wildes 利用拉普拉
+斯— 高斯滤波器来提取图像信息[ 22] . 
+(4)匹配决策:Daugman 用两幅图像虹膜码的汉明距离来
+表示匹配度, 这种匹配算法的计算量极小, 可用于在大型数据
+库中识别.Wildes 是计算两幅图像模式表达的相关性, 其算法
+较复杂, 仅应用于认证[ 22] . 
+2.4　手形识别
+手形的测量比较容易实现, 对图像获取设备的要求较低, 
+手形的处理相对也比较简单, 在所有生物特征识别方法中手
+形认证的速度是最快的.然而手形特征并不具有高度的唯一
+性, 不能用于识别, 但是对于一般的认证应用, 它足可以满足
+要求.目前手形认证主要有两种方法:基于特征矢量的方
+法[ 23, 24] 和基于点匹配的方法[ 25] . 
+(1)基于特征矢量的手形认证:大多数的手形认证系统都
+第　12A　期 孙冬梅:生物特征识别技术综述 1745
+
+是基于这种方法.典型的手形特征包括:手指的长度和宽度、
+手掌或手指的长宽比、手掌的厚度、手指的连接模式等.用户
+的手形表示为由这些特征构成的矢量, 认证过程就是计算参
+考特征矢量与被测手形的特征矢量之间的距离, 并与给定的
+阈值进行比较判别. 
+(2)基于点匹配的手形认证:上面方法的优点是简单快
+速, 但是需要用户很好地配合, 否则其性能会大大下降.采用
+点匹配的方法可以提高系统的鲁棒性, 但这是以增加计算量
+为代价的.点匹配方法的一般过程为:抽取手部和手指的轮廓
+曲线;应用点匹配方法, 进行手指的匹配;计算匹配参数并由
+此决定两个手形是否来自同一人. 
+2.5 　掌纹识别
+与指纹识别相比, 掌纹识别的可接受程度较高, 其主要特
+征比指纹明显得多, 而且提取时不易被噪声干扰, 另外, 掌纹
+的主要特征比手形的特征更稳定和更具分类性, 因此掌纹识
+别应是一种很有发展潜力的身份识别方法. 
+手掌上最为明显的3 ～ 5 条掌纹线, 称为主线.在掌纹识
+别中, 可利用的信息有[ 26] :几何特征, 包括手掌的长度、宽度
+和面积;主线特征;皱褶特征;掌纹中的三角形区域特征;细节
+特征.目前的掌纹认证方法主要是利用主线和皱褶特征.下面
+从掌纹特征抽取和特征匹配两方面来概述掌纹识别算法. 
+(1)掌纹特征抽取:有两类方法, 一是抽取特征线[ 26] , 二
+是抽取特征点[ 27] .抽取特征线的优势在于可以用于低分辨率
+和有噪声的图像, 抽取特征点的好处是抽取的速度快. 
+(2)掌纹特征匹配:对应于掌纹特征的抽取, 特征匹配分
+为特征线匹配和特征点匹配.特征线匹配是计算两幅图像对
+应特征线参数之间的距离[ 26] , 特征点匹配是两幅图像的两个
+点集之间的几何对准过程[ 27 ～ 29] . 
+2.6 　签名识别
+签名识别是一种行为识别技术, 目前签名大多还只用于
+认证.签名认证的困难在于, 数据的动态变化范围大, 即使是
+同一个人的两个签名也绝不会相同.签名认证按照数据的获
+取方式可以分为两种:离线(off-line)认证和在线(on-line)认
+证.离线认证是通过扫描仪获得签名的数字图像;在线认证是
+利用数字写字板或压敏笔来记录书写签名的过程.离线数据
+容易获取, 但是它没有利用笔划形成过程中的动态特性, 因此
+较在线签名容易被伪造. 
+从签名中抽取的特征包括静态特征和动态特征, 静态特
+征是指每个字的形态, 动态特征是指书写笔划的顺序、笔尖的
+压力、倾斜度以及签名过程中坐标变化的速度和加速度.目前
+提出的签名认证方法, 按照所应用的模型可以归为三类:模板
+匹配的方法, 隐马尔可夫模型(HMM)方法, 谱分析法.模板匹
+配的方法是计算被测签名和参考签名的特征矢量间的距离进
+行匹配[ 30～ 33] ;HMM 是将签名分成一系列帧或状态, 然后与从
+其它签名中抽取的对应状态相比较[ 34 ～ 36] ;谱分析法是利用倒
+频谱或对数谱等对签名进行认证[ 37 , 38] . 
+2.7　声音识别
+声音识别也是一种行为识别技术, 同其它的行为识别技
+术一样, 声音的变化范围比较大, 很容易受背景噪声、身体和
+情绪状态的影响.一个声音识别系统主要由三部分组成:声音
+信号的分割, 特征抽取和说话人识别. 
+(1)声音信号的分割:目的是将嵌入到声音信号中的重要
+语音部分分开, 通常采用以下几种方法:能量阈值法;零交叉
+率和周期性的测量[ 39] ;声音信号倒频谱特征的矢量量化;与
+说话人无关的隐马尔可夫字词模型. 
+(2)声音特征抽取:人的发声部位可以建模为一个由宽带
+信号激励的时变滤波器, 大部分的语音特征都与模型的激励
+源和滤波器的参数有关[ 40] .倒频谱是最广泛使用的语音特征
+抽取技术[ 40, 41] , 由标准倒谱发展了mel 整形倒谱[ 42 , 43] 和mel 
+频率倒谱系数(MFCC)[ 44] , 此外, 语音特征参数还包括全极点
+滤波器的脉冲响应、脉冲响应的自相关函数、面积函数、对数
+面积比和反射系数[ 45] . 
+(3)说话人识别:说话人识别的模型有两种, 参数模型和
+非参数模型.两个主要的参数模型是高斯模型[ 41 , 46] 和隐马尔
+可夫模型(HMM)[
+47] .HMM 是当前最为流行的说话人识别模
+型.非参数模型包括参考模式模型和连接模型.参考模式模型
+将代表说话人的声音模式空间作为模板储存起来, 应用矢量
+量化[ 48] 、最小距离分类器等进行匹配.连接模型包括前馈和
+递归神经网络, 多数神经网络被训练作为直接将说话人分类
+的判决模型[ 49] . 
+2.8　各种生物特征识别技术的比较
+从上面的概述可以看到, 每种生物特征识别技术都有自
+己的优势和不足, 下表是它们的一些对比[ 50] : 
+表1 　
+生物特征普遍性独特性稳定性可采集性性能接受程度防欺骗性
+人脸High Low Medium High Low High Low 
+指纹Medium High High Medium High Medium High 
+手形Medium Medium Medium High Medium Medium Medium 
+虹膜High High High Medium High Low High 
+视网膜High High Medium Low High Low High 
+签名Low Low Low High Low High Low 
+声音Medium Low Low Medium Low High Low 
+　　选择一个特定的生物特征识别技术主要依赖于具体的应
+用, 没有一种技术能够在所有方面胜过其它的技术, 从这个意
+义上说, 每种技术都是可以采纳的.例如, 指纹和虹膜识别在
+准确性和速度上优于声音识别, 然而在电话计帐系统中, 声音
+识别却是一个好的选择, 因为它能够很好地集成到现有的电
+话系统中. 
+1746 　　电　　子　　学　　报2001 年
+
+3 　生物特征识别技术存在的问题和未来的研究工
+作
+3.1 　生物特征识别性能的改善
+目前生物特征识别技术的研究还处于初始发展阶段, 如
+何提高系统的准确性和鲁棒性是这个研究领域的重大挑战. 
+每种生物特征都不是完美的, 都存在固有的局限性, 那么要改
+善系统的识别性能, 就已不再是单单改善某一种识别技术的
+问题, 因此考虑包括各种生物特征在内的多种认证信息的结
+合, 成为一种切实可行的解决方案. 
+信息的结合可以采取不同的方式:(1)将生物特征识别信
+息和非生物特征识别信息相结合, 例如将生物特征与智能卡
+结合;(2)将多种生物特征相结合, 构成多模态识别系统.在多
+模态识别系统中, 需要考虑两方面的问题, 一是不同生物特征
+的选择和实现, 二是多种生物特征信息的融合.多模信息的融
+合可以在原始数据层、特征抽取层和分类决策层实现.由于每
+种模态对决策的作用不都是线性的, 因此融合方案只是采用
+求和[ 51] 、相乘[ 52] 、多数表决[ 53] 等相对比较简单的线性组合方
+案, 则不能最优地利用多模信息, 因此如何利用多模态获得最
+大的信息量, 这个最大的信息量的极限是多少, 这不仅要通过
+实际的多模态系统进行实验, 更要有理论上的分析和论证. 
+3.2 　基于生物特征识别的网络身份认证系统
+由于生物特征识别固有的优越性, 使它在网络身份认证
+中有着其它认证信息所不能比拟的优势, 因此建立基于生物
+特征识别的网络身份认证系统是生物特征识别技术的一个重
+要研究方向.而现在对生物特征识别的研究还局限于单机系
+统.要建立基于生物特征识别的网络身份认证系统应当解决
+下面一些关键问题: 
+(1)在一个开放的网络上传送用户的生物特征模板, 应当
+使用高级加密工具来保障其通信安全; 
+(2)保证生物特征获取装置检测的是真正的用户特征, 而
+不是照片或记录, 防止生物特征信息被篡改或替换; 
+(3)认证需要通过网络在中央服务器上进行, 应当建立一
+个可升级的、安全的平台来有效地管理模板文件; 
+(4)为有效防止黑客攻击, 阻止其绕过系统安全检测, 应
+当将生物特征登录程序与计算机操作系统紧密集成; 
+(5)保证即使大量的应用使用用户的同一种生物特征, 也
+不会造成未经授权而互相访问的情况. 
+3.3 　生物特征识别技术的标准
+目前国际上对生物特征识别尚未形成统一的标准, 很多
+国际组织正在积极地进行标准的制定, 其中最主要的是ANSI 
+X9.84 , 它是有关生物特征的管理和安全的标准.由于标准必
+须具有先进性、通用性和有效性, 并要得到世界各国的认同, 
+因此形成标准仍是一项艰巨的任务. 
+4 　结论
+　　生物特征识别技术是指基于个人独特的生理和行为特征
+进行自动身份鉴别的技术.它为我们这个信息社会日益加剧
+的安全需求提供了一个很好的解决方案.随着生物特征识别
+技术的不断改进, 生物特征传感器价格的不断下降以及人们
+接受程度的不断提高, 生物特征识别技术必定会作为一种基
+本的身份识别手段而得到广泛的应用. 
+参考文献: 
+[ 1 ] 　Glossary of biometrics terms [ R] .1998 , Association for biometrics 
+(AfB), International Computer Security Association (ICSA). 
+[ 2 ] 　R Chellappa, et al.Human and machine recognition of face:a survey 
+[ J] .Proc .IEEE ,1995 , 83(5):705-740 . 
+[ 3 ] 　R Brunelli , T Poggio.Face recognition :features versus templates [ J] . 
+IEEE Trans.PAMI ,1993 , 15(10):1042 -1052 . 
+[ 4 ] 　D L Swets , J Weng .Using discriminant eigenfeatures for image ret rieval 
+[ J] .IEEE Trans .PAMI ,1996 , 18(8):831-836 . 
+[ 5 ] 　B Moghaddam , et al.Probabilistic visual recognit ion for object recognition 
+[ J] .IEEE Trans .PAMI , 1997, 19(7):696 -710 . 
+[ 6 ] 　S Y Lee, et al.Recognition of humman front faces using knowledgebased 
+feature ext raction and neurofuzzy algorithm [ J] .Pat tern Recognition 
+, 1996 , 29(11):1863 -1876 . 
+[ 7 ] 　S Lawtence, et al.Face recognition :a convolutional neural-network approach 
+[ J] .IEEE Trans .NN, 1997, 8(1):98 -113. 
+[ 8 ] 　周洁, 卢春雨, 等.人脸自动识别方法综述[ J] .电子学报, 2000 , 
+28(4):102-106 . 
+[ 9 ] 　J Zhang, et al.Face recognition :eigenface, elastic matching, and neural 
+nets [ J] .Proc.IEEE , 1997, 85(9):1422 -1435 . 
+[ 10] 　LWiskott ,et al .Face recognition by elastic bunch graphmatching [ J] . 
+IEEE Trans .PAMI .1997 , 19(6):775 -779. 
+[ 11] 　N Ratha , et al .A real-time matching system for large fingerprint 
+database [ J] .IEEE Trans .PAMI, 1996 , 18(8):799 -813 . 
+[ 12] 　D Maio , D Maltoni.Di rect gray-scale minutiae detection in fingerprint 
+[ J] .IEEE Trans .PAMI, 1997 ,19(1):27 -40 . 
+[ 13] 　A Jain , et al.An identity authentication system using f ingerprints [ J] . 
+Proc.IEEE , 1997 , 85(9):1365 -1388 . 
+[ 14] 　L Hong , A K Jain .Classification of fingerprint image [ A] .Proceedings 
+of 11th SCIA [ C] , June, 1999 . 
+[ 15] 　M Kawagoe, A Tojo.Fingerprint pattern classif ication [ J] .Pattern 
+Recognition , 1984 ,17(3):295 -303 . 
+[ 16] 　A Jain , et al.On-line fingerprint verifi cation [ J] .IEEE Trans.PAMI , 
+1997, 19(4):302 -314. 
+[ 17] 　S Prabhaker , A Jain .Deci sion-level fusion in biometric verification 
+[ J] .IEEE Trans .PAMI.2000 . 
+[ 18] 　J G Daugman .High confidence visual recognition of persons by a test of 
+statistical independence [ J] .IEEE Trans .PAMI , 1993 , 13(11):1148 
+-1161. 
+[ 19] 　J G Daugman.Recognizing persons by their iris patterns .Biometrics : 
+Personal Identification in Networked Society [ M] .Amsterdam :Kluwer 
+Academic Publi sher ,1999 :103 -121. 
+[ 20] 　R P Wi ldes , et al.A machine vision system for iris recognition [ J] . 
+Machine Vision Application , 1996 , 9 :1-8 . 
+[ 21] 　J G Daugman .Demodulation , predictive coding , and spatial vision [ J] . 
+J .Opt .Soc .Am , 1995 , 12(4):641 -660. 
+[ 22] 　R P Wildes .Iris recognition :an emerging biometri c technology [ J] . 
+Proceedings of IEEE , 1997 , 85(9):1348 -1363 . 
+[ 23] 　R S Reillo, et al.Biometric identification through hand geometry mea- 
+第　12A　期 孙冬梅:生物特征识别技术综述 1747
+
+surements [ J] .IEEE Trans .PAMI , 2000 , 22(10):1168 -1171 . 
+[ 24] 　A K Jain , et al .A prototype hand geometry-based verification system 
+[ A] .2nd Int' 1 Conference on Audio-and Video-based Biomet ric Person 
+Authentication [ C] ,Washington D.C .March 1999 . 
+[ 25] 　A K Jain , N Duta .Deformable matching of hand shapes for verif ication 
+[ A] .Proceedings of IEEE ICIP ,Oct , 1999 . 
+[ 26] 　D Zhang, W Shu .Two novel characteristics in palmprint verif ication : 
+datum point invariance and line feature matching [ J] .Pattern Recognition 
+, 1999, 32(2):691 -702 . 
+[ 27] 　N Dut a, et al.Matching of palmprint s [ J] .Pattern Recognition Lett ers , 
+2001 . 
+[ 28] 　N Duta , et al.Automati c construction of 2D shape model [ J] .IEEE 
+Trans .PAMI , 2000 . 
+[ 29] 　P Besl , N Mckay .A method for registration of 3-D shapes [ J] .IEEE 
+Trans .PAMI, 1992 , 14(2):239 -256 . 
+[ 30] 　V S Nalwa .Automatic on-line signature verificat ion [ J] .Proceedings of 
+IEEE, 1997 , 85(2):215 -239 . 
+[ 31] 　K Huang ,H Yan .On-line signature verification based on dynamic segmentation 
+and global and local matching [ J] .Optical Engineering , 
+1995 ,34(12):3480 -3487 . 
+[ 32] 　L L Lee , et al.Reliable on-line human signature based on dynamic segmentation 
+and global and local matching [ J] .IEEE Trans .PAMI , 
+1996 , 18(6):643-647 . 
+[ 33] 　G Gupta.A study of shape in dynamic handwritten signature verif ication 
+[ R] .James Cook University of North Queensland, 1997 . 
+[ 34] 　L Yang, et al.Appli cation of hiddenmarkov models for signature verification 
+[ J] .Pattern Recognition , 1995 , 28(2):161 -170. 
+[ 35] 　J Dolfing , et al.On-line signature verificationwith hidden markov models 
+[ A] .ICPR [ C] , 1998, 2 :1309-1312 . 
+[ 36] 　G Rigoll , A Kosmala.A systematic comparison between on-line and offline 
+methods for signature verification with hidden makov models [ A] . 
+Proceedings of ICPR[ C] ,1998 , 2 :1755 -1757 . 
+[ 37] 　Q Z Wu , et al.On-line signature verifi cation using lpc cepstrum and 
+neural networks [ J] .IEEE Trans .On Systems , Man , Cybernetics and 
+Part B:Cybernetics , 1997, 27(2):148 -153 . 
+[ 38] 　Q ZWu , et al.On-line signature verifi cation based on logarithmic spectrum 
+[ J] .Pattern Recognition , 1998 , 31(12):1865 -1871 . 
+[ 39] 　RTucker .Voice activity detection using a periodicity measure [ J] .IEE 
+Proc.1992 ,139(4):377 -380. 
+[ 40] 　P Ramachandran , et al.A comparative study of robust linear predictive 
+analysis methods with appli cations to speaker identification [ J] .IEEE 
+Trans .Speech , and Audio Processing ,1995 , 3(2):117 -125. 
+[ 41] 　H Gish ,M Schmidt.Text independent speaker identification [ J] .IEEE 
+Signal Processing Magazine , 1994 , 11(4):18 -32 . 
+[ 42] 　H Gish ,M Schmidt.Text independent speaker identification [ J] .IEEE 
+Signal Processing Magazine , 1994 , 11(4):18 -32 . 
+[ 43] 　D A Reynolds, et al.Robust text independent speaker identifi cation using 
+gaussian mixture speaker models [ J] .IEEE Trans .ASSP , 1995 , 3 
+(1):72 -83 . 
+[ 44] 　S B Davis , P Mermelstein .Comparison of paramet ric representation for 
+monosyllable word recognition in continuously spoken sentences [ J] . 
+IEEE Trans .ASSP , 1980 , 28 :357 -366 . 
+[ 45] 　J P Campbell.Speaker recognition :a tutorial [ J] .Proceedings IEEE , 
+1997 , 85(9):1436 -1461 . 
+[ 46] 　D A Reynolds , R C Rose .Robust text independent speaker identification 
+using gaussi an mixture speaker models [ J] .IEEE Trans .ASSP , 
+1995, 3(1):72 -83 . 
+[ 47] 　L Rabiner .A tutorial on HMM and selected appli cations in speech 
+recognition [ J] .Proc.IEEE, 1989 ,77(2):257 -286 . 
+[ 48] 　K Yu , et al.Speaker recognition using hidden markov models, dynami c 
+time warping , and vector quantisation [ A] .IEE Proc.Vision , Image , 
+and Signal Processing , 1995, 142(5):313-318 . 
+[ 49] 　K Farrell.Speaker recognition using neural networks and conventional 
+classif iers [ J] .IEEE Trans.SAP, 1994, 2(1):part Ⅱ .194 -205. 
+[ 50] 　A K Jain , et al.Biomet rics :Promising frontiers for emerging identification 
+market [ J] .Communication ACM , 2000, 2 :91 -98 . 
+[ 51] 　J Kitt ler, et al.On combining classifier [ J] .IEEE Trans.PAMI.1998 , 
+20(3):226-239 . 
+[ 52] 　L Hong , A Jain .Integrating faces and fingerprints for personal identification 
+[ J] .IEEE Trans .PAMI, 1998 ,20(12):1295 -1306 . 
+[ 53] 　A Jain , et al.A multimodal biometri c system using fingerprints , face 
+and speech [ A] .2nd Int′1 Conference on Audio- and Video- based 
+Biometric Person Authenti cation [ C] , Washington D.C .,March 1999 : 
+182 -187 . 
+作者简介: 
+孙冬梅　女.1970 年出生于沈阳.1995 年毕
+业于北京工业大学, 获自动控制理论及应用专业
+硕士学位, 现为北方交通大学信息研究所博士
+生, 主要从事生物特征识别技术、图像处理和模
+式识别方面的研究.E-mail :sun -dm @263 .net . 
+裘正定　男.1944 年出生于浙江杭州市.北
+方交通大学信息研究所教授, 博士生导师, 通信
+协会会士, 研究领域为信号与信息处理, 多媒体
+通信及IP 网络技术, 并承担和主持包括自然科
+学基金和国家“863” 计划项目在内的多项科研及
+产品的开发. 
+1748 　　电　　子　　学　　报2001 年
+

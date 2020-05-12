@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.frmMain.resources
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\bin\Debug\DevComponents.DotNetBar2.dll
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\bin\Debug\StringMatching.dll
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\bin\Debug\StringMatching.pdb
+C:\Users\Administrator\Desktop\ConsoleApplication1\WindowsFormsApplication1\bin\Debug\DevComponents.DotNetBar2.xml

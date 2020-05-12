@@ -1,0 +1,479 @@
+第 
+40卷第 
+5期电力系统保护与控制 Vol.40 No.5 
+2012年 
+3月 
+1日 Power System Protection and Control Mar. 1, 2012
+
+电力杆塔监控系统中电子地图的设计研究 
+
+
+史丽萍，王利朋 
+（中国矿业大学信电学院，江苏 徐州 221116） 
+
+摘要：针对使用专业地理信息系统（GIS）平台开发应用于电力系统的电子地图，提出了运用 Google地图制作电子地图的方
+法。该方法分析介绍了Google地图的命名规则和下载技术，开发出了简易的地图编辑软件。最终将Google地图加载到该编
+辑软件中，来制作应用于电力杆塔监控的电子地图。使用该方法制作出的电子地图拥有信息表达、放大、缩小、显示特定区
+域等专业平台地图的功能，并且还具备成本低廉、运行可靠、画面丰富等优点。 
+关键词：电子地图；地理信息系统；Google地图；地图编辑软件；电力杆塔 
+
+Design of electronic map for power tower monitoring system 
+
+SHI Li-ping, WANG Li-peng 
+(School of Information and Electrical Engineering, China University of Mining and Technology, Xuzhou 221116, China) 
+
+
+Abstract: In view of the electronic map developed based on professional Geographic Information System platform and used in power 
+system, this paper proposes to use Google maps to create the electronic map. This method introduces the naming rule and 
+downloading technology of the Google map and develops a simple map-editing software. The Google maps would be loaded into the 
+map-editing software to create electronic map used in power tower monitoring system. This electronic map possesses functions like 
+information representation, zoom, displaying specific area professional, and so on. It also has the advantages of low cost, reliable 
+operation and rich pictures. 
+Key words: electronic map；GIS；Google map；map-editing software；power tower monitoring system 
+
+中图分类号： 
+TM769文献标识码： 
+A文章编号： 1674-3415(2012)05-0096-04 
+
+0 引言 
+
+近年来，在国民经济持续发展的带动下，我国
+的电力需求快速增长，电力杆塔网络的覆盖范围也
+迅速扩大。为了有效地防止电力杆塔外力破坏事故
+和覆冰等自然灾害，有必要及时了解电力杆塔的实
+时情况。而电力网络的迅速增长已使得传统的人工
+巡视方式远不能满足电力系统自动化发展的需要，
+所以合理、科学地设计应用于电力杆塔的电子地图，
+可帮助监控人员直观了解现场的地理信息情况，以
+便及时发现、处理事故，提高电力系统自动化运行
+的安全性和可靠性。
+
+现有的电力杆塔监控文献中 
+[1-4]，大部分都是应
+用专业的 
+GIS平台进行二次开发得到电子地图，其
+成本非常的高。本文运用常见易得的资源，进行电
+子地图设计，消除了专业 
+GIS软件带来的成本问题。
+制作本电子地图，本文通过以下步骤实现：①分析
+了 
+Google地图的命名方法和下载技术，得到所需 
+
+
+Google地图的下载方法并将地图下载到本地磁盘；
+
+②用 
+Visual Studio 2008、wxWidgets、OpenGL（Open 
+Graphics Library）开发出了地图编辑应用软件，将 
+Google地图加载到地图编辑软件中；③在地图编
+辑软件里编辑出需要的电子地图，并将电子地图保
+存为解析方法多样化的 
+xml类型的文件，以方便地
+移植到其他电力杆塔监控的应用软件中去。 
+1 Google地图的下载 
+
+下文通过对 
+Google地图命名方法的分析，得到 
+Google earth中的一幅地图实际上是由很多小的卫
+星地图拼接而成的。这些小的卫星地图都具有唯一
+的名称，并且对应着唯一的下载地址。分析得到这
+些地址后，便可下载需要的 
+google地图。 
+
+
+1.1 Google地图命名方法分析 
+Google earth采用 
+18种（0级~17级）不同缩放
+级别（不同分辨率）的卫星图片来表达地图，其中， 
+0级分辨率最高， 
+17级分辨率最低。 
+Google earth 
+
+
+
+史丽萍，等电力杆塔监控系统中电子地图的设计研究 - 97 
+
+
+每张卫星图片都表示为 
+256*256像素的 
+JPG格式[5]。
+当 
+Zoom=17，即分辨率最低时，整个地球就是一副
+图片，如图 
+1所示。
+
+
+图1 Zoom=17时，Google图片 
+Fig. 1 Google map(Zoom=17) 
+
+当 
+Zoom=16时，地球被划分为 
+4=4（17-Zoom）块。
+这样，每次缩放，即缩放级别减 
+1时，每张 
+Google
+图片会分裂成 
+4幅 
+256*256的 
+JPG格式的图片。当 
+Zoom=0时，卫星图片达到最高分辨率，整个地球
+的卫星图片数量达到最大值，数量为 
+417幅。所以，
+每个缩放级别的卫星图片数量为 
+4（17-Zoom）幅。
+
+对于卫星图片的分裂，每一幅卫星图片都有唯
+一的名称。当 
+Zoom=17时，图片名称为 
+t = t。当 
+Zoom=16时，有四幅图片，名称分别是 
+tq（左上角）、 
+tr（右上角）、ts（右下角）、tt（左下角）。Google earth
+的图片命名规则，如图 
+2所示。
+
+
+图 2 Google图片的命名规则 
+Fig. 2 Naming rule of the Google picture
+
+这样每一幅卫星图片都会有一个唯一的名称，
+然而对于期望得到某个地理区域范围内的所有卫星
+图片的用户来说，这些图片的名称并不是透明的，
+所以用户无法利用图片的名称来得到该卫星图片。
+对于用户，更容易得到图片的经纬度值，利用经纬
+度范围和该范围内卫星图片名称的转换公式，得到
+卫星图片在服务器端唯一的 
+URL[6]，便可通过目标
+地理区域的经纬度来下载卫星图片。 
+
+
+1.2 Google地图下载技术分析 
+Google earth的服务器端存储着大量的卫星拍
+摄的图像，通过采用 
+C/S（客户 
+/服务器）模式来显
+示地图。用户通过客户端向服务器端发送请求来使
+用 
+Google earth，Google earth服务器端便根据用户
+的请求返回用户要求的地图数据。由这一工作原理，
+
+当客户端获取到服务器端的相关数据时，便能实现
+地图的显示。因此可以考虑下载 
+Google earth服务
+器的地理数据到本地，然后解析本地下载数据，即
+可实现地图下载。如今，因特网的发展大大促进了
+下载技术。 
+Internet客户通过 
+HTTP、FTP等协议来
+获取网络服务器的数据信息。所以如果能获取 
+Google earth有效的网络地址 
+URL，便能下载数据
+到本地。通过以上命名方法的分析，得知对于某种
+缩放级别的图片都会有唯一的网络地址。本文利用 
+firefox浏览器的 
+HttpFox插件，通过网络获取期望
+的地图数据，分析服务器和浏览器之间的网络数据，
+最终利用 
+HTTP协议下载已知 
+URL地址的 
+Google
+地图。 
+
+
+2 地图编辑软件的开发 
+
+地图编辑软件主要用来加载下载到本地的 
+Google地图并且编辑电子地图。因此除了加载 
+Google地图的功能外，其还应具备方便的操作体验
+和丰富的编辑功能，以便使电子地图中空间信息的
+表现形式更加多样化。
+
+2.1开发工具及方法
+本地图编辑软件利用三维 
+API——OpenGL对
+电子地图进行绘制显示。 
+OpenGL是图形硬件的软
+件接口，可以实现对基本图元（点、线、面等）的
+绘制。它将对象描述为一组像素（用来定义图像）
+或顶点（用来定义几何对象）。OpenGL将二维或者
+三维对象绘入帧缓冲区，对数据进行多个步骤的处
+理后，将其转换成像素，这些像素最终在帧缓冲区
+中形成需要的图形。由于 
+OpenGL的硬件实现采用
+图形卡驱动程序，驱动程序直接通信图形显示硬件，
+其性能要远远超过单纯的用软件实现的图形显示速
+度[7]。
+
+在 
+OpenGL的基础上，利用 
+Visual Studio 2008、 
+wxWidgets实现应用程序的窗口显示。 
+wxWidgets
+是 
+C++的一个开源跨平台架构库，它提供 
+GUI（图
+形用户界面）和其他工具，对 
+OpenGL进行了封装，
+因此使用非常方便 
+[8]。在本软件中，利用继承 
+wxGLCanvas类，将 
+EVT_PAINT等的回调函数进
+行重载。示例代码如下： 
+BEGIN_EVENT_TABLE(MapCanvas, wxGLCanvas) 
+
+EVT_SIZE(MapCanvas::OnSize) 
+
+EVT_PAINT(MapCanvas::OnPaint) 
+
+EVT_LEFT_DOWN(MapCanvas::OnLeftDown) 
+
+EVT_LEFT_UP(MapCanvas::OnLeftUp) 
+
+EVT_MOTION(MapCanvas::OnMotion) 
+
+EVT_MOUSEWHEEL(MapCanvas::OnMouse-Wheel) 
+
+
+
+-98 -电力系统保护与控制 
+
+
+EVT_RIGHT_DOWN(MapCanvas::OnRightDo-wn) 
+
+EVT_RIGHT_UP(MapCanvas::OnRightUp) 
+
+EVT_LEFT_DCLICK(MapCanvas::OnLeftDclic-k) 
+END_EVENT_TABLE()
+
+2.2电子地图中空间信息的表现形式
+丰富的空间信息的表现形式，便于用户理解和
+使用电子地图。灵活地运用图形、文本、直线、三
+角形等这些基本的模型，可以形象表示空间信息 
+[9]。
+例如，对于地标性的物体，像杆塔、发电厂、标志
+性建筑或者地点等，可以添加一个形象的图片
+（Image）来表示；对于线性状的物体，像杆塔线路、
+道路、铁路等，可以通过添加直线（ 
+Line）来表示；
+对于河流、湖泊等这样的实体，可以通过添加多个
+三角形（ 
+Shape）拼装而表达；鉴于文字标注的重要
+性，还要有文字（ 
+Text）加注设置功能。为了灵活
+表示多种实物，软件具有对这些基本模型进行属性
+设置的功能。该属性主要包括类型（杆塔、变电站、
+学校、河流等）设置、大小设置、颜色设置等。
+
+本地图编辑软件中，运用编辑（ 
+Edit）、删除
+（Del）、加载（ 
+Load）和保存（Save）四个常用的
+模式进行地图相关操作；运用图形（ 
+Image）、文本
+（Text）、直线（ 
+Line）、三角形（ 
+Shape）四个基本
+的模式进行地图中空间信息的表达。 
+
+
+3 加载 Google地图并编辑电子地图 
+
+3.1加载 Google地图 
+从上文已知，下载到本地的 
+Google卫星图片均
+为 
+256×256大小的 
+JPG格式的图片。采用默认的 
+Windows下的映射模式（ 
+Windows方式下的屏幕的
+坐标方式），很容易将卫星图片内的某一个像素点映
+射到屏幕上。由于数字地图一般是由大量小块卫星
+图片组成，所以本文在地图显示过程中，要设置一
+个显示缓冲区，该缓冲区包含当前调度加载的全部
+卫星图片。地图显示时，目标卫星图片在磁盘中检
+索，这是一个费时的操作，读取图片的像素信息，
+也要耗费时间。因此对于大量的卫星图片同时进行
+检索和读取，最好采用缓冲区策略 
+[10]。缓冲技术的
+应用过程如图 
+3所示。
+
+
+由于在下载 
+Google卫星图片时，每一幅图片都
+有其唯一的名字，这一特点使卫星图片的查找变得
+简单明了。根据 
+Windows的绘图机制，一个矩形区
+域的卫星图片绘制完后将会显示在窗口上，用户便
+通过视图窗口看到数字地图。该数字地图的组成可
+以用类似矩阵的形状来表示，矩阵中的图片可以由
+行号和列号来表示。那么，相邻矩阵的图片在同一
+行或者同一列，他们之间的行号或者列号的关系为
+增 
+1或者减 
+1的关系。矩阵描述形式可表示如下： 
+
+
+.(mi1,n j1) k k (m i1, n j. 
+) . 
+..
+
+kkk k
+
+.. 
+. 
+kkk k . 
+
+
+.. 
+
+
+.(mi. 
+,n j1)k k(mi. 
+,n j. 
+)..
+
+. 
+
+
+3.2编辑电子地图
+将加载好的 
+Google地图为底图，在此基础上利
+用开发的地图编辑软件制作需要的电子地图。
+
+综合运用图片（ 
+Image）、直线（ 
+Line）、三角形
+（Shape）等基本模型，便可制作常见的电子地图，
+在 
+Google地底图上对空间信息进行表达，表达效果
+如图 
+4所示。制作完毕后，将一切制作信息利用 
+XML标记语言进行信息描述，并保存为 
+xml格式
+的地图文件 
+[11]。
+
+
+图4 在 Google底图上进行编辑 
+
+Fig. 4 Edit on the Google base map 
+
+4 应用 
+
+输电线路作为工矿企业的配套工程，是关系到
+煤矿正常生产运营的基础设施。煤矿开采引起的地
+表沉陷不可避免地对通过矿区的输电线路产生危
+害，直接威胁线路的安全运行，有可能导致倒塔、
+断线等严重安全事故。因此有必要对位于矿区的电
+力杆塔进行监控。图 
+5为运用本文方法制作出的某
+矿区电力杆塔线路电子地图。
+
+
+
+史丽萍，等电力杆塔监控系统中电子地图的设计研究 
+- 99 
+
+
+图5 电子地图示意效果 
+
+Fig. 5 Effect of the indicative electronic map 
+
+5 总结 
+
+本文介绍了电力杆塔监控系统中电子地图的
+设计，由于应用了Google地图作为底图进行设计，
+保证了最终的电子地图与实际地理信息成比例的效
+果。地图编辑软件应用了 OpenGL开发，其直接面向
+显卡操作，具备了显示速度快，显示效果好的特点；
+应用的wxWidgets工具，具有跨平台等多种优点，
+可以方便的对应用程序进行平台移植。开发出的电
+子地图，实现了地图显示查看、信息查询等功能；
+地图的制作信息利用 XML标记语言进行信息描述，
+可方便应用到其他电力杆塔监控的应用软件中去。
+
+参考文献 
+
+[1] 
+杜颖, 卢继平 , 沈智健 , 等. 基于 WebGIS电力电缆信
+息管理系统设计与实现 [J].电力系统保护与控制 , 
+2008, 36(12): 64-68. 
+DU Ying, LU Ji-ping, SHEN Zhi-jian, et al. Design and 
+implementation of electric cable information 
+management system based on WebGIS[J]. Power System 
+Protection and Control, 2008, 36(12): 64-68. 
+[2] 
+韦鹏, 王玮, 倪平浩 , 等. 基于 GPRS及 GIS技术的电
+力杆塔防盗远程监视系统的设计 [J].电气应用, 2008, 
+27(9): 44-47. 
+WEI Peng, WANG Wei, NI Ping-hao, et al. Design of 
+power transmission tower guard against theft and remote 
+surveillance system based on GPRS and GIS[J]. 
+Electrotechnical Application, 2008, 27(9): 44-47. 
+[3] 
+刘清海 , 杨建华 , 杨普, 等. 基于 GIS组件的配电网规
+划与改造软件[J].电力系统保护与控制 , 2010, 38(4): 
+106-109. 
+LIU Qing-hai, YANG Jian-hua, YANG Pu, et al. 
+Distribution network planning and reconstruction 
+software based on GIS component[J]. Power System 
+Protection and Control, 2010, 38(4): 106-109. 
+
+[4] 
+郑立, 裴孟翔 , 杨芳利 . GIS在光缆线路监测系统中的
+应用[J].继电器 , 2006, 34(13): 77-79. 
+ZHENG Li, PEI Meng-xiang, YANG Fang-li. 
+Application of GIS in optical cable automonitoring 
+system[J]. Relay, 2006, 34(13): 77-79. 
+[5] 
+刘轩明 . 基于卫星图片的数字地图开发与应用 [D].哈
+尔滨: 哈尔滨工业大学 , 2009. 
+LIU Ming-xuan. Development and application of digital 
+map based on satellite images[D]. Harbin: Harbin 
+Institute of Technology, 2009. 
+[6] 
+崔金红 , 王旭. Google地图算法研究及实现 [J].计算机
+科学, 2007, 34(11): 193-195. 
+CUI Jin-hong, WANG Xu. Research on Google map 
+algorithm and implementation[J]. Computer Science, 
+2007, 34(11): 193-195. 
+[7] 
+周小军 , 夏青, 蒋秉川 . OpenGL多线程电子地图显示
+研究[J].测绘科学 , 2010, 35(6): 105-106. 
+ZHOU Xiao-jun, XIA Qing, JIANG Bing-chuan. 
+Electronic map display based on OpenGL multi-
+thread[J]. Science of Surveying and Mapping, 2010, 
+35(6): 105-106. 
+[8] 
+Julian Smart, Kevin Hock, Stefan Csomor. Cross-platform 
+GUI programming with wxWidgets [M]. UK: Prentice Hall 
+PTR, 2005. 
+[9] 
+李海成 . 电子地图的制作及相关技术解析 [J].唐山师
+范学院学报 , 2010, 32(5): 82-84. 
+LI Hai-cheng. Production of digital maps and related 
+technical analysis[J]. Journal of Tangshan Teachers 
+College, 2010, 32(5): 82-84. 
+[10]袁小勇 . 电子海图无缝拼接显示技术研究 [D].西安: 
+西安电子科技大学 , 2007. 
+YUAN Xiao-yong. Research on the technology of 
+electronic charts seamless conjoin display[D]. Xi’an: 
+Xidian University, 2007. 
+[11] 刘博 , 袁方. 基于 XML的电子地图系统的设计与实现 
+[J].计算机工程与设计 , 2006, 27(4): 708-710. 
+LIU Bo, YUAN Fang. Design and implement of 
+electronic map system based on XML[J]. Computer 
+Engineering and Design, 2006, 27(4): 708-710.
+收稿日期：2011-05-10；修回日期：2011-06-15 
+作者简介： 
+
+史丽萍(1964-)，女，教授，博士生导师，从事电力系
+统自动化、设备控制与计算机集成系统等研究； E-mail: 
+powerfriendwang@163.com 
+
+王利朋(1987-)，男，硕士研究生，从事计算机在电力
+系统中的应用等研究。 
+
+
+

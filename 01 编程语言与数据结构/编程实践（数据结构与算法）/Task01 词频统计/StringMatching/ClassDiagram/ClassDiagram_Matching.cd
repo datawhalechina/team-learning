@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="StringMatching.StringMatchingStrategy">
+    <Position X="0.5" Y="0.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matching\StringMatchingStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StringMatching.KmpMatching">
+    <Position X="3.25" Y="4" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Matching\KmpMatching.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StringMatching.PrefixBruteForceMatching">
+    <Position X="3.25" Y="2.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Matching\PrefixBruteForceMatching.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

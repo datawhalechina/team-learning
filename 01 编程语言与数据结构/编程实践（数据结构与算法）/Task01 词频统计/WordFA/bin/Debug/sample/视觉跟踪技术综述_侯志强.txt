@@ -1,0 +1,1928 @@
+第 卷 第 期 年 月 自动化学报
+, N o 
+. 
+4 
+J u ly , 2 0 0 6 
+视觉跟踪技术综述` ’ 
+侯志强1,2 韩崇昭` 
+` 
+(西安交通大学电子与信息工程学院综合自动化研究所西安7 1。。4 9 ) 
+2 (空军工程大学电讯工程学院指挥自动化教研室西安7 10 0 77) 
+( E
+一m a i l : h o u一z h q@ s o h u· e o m, e z h a n @ m a i l 
+. x jt u 
+. 
+e d u 二n ) 
+摘要视觉跟踪问题是当前计算机视觉领域中的热点问题, 本文对这一问题进行了详细的
+介绍. 首先, 对视觉跟踪技术在视频监视、图像压缩和三维重构等三个主要方面的应用进行了
+论述. 其次, 详细阐述了该技术的研究现状, 介绍了其中的一些常用方法, 为清楚说明这些方
+法, 先对视觉跟踪问题进行了分类, 然后介绍了处理视觉跟踪问题的两种思路即自底向上和
+自顶向下的思路, 最后将具体的视觉跟踪方法分为四类进行了介绍, 这四类分别是基于区域
+的跟踪、基于特征的跟踪、基于变形模板的跟踪和基于模型的跟踪. 最后, 从控制论角度给出
+视觉跟踪算法所面临的难点, 即算法要满足鲁棒性、准确性和快速性要求时所遇到的困难, 
+并对视觉跟踪问题的研究前景进行了展望
+. 
+关挂词计算机视觉, 视觉跟踪, 图像序列, 监视系统, 
+M P E G 一
+4 
+, 三维重构
+中图分类号T P 3 91 
+A S u r ve y o f V i s u a l rT a e k in g 
+H O U Z h i 
+一
+Qi a n g , , 2 H A N C h o n -g Z h a o l 
+` 
+(S e h o o l of lE ec ￡。。`e , 二d l玩阳, a亡` o。肠夕`。。。行即, 
+iX, 
+a。六a o云。
+坷咖葱。
+e。` t, , 
+XlI 
+a o 7 1X() 4 9 ) 
+2 (S e h o l of eT lce o 。。。。`ca t ` o 。肠夕` , e 八。夕, A ` r oF 二e E n 夕`。e e 八。夕咖`。e , ` t夕, 
+XlI a o 7 1 0 0 7 7 ) 
+(-E m a i l: h o -u : h q@ s o h u 
+. 
+co m , e z h a n @ m ia l xj t u 
+. 
+de u 
+. e n ) 
+A b s t r a e t T h is P SP e r i nt r o d u e es in d e t a il t he r e s e a r e h o f v i s u a l t r ac k i n g w h i e h 15 a h o t 
+s P o t e u r r e nt ly i n t h e d o m ia n o f e o m P u t e r v i s i o n . 
+F ir s t ly , t h e aP P li e at i o n s o f v i s u a l t r ac k i n g 
+i n t h r e e ar e as i n e lu d in g v is u a l s u r ve i l la n e e , 
+im ag e e o m P r e s s i o n , a n d 3
+一
+D er e o n s t r u e t io n ar e 
+d i sc u se d 
+. 
+S e e o n d l y , t he st at e o f t h e 时t ab o 毗v is u al t r a e ki n g 18 int r o d u e e d , 
+es P e e i al ly t h e 
+m a i n a P P or aC h es o f v i s u al t r ac k i n g ar e s h o w n 
+. 
+I n o r d e r t o ex P l ia n t h es e m e t h o d s e le ar ly , 
+t h e P r o b le m s o f v i s u al t r a e k ln g aer e l as s i if e d 
+. 
+T h e n t wo w 尽y s t o r e s e ar e h t h e v i s u a l t r ac k in g 
+p r o b l e m ar e P er s e nt e d 
+. 
+A n d t h e v is u al t r a c k in g al g o r i t h m s ar e e l as s iif e d i n t o fo u r e l as s e s : 
+t h e ar e a- b ase d m e t h o d s , fe at u -er b 留ed m e t h o d s , d e fo r m a b l-e t e m P l at -e b 睽d m e t h o d s a n d 
+m o d e -l b as e d m e t h o d s 
+. 
+F i n a ll y , fr o m t h e P o int o f v i e w o f e o nt r o l t h eo r y , t h e d iif e u l t i e s o f 
+v is u al t r ac k in g ar e d i s e us e d t h a t t h e a lgo r it h ms s h o ul d h vae r o b u s t n 
+es ac e u r ac y an d b e 
+afs t 
+. 
+M e a n w h i le , so m e fu t u r e d i r e e t io n s o f v i s u a l t r ac k in g ar e a ls o a d d er s s e d s h o r t ly 
+. 
+K e y wo r d s C o m p u t e r v is i o n , v is u al t r aC k in g , 
+im a g e s e q u e n e e , s u r v e il lan e e s y s t e m 
+, 
+M P E G - 
+4 , 3D r e co sn t r u e t i o n 
+1) 国家9 7 3 项目( Zo o i e B s o 9 4 o s ) 和国家自然科学基金( 60 5 7 40 3 3 ) 资助
+S u p p o r t e d 场N at i o n a l K e y uF n d a m e n t a l eR se ar e h (9 73 ) P r o g r a m (2 00 l C B 3 0 94 0 3 ) a n d N a t i o n a l N a t u r a l S e i e n e e 
+oF u n d a t i o n o f p 
+· 
+R 
+. 
+C h i n a ( 6 0 5 7 4 0 3 3 ) 
+收稿日期2 0 0 5一7一1 2 收修改稿日期2 0 06 一2一2 5 
+R e e e i ve d J u l y 1 2 , 2 0 0 5 ; i n r e v i s e d fo r m 凡b r u ar y 25 , 2 00 6
+
+0 4 自 动 化 学 报 卷 1 引言
+随着计算机技术的不断发展, 计算能力得到了极大的提高, 使得利用计算机实现人类的
+视觉功能成为目前计算机领域中最热门的课题之一视觉跟踪( iV su al tr ack ign ) 间题是计算
+机视觉领域中的一个重要问题
+. 
+所谓视觉跟踪, 就是指对图像序列中的运动目标进行检测, 
+提取、识别和跟踪, 获得运动目标的运动参数, 如位置、速度
+、加速度等, 以及运动轨迹, 从而
+进行进一步处理与分析, 实现对运动目标的行为理解, 以完成更高一级的任务
+. 
+近年来, 国
+际上对视觉跟踪问题正处于研究高潮中. 
+许多重要国际期刊( IE E E 肠a sn ac it o sn on P at t er n 
+A n a l y s i s a n d M ac h in e I nt e l li g e n e e : I E E E 肠a sn ac t i o sn o n I m a ge P r o e e s s i n g ; I E E E 肠a sn ac t i o sn 
+o n M e d i e a l I m a g i n g : IE E E 肠asn 
+a e t io sn o n C i r e ul t s a n d s 邓t ems fo r V id eo eT e h n o l o gy ; I E E E 
+肠an s ac t i o sn o n Ve h i e u l a r eT e lm o lo gy : I nt e r n a t i o n a l J o ux n a l o f C o m P u t e r V is i o n : C o m P u t e r 
+V is i o n an d Im ag e U n d e r s t a n d i n g ; Im ag e a n d V i s io n C o m P u t i n g : P at t e r n eR 
+e o g n i t i o n ; P at t e r n 
+eR 
+e o g n i t io n L e t t e r s : M a e h i n e V i s i o n an d A p p l i e at i o n : eR 
+a l
+一
+t im e Im a g i n g : e t e . 
+) 以及重要国际
+会议(I C C v ; Cv p R : E C C v : I C I p ; I C p R: IWv S ; e t e . 
+) 发表T 大量有关视觉跟踪方面的论
+文
+· 
+其中一些重要国际期刊还就视觉跟踪间题发行专刊进行了讨论l( E E E 升a sn ac t in sn 。n 
+P a t t e r n A n a ly s i S a n d M a hc i n e Int e ll i g e n e e , 2 2 (8 ) 
+, 
+2 0 0 0 ; p r o e e e d i n g s o f t he I E E E 
+, 8 9 ( 10 ) 
+, 20 0 1 ; 
+I nt e r n a t i o n a l J o u r n a l o f C o m p u t e r V i s io n , 
+3 7 
+, 
+J u n e 2 0 0 0 ; eR 
+a 卜t im e Im a gi n g , 
+7 (5 )
+, 
+2 0 0 1 ) 
+. 
+视觉跟踪问题引起广泛关注是由于它能够应用于民用和军事的许多领域, 主要包括三
+个方面: 视频监视, 图像压缩和三维重构. 
+本文在随后一节中对视觉跟踪技术在这三方面
+的应用进行详细介绍. 
+本文的其它部分是这样安排的, 第3 小节将对常用的一些视觉跟踪
+算法进行分类介绍; 在第4 小节中, 对目前视觉跟踪技术中的难点问题以及未来的发展趋
+势作简要说明; 结束语在第5 小节给出
+. 
+2 视觉跟踪技术的应用
+.2 1 视颇监视
+视频监视系统应用的范围非常广, 最常见的是对于民宅、停车场、公共场合
+、银行等
+的监视, 以防止偷盗、破坏行为的发生, 保障社会的安全
+. 
+实时监控系统W4 用干对人的
+行为的监视! ` , , 用于民宅、
+停车场、银行等场合, 能够对携带物品的可疑人员进行有效的
+监视. 
+D E T E R (D e t e e t i o n 。f e ve n t s fo : t 址e at e va l u a t i o n a n d R e c o g n it i o n ) 系统{2 ] 用于对停
+车场进行监控, 以防止车辆被盗, 该系统在提取出运动目标之后, 能够对运动目标的行
+为进行跟踪, 通过跟踪轨迹对运动目标行为模式进行判定, 有效地提供异常行为报警, 
+从而确保停车场的安全
+. 
+19 9 7 年, 美国国防部高级研究项目署(D e fe sen ad va cn ed r es e ar hc 
+rP oj ec st a ge cn y, D A R PA ) 设立了以卡内基梅隆大学为首, 麻省理工学院等高校参与的视
+觉监控项目v S A M (v i s u a l s ur v e i ll a n e e a n d m o 川t o r i雌) [ 3 , , 该系统能够用于普通民用场景
+以及战场的实时监控, 卡内基梅隆大学在该系统建成之后, 建立了一个校园监控系统’]I 
+. 
+PA S SWO R D S (P ar a l l e l a n d a d va n e e d s ur ve i ll a n e e s y s t e m w i t h o p e r at o r as s i s t a n ce fo r r e v e a l i n g 
+血n ge or u s ist ua it o sn ) 系统sI] 是一个智能视频图像分析系统, 用于实现视频监视以满足不同
+用户的安全要求. 
+P if n d er ( eP sr on ifn d er ) 系统间用于实现对室内人员行为的实时监视与判
+定
+. 
+在交通系统中, 视觉跟踪研究也具有非常广泛的应用, 主要包括交通流量控制
+、
+车辆
+异常行为检测、行人行为判定、
+智能车辆等很多方面
+. 
+c of ifn an 等人图建立了一个基于视
+频图像处理系统(v i d eo im 昭e p r o e e s s i n g s y s t e m , 
+v l p S ) 的交通监控系统, 用于交通流量监
+
+期 侯志强等 视觉跟踪技术综述控以及不同车型的统计, 这一方面的研究工作还有很多`8一` 0] , 研究要解决的重点间题是如
+何准确的实现对车辆的分割和跟踪
+. 
+道路上车辆异常行为检测在交通事故的预防和事后处
+理中都具有重要意义, 其核心技术是如何分割和跟踪车辆并对所跟踪车辆的运动轨迹进行
+判定, 
+aT i 等人{, ` } 研究了一个用于交通事故检测的视频监视系统, 能够自动检测运动车辆
+并对其运动轨迹进行判定. 
+V l sAT R A M (V l s io n s y s t e m fo r a u t o m at i e T R A 伍e m o n it o r i n g ) 系
+统`, 2 , 能够对各个车道的车辆行为进行监控, 保证交通通畅
+. 
+H a g 和N ag el{ 
+’ 3 } 专门对机动
+驾驶的车辆跟踪问题进行了研究. 
+行人行为判定和跟踪对于车辆的安全驾驶以及道路交通
+管理有着重要帮助, 
+P ia 等人! l4j 专门研究了十字路口的行人检测与跟踪以保证驾驶员在十
+字路口能够安全驾驶, 
+M as ou d 和P aP an iko l叩ou los ! ` 剐通过对道路行人的跟踪以实现对行
+人的记数, 为道路交通管理提供信息. 
+智能车辆是目前计算机视觉研究中一个热点`’ 6 一` s] , 
+实现自动车辆驾驶是这一研究的最终目的, 其基本思路是利用安装在车辆上的摄像机实现
+对道路的检测、对前方车辆和行人的检测与跟踪, 以保证车辆的安全行驶, 同时, 该技术
+可以很容易的转移到机器人技术上lN 
+. 
+视频监视系统除了在上述民用方面应用之外, 在军事上也有极其重要的应用价值
+. 与
+民用技术相比, 在军事领域对于视频监视系统的要求要高得多, 主要由干战场环境远比普
+通的民用环境复杂和苛刻
+. 
+例如, 对隐藏的狙击手(S n i p er ) 进行检测和跟踪就非常困难, 在
+这种情况下, 普通的民用技术由于算法所采用假设的局限性往往不能使用, 
+L o T s( eL h ihg 
+o m n i d i r e c t i o n a l t r a e k in g s y s t e m ) 系统! , 。] 针对这一间题进行了详细的讨论
+. 
+从飞行器上对
+空中或地面目标进行跟踪和识别在现代战争中具有重要的意义, 是实施精确打击的必要
+手段, 但是在飞行状态下对运动或静止的目标实施跟踪与识别非常困难, 
+vA s (A er ial vi d eo 
+s ur ve il an ce ) 系统睁` ’ 
+2 2 ] 在这一方面进行了大量的研究
+. 
+对战场环境中的敌方运动目标进行
+快速准确的搜索和跟踪, 是视频监视系统在军事上的一个重要任务, 但是恶劣的战场环境
+要求视频监视系统具有很强的适应性, 能够对快速变化的运动目标实施稳定可靠地跟踪, 
+T sa 。和we 
+n 对此间题进行了讨论:la] 
+. 
+.2 2 图像压缩
+在新一代的视频图像压缩编码标准M P E G
+一4 中, 提出了一个不同于以前的视频编码的
+新概念视频对象平面(V id e o 。b je e t p l a n e s , V o p ) I, ` } , 以实现基于图像内容( e o n t e n t 
+一
+b as e d ) 
+的压缩
+. 
+在压缩编码过程中, 视频中的场景被分割成若干个V o P 
+, 不同的v O P 根据其特点
+采用不同的编码策略, 例如, 场景中的背景在很多情况下基本上保持不变或只有很少部分
+的变化, 则可以在连续的多帧图像中使用相同的编码或只有很少改动的编码来表示背景, 
+从而大大提高了压缩效率
+. 
+这种方案具有很高的压缩比, 同时还具有良好的视觉效果, 便
+于进行基于内容的交互和查询
+. 但是, 这一压缩编码的技术难点在于如何在任意场景下实
+现对运动目标的自动提取与分割`, 剐, 而这些问题也正是视频跟踪所要解决的关键间题. 
+与用于视频监视的图像跟踪技术不同的是, 在图像压缩编码中, 要求对运动目标的
+分割和提取的精度非常高, 能够尽量完整准确地将运动目标从背景中提取出来, 在这方面
+有大量的文献对此进行研究!26 一, ` , 
+. 
+此外, 一些重要国际期刊还刊发了有关M P E G 
+一4 压缩
+编码的的专刊(I E E E 肠a n s a e t io n s o n C i r e u i t s an d s 邓t ems fo r V i d e o eT e h n o lo 盯, 
+7 ( 1) 
+, 
+19 9 7; 
+S ig n a l P r o e e s s i n g , 
+6 6 ( 2 ) 
+, 1 9 9 8 : S ig n a l P r o e e s s ign : Im ag e C o m m u n i e a t io n , 1 5 (奋5 )
+, 
+J a n . 
+2 0 0 0 ; 
+e 忿c 
+. 
+) 
+. 
+.2 3 三维皿构
+三维重构在医学上有着重要的实用价值
+. 
+在获得人体器官切片的医学图像之后, 通过
+对人体器官的三维重构能够为医生的准确诊断提供极其重要和直观的帮助
+. 
+三维重构还能
+在目标识别间题上提供一个很好的解决方案
+. 
+如果能够通过一组图像序列将其中的ZD 运
+
+自 动 化 学 报 卷 动 目标重构成 运动目标 , 则无论该运动目标的姿态如何, 由于已知其三维信息, 总能将
+该运动目标识别出来, 从而实施有效的跟踪
+. 
+这里要说明的是, 由于运动目标姿态的变化
+而导致跟踪过程中目标的丢失是目前视觉跟踪问题中的一个难点, 而三维重构技术能在克
+服这一难点方面提供一个潜在的解决办法
+. 
+三维重构与视觉跟踪要解决的问题都是在一组
+图像序列中找出相同或相似的感兴趣目标, 不同的是三维重构需要将该目标重构为三维形
+式, 而视觉跟踪却要得到该目标的相关运动参数
+. 有关三维重构的文献可以参见[32 、36 ]
+. 
+视觉跟踪技术除了在以上所讲的三个大的方面应用之外, 其相关技术还可以应用到
+很多方面
+. 
+例如, 在视频监视系统中对人的行为的识别研究可以应用干人一机感知接口
+(H u m a -n e o m p u t e r p e r e e p t u a l i n t e r fac e ) 中, 其主要解决的问题是基于计算机视觉的人的手势
+和表情识另J
+, , 一, , , 
+. 对于人脸的检测、识别与跟踪(贩i a l d e t e e t i o n , r e e o g n i t i o n a n d t r 
+ack in g ) 还
+能在远程电视会议中大大降低图像传输的比特率, 并使画面及时锁定在讲话人的身上田洲, 
+有关这方面的研究还可以参考重要国际期刊专刊( IE E E 肠a sn a c t i o n s o n p at t e r n A n a l y s i s 
+an d M a e h i n e Int e ll i g e n e e , 
+1 9 (7 ) 
+, 
+19 9 7 )
+. 
+而上述应用中所涉及到的对于人运动的视觉跟踪是
+视觉跟踪问题中又一个研究的热点间题, 有大量文献对这一问题进行了研究, 其中代表性
+的综述性参考文献有{41 、4 ]
+. 在视觉跟踪技术中, 还可以利用图像序列中感兴趣目标的相
+似性实现对目标的识别与跟踪, 这一技术能够被利用来进行图像检索和图像查询( Im a g e 
+取t r ie va l ) l` 5 一4 , ] , 有关图像查询的文献在重要国际期刊上有专刊(e o m p u t e r v i s i o n a “ Im 鳍e 
+U n d e r s t a n d in g 
+, 
+9 4 ( 1、3 ) 
+, 
+20 0 4 ) 进行讨论. 
+此外, 视觉跟踪技术也是虚拟实现(V i r t u ia r e a li t y ) 
+中的核心技术之一, 一50] 
+. 
+综上所述, 开展视觉跟踪研究非常有意义, 其研究成果具有广阔的应用前景, 
+3 视觉跟踪技术的研究现状
+视觉跟踪问题是随着计算机技术的发展而逐渐成为研究热点的
+. 
+二十世纪80 年代以
+前, 由于计算机技术的限制, 对图像的处理与分析主要以静态图像为主sl[] 
+, 在动态图像序
+列的分析中, 对运动目标的跟踪带有很强的静态图像分析的特点15 2 , 
+. 
+二十世纪80 年代初
+光流法(O tP ica l ifo w) ! 53 
+, 
+s’] 被提出之后, 动态图像序列分析进入了一个研究的高潮. 其中对
+光流法的研究热潮从其产生一直持续到了二十世纪90 年代中期, 有关光流法的综述性文
+章可以参见文献[5 ]
+, 直到最近, 还有文章对L
+一
+K 方法进行了回顾冈
+. 
+但是, 光流法所需的
+运算量即使在现阶段对计算机而言也是太大, 很难满足实时性要求, 同时由于采用假设的
+局限性使得光流法对噪声特别敏感, 很容易产生错误的结果, 这些缺点造成光流法与实际
+使用之间还存在着很大的距离. 从二十世纪80 年代之后, 还出现了其他众多的视觉跟踪
+算法, 下边将介绍其中常用的一些方法
+. 为了清楚地对这些方法进行说明, 首先对视觉跟
+踪问题进行了分类, 然后介绍了处理视觉跟踪问题的两种思路, 最后对具体的视觉跟踪方
+法进行了分类介绍
+. 
+3 
+. 
+1 视觉跟踪问肠分类
+按不同标准可将视觉跟踪问题分成很多类型I ’l 
+, 
+43, ’ 钊. 下边给出一些常见的分类. 
+l) 摄像机的数目: 单摄像机v s 多摄像机
+. 根据所使用摄像机数目的多少, 可以将
+视觉跟踪问题分为单摄像机(Mon oc ul ar ca m er a) 视觉跟踪和多摄像机视觉跟踪(M ul it lP e 
+ca m er 叫
+. 
+目前, 绝大多数研究都属于单摄像机的视觉跟踪问题{, , “ , 
+? 
+, “ , `心, ` ” ” , 其中对于图像
+压缩技术而言, 纯摔只考虑单摄像机获得的图像序列
+, 
+但是, 在实际的视频监视系统中, 
+单摄像机所能监视的区域很有限, 因此, 在一些大的公共场合, 更多的是使用多摄像机以
+扩大监视的范围l , 
+· 弓, 
+盯洲
+. 
+此外, 单摄像机不能获得运动目标的距离信息, 而双目或三目视
+觉系统却能够得到运动目标的距离信息因
+. 
+在对运动目标跟踪过程中, 往往发生运动目标
+
+期 侯志强等 4 视觉跟踪技术综述被遮挡或暂时消失等情况从而丢失运动目标, 这一问题(o c lus ion ) 是运动目标跟踪中又
+一个难点问题, 使用单摄像机解决这一问题相当困难, 而使用多摄像机能在很大程度上解
+决这一难题l6[] 
+. 
+但多摄像机跟踪面临一个单摄像机跟踪所没有的难题, 那就是如何将不同
+摄像机所获得的不同视角的运动目标信息正确地对应起来, 由于这一间题的难度甚至比单
+纯跟踪问题的难度还要大, 因此有关多摄像机跟踪的文献并不是很多. 
+2 ) 摄像机是否运动: 摄像机静止v s 摄像机运动
+. 
+根据摄像机是否运动可以将图像跟踪
+问题分为摄像机静止时的运动目标跟踪和摄像机运动时的运动目标跟踪
+. 
+对于大多数的视
+频监视系统而言, 都是在摄像机静止时对某个需要特殊关注的区域进行监视{` , ’ ·“ , ’ , “ , ’ ` · ’ 5 ,
+z0] 
+, 
+此刻, 背景是静止的, 而作为前景的运动目标是移动的, 这种情况下通常使用背景差法
+(B a ck g r o u n d s ub t r a e t i o n ) 进行变化检测( C h a n g e d e t e e t io n ) 能够取得相当不错的结果, 已
+经应用到了很多的实际系统中l[, ’ , “ , “ , ` , , ’ 。, 
+. 
+但是, 在很多情况下, 摄像机是运动的, 其运动
+的形式可以分为两种, 
+及缩放( z o o m )! 6 , , ; 
+一种是摄像机的支架固定, 但摄像机可以偏转( P an ) 
+, 俯仰(iT lt) 以
+另一种是摄像机装在某个移动的载体上的, 如移动的车辆“ ’ , 
+e3J 或飞行
+的飞机队叫上
+. 
+在这些情况下, 由于背景和前景都是运动的, 要准确检测并跟踪运动目标
+是一件困难的事情, 通常, 如果摄像机的运动方式被限定在垂直于光轴的平面上, 可以采
+用图像拼接(M os ia c) 的方法将背景拼在一起, 然后按照摄像机静止时的跟踪方法进行处
+理哪一盯, ; 如果摄像机是沿着光轴运动的, 光流法或许是一种可以考虑的方法川, 
+65] 
+. 
+3) 场景中运动目标的数目: 单运动目标V S 多运动目标
+. 
+根据视频场景中运动目标数
+目的多少, 视觉跟踪间题可以被分为单目标跟踪和多目标跟踪两类
+. 单目标跟踪并不是一
+个简单的问题, 首先从场景中完整准确地检测和提取目标就比较困难, 例如在M P E G 
+一4 编
+码中, 要将画面上一个运动的目标从复杂的背景中完整地提取出来就很不容易`28 
+·
+叫. 由于
+场景中噪声的影响, 往往不能准确地检测到真正的运动目标; 即使检测到了运动目标, 也
+很难将其完整地提取出来, 例如由于阴影或光照l( fu m ian t ion ) 的影响等造成提取出来的
+运动目标不完整或中心有空洞`ao] 
+. 
+而多目标跟踪比单目标跟踪要困难得多, 在多目标跟踪
+过程中, 必须考虑到多个目标在场景中会互相遮挡(O e e l u s i o n ) 
+, 合并(M e r g e ) 
+, 分离(S p l i t ) 
+等情况, 这是多目标跟踪问题的难点, 有大量文献是关于这些问题的`70 一侧. 
+4 ) 场景中运动目标的类型: 刚体V S 非刚体
+. 
+根据视频场景中运动目标类型的不同, 
+可将视觉跟踪间题分为对刚体(凡ig d) 的跟踪和非刚体(N on 
+一ir ig d ) 的跟踪
+. 
+所谓刚体是指
+具有刚性结构、
+不易变形的物体, 例如车辆、飞机等等这些人造物体, 这些物体的共同特
+点是结构比较规范, 能够用3 D 几何模型描述, 因此, 对这类运动目标的跟踪采用基于3 D 
+模型的跟踪方法比较常见! 。, 7 “ · ” . 
+而非刚体是指外形能够变化的物体, 如细胞
+、动物、人
+等. 
+对这类目标一种通常的方法是采用变形模板(D e fo r m ab le et m lP at e ) 进行跟踪`” · 州, 此
+外, 在对人的跟踪方面, 大量工作尝试建立人的模型进行跟踪【34, ` ’ 
+7t 
+’ 81 , 重要国际期刊专
+刊( Co 哪u t e r v i s i o n a n d I m铭e U n d e r s t an d i n g , 
+5 1 (3 ) 
+, 2 0 0 1 , 
+M a hc i n e iV s i o n a n d A p p l se a t i o n , 
+14 ( ’) 
+, 
+20 03 ) 对有关人的建模和跟踪问题进行了讨论
+. 
+5 ) 传感器的种类: 可见光图像v s 红外图像
+, 
+根据所使用的传感器种类的不同, 可以
+将视觉跟踪问题分为由C C D 摄像头获得的可见光图像的视觉跟踪和由红外传感器获得的
+红外图像的视觉跟踪. 
+这两种类型的图像跟踪分别在不同的情况下使用
+. 
+通常的自然环境
+条件下, 白天使用可见光图像进行目标跟踪, 而晚上则使用红外图像进行目标跟踪. 如果
+将二者所获得的图像进行融合处理(Im ag e fus ion ) 
+, 则一般可以得到比单一传感器信息更多
+的图像, 从而极大地提高检测和跟踪运动目标的能力
+. 
+3 
+. 
+2 处理视觉跟踪问肠的两种思路
+对于视觉跟踪问题的处理, 总体上讲有两种思路助, ` , 一种称之为自底向上(B ot ot m 
+-
+
+自 动 化 学 报 0 卷 的处理方法 另一种称之为自顶向下 卜 ( 的处理方法 自底向上的处理方法又
+称之为数据驱动 的方法 ( a a v , 这种方法不依赖于先验知识, 直接从图像序列中获
+得目标的运动信息并进行跟踪
+. 
+自顶向下的处理方法又称之为模型驱动(M o de l
+一
+dr ive n) 的
+方法, 这种方法一般依赖于所构建的模型或先验知识, 在图像序列中进行匹配运算或求解
+后验概率, 采用匹配运算时, 如果相似距离最为接近则认为跟踪上运动目标; 求解后验概
+率时, 选择最大后验概率所对应的状态向量作为运动目标的当前状态
+. 下边对这两种思路
+做进一步的介绍. 
+l) 自底向上
+. 
+自底向上实现视觉跟踪的思路以iD va d M ar : 的视觉计算理论最具代表
+性`“ ` ] 
+. 
+M ar 认为视觉过程的主要任务是从Z D 图像中定量地恢复出图像所反映的场景中
+3 D 物体的形状和空间位置
+. 为此, 
+M ar 将视觉过程分为三个阶段: 早期、中期和后期. 
+早期视觉由输入图像获得要素图, 包括图像中强度变化剧烈处的位置、几何分布和组织结
+构; 中期视觉实现由输入图像和要素图获得的.2 5 D 图, 即在以观察者为中心的坐标系里
+可见表面的发祥
+、深度及不连续轮廓等等; 后期视觉由输入图像、要素图以及.2 5 D 图获
+得的物体得3 D 表示
+. 
+与此相似, 在自底向上的视觉跟踪过程中, 跟踪的目的是获得场景中运动目标的位
+置
+、速度
+、加速度
+、运动翻迹等信息, 这相当于视觉过程中的后期阶段, 为得到这些信息, 
+在获得图像序列并对图像序列进行预处理之后, 首先直接从图像序列中检测运动目标, 这
+是早期阶段; 检测到运动目标之后, 提取出运动目标并进行识别, 以判定是否跟踪, 这相
+当于中期阶段; 最后对该目标进行跟踪并获得运动目标的相关运动信息
+. 
+上述过程按处理
+顺序共分为四步, 第一步为图像预处理, 一般对所获得的序列图像进行消噪或增强, 提高
+图像质量以方便后续处理; 第二步为目标检测, 在摄像机不动情况下一般采用帧差法’ 82] 
+或背景差法sa[] 进行变化检测以获取运动目标, 此时得到的运动目标是一个斑点( lB ob ) ; 第
+三步为目标分类, 要完成两个任务, 首先提取出检测到的运动目标, 其次对该目标进行识
+别; 最后在目标跟踪阶段获得运动目标的相关运动信息
+. 
+这种方法的优点在于能快速检测并跟踪运动目标, 便于工程实现, 目前已有大量实际
+系统利用该思路解决视觉跟踪间题1, 2 ,4, 6一` , , ` 吃, ` ” , 
+加
+, 
+7O 
+, , 川. 该方法在摄像机静止情况下效果非
+常好, 但如果摄像机是运动的, 则实现运动目标检测与跟踪就比较困难, 因此在很大程度
+上局限了该方法的使用范围. 
+2 ) 自顶向下. 
+自顶向下的跟踪思路以B-ar Sh alo m 的目标跟踪与关联思想最具代表
+性ls ’] 
+. 
+这一思路将目标跟踪问题转换为在贝叶斯(B ayes ian ) 理论框架下, 已知目标状态的
+先验概率, 在获得新的量测(M e as ur e
+me nt ) 后不断求解目标状态的最大后验概率的过程
+. 
+也就是说, 在贝叶斯理论框架下, 将视觉跟踪问题看作是“ 最优猜测” 或者是一种“ 推理” 
+过程, 通常采用状态空间法( s t at e sP ace aP rP o 
+hac ) 实现视觉跟踪
+. 
+首先确定目标的状态向
+量{x * }; 动, l , 2 , … , 其中k 表示离散时间序列, 状态是跟踪系统的输出, 对应的状态方程如
+下: 
+X 、+ i = 凡X 、+ V * 
+其次是目标的观测向量{ Z ; }* = 1 , 2 , … , 同样无表示离散时间序列, 
+( 1) 
+观测是指从图像中提
+取的各种特征, 对应的观测方程如下: 
+Z = 从X k + F犷、(2 ) 
+在( l) 和(2 ) 式中, 
+{ V 、}k 一。, l , 2, … 和{w 、}卜: , 
+2, 
+. 
+表示噪声序列, 通常假定它们是独
+立同分布的( In d e p e n d e n t a n d id e n t i e a l l y d i s t r ib ut ed 
+, 记为1. 
+1
+. 
+d 
+. 
+) 
+. 
+在确定T 状态和观测之
+
+期 侯志强等 : 视觉跟踪技术综述6 0 9 
+后, 跟踪的任务是: a) 根据k 时刻前的观测来预测k + l 时刻的状态; b) 收到k + 1 时刻
+的观测后对预测做出修正
+. 
+假设在k 时刻, 有状态的先验概率试x 、! z : : * ) 
+, 其中, 
+2 1 : 、= { 2 1 , 
+2 2 , … , 
+z 、} 表示一
+直到当前k 时刻的所有观测量, 该先验概率对于无+ l 时刻是先验, 而对于k 时刻是后验
+. 
+则跟踪过程由两步组成. 
+预测: p (义* + l !2 1 : * ) 二p (万* + 1 !X ; )p (X * {2 1 : 、) ( 3 ) 
+更新: p (x 、+ l }2 1 : * + i ) 二p (Z ; + 1 }x 、+ l )p (x 
+、+ 1 !2 1: 、) (4 ) 
+这样就得到了k + 1 时刻的后验概率抓X 、+ : {Z : : * + 1 ) 
+. 其中状态转移概率拭x 杆, IX 日
+是建模系统的动态特性
+. 
+当系统噪声为高斯分布(G au s ian ) 且凡和H、为线性关系(iL n - 
+e ar ) 时, 可以利用卡尔曼滤波(K a lm a n n l t e r )“ ` , ” 5 ` , 求解后验概率, 此时p (x ; !2 1: * ) 和
+拭X 解1 }2 1: 奸1 ) 的分布都必须是高斯分布. 
+当凡和从为非线性关系(N on il ea r) 时, 可
+以利用扩展卡尔曼滤波(E xt en d de 如lm an ifl t er , 
+E K F ) ’84, 
+” ` 叫求解后验概率, 此时后验概
+率仍然满足高斯分布一种替代E K F 的方法是u K F (u sn e e nt e d K a lm an F i l t e r , 
+u K F )“ 5 ` 
+, 6 , 
+. 
+如果状态空间是离散的而且是由有限个状态组成的, 则可以使用隐马尔可夫模型(iH d d en 
+M ar k o v M o d e ls , 
+HM M ) 18 , , 进行跟踪
+. 
+但是, 经典卡尔曼滤波只能处理线性、高斯
+、单模态(U in m o da l) 的情况
+. 
+实际的视觉
+跟踪过程中, 后验概率的分布往往是非线性、非高斯、多模态(M ul it m od al) 的, 为此, 一
+种称之为序贯蒙特卡罗的方法(s e 明e nt i a l m o n t e C a r l。
+me t h o 山, 
+s M e )“ 8 , 。, , 被提出用于解
+决这类情况
+. 
+该方法在刚提出之时并未受到很大关注, 直到19 96 年, 由Ias dr 和lB a ke 提
+出c o n d e ns at io n 算法之后0o[] 才引起广泛注意
+. 目前这一类方法被称为粒子滤波( P ar ict le 
+n l t e r ) 
+, 是当前视觉跟踪方法中的研究热点`, ` 一。。, , 重要国际期刊专刊(I E E E 肠a n s a e t i o 、o n 
+s i g n a l P r o e es s i n g , 5 0 (2 ) , 2 0 0 2 ) 对此进行了讨论
+. 
+U K F 思想也可被粒子滤波方法所借用, 
+这种情况下粒子滤波被称为u P F (u sn e e n t e d p a r t ie l e if l t e r ) [, 7 ) 
+. 
+自顶向下思路利用先验知识对跟踪间题建立模型, 然后利用实际图像序列验证模型的
+正确性, 这种方法具有坚实的数学理论基础, 有很多数学工具可以使用, 因此一直是理论
+界研究视觉跟踪问题的主流方法
+. 
+但是, 先验知识的表述是人工智能( rA it ifc ial int el i g en ce ) 
+中的困难所在, 而且人的很多先验知识也很难用数学形式来表达
+. 
+此外, 通过模型匹配来
+实现跟踪往往比较费时, 很难在实际工程中实现实时跟踪
+. 自底向上跟踪和自顶向下跟踪
+有着各自的优点和缺点, 若将自底向上和自顶向下这两种思路结合起来使用, 就有可能克
+服各自弱点, 实现更为有效的跟踪, 文献!80 } 中对此进行了尝试
+. 
+.3 3 视觉跟踪算法
+从20 世纪80 年代起到目前为止这近25 年里, 出现了众多的视觉跟踪算法
+. 
+1 9 8 8 年, 
+A g ar w al 和N a n a d h ak u m a : 对运动图像分析算法进行了总结ls] 
+, 将算法分为两类, 一类是
+基于光流法的分析, 另一类是基于特征点的分析. 
+此后在视觉跟踪领域中, 又出现了许多
+新的方法, 其中在文献闭和[4 } 中, 将视觉跟踪方法分为四类, 分别是基于区域的跟踪、
+基于特征的跟踪、基于变形模板的跟踪和基于模型的跟踪, 这种分类方法概括了目前大多
+数视觉跟踪算法, 因此下面用这种分类方法对视觉跟踪算法进行介绍
+. 
+l) 基于区域的跟踪(R eg ion 
+一
+b as ed tr 毗ign ) 
+. 
+基于区域的跟踪算法基本思想是: 首先得
+到包含目标的模板(eT m p lat e ) 
+, 该模板通过图像分割获得或是预先人为确定, 模板通常为
+略大于目标的矩形, 也可为不规则形状; 然后在序列图像中, 运用相关算法跟踪目标, 对
+灰度图像可以采用基于纹理和特征的相关, 对彩色图像还可利用基于颜色的相关
+. 
+最常用
+的相关准则是平方和准则s S D (t h e s u m o f s q u a r e d d i fe r e n e e s ) 
+, 如下式
+C 二艺(` 一护( 5 )
+
+6 1 0 自动化学报3 2 卷
+式中, 葱和J 分别是图像I 和J 图像的像素
+. 该算法还可和多种预测算法结合使用, 如线
+性预测、
+二次曲线预测、卡尔曼预测等, 以估计每幅图像中目标的位置
+. 
+这种算法的优点
+在于当目标未被遮挡时, 跟踪精度非常高, 跟踪非常稳定. 
+但其缺点首先是费时, 当搜索
+区域较大时情况尤其严重; 其次, 算法要求目标变形不大, 且不能有太大遮挡, 否则相关
+精度下降会造成目标的丢失
+. 有关基于区域的跟踪算法可参见文献!9 
+, 1叫
+. 
+近年来, 对基
+于区域的跟踪方法关注较多的是如何处理模板变化时的情况, 这种变化是由运动目标姿态
+变化引起的, 如果能正确预测目标的姿态变化, 则可实现稳定跟踪, 研究这一间题的有关
+文献可参见17 9 
+, 1 0 1 
+, 1 0 2 , 
+94 
+, 
+10 3、10 6」. 
+2 ) 基于特征的跟踪( eF at ur -e b as ed tr aC ik n g )
+. 
+基于特征的跟踪算法一般也采用相关算
+法
+. 与基于区域的跟踪算法的不同之处在于, 后者使用目标整体作为相关时的对象, 而前
+者使用目标的某个或某些局部特征作为相关时的对象
+. 
+这种算法的优点在于即使目标的
+某一部分被遮挡, 只要还有一部分特征可以被看到, 就可以完成跟踪任务, 另外, 这种方
+法与卡尔曼滤波器联合使用, 也具有很好的跟踪效果
+. 
+这种算法的难点是: 对某个运动目
+标, 如何确定它的唯一特征集? 这也是一个模式识别问题
+. 若采用特征过多, 系统效率将
+降低, 且容易产生错误, 文献【108 
+, 
+10 9」对这一间题进行了讨论
+. 在特征提取时, 一般采用
+c an yn 算子获得目标的边缘特征{’ ` o] , 而采用s u s A N 算子获得目标的角点信息l“ ” . 
+有关墓
+于特征的跟踪算法还可参见{1 12 
+, 11 3] 
+. 
+3 ) 基于变形模板的跟踪(D e fo r m ab -le et m lP at -e b as ed tr ac ik gn ) 
+. 变形模板是纹理或边缘
+可以按一定限制条件变形的面板或曲线`10] 
+. 文献11 14 
+, 1 1 5 } 中, 目标模板为一条手划(H an -d 
+D r aw n) 的封闭曲线, 该曲线通过方向及方向的变形逐渐与图像中的真实目标相适应, 从
+而检索或跟踪复杂背景中的目标. 
+在视觉跟踪过程中, 更为常用的变形模板是由K as s 在
+1 9 5 7 年提出的主动轮廓模型(Ae t iv e 。o nt o ur mo d e 坛, 
+A e M ) l“ 6 , , 又称为s n axe 模型, 
+K as s 用
+于唇动的跟踪
+. 
+s n 
+ake 模型非常适合可变形目标的跟踪, 如对运动细胞的跟踪叫
+. 这种模
+型与卡尔曼滤波相结合能够更好地进行跟踪〔“ ? 1 
+. 
+vi er en 等提出了一种基于sn ake 模型的
+多目标跟踪算法,“ 钊, 思路比较新颖
+. 但s n ake 模型比较适合单目标的跟踪, 对于多目标的
+跟踪更多地是采用基于水平集(eL ve l se t) 方法的主动轮廓模型【“ , 一` , ` ! , 有关的研究可以参
+见{1 2 2、1 2 51
+. 
+4 ) 基于模型的跟踪(M od -el b as ed tr ack ign ) 
+. 对人体进行跟踪时, 通常有三种形式的模
+型〔,sl , 即线图模型、
+ZD 模型和3 D 模型
+. 但是在实际的视觉跟踪算法中, 更多的是采用
+运动目标的3D 模型进行跟踪, 尤其对于刚体如汽车侧的跟踪
+. 其基本思想是: 首先由先
+验知识获得目标的三维结构模型和运动模型, 然后根据实际的图像序列, 确定出目标的三
+维模型参数, 进而确定出目标的瞬时运动参数
+. 
+这种方法的优点是, 可以精确地分析目标
+的三维运动轨迹, 即使在运动目标姿态变化的情况下, 也能够可靠地跟踪
+. 
+但是其缺点在
+于, 运动分析的精度取决于几何模型的精度, 在现实生活中要获得所有运动目标的精确几
+何模型是非常困难的
+. 
+这就限制了基于模型的跟踪算法的使用, 同时, 基于3 D 模型的跟
+踪算法往往需要大量的运算时间, 很难实现实时的运动目标跟踪
+. 
+有关基于模型的跟踪算
+法可以参见{73 
+, 
+74 
+, 
+12 6 
+, 
+12 7 ]
+, 在最近的综述! , slz 中, 作者对基于模型的跟踪算法进行了详细
+的介绍. 
+4 视觉跟踪问题中的难点与展望
+4 
+. 
+1 视觉跟踪问肠中的难点
+从控制的观点来看, 视觉跟踪问题所面临的主要难点可以归结为对视觉跟踪算法在三
+个方面的要求, 即对算法的鲁棒性、准确性和快速性a4[] 要求
+.
+
+4 期侯志强等: 视觉跟踪技术综述6 1 1 
+鲁棒性 (oR u . 所谓鲁棒性是指视觉跟踪算法能够在各种环境条件下实现对
+运动目标持续稳定的跟踪. 
+影响视觉跟踪算法鲁棒性的最主要原因在于’ ` ” , ’ 
+a) 被跟踪运动目标的姿态改变; 
+b) 运动目标所处环境的光照变化; 
+c) 部分遮挡引起的运动目标不规则变形和全部遮挡引起的运动目标的暂时消失
+. 
+对运动目标进行三维重构能够有效解决其姿态改变所引起的目标丢失, 基干3 D 模型
+的跟踪算法可在很大程度上解决这一间题, 但基于3 D 模型的跟踪算法所存在的局限性严
+重限制了它在实际系统中的应用
+. 
+当运动目标所处环境的光照发生改变时, 采用图像灰度
+信息或色彩信息作为跟踪基础的视觉跟踪算法一般都会失效, 而基干图像特征的方法往往
+不受光照改变的影响, 如利用运动目标的边缘信息能有效避免光照变化对运动目标的影
+响, 但在复杂环境中要将运动目标的边缘和周围其它目标边缘区分开来是非常困难的
+. 
+遮
+挡间题是视觉跟踪算法中又一难点问题, 利用单摄像机解决遮挡间题也一直是视觉跟踪领
+域中的热点{` , , `吃` 2 剑, 而利用多摄像机可以在很大程度上解决这一间题, 但正如前所述, 多
+摄像机的应用又会引入新的难题
+. 
+总之, 对视觉跟踪算法的鲁棒性要求是视觉跟踪间题研
+究的重点, 目前, 该问题还远远没有得到很好的解决. 
+2 ) 准确性(A c ur a c y ) 
+. 在视觉跟踪研究中, 准确性包括两个方面, 一是指对运动目标
+检测的准确性, 另一个是指对运动目标分割的准确性
+. 对运动目标检测准确性的目的是尽
+可能降低运动目标检测的虚警率和漏警率, 从而提高对真实运动目标的检测概率, 这一点
+在视频监视系统中要求比较高四
+. 
+由于实际复杂环境中存在大量噪声, 很难实现各种环境
+条件下对运动目标地准确检测, 往往只能在虚警率和漏警率之间寻求一个折中(肠ad -e o f) 
+. 
+对运动目标分割的准确性主要应用于图像压缩编码中, 该问题实际上是图像分割( Im ag e 
+se g m e nt at io n) 间题, 至今已经出现了上千种各种类型的分割算法, 但由于尚无通用的分割
+理论, 目前并没有一种适合于所有图像的通用分割算法! ` 3 oJ 
+. 在视觉跟踪算法中, 对图像序
+列中运动目标的分割, 更多的是利用目标的运动信息实现对目标的提取{` 3 ` , , 如利用光流法
+ls 
+, 
+s4] 实现对图像序列中运动目标的分割. 
+而主动轮廓模型{ , `“ , ` :0] 也是实现对运动目标提
+取的常用方法
+. 
+一旦能够实现对运动目标的准确检测和准确分割, 那么也就能够准确获得
+运动目标的相关运动信息
+. 
+3 ) 快速性( S ep ed )
+. 
+一个实用的视觉跟踪系统必须能够实现对运动目标的实时跟踪, 
+这就要求视觉跟踪算法必须具有快速性’26 
+, 。匕’ `
+O4, 
+’ a] 
+. 但是, 视觉跟踪算法处理的对象是包
+含巨大数据量的图像, 这些算法往往需要大量的运算时间, 很难达到实时处理的要求
+、
+通
+常, 简单算法能够实现实时跟踪, 但跟踪精度却很差; 复杂算法具有很高的跟踪精度, 实
+时性却很差
+. 
+一种通用的减小视觉跟踪算法运算量的方法是利用金字塔分解或小波变换将
+图像分层处理; 另一种思路是设计专用硬件实现实时的视觉跟踪
+. 
+上述讨论仅仅只是从控制角度简要地给出了视觉跟踪技术中的几个主要难点问题
+. 
+视觉跟踪技术所面临的更为一般的难题是: 如何从图像序列中实现有效的图像分割和图
+像对应
+. 
+这里的图像分割是指将被跟踪目标从图像或图像序列中提取出来, 而图像对应是
+指将被跟踪目标在图像序列中始终能够准确的对应起来, 无论该目标是否变形、被遮挡等
+等. 
+图像分割问题目前尚未得到有效解决, 而图像对应问题则是与模式识别紧密相连的人
+工智能难题
+. 
+更多的有关视觉跟踪技术所面临的困难在综述文献!37 
+, 4 1、4 
+, 
+98 
+, 12 8」中都有
+所论述, 其中所涉及的每一个难点都值得进行深入研究
+. 
+.4 2 展盛
+实现一个具有鲁棒性、准确性和快速性的视觉跟踪系统是当前视觉跟踪技术努力的
+方向
+. 但视觉跟踪技术在这儿个方面中每前进一步都是非常困难的, 因为该技术的发展与
+
+1 6 自 动 化 学 报 3卷 人的感知特性的研究紧密联系在一起
+. 
+由于目前对人的感知特性没有一个主流的理论, 其
+数学模型更是难以建立
+. 同时, 在计算机视觉中大多数问题是不适定的, 这就更增加了视
+觉跟踪技术发展的难度
+. 但是, 视觉跟踪技术具有广阔的应用前景, 并不仅仅局限于前边
+所介绍的几个方面
+. 
+随着计算机技术的不断发展, 视觉跟踪技术作为计算机视觉领域中的
+核心技术之一, 在一些关键技术中具有越来越重要的作用, 例如机器人技术
+、
+智能武器系
+统、虚拟现实技术等
+. 同时近几十年来, 数学理论方面取得了巨大的进步, 使计算机视觉
+技术在发展过程中可以很好的利用这些数学工具处理视觉跟踪问题
+. 
+因此, 尽管视觉跟踪
+技术在前进的道路上还存在着许多困难, 但是其所具有的强大的生命力必将使这一技术得
+到强有力的发展, 并对人们未来的生活产生深远的影响
+. 
+5 结束语
+视觉跟踪间题是当前计算机视觉领域中的热点问题, 本文对这一问题进行了详细的介
+绍
+. 首先, 对该技术应用的主要领域, 即在视频监视、图像压缩和三维重构等三个方面的
+应用进行了论述
+. 
+其次, 详细阐述了该技术的研究现状, 介绍了其中的一些常用方法, 为
+了清楚地对这些方法进行说明, 先对视觉跟踪间题进行了分类, 然后介绍了处理视觉跟踪
+问题的两种思路即自底向上和自顶向下的思路, 最后将具体的视觉跟踪方法分为四类进行
+了介绍, 这四类分别是基于区域的跟踪、基于特征的跟踪、基于变形模板的跟踪和基于模
+型的跟踪. 
+最后, 从控制论的角度给出视觉跟踪算法所面临的难点问题, 即算法要满足鲁
+棒性、准确性和快速性要求时所遇到的困难, 同时还简要的对视觉跟踪问题的研究前景进
+行了展望. 
+本文着重选取了近十年来国内外在视觉跟踪技术方面的研究成果, 从上千篇参考文献
+中选出一百多篇重要参考文献. 由于期刊文献具有更好的理论完整性, 因此, 在文献选择
+上更多地关注了期刊论文
+. 
+通过本文对视觉跟踪技术的介绍, 希望能对相关领域的研究人
+员和工程技术人员提供有益帮助
+. 
+1 H ar it ao g lu l 
+, H ar w o o d D 
+, D va is L . 
+W4 : 凡泪~ t i m e s u工v e i lIan ce o f P eo P le a n d t h e ir ac t i v i t i印
+. 
+石日召E 升a n s a c ` 
+亡宕淞o n 
+aP 亡tenr A n aJ 如15 an d M aC h j n e ln 亡e llj罗n ce 
+, 2 0( 刃, 2 2 ( 8 ) : 8 0 9、8 3 0 
+2 P va li d is l , M o r e ll as V 
+, 
+T s i am y r t z 运P , H ar P S 
+. 
+U r b a n s 
+vuer 
+川an e e s y s et m : R O m t h e lab o r at o r y t o t h e co -m 
+m e r c i a l wo r ld 
+· 
+P r o C氏泪j n gs o f t五e IE E E 
+, 20 1 , 8 9 (1 0 ): 14 7 8、14 9 7 
+3 C o lli ns R , L ip t o n A , K a n动e T , 几」iy O8 h i H , D u g g i ns D , T s i n Y 
+, 
+OT ll ive r D , E n o m o t o N , H ase g a w a o , B u r t P , 
+Wix s o n L 
+. 
+A sy s t e m fo r v id eo s 
+vuer 
+il la n ce an d mo n i t o r in g , V S A M if n al r e P o r t , C ar n e ig e M e l lo n U n i ve r s i ty : 
+eT hc in ca l 取p o r t C M U
+一
+RI 
+一
+T -R (心. 12 , Z IX洲) 
+4 C ol li ns R , L ip t 洲A , 
+R习l y 洲h i H , K an ad e T . 
+A lg or i t hm s for co 叩er at ive mu lt ise nso 
+r s u ver ill a n c e . P r OC 庆泪in 召, 
+Of 亡h e I E E E , 20 1 , 8 9 ( 10 ) : 14 5 6、1 4 7 7 
+5 B o g ae r t M 
+, 
+C h l闪N , 
+C or n e z P 
+, 助g a 名z o n i C S 
+, T钱犯h l o n i A , 
+T h on n a t M 
+. 
+T he P A S S WO R D S P r o j e c t 
+. 
+I n : P价
+e e d in , o f I E E E I nt e r n at i o n a l C o n fe r e n ce o n Im a g e P r o 
+cse ign 
+. 
+S w it ez r l an d : L
+asn 
+n e , 1 996 
+, 3 : 6 7 5 ~ 6 7 8 
+6 W淤e n C R , A z ar b ay ej an i A , 
+D ar er l l T , P e nt lan d A .P P if nd e r : 取al 一
+t i m e t r 川火In g o f t h e h um an 伙刘y, I E E E 
+升胡s ac t i姗on aP 忿t e r n A n a加js an d M aC h in e nI t le l l g℃ n e e , 1 9 9 7 , 1 9 ( 7 ): 7 8() 、7 5 5 
+7 C o i fm an B , 
+eB y m e r D , 
+M e l au e h lan P , M al i k J 
+. A r e al 
+一t im e co m P u et r y 访io n sy : t e m fo r ve h ie le t r 朗k l ng an d 
+t r确c s
+VerU 川an e e 
+· 升助吕p or 亡a t jon R es e ar 曲只盯t C, 19 9 8, 6 ( 4 ): 2 7 1 、2 8 
+8 M a g e D . 介朗k i gn m ul t i p l e ve h i e l韶us i n g fo r e gr o u n d , b aC k g r o u n d an d m ot i o n m de e ls 
+. 
+mI 扭g e an d V 扫万o n 
+C b 川p u t jgn 
+, 2X() 4 , 2 2 ( 2 ) : 1 4 3 、1 5 5 
+9 K o ll e r D , D an i i lid is K , N 昭e l H 
+. 
+M o d e l一b aS e d o b j e e t t r ac ik n g in m o 
+ocn 
+u l ar i m ag e se q u e n e e s o f r o ad t r a 币e 
+enSC 
+e · 
+ID 忿ern a `j朋aJ oJ u o aJ OI C O nZ p u t e r 功s j叨, 19 9 3 , 1 0 ( 3 ) : 2 5 7 、2 8 1 
+1 0 D u b ul 即仆J o l ly M , L a ks h m an an S , J ia n A K . 
+Ve h i e le s e g m e n t at io n an d e l哪iif ca t io n us in g d e fo r m a b le t e m 
+- 
+p la t es 
+. 招石召们旧刀
+sac 云jon s on aP t 七enr A n a 
+lys 抬an d M a 动, n e nI t e」」j邵n ce 
+, 19 9 6 , 1 8 (3 ): 2 9 3 、3 0 8
+
+期 侯志强等 视觉跟踪技术综述 , T s a n g S 
+, L in C 
+, 
+5 0 鳍K 
+. R e al 一
+t i m e im a g e t r a c k i n g fo r a u t o m at i e t r 确e m o n i t o r in g a n d e n fo r e e m e n t 
+即p li e at io n 
+. 加a g e an d Vi s fo n oC m p u t i吧, 2 0 0 4 , 2 2 (6 ): 4 8 5 “ 5 0 1 
+12 Z h u Z , X u G 
+, 
+aY n g B , 
+S h i D , L sn X 
+. 
+V I S AT R A M : A r e a l一
+t im e v i s io n s y s t e m fo r a u t o m at ie t r 沥e m o n i t o r i n g 
+· 
+加a g℃ 
+an d 场s 万o n 
+oC nz p u 亡j叮, 2 0 0 0 , 1 8 ( 1 0 ) : 7 8 1、7 9 4 
+一3 H a g M , N a g e l H 
+. 
+竹朗k in g o f co m p lex d r iv in g m an e u ve r s in t r a if e i m 略e s 阅ue n e es 
+. 
+加a g e an d 价s 万o n 
+oC 二p u 亡万n g , 1 9 9 8 , 1 6 (8 ) : 5 1 7 、5 2 7 
+1 4 P ia e , T y a n H , L ian g Y , L i即H M 
+, 
+C h e n 5 
+. p de es t r ia n d e t ce t io n a n d t r朗k i叱at e r os s r o ad s · 
+aP 亡亡e nr 
+R ce o g n j亡j o n , 2 0 0 4 , 3 7 (5 ): 10 2 5、1 0 3 4 
+1 5 Mas o u d o 
+, P 即a n i ko lo p o u los N P 
+. 
+A n voe l m e t h o d fo r t r 鱿k i n g a n d e o u nt in g p e d e s t r i ans i n r e a l一t im e us in g 
+a s in g l e e a m e r a 
+. 
+了E E E 乃a n s ac 亡万o ns on 、乞h je u lar 甲兜力n o lo g y , 2 0 0 1 , 5 0 (5 ) : 1 2 6 7 、1 2 7 8 
+16 OF r es t i G L , M u r in o V , 
+eR g 脸z o n i C 
+. 
+Ve h ie l e r e e o g n it io n an d t r aC k i n g fr o m r o a d i m ag e s e q u e n e es 
+. 
+了E E E 
+升an s ac 忿f朋s on 、乞力fe u lar 于兜五n o l`飞D尸, 19 9 9 , 4 8 ( 1 ) : 3 0 1~ 3 1 8 
+一7 B et ke M , H a r i t a o g l u E , D va is L S 
+. 
+eR 公t i m e m u lt i p le ve h ie l e d et e e t i o n an d t r ac k i略fr o m a m o v in g ve h i e le · 
+Ma c 力万n e 访s主o n 朋d A即Ije a 亡万o n s , 2X() 0 , 1 2 ( 2 ): 6 9 、8 3 
+18 eF r r y m a n J M 
+, 
+M sy b an k S J , 
+Wb r r al l A D 
+. 
+V i s u a l s u r ve il la n e e fo r mvo i n g ve h ic l e . 
+nI t enr 
+a 亡万o n a l OJ u 切心Of 
+OC m p u t er vis 万o n , 2 0X() , 3 7 ( 2 ) : 1 8 7 、1 9 7 
+19 D es o u z a G 
+. 
+N , K ak A . 
+C 
+, V is io n fo r m o b ile r o b o t n va ig at io n : A s ur v e y 
+, 石日E E 7 } a n 
+acs t jo n s o n 
+aP 七`
+ern 
+A n a 」夕s js an d M 助为j
+n e ln 亡eJ l lg ’e n ce 
+, 2 0 0 2 , 2 4 (2 ) : 2 3 7、2 6 7 
+2 0 B o u lt T E , 
+M ie h e al s R J 
+, 
+G ao X , E c km a n n M 
+. 
+I nt o t h e wo o d s : V is u a l s u r ve il lan e e o f n o n e o o p e r a t i ve a n d 
+e a m o u n a g e d t ar ge t s in e o m p l e x o ut d o o r s e t t i n , 
+. 尸r o c氏心孟n罗of t五e IE E E , 2 0 0 1 , 8 9 ( 1 0 ): 1 3 8 2 、14 0 2 
+2 1 K u m a r R , 
+Saw h n ey H , 
+S a m ar as e ke r a S 
+, 
+H s u S 
+, 丁妞。
+H 
+, 
+G u o Y , H a n n a K , P o P e A 
+, 
+Wi ld es R , H i rvo n e n 
+D , H
+anse 
+n M , B u r t P 
+. 
+A e r i a l v i d eo s
+vuer 
+il lan ce a n d ex P lio t at io n 
+. P r o 。笼以jn g万of 亡h e I E E E , 2X() 1 , 8 9 ( 10 ): 
+15 1 8、1 5 3 9 
+2 2 1 ’a ( , H 
+, 
+S aw h n e y H S 
+, K u m ar R . 
+o b j e ct t r朗k i n g w it h B 御阳s ian es t i m at i o n o f d y n a m i e l a y e r r e p r 
+ese 
+n t a t io 朋
+· 
+石日E E 了丫a n 
+acs t j on s on aP 云t
+e nr A n a 」y
+s 招an d M剐出jn e ln 亡el l扭er n ce 
+, 2 0 0 2 , 2 4 ( 1 ) : 7 5、8 9 
+2 3 T s 的T , W晚n 2 . 
+Im a g -e b as ed t ar g e t t r ac k i n g t h r o ug h r a P i d s e ns o r o r i e nt at io n e h a n ge 
+, S P I E O p t j c a 」nE 乡- 
+n 
+er fn 乙2 0 0 2 , 4 1 (3 ): 6 9 7、7 0 3 
+2 4 S i ko r a T . T h e M P E G 
+一4 v i d o s t a n d ar d ve r iif e at io n m o d e l . JE E E 升a n s ac 亡jo n s o n 6 cr u j亡5 a n d yS s t e m ` fo r 
+祷d eo 7’e 曲n o lo 幻r , 19 9 7 , 7 ( 1 ) : 19 、3 1 
+2 5 C as t a g n o R , E b r ah im i T , K u nt M 
+. V id eo se g m e nt at io n b 朋e d o n m u lt i P le fe at ur es fo r int e r ac t i ve m u lt i m de i a 
+a p p lie at i o ns 
+. 
+JE E E 升an 
+吕ac t 室on s on 口cr u jst an d yS s t enz 
+s fo r 访d eo 叭兜力n OJ 哪口, 1 9 9 8 , 8 ( 5 ) : 5 6 2 、5 7 1 
+2 6 K i m B , P ar k R 
+. 
+A 丘明t au t o m at i o n V O P ge n e r at io n us i n g b o u n d ar y b lo ck se g m e nt at io n . R e 司一亡万m e 
+lm 绍i n g l 
+2 0 0 4 , 1 0 (2 ): 1 1 7~ 1 2 5 
+2 7 V a le nt e S , D 姐e l盯J . A v is u a l an ia ” 15 / s y nt h e s i s ft 姆d b 朗k lo OP fo r ` e ur at e fa c e t r ac k in g 
+. 
+S jg n 目尸r 。
+~ 
+幻g : 
+mI 
+a 梦C O m nz u n 室ca t jon 
+, 20 1 , 1 6 (6 ): 5 8 5、6 0 8 
+2 8 M e i e r T , N g an K N . A u t o m at i e s e g m e nt at i o n o f m vo i n g o bj ce t s fo r v i d e o o b j e e t p l a n e 罗n e r at io n 
+. 
+I E E E 
+升an 吕ac 亡j o n s on 曰cr u f七5 an d yS s 亡!en 
+s fo r 功d eo 7 b 曲n O I哪妙, 1 9 9 8 , 8 ( 5 ) : 5 2 5 、5 3 8 
+2 9 叭8/ n g D 
+. U ns u p e r v i s de v id eo s e g m e nt at i o n b as e d o n w at e r s h de s an d t e m p or a l t r朗k l雌. JE E E 乃a n s ac 亡亩即s 
+o n iC cr u i t s an d yS s t em 
+s fo r Vj d eo 于eC h n oj q 。尹, 1 9 8 , 8 (5 ) : 5 3 9 、5 4 6 
+3 0 M ec h R , 
+W6 llb or n M 
+. A no is e r o b us t m e t h o d for Z D s h 8P e es t lm at io n o f m vo ign o bj ce t s i n v id eo se q u e n e es 
+e o ns id e r i吧a m vo i飞e a m e r a . 
+S jgn 目尸r 。
+~ 
+刀g , 1 9 9 8 , 6 6 ( 2 ) : 2 0 3 、2 17 
+3 1 z h u Z J , J ian g G Y , 
+uY M 
+, 认厄n g R D , v 入1 x W
+. 
+N e w sl g or i t h m fo r e x t r 鱿t in g an d t r aC k i n g m vo i n g o b j ce t 
+in o b j e e t 一b , d v i d oe co d i n g 
+. 
+A e t a E le e t or n` ca iS n ica 
+, 2 0 0 3 , 3 1 (9 ) : 1 4 2 6 、1 4 2 8 
+3 2 C o h e n L D , C o h e n 1
+. 
+F in it -e e le m e nt m e t h o d s fo r ac t ive e o n t o ur m o d e ls an d b a ll o o n s fo r Z一D an d 各D i m ag e s 
+. 
+IE E E 升a n s ac 亡龙on : on aP 亡亡enr A n a ly s is an d M ac 力万n e nI t e ll jge n ce 
+, 1 9 9 3 , 1 8 ( 1 1 ): 1 13 1、1 1 4 7 
+3 3 J ay n es C , 凡s e m an E , H ans 
+o n A . R ce o g n it io n an d r ce o ns t r u c t io n o f b u i ld in g s fr o m m u l t i P le 朗r ial i m a g e s . 
+C七nZ p u t er 访s j o n an d lnI 
+a 邵nU d , tan d f n乙20() 3
+, 9 0 (1 ): 6 8、9 8 
+3 4 eR m o n d in o F . 各D r e co 二t r u e t i o n o f st at ie h u m an b o dy s h aP e fr o m i m a g e se q ue n ce 
+. 
+C b m p u `e r 功` 万o n an d 
+mI a g 旧
+nU d esr t an d j n g , 2X() 4 , 9 3 (1 ): 6 5 、8 5 
+3 5 P ar k S , 
+S u b b ar 的M 
+. A u t o m st ie 3 D m o d e l er c o n 月t r u e t io n b ase d o n n vo e l p os e e s t im at io n an d i nt e gr at i o n 
+t ec h n iq u es 
+. 
+加易g e an d 访s fo n C b nZ p u 亡j赐2X() 4 , 2 2 (8 ): 6 2 3~ 6 3 5 
+3 6 Zh e gn J Y 
+. A e q u i r in g a e o m P le t e 3 D m o d e l fr o m s P ce u lar m ot io n u n d e r t h e i ll u m i n at io n o f e i r e u la r 一s h a P e 
+li g h t s o ur e es 
+. 了E E E 朴an s ac 亡fon s on aP 亡亡enr A n a 加抽an d M比石in e 劲t e l ljge n ce 
+, 2 0 0 0 , 2 2 ( 8 ): 9 13 ~ 9 2 0
+
+自 动 化 学 报 卷 , Sh ar m a R 
+, H u a n g T 5 
+. 
+V is u 目i nt e r p r et at io n o f h an d g . t ur es for h u m a-n co m Put er in t e r a ` t io n : 
+A er v 玉e w 
+. 
+IE E E 升an 日. 比j~ on aP t tenr A n a ly s is an d M助石宕n e 劲沈川罗刀ce 
+, 19 7 , 1 9 (7 ): 67 ~ 69 5 
+3 8 L ie n C , H u an g C 
+. 
+M do e l一
+b a 朋d art i e ul at de h an d m ot i o n t r 朗k i呢for g es t uer 
+r e c o g n l t io n 
+. 
+mI 绍. an d Vj 日j闭
+C o m p u t室赐1 9 9 8 , 1 6 (2 ) : 12 1、1 3 4 
+3 9 C h o i H l , 
+hR e P K . 
+He ad g es t ur e r ce o g n 卫t i o n us i眼H M M s . E x p er t 叹邓t二初t h A即Ijca t j~ 
+, 19 9 , 1 7 (3 ): 
+2 1 3 、2 2 1 
+4 0 V io la P 
+, 
+J o nes M 
+. J , 
+DR b us t r e ia- t i m e afC e d e 
+cet t io n 
+. 
+nI t enr a t j o n al OJ u 。川Of Cb m p u 七er 俏成on 
+, 2 叨4 , 5 7 (2 ): 
+1 3 7 ~ 15 4 
+4 1 G va r i la D M 
+. 
+T h e v i s u a l an a ly s is o f h u m an m voe m e nt : A s ur v e y 
+. 
+C b m P u t e r Vj s jon an d lm 尽g e 
+nU d e sr 亡an d 主gnI 
+1 9 9 9 , 
+7 3 ( 1) : 8 2 、9 8 
+4 2 A g ~ aJ J K , 
+C ia Q 
+. 
+H u m a n m ot io n an al y s is : A r e v ie w 
+. 
+C b 切p u 亡er 访s j on an d lm 扭g e 
+nU desr 亡an d jn g , 1 9 9 9 , 
+7 3 (3 ) : 4 2 8 、4 4() 
+4 3 M姗l un d T B , 
+G r 
+anu m E 
+. A s ur ve y o f co m P u t e r v is io -n b a s e d hum an m o t io n e 即t 
+uer 
+. 
+oC m P u 亡er 俏s j佣an d 
+加a g e 
+nU d , 亡an id n g l ZX() 1, 8 1 (3 ) : 2 3 1、2 68 
+4 4 叭a/ n g L , H u W M 
+, 1 妞n T N 
+. A s u r v e y o f v is u al an 目y s i s o f h u m an m o t i o n 
+. 
+hC j n 
+ese oj 帅SJ of C b 切p u 亡esr 
+, 
+2 0() 2 , 2 8 (3 ) : 2 2 5、2 3 7 
+4 5 T i e u K , 
+V i o la p . B os t i n g im a g e er t r ie 回. 
+nI t enr 
+a t i朗目oJ u o aj of 汤切p u 亡er 功s jo n , 2 0 4 , 8 6 ( 1 / 2 /3 ): 1 7、36 
+4 6 F匕b l e t R 
+, B o u t he m y P 
+. N on 
+一p ar am e t r ie m ot io n ac t iv i yt an al ” 15 for s t at is t i e a l r e t r i e val w it h P ar t i a l 明e 详
+oJ u r n al 01 Ma t henz a ` j司nIZ 绍宕gD an d 功s f on 
+, 20 1 , 1 4 (3 ) : 2 5 7 、2 7 0 
+4 7 C he n Y 
+, 叭厄n g J 2 . A r e ig o -n b as de fuZ 
+z y fe at ur e mat ch i呢aP rP o aC h t o e o nt e nt 一b as de im昭e r e t r i e va l
+· 工E E E 
+乃助日配t jo ns o n 
+aP t 亡enr A n a lysj s an d M创土j n e ln 亡eJ 」馆e n ce 
+, 2X() 2 , 2 4 ( 9 ) : 1 2 5 2、1 2 6 7 
+4 8 S t r ie k e r D , K et t e n b 鱿h T 
+. 
+eR al 
+一
+t im e an d m ar ke r l哪v is io n 一b嫂d t r朗k i n g fo r o u t d o o r a gu me nt de r ael it y 
+SP P li e at io n 
+. 石日E E an d A C M nI 亡enr a 亡jon al yS m P OSJ 
+u m on A u 琴m en 云司月油司j yt, 2X() 1, 
+18 9 ~ 19() 
+4 9 oY u S 
+, 
+N e u m an n U 
+, 
+A z u m a R 
+. H y b r id in e rt iia an d v is io n t r 鱿k igl fo r au g m e nt de r aej it y r e g is t r at io n 
+. 尸r介
+c 以泪jn 邵o f I E E E 功r t u al R e 司主yt 
+, 1 9 9 9 , 2 6 0 、2 6 7 
+5 0 K an b a r a M , 
+oY k卿a N 厂几k e m ur a H 
+. 
+A s t er eo v is io -n b 韶ed au g l l l e nt ed r e al iyt s ys t e m w it h m ar 助r an d n at ur al 
+fe at uer 
+t r 鱿k in g 
+. 
+I n : P r o e e d i n gs o f I E E E t h e 7 t h In t e r n at i o n al C o n fe r e n ce V i r t u al S ys et m an d M ul t i m ed ia , 
+V S MM , 0 1 
+. 
+W如h in gt o n , D C 
+, 
+U SA : I E E E P r哪, 2X() 1 
+. 
+4 5 5、4 6 2 
+5 1 R朋e n fe ld A . 
+R O m i m a g e an a l ys is t o co m P u t e r v is io n : A n a n n o t at de b i b li o gr a P .hy 伪m P u t er 场s 奎o n an d 
+mI a g e nU d e r s tan d 宕n 乙2X() l , 8 4 ( 2 ) : 2 9 8 、3 2 4 
+5 2 B ia lar d D H , B r ow n C M 
+. 
+C o m P u t e r V is io n , P er nt i份H al 
+, I n e , 19 8 2 
+5 3 Hor n B K , 
+S e h u n ck B G 
+. D e t e r m in e o p t ie 目F low 
+. 
+A r t 访d al 劲亡e ll主罗。ce 
+, 1 9 8 1 , 1 7 ( 1· 3 ): 1 8 5 、2 04 
+5 4 L u 诩B D , K a n 毗e T . 
+A n it er at ive i m a g -e r e igs t r at io n t ec h n iq u e w it h an 即p lie at i o n t o s t e r eo v is i o n 
+. In : 
+P r o c 以刃in gs o f t h e I n t e r n at io n a l Jo int C o n fe r e 
+nce o n A rt iif e i a l I nt e l lig e n e e 
+. 
+V妞n e o u ve r , B C 
+, 
+C an 目a : Wi lliam 
+K au fm an n , 1 9 8 1 , 6 7 4 、6 79 
+5 5 B e a u e h e m i n 5 5 
+, B ar r o n J L . T h e 。o m p u t at io n o f o p t ie a l if ow 
+. 
+A C M oC m p u t矛n g S u r 诀岁s , 1 9 9 5 , 2 7 (3 ): 
+4 3 3、4 6 7 
+5 6 B a k e r S , M a t t he w s 1 
+. 
+L u 
+~ K an ad e 2 0 ” asr 
+o n : A u n i fy i n g fr am 
+ewo r k 
+. 
+nI t er n a t i on 目oJ u nr 目Of C b 川P u 忿e r 
+祷s 万on 
+, 2 0 04 , 8 6 ( 3 ) : 2 2 1、2 5 5 
+5 7 M at s u y a m a T , U ik t a N 
+. R e a 】~ t i m e m u lt i t ar g e t t r aC k l n g by a 
+co p e r at ive d is t r ib u tde v is io n s y s t e m 
+. 尸功伪目~ 
+i n 召, of th e I E E E , 2X() 2 , 9 0 ( 7 ) : 1 1 3 6 、1 1 5 0 
+5 8 W助h t er s 
+, N a g e l H . 升朗k i n g p e r so ns i n m o n o e u lar im a g e s 叫u e n 璐
+. C b nZ p u 忿er 功s jon an d mI . g e UD d -er 
+s 忿an 山幅19 9 
+, 倪( 3 ) : 1 74 、19 2 
+5 9 Zh a n g W J , 
+Q i F H , J ian g 2 J . A p r ac t i e e a l m e t h o d fo r d et ec t i昭a n d t r 朗ik gD o b 」e c t s i n i m ag e eS q ue n c 〔. 
+i n a er al 
+一
+t ime 
+v id eo s
+vuer 
+i lla n e e an d m o n iot r in g s y s t e m 
+. 
+C 石加ese oJ unr al Of hS an hg 目J ja o ot n g 山jv . r s l yt 
+, 
+2X() 2 , 3 6 (1 2 ) : 1 8 3 7 、1 84 0 
+60 M a S D , Z h an g 2 Y 
+. 
+C o m p u t e r V i s i o n : C al e u la t io n T h eo 即an d A lg o r i t h m oF un d at i o n , B e ij ing : cS ie n ce 
+P r 
+es 
+, 19 9 8 
+6 1 D o d 侣t ad e r S L , 
+eT 树p A M 
+. 
+M u l t ip le e 
+am 
+e r a t r ac k i n g o f in t e r ac t in g an d o c lu d de hu m an m ot i o n · 
+P r o 
+~ d j n 邵o f 亡为e I E E E , 20 0 1 , 8 9 ( 1 0 ) : 14 4 1、1 4 5 5 
+6 2 eY Y , 
+T s o t sos J K 
+, H ar l叮E 
+, 
+B e n n e t K 
+. 
+竹ac k i n g a p e sr o n w i t h p r -e r ce or d de im a g e d at a b ase 
+a dn a p an 
+, t i lt , 
+an d oz o m e a m e r a . 
+M瓦打才n e 俏s jon an d A p p 」jca `主on 
+, 2《兀)K , 1 2 ( 1) : 3 2、4 3 
+6 3 Sm it h S M , B r a d y J M 
+. A S S E T 一2 : 助a l一
+t i m e m o t io n eS g m e nt at i o n a n d s h 即e t r aC k i雌
+· 
+石日E E 7乍a n s aC 亡j o 朋
+o n aP t t 
+enr A n a 」少s 招an d M创力jn e nI t e llj g ℃ n e e , 19 9 5 , 1 7 ( 8 ): 8 1 4 、8 2 0
+
+期 侯志强等 视觉跟踪技术综述 , B r o d s k y T 
+, 
+A lo imo osn Y 
+. D et e c t i n g in d e p en d e nt m o t in n : T he s t at i s t iCS 
+o f t e m p o r ia co nt i n u i yt 
+. 
+JE E E 升an s ac 亡f on s on aP t t ern A n a 
+lys 坛an d M` 功jn e ln 亡eJ l gej 
+n ce 
+, 2 0X() 
+, 2 2 (8 ): 7 6 8、7 7 3 
+6 5 H s ie h J 
+. Fb 日t s t it e h in g ia g o r it hm fo r m vo in g o bj e e t d e t e e t io n an d m os ia e co ns t r u e t io n 
+· 
+mI 
+a g e a n d 铸s `o n 
+伪功p u t j姐, 2 0 4 , 2 2 ( 4 ) : 2 9 1、3 0 6 
+6 6 H s u C , T s an Y . 
+M oe ia cs o f v id e o se q u e n ce s w i t h m vo i n g o b j e e t s . 
+S j胭aI 于份o c 侧” j n g : 
+nIZ 日g e OC m m u ” 矛ca 七jo n , 
+20() 4 , 1 9 (1 ) : 8 1“ 9 8 
+6 7 节而叮9 D S 
+, L i 2 M 
+. 
+T h e t ce h n o lo g y o f r e ia 
+一t i m e d e t e e t io n a n d t r ac ik n g fo r s p at iia l v id e o m o t io n o b j ce t 
+· 
+既i n es e oJ u nr aJ of S j却目P or ~ j n 肠20() 5 , 2 1 (2 ) : 1 9 5 、1 9 8 
+6 8 Y五Il g Y 
+, Z h an g T 
+. 
+M vo i n g t ar 罗t t r a c k i n g b as e d o n fe at u r -e o p t i e a l
+一
+fl ow 
+. 
+hC jn es e OJ u nr a l o f A s 乙or n A u 亡ics , 
+2 0X() 
+, 2 1 (2 ): 8 、1 5 
+6 9 S o a r e s L D 
+, 
+P e er i r a F 
+. 
+S p at ial s h aP e e r r or e o n e e al m e n t fo r o b j ce t 
+一
+b朋de i m a g e an d v i d o e o d i n g 
+. 
+IE E E 
+升a 刀
+acs t jons on lm 日g e P r o 
+cesl 
+n 乙2 0() 4 , 1 3 ( 4 ): 5 8 6 、5 9 9 
+7 0 Z hao T 
+, N e v a t ia R 
+. 
+肠朗k i雌m ul t i p l e h u m ans in e o m p le x s i t u at i o ns 
+. 
+ZE E E 乃a D acs t jo n s on aP 亡t er n A n a ly s js 
+an d M a 曲j n e ln 亡eJ ll g℃n e e , 20 0 4 , 2 6 (9 ): 12 0 8、12 2 1 
+7 1 uY T , 
+V叭二Y 
+. 
+C o llab or a t ive t r aC k in g o f m u lt i p le t ar g e t s . I n : P r o e e d in , o f I E E E C o n fe r e n e e o n C o m p u t e r 
+V io i o n an d P at t e r n R e c吃n i t io n , 
+C V P R ` 0 4 , W比h in gt o n , D C 
+, 
+U S A : I E E E P r es s , 2 0 0 4 
+. 
+1 : 8 3 4 、8 4 1 
+7 2 M e K e n n a S 
+, J a b r i S 
+, D ur i e Z 
+, R o se n fe l d A , 
+W匕c ha le r H 
+. 
+竹鱿k in g gr o u PS o f P eo P l e . 
+Cb m P u ` er 祷s 京on a n d 
+加a 召℃ 
+nU d e r s tan d 万赐2X() 0 , 8 0 ( l ): 4 2、5 6 
+7 3 J ur ie F . 
+肠朗拓n g o bj ce t s w it h a r ce o g n i t io n a lg o r i t h m 
+. 
+aP 亡七er n 几即姐刀j t f朋eL “ e sr , 19 9 8 , 1 9 (3 一4 ) : 3 3 1“ 3 4 0 
+7 4 D r u m m o n d T , 
+C IP o l la R 
+. 
+取al 
+一
+t i m e v i s u a l t r ac k ln g o f e o m P lex s t r u e t ur es 
+. 
+IE E E 升an s ac t 万o n s o n 
+aP 亡亡er n 
+A n a ly s招an d M` 功万n e ln `目石罗刀e e , 2 0 0 2 , 2 4 (7 ) : 9 3 2、9 4 6 
+7 5 L即m ar ie F , L e v i n e M D . 
+升a C k i略d e fo r m ab le o b j ce t s i n t h e p la n e us i昭a n ac t ive e o nt o u r m o d e l
+· 了E E E 
+升an s ac 亡jo ns o n 
+aP 亡七enr A n 碱ysj 
+s an d M` 士室n e ln ` eJ I Jg ℃ n e e , 19 9 3 , 1 5 (6 ): 6 1 7、6 2 4 
+7 6 J ia n A K 
+, 
+Z h o gn Y 
+, D u b u is s o n 一
+J o lly M 
+. D e fo r m a b le t e m Pl at e m o d e ls : A r e v i e w 
+. 
+s 主gn 川rP o e
+esj 
+n 乙19 9 8 , 
+7 1 (2 ): 109 、1 2 9 
+7 7 D e lam ar er Q , 
+aF u g e r 留0 
+. 3 D ar t i e u la t de m o d e le an d m u lt iv ie w t r 朗k i n g w it h Phy s ica l fo r e es 
+. 
+OC m P u 亡e r 
+训日jon an d mI 
+a 罗nU d , 亡an d jn乙20() 1, 8 1 (3 ) : 3 2 8 、3 5 7 
+7 8 P la n ke r s R 
+, 
+F’u 
+a P . 肠队k in g an d mo de lin g P eo P le i n v id e o s e q u e 
+nces 
+. 
+C o m P u t e r Vi s 宜o n an d Im 尽g e 
+nU d e -r 
+s 忿an d 全n 乙2 0 0 1 , 8 1 (3 ): 2 8 5 、3 0 2 
+7 9 C o m an n ie iu D , 
+R启m es h V 
+, 
+Me er P . 
+K e r n e -l base d o bj e e t t r ac k ln g 
+. 工日E E 7 } a n ` aC 亡万on s o n 
+aP 亡亡er n A n a lys is 
+an d M` 出全n e ln 亡e ll l g℃ n ce 
+, 2 0 0 3 , 2 8 (5 ): 5 6 4~ 5 7 7 
+8 0 o li ve r N M , 
+Ro s ar i o B , 
+eP Dt lan d A R A B a y e s i an e o m P u t e r v is io n s ys t e m for m o d e li n g h u m an i nt e r a c t l o 朋. 
+工E E E 升an s ac `f朋, 即aP 七忿ern A n a ly s 抽an d MaC 右了n e ln 亡el l l g e n ce 
+, 2 0 X() 
+, 2 2 (8 ) : 8 3 1、8 4 3 
+8 1 M ar r D . 
+V is io n : a co m p ut at i o n a l i n v 吧旧t ig a t io n i nt o t h e h u m a n er p r e s e nt at io n an d p r o e 
+es in g o f v is u al in fo -r 
+m at i o n , 
+R e m an W 
+. H . 
+an d C o m p a n y , S a n R a n e i s e o , 1 9 8 2 
+s Z v 而田9 5 
+, A i H . 
+Z , He K . z , D i fe r e n 脸i m a g -e b 朋e d m u l t ip l e m o t io n t a r g et s d e t e e t io n an d t r ` k i n g 
+. 伪fn 
+ese 
+OJ u nr 目Of lm 件g e an d G r 即h jcs , 1 9 9 9 , 4 A ( 6 ): 4 70 、4 7 5 
+8 3 H o u Z Q
+, H an C 2 
+. A b 鱿k 盯o u n d r e co sn t r u ct ion a lg o r it h m b as e d o n p ixe l i nt e 朋i yt e l as s iif e at io n 
+. 以`n 印e 
+OJ u rn al of S o ft 肠旧rL e , 2X() 5 , 1 6 ( 9 ) : 15 6 8、1 5 7 6 
+8 4 B ar 
+一
+S h a lo m Y 
+, 
+oF rt ma n n T 
+. 升鱿k i n g a n d D at a A s so e i at i o n , 
+A e ad e m ie P r e s , 1 9 8 8 
+8 5 J u li e r S 
+, F l e t D 
+, E -I Mar ag h i T 
+. 
+A n e w e xt e ns i on o f t h e K ia m an if l t e r t o n o n l至n e ar s y s t e m 
+. 尸r o e 氏对j n 邵o f 
+S 于叹E , 19 9 7 , 3 0 6 8 : 18 2、1 9 3 
+8 6 L I P , 
+Z h an g T , M a B . 
+U ns e e nt e d K a l m an if lt e r for v i s u a l e u r ve t r aC k ign 
+. 加a g e an d 访s fo n oC m P u t jn 乙2X() 4 , 
+2 2 (2 ) : 1 5 7、1 6 4 
+8 7 Ra b in e r L 
+. 
+A t u t or i ia o n h i d d e n Ma r k o v m o d e ls an d s e le e t de a P P li e at io ns i n s P e e h r e c o g n i t i o n . 
+Of th e I E E E , 1 9 8 9 , 7 7 ( 2 ) : 2 5 7、2 8 5 
+8 8 S ia mo dn D , 
+G o r d o n N , Sm it h A . 
+A voen l a p p r o aC h t o n o n li n e ar /on -n G a us ian B a y es i an s t at e es t im a t io n 
+. 
+JE E P r o c峨泪j n 邵on 凡记ar 
+, 
+oS n ar an d Na 
+v l g a 亡j on 
+, 19 9 3 , 1 4 0 (2 ): 1 0 7 、1 1 3 
+8 9 A r u lam P aj am M 
+, 
+Mas ke l S , G o r d o n N , 
+C I即P T . A t 毗o r iia o n P a r t i e le if lt e r s fo r o n lin e n o n li n e a r / n o n - 
+G~ 
+ian B a y es i an t r 鱿k i n g 
+. 刃日E E 7 ) a n s ac 衍o ns o n s 落n al P r O
+~ f n g , 2 0 0 2 , 5 0 ( 2 ): 1 7 4 、18 8 
+9 0 Is ar d M , B la k e A . 
+C O N D E N S A I 
+,
+10 N 一
+C o n d it i o n al d e ns ity P r o p 昭at io n fo r v i s u a l t r 鱿k i n g 
+. 
+nI 亡
+ern 
+a t i o n a l 
+oJ u rn al Of C b m p u t er 叨s f朋, 1 9 9 5 , 2 9 ( 1 ): 5~ 2 8 
+9 1 C he n Y 
+, 
+R u i Y . R e a l一
+t i m e s P e a k e r t r ac k i gn us ign P 翻rt i e le if let r se nso 
+r f u s i o n 
+. 
+尸r o c 氏对i n 罗o f t石e IE E E 
+, 2X() 4 , 
+9 2 (3 ): 4 8 5、4 9 4
+
+自 动 化 学 报1 卷 让 , 
+Hu a n g T 
+. 助b us t vis u ia t r ~ 盘i鳍妙玉n t e gr at in g m ult 玉p le eues b a de on 汾i n fe er cne laer in 雌. 
+nI et -r 
+n a t jon aJ oJ unr aJ o f Cb m p u etr 访s i on 
+, 2X() 4 , 5 8 (1 ): 5 5 ~ 7 1 
+9 3 P e r 既P 
+, 
+Ve r m a k J 
+, 
+B lak e A 
+. D at a 仙i on for vi s u al t r aC k i鳍w i t h p 四rt ie les 
+. 
+f 份。仍司盛刀沙of 亡h e 石日E E 
+, 2以M 
+, 
+9 2 (3 ): 4 9 5 ~ 5 13 
+9 4 Z h o u S K , 
+C h e lla p p a R 
+, 
+M O g h ad d an B 
+. V is u al t r aC 拓gD an d r eC o g n 盛t i朋朋ign a p p ear an 汾ad 即t ive m o d山
+in p ar t ie le if lt e r s · 不日E E 升a n s aC 亡ion 
+s 朋nIZ 尽g e p r o 
+~ 万吧, 2 0 4 , 1 3 (1 1 ): 1 4 9 1 、1 506 
+9 5 H u e C 
+, 
+C ad e r J , 
+eP r e z P. 
+升配裕n g m u lt iP le o bj ec st w it h p a r t i e l e if lt e r i n g 
+. 了E E E 升an s a c t josn on A e r 创甲aC e 
+an d lE ec t orn 主e yS s t~ 
+, 20 2 , 3 8 (3 ): 79 1~ 5 1 2 
+9 6 S P e n g le r M , Se h ie le B . 
+l b w ar ds r o b u 旧t m ul t i- e u e i nt e gr a t i o n fo r v i s u al t r 鱿ik gn 
+. 
+M创力j n e 仍s 室on an d A P P I卜
+ca 亡万助s , 2X() 3 , 1 4 ( 1): 5 0、5 8 
+9 7 Me r we R 
+, D o u ce t A , 
+R e i t . N , 认厄n E . T h e 
+uns ce nt de p ar t i e le if lt e r , t e ch n ie a l er p o r t C U E D /F 一IN F E N G / 
+T 3R 8 0 
+, E n g i n er i n g D e P ar t m e n t , 
+C am b r id g e U in ver 
+s iyt A gu 
+. 
+2 0X() 
+9 8 A g 盯w a l J K 
+, N an d hak u m ar N 
+. 
+o n t h e e o m P u t at i o n o f m ot io n for m 吸闷u e n ces 
+o f im a g es 
+一
+A r e v ie w 
+. P r 。
+c 仪泪jn乎of `h e L日E E , 1 98 
+, 7 6 (8 ): 9 1 7 、9 3 5 
+9 9 M e y℃ r F , 
+B o u t he m y P . 
+助9 10 介b a s e d t r 创火Ign us i gn a if ne m o t io n m o d e is i n lo n g im a g e s e q u e n 姗
+. 
+C 、,G IP : 
+mI a 砂u n d e 怡t an id n 乙1 9 9 4 , 6 0 (2 ): 1 1 9、i 如
+1X() B as e le B 
+, 
+D e r ich e R 
+. 
+取g io n t r 朗k i n g t hr o gu h im a g e eS q ue n ces 
+. 
+I n : P or c 氏对jn gs of IE E E nI 切r n a t jon al 
+C b n fe r e n ce of OC m P u etr V 万s j如, 1 9 9 5 , 3 0 2、3 0 7 
+10 1 H a g e r G 
+, 
+B e lh u m e u r R E if e ie nt r e ig on t r aC k ln g w it h p ar am et r i e m o d e 坛o f g e o m e t r y an d i llu m in at io n 
+. 
+花扭召
+升如配忿j on s on aP t et r n A n a 」ys `5 an d M侧出i n e DI 七el l扭enr ce 
+, 1 9 9 5 , 2 0 ( 1 0 ) : 1 0 2 5 、1 0 3 9 
+10 2 J e P so n A 
+, 
+F l e t D , 
+E l一M ar ag h i T 
+. 
+DR b us t on li ne aP pe ar acne m o d e is fo r v i s u al t r 鱿k l n g 
+. I E E E 升an s ac 忿万姗
+叨aP 忿七enr A n .al ” 拍an d Mac h `n e nI t e l刀地渗n ce, 2X() 3, 2 5 ( 10 ): 12%、13 1 1 
+10 3 M 毗t h e w s l , 
+I s h i肠w a T , B a k e r 5 
+. 
+T he t e m P lat e u P d at e P r o b le m 
+. JE E E 升an s ac t j朋5 on aP t忿enr A n a加抽
+an d M剐为jn e 助亡e lil 罗n ce 
+, 20 4 , 2 6 (6 ): 5 10 、8 1 5 
+10 4 N g u y e n H , Sm e u l de r s A 
+. f 抽t o c ldu de o bj ce t t r朗k ign by a r o b us t aP p e ar an ce if lt e r 
+. 
+厂E E E 升a 刃` 旧d 万ons on 
+aP 亡姗n A n a ly s js an d M川为宜n e ln 亡el l l g℃ n ce 
+, 2 加4 , 2 6 (8 ): 109 9 、1 10 4 
+10 5 A v id a n 5 
+. 
+S u P po rt v ce t or t r ac k i n g 
+. 
+JE E E 升a ns ac t i朋5 on aP t 亡enr A n aJ 声主5 an d M山士j n e nI elt ll g℃n ce 
+, 2X(] 4 , 
+2 6 ( 8 ) : 106 4 ~ 10 72 
+1 0 6 B I朗M , J e 声o n A 
+. E ige n t r ac k i n g : DR b us t m at e h ign an d t r aC k lgn o f ar t i e u lat ed o b j e ct s us i n g a v ie 补b . ed 
+r e P r es e nt at io n 
+. I n : P r o e e d i n gS o f E ur o P e an C o n fe er n ce o f C o m p ut e r V is i o n 
+. 
+C am b r i d ge 
+, 
+U K : SP r i n g e r 
+Ve r lag 
+, 1 996 
+, 3 2 9 ~ 3 4 2 
+1 0 7 K r is hn an S , 
+Ra v iv D 
+. ZD fe at ur e t r 川水i鳍al g o r it h m for m ot io n an ia ” i s . 
+aP 亡t 
+enr R eC 哪, j t j如, 1 9 5 , 2 8 (8 ) : 
+1 1 0 3 、1 1 2 6 
+108 K a n e kO T , H o r i 0 
+. 凡a t ur e se lce t ion fo r er il ab le t r鱿k i gn us i n g et m P la et m at ch in g 
+. In : P or c 以刃i n 口o f I E E E 
+C o m P u t e r S o e i e t y C o n fe r e cn e o n C o m p ut e r V is i o n an d P at t e r n R ce o g n it i o n , C V P R ` 0 3 . 
+M ad i s o n , 
+Wi. c o ns in , 
+U S A : I E E E P r 洲, 2X() 3 
+. 
+1 : 7 9 6 ~ 80 2 
+1 0 9 Ml t r a P , M ur t妙C 
+, P ia S 
+. 
+U朋u pe r v is de fe a t ur e se lce t ion us in g fe at u r e s i m i lar it .y I E E E 升a n . a ` 亡j ons on 
+aP t t 
+enr A n a 加括an d M山功`n e ln 忿e 」五创翔ce 
+, 2 0 2 , 2 4 ( 3 ) : 3() 1~ 3 1 2 
+1 1 0 C a n 刀y J F . A co m p u t at io n a l aP P r o a ￡h t o de ge d e t e c t io n 
+. JE E E 乃~ ac t jons on aP 亡t 
+enr A n a ly 习抽an d M山=h 万n e 
+加七e1J 堪℃ n ce 
+, 1 9 8 6 , 8 ( 6 ) : 6 7 9 、6 9 8 
+1 1 1 Sm it h S 
+, B r ds y J . 
+S U S U N 一A ne w aP p r o ac h t o l ow le ve l i m a g e p r o e 
+es i n g 
+. 
+nI t
+enr 
+a ` j。刀al OJ u 功aI Of Cb m P u t er 
+V 抽, o n , 1 9 9 7 , 2 3 ( l ): 4 5 、78 
+1 1 2 T 让旧山n a y a g a m P , 
+S u t e r D . o b j ec t t r ac k ing in im a g e s e q u e n ces us in g po int fe a t ur e . 
+aP 忿tenr 凡翔卿j忿jon 
+, 
+2X() 5 , 3 8 (1 ) : 10 5“ 1 1 3 
+1 1 3 N i e ke is K , H ut ch inso n S 
+. 
+8E t i m at i gn u n c e rt ia n t y in S S-D b 助de 众滋t ur e t r ac k l gn 
+. 
+加. 召旧
+an d 仍s 盛on 伪功p u 肠刀g , 
+2 0 0 2 , 2 0 (1 ) : 4 7” 5 8 
+1 1 4 J ia n A K , Z h o 雌Y 
+. 
+L a ks h m an an 
+, 
+o bj e c t m at e ih n g us i gD de fo r m ab le t em P alt es 
+. 石日E E 朴an acs 
+`J 。。日。
+aP 亡t enr A n .aJ yjB 
+s an d M瓜出jn e ln `el il 邵n ce 
+, 1 9 9 6 , 1 8 (3 ): 2 6 7、2 饱
+1 1 5 Y U Z , J ia n A K , D u b u is -son J o ll y M 
+. O b j e c t t r ac k i昭us ln g d e fo r m ab le et m P I毗es 
+. 石日E E 升a 刃口旧d jo n 日助
+aP 忿亡enr A n aJ 声js 朋d M` 叻万n e ln 亡e l il 罗n ce 
+, 2峨洲X ) , 2 2 (5 ): 5刁4 “ 5 4 9 
+1 1 6 K as M , 
+Wi t ik n A , 
+eT r z OP o u los D . S n a k es : A Ct i说co n t o ur m o d e ls . 
+加tenr a t i朋aJ oJ unr al of 伪m p u etr V 抽jo n , 
+19 8 
+, 1 ( 4 ) : 3 2 1~ 3 3 1 
+1 1 7 晓orz po u los D , S即lis k i R 
+. 
+升鱿k i n g w i t h K a lm an S n ak es , in A ct ive V is io n , B lak e A . 
+叨d y ’u ille A 
+, E月5 . 
+C a j n b r i d ge 
+, M A : M I T P r es s , 1 9 9 2 
+. 
+3 、2 0
+
+4 期侯志强等: 视觉跟踪技术综述6 17 
+1 1 8 V ie r e n C , 
+C ab e s t 成n g F , P os t ia r e J 
+. 
+C at e h i n g m vo i n g o bj ce t s w i t h s n a k e s fo r m o t i o n t r ac k i n g 
+. 
+aP t t e r n 
+R e CO g n it 主o n L e t七e r s , 1 9 9 5 , 1 6 (7 ): 6 7 9 、6 8 5 
+1 1 9 O s h e r S 
+, Se t h i an J A . 
+R o nt s P r o P ag at i n g w i t h e ur va t u r e d e P e n d e nt s P e d : a lg o r i t h m s b as e d o n H a m i lt o n - 
+J ac o b i fo r m u lat io n 
+. 
+OJ u nr al Of C o nz P u 亡a 七j o n al P力” f cs , 1 9 8 8 , 7 9 ( l ): 1 2 、4 9 
+1 20 M al lad i R , 
+S e t h ian J A , 
+Ve m ur i B C 
+. 
+Sh a P e m o d e li n g w it h fr o nt P r o Pag at i o n : A l e ve l se t a P p r o ac h 
+. JE E E 
+1份助acs 亡jons on aP 忿亡enr A n aJ ” js an d M创出jn e ln 亡el lj g℃ n e e , 19 9 5 , 1 7 (2 ) : 15 8、1 7 9 
+1 2 1 C as e l les V 
+, K im m e l R , 
+S即i r o G 
+. 
+G eo d e s i e ac t i ve e o n t o u r s . 
+nI t 
+enr a `沁刀al OJ u nr al Of C b m p u t e r 功s 矛on 
+, 1 9 9 7 , 
+2 2 ( 1 ) : 6 1、7 9 
+1 2 2 P ar sg ios N , D e r ie h e R 
+. 
+G e o d es i e ac t ive co nt o ur s an d le ve l s e t fo r t h e d e t ce t io n an d t r 鱿k i n g o f m vo in g o bj e e t s . 
+I E E E 升a n s ac 亡f o n s on aP 亡t enr A n a 加15 an d M aC h 万n e nI t e lll g e n ce 
+, 2 0 0 0 , 2 2 (3 ): 2 6 6、2 8 0 
+1 2 3 D go l d e nb e r g R , K im m e l R 
+, 凡v li n E , 
+R du z s k y M 
+. f 助t g e o d e s ie 鱿t ive co nt o ur s . 招E E 升a n 
+acs 亡j o n s on 加a 吕℃ 
+尸r o 
+~ 赐2 0 0 1 , 1 0 ( 10 ): 14 6 7、1 4 7 5 
+12 4 M a nso ur i A 
+. 
+eR g io n t r ac k i n g v ia le ve l s e t P D sE w it h o ut mo t io n co m P俄at io n 
+. 
+I E E E 乃a n 
+acs t 主o ns o n 
+aP t 亡e r n 
+A n a 加招an d M创劝万n e nI elt ll g e n e e , 2X() 2 , 2 4 (7 ) : 9 4 7、9 6 1 
+1 2 5 R e e d m a n D , 
+Z h a n g T 
+. 
+A e t ive C o 毗o u r s fo r t r ac k ln g d i s t r i b u t io 朋. 石日E E 升an s ac 乙万o n s o n 
+mI 
+a g e rP o e es s j n g , 
+2 0 0 4 , 1 3 (4 ): 5 1 8、5 2 6 
+12 6 G e r ar d P , G ag al ow ic z A . 
+T hr e d im e n s io n al m o d e l
+一
+b as de t r朗k i gn us in g t e xt u r e l e ar n in g a n d m a t ch in g 
+. 
+aP t亡enr R ce go n j幻on eL t亡。, 2X() 0 , 2 1 (1各14 ): 10 9 5、1 1 0 2 
+12 7 J un g S K 
+, 
+W匕h n K Y 
+. A m o d e l
+一
+b as de 3一D t r朗ik gn o f r i ig d o bj ce t s fr o m a s e q u e n e e o f m u l t iP le P e r s P ce t ive 
+v ie w s . 
+aP t亡
+enr R ce 哪和i t jon L e t亡。, 1 9 9 8 , 1 9 (-5 6 ) : 4 9 9 、5 1 2 
+1 2 8 H u W M 
+, 飞妞n T N 
+, 认厄n g L , 
+M即b a kn 5 
+. 
+A s u r Ve y o n v is u a l s ur ve i llan e e o f o bj ec t m o t io n a n d b e h va io r s · 
+招E E 
+升an s ac 忿龙on s on yS s t ezn 
+s , 
+Man , 
+an d yC benr 
+e t万c-s F恤r 亡C : A 即Ij ca 亡jo n s an d eR vi e 。, 2 0 0 4 , 3 4 ( 3 ) : 3 34 、3 5 2 
+12 9 G e nt i le C , C am 讲0 
+, S z n ia e r M 
+. 
+Se g m e nt at i o n fo r r o b u s t t r ac k in g i n t h e p r es e n e e o f s e ve r e o e e l us io n 
+. JE E E 
+了}朋s ac 七万o n , 即mI a g e P r O
+~ in 乙2 0 4 , 1 3 (2 ): 16 6“ 1 7 8 
+13 0 Zh an g Y J . Im a g e E n ig n e e r in g : Im a g e P or e es i n g an d A n a l y s is , B e 巧i吃: T s i n g h u a U n ive r s iyt P r es 。, 1 9 9 9 
+13 1 G ao W
+, 
+C h e n X L . 
+C o m P u t e r V is io n : A lg o r lt h m an d S y s t e m T h o r 醉B e ij i n g : sT i吧h u a U n ive r s i t y P r哪, 
+19 9 9 
+俄志强2 0 5 年毕业于西安交通大学, 获博士学位, 目前为空军工程大学电讯工程学院副教授. 研究方向为图像
+处理, 视觉跟踪和信息融合. 
+(H O U Z h -l Q i a n g eR 
+e e iv e d h is P h 
+. 
+D 
+. 
+d e 夕e fr o m X i` 
+an J iao t o 雌U n i ve sr it y i n 2 0() 5 . He 15 e ur r e nt ly an 
+~ 
+e iat e p r o fes sor 
+, hi s r es e ar hc int e心t s in e lu d e im a g e p r o e es s i n g , v is u al t r aC k in g , a n d in fo r m at io n 
+fus i o n 
+. 
+) 
+林奈昭西安交通大学电信学院教授, 博士生导师. 研究领域是随机控制与自适应控制
+、
+工业过程控制与优化
+、
+非
+线性颇谱分析, 决策理论与决策支持系统等, 近年来主要从事信息融合理论研究. 
+(H A N C h o n -g Z h a o P or fes so r in S e h o o l o f E le ct r o n i e a n d I n fo r m at io n E n g in e e r i n g at X i
+` a n J ia o t o n g 
+U n i ve r s iyt 
+. 
+H is r es e ar hc int e r es t s in e l u d e s t o e h 朋t ie e o nt r o l a n d ad aP t i ve e o nt r o l, i n d us t r ia l P r o e es s co n t r o l an d 
+o p t im i z at io n , n o n li n e ar s p ce t r a l an a ly s is , d e e i s io n s u p p o r t t h e o r y an d s ” t e m s , 
+an d i n fo r m at i o n fus io n 
+. 
+)
+

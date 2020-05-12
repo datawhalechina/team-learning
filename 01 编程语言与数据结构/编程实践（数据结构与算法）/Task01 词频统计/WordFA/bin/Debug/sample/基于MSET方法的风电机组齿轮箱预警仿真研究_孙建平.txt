@@ -1,0 +1,553 @@
+第25 卷第12 期系统仿真学报. Vol. 25 No. 12 
+2013 年12 月Journal of System Simulation Dec., 2013 
+http:∥www.china-simulation.com 
+. 3009 . 
+基于MSET 方法的风电机组齿轮箱预警仿真研究
+孙建平，朱雯，翟永杰，葛建宏 
+(华北电力大学自动化系，保定 071003) 
+摘要：风电机组常年在复杂工况下连续运行，机组对设备的可靠性等方面有很高的要求，齿轮箱
+重要部件的损伤和失效都会直接或间接导致机组停机，从而导致计划外的更换和维护成本。利用
+MSET(Multivariate State Estimation Technique)方法对风电机组的齿轮箱轴温进行状态估计，得出
+齿轮箱轴温的估计值。然后利用滑动窗口残差统计方法对齿轮箱轴温的估计值和实际值的残差进
+行分析，残差均值能显示出齿轮箱轴温的实时运行状态，当残差均值曲线超出设定的阈值区间时， 
+系统开始预警，表明设备运行异常。仿真结果表明基于MSET 方法的风电机组齿轮箱预警系统能
+够实时监测机组齿轮箱的运行状态。
+关键词：MSET; 滑动窗口统计; 齿轮箱; 预警; 仿真
+中图分类号：TM 315 文献标识码：A 文章编号：1004-731X (2013) 12-3009-06 
+Wind Turbine Gearbox Prognostic Simulation Research Based on MSET Method 
+SUN Jian-ping, ZHU Wen, ZHAI Yong-jie, GE Jian-hong 
+(Department of Automation, North China Electric Power University, Baoding 071003, China) 
+Abstract: Wind turbine has been continuous operation under complex condition, and all aspects of the 
+unit equipment have to require high performances such as reliability. Any damage or invalidation of the 
+gearbox important components would make fans stop working directly or indirectly, and it could produce 
+unplanned replacement and maintenance. MEST (Multivariate State Estimation Technique) was used to 
+carry out the state Estimation for the unit gear box bearing temperature to get the gear box bearing 
+temperature estimated values. The sliding window residual statistical method was then used to analyze 
+the residual between the estimated values and the actual values, the residual mean curve was then 
+obtained which expressed the gear box bearing temperature real-time operation state. When residual 
+mean curve went beyond set threshold value interval, the system began prognostic and indicate the 
+equipment has fault. The simulation result shows that the gearbox prognostic system based on MSET 
+method can monitor unit gear box operation real-time. 
+Key words: MSET; sliding window statistic; gearbox; prognostic; simulation 
+引言1 
+齿轮箱是风电机组的一个重要机械部件，主要是将风
+轮在风力作用下所产生的动力传递给发电机并使其得到相
+应的转速。风轮的转速比较低，风力的大小和方向经常变
+化，使得转速不稳定，因此必须通过齿轮箱齿轮副的增速 
+收稿日期：2012-04-16 修回日期：2012-06-13 
+基金项目：中央高校基本科研业务费专项资金资助(12MS118) 
+作者简介：孙建平(1962-)，男，博士，教授，研究方向为系统建模与
+仿真；朱雯(1987-)，女，硕士生，研究方向为系统建模与仿真。
+作用来实现发电机发电所需的转速。齿轮箱在风电机组中
+有加速/减速、改变传动方向、改变转动力矩和离合功能， 
+其发生故障的原因主要是齿轮箱润滑不良造成齿面、轴承
+过早磨损，失速调节型风电机组安装角如果设置过大时， 
+冬季就会出现过功率现象，过高载荷影响齿轮箱的寿命。
+由此可见，对风电机组的齿轮箱进行实时监测是十分必要
+的，它不仅能降低维护成本，还能提高机组的运行水平。
+目前，风电机组故障诊断的主要研究方法包括[1]：基
+于统计数据的故障模式分析，基于时间序列预测的故障诊
+断，基于模型的控制系统故障诊断，基于振动分析的故障
+
+第25 卷第12 期系统仿真学报 Vol. 25 No. 12 
+2013 年12 月Journal of System Simulation Dec., 2013 
+http:∥www.china-simulation.com 
+. 3010 . 
+诊断，以及采用其他检测手段来辅助进行故障诊断，如声
+发射技术[3]、超声波-电容液位检测技术[6]。文献[3]采用BP 
+神经网络对齿轮箱和发电机进行建模并预测，采用多Agent 
+方法对不同部件的诊断结果进行综合分析，给出机组整体
+的运行状态。但采用神经网络建模需要耗时的学习过程， 
+学习样本的选择缺乏依据。用来进行振动幅值的阈值报警， 
+振动信号的采集速度往往难以满足高频振动分析的需要。
+文献[4-6]对近年来的风电机组不同部分的状态监测方法进
+行了系统的分析和综述。文献[7-10]建立了齿轮箱和发电机
+的硬件实验台，通过小波分析方法处理高速采集的振动信
+号，但与实际的齿轮箱运行状态有较大差别。文献[11]是通
+过自动对SCADA(Supervisory Control and Data Acquisition) 
+系统中的数据进行分析来监测风机故障。这些研究内容和
+诊断结果相对分立，没有对不同的特征和征兆如振动数据、
+温度数据、功率数据、启停记录进行数据融合[12]。
+本文主要是采用 MSET 方法对齿轮箱轴温进行状态估
+计，其中应用遗传算法对MSET 方法中的权值参数进行修
+正，得到最佳估计值，然后利用滑动窗口残差统计方法对
+估计值和实际值的残差进行分析，得出残差均值的变化趋
+势，接着根据现场工作人员的经验或者训练时的残差变化
+趋势定义残差均值的阈值区间。为模拟齿轮箱的故障情况， 
+本文在SCADA 系统中对观测向量加入人为温度偏移，并
+对其进行仿真研究。若残差均值曲线超出阈值区间，则表
+明齿轮箱运行异常，工作人员需对其进行检查，并提前确
+定维护方案和维护时间，避免和减轻严重的设备损坏，降
+低维护成本，提高风电机组运行的经济性。仿真结果表明， 
+该方法能及时发现风电机组齿轮箱的异常运行状态，可达
+到实时监测在线状态的目的。
+1 MSET 建模原理
+MSET 是由Singer 等[13]提出的一种多变量状态估计技
+术，已在核电传感器校验、设备监测、电子产品寿命预测
+等方面有成功的应用[14-16]。它是利用系统中正常状态时的
+历史数据进行学习，定义系统状态的各个参数之间的关系， 
+接着通过相关性分析来建立正常运行状态下多个相关变量
+间的内在非线性模型，从而达到状态估计的目的。
+假设风电机组在一定运行时间内的整体数据可用矩阵
+形式表示，该机组共有n 个相互关联的变量，m 个状态， 
+矩阵的列表示某一时刻所有相关变量的运行数据，矩阵的
+行表示该机组在m 个状态时的某一变量的运行数据。设在
+i 时刻时观测到的n 个相关变量为观测向量，即： 
+T 
+X(i) [x (i), x (i), , xn (i)] . 1 2 . (1) 
+定义在正常工作状态下m 个历史观测向量组成过程记
+忆矩阵D，即： 
+D . [X(1) X(2) . X(m)] 
+= 
+1 1 1 
+2 2 2 
+(1) (2) ( ) 
+(1) (2) ( ) 
+n (1) n (2) n ( ) n m 
+x x xm 
+x x xm 
+x x x m. 
+. . 
+. . 
+. . 
+. . 
+.. .. 
+.
+. 
+. . . 
+. 
+(2) 
+过程记忆矩阵 D 中的每一列观测向量代表机组的一个
+正常工作状态。经过合理选择的过程记忆矩阵中的m 个历
+史观测向量所张成的子空间(D)能够代表机组正常运行的
+整个动态过程。过程记忆矩阵的构造实质就是对设备正常
+运行特性的学习和记忆过程。
+MSET 的输入为某一时刻设备的观测向量Xobs，模型
+输出为对该输入的估计向量Xest。对任何一个输入观测向
+量Xobs，MSET 生成一个m 维的权值向量W： 
+T 
+W . [w1 w2 . wm ] (3) 
+从而得到估计向量Xest： 
+Xest .D.W .w1 .X(1).w2 .X(2)...wm .X(m) (4) 
+即MSET 预测输出为过程记忆矩阵D中m 个观测向量
+的线性组合。接着进行权值向量W 的确定和优化。构造
+MSET 模型的输入观测向量和输出估计向量的残差： 
+obs est ε . X . X (5) 
+构造权值向量W[17,18]： 
+W . (DT .D..I).1 . (DT . Xobs) (0 . . . 1) (6) 
+式中：. 为权值向量W 优化参数，I 为单位向量，.为非线
+性运算符，用来替代普通矩阵运算中的乘法运算。接下来
+利用遗传算法对残差进行极小化，求得权值向量W 的优化
+参数. ，从而得到MSET 的状态估计。
+非线性运算符.有多种选择[19]，本文选用两向量间的
+Euclidean 距离，即
+2 
+1 
+( , ) ( ) 
+n 
+i i 
+i 
+x y 
+. 
+. X Y . . . (7) 
+式(6)中的权值向量W反映了MSET模型输入观测向量
+与过程记忆矩阵中各向量的相似性。将式(6)代入式(4)中， 
+MSET 模型对设备或过程的估计向量为： 
+T 1 T 
+est ( ) ( obs ) X . D. D .D . . D .X (8) 
+当机组正常运行时，MSET 的输入观测向量位于过程记
+忆矩阵D 所代表的正常工作空间内，与D 矩阵中的某些历史
+观测向量距离较近，相应的MSET 模型的估计向量Xest 和观
+测向量Xobs 较接近，此时Xest 具有很高的精度。当设备
+运行异常时，机组的动态特性发生改变，输入观测向量将
+偏离正常工作空间，通过过程记忆矩阵D 中的历史观测向
+量的组合将无法构造其对应的精确估计值，导致估计向量
+Xest 和观测向量Xobs 之间的偏差较大，估计精度下降。
+
+第25 卷第12 期Vol. 25 No. 12 
+2013 年12 月孙建平, 等: 基于MSET 方法的风电机组齿轮箱预警仿真研究 Dec., 2013 
+http:∥www.china-simulation.com 
+. 3011 . 
+2 滑动窗口残差统计方法
+本文利用滑动窗口(Sliding Window)残差统计方法消除
+风电机组运行中的不确定因素和随机干扰(如传感器测量
+误差等)，提高监测的可靠性。通过合理的选择滑动窗口的
+宽度，便能及时、迅速地反映残差统计特性的连续变化， 
+消除随机因素的影响，提高设备状态监测的可靠性，降低
+误报警的几率。当机组运行异常时，这些动态模型可及时
+检测出机组各部分的轻微异常变化，从而达到早期故障诊
+断的目的。
+假设在某段时间内，MSET 模型的齿轮箱轴温的预测
+残差序列为： 
+GT [ 1 2 N ] ε . . . . . . (11) 
+对该序列取一个宽度为N 的滑动窗口。对窗口内的连
+续N 个残差计算其均值： 
+..
+. 
+N 
+i 
+i N i 
+X 
+1 
+1 . (12) 
+接着确定残差均值的故障阈值EY 。记机组正常运行时 
+MSET模型的残差均值绝对值最大值为EV ，则齿轮箱故障 
+预警的阈值EY 为： 
+Y V E k E 1 . . (13) 
+式中：k1 可由工作人员根据运行经验确定。
+3 对齿轮箱温度进行建模
+3.1 选择建模相关变量
+本文研究的是额定功率为 1.5MW，切入风速为4m/s, 
+切出风速为25 m/s 的Vestas 风电机组。风机的所有运行数
+据均存在SCADA 系统中，SCADA 系统每10min 记录一次
+机组的运行监测参数和运行状态信息，其中运行监测参数
+包含有功功率、无功功率、齿轮箱轴承温度、齿轮箱油箱
+温度、机舱温度、环境温度等126 个监测参数；运行状态
+信息包含机组启动、停机、变桨系统故障、发电机系统故
+障、变频器系统故障、偏航系统故障、液压系统故障和齿
+轮箱系统故障等。本文在SCADA 系统中选择与齿轮箱轴温
+密切有关的以下参数作为MSET 建模中的观测向量Xobs。
+1. 有功功率(P)：当机组输出功率大时，齿轮箱承受的
+载荷就会增大，导致齿轮箱温度升高。有功功率的大小与
+风速、齿轮箱齿轮转速、偏航角度密切相关。
+2. 风速(u)：本文研究的是变速风电机组，这种风电机
+组为实现最大风能追踪的目的，风机要达到最佳叶尖速比， 
+从而使得传动系统的转速与风速成正比。风速越大，齿轮
+箱转速越高，齿轮箱温度越高。
+3. 环境温度(T)；在不同季节，环境温差相对较大；在
+不同时刻，即使机组的功率和风速相同时，由于环境温度
+的不同也会导致齿轮箱温度有很大差异。
+4. 机舱温度(Tc)：机舱温度也是影响齿轮箱温度的因
+素之一，机舱温度过低不利于机械零件工作，过高不利于
+电气部件的寿命。
+5. 齿轮箱油温(Toil)：齿轮箱内有温度传感器，机组运
+行前，要保证齿轮箱油温高于0℃(根据润滑油的要求设
+定)，否则加热到10℃再运行。正常运行时，润滑油泵始终
+工作，对齿轮和轴承进行强制喷射润滑。当油温高于60°C 
+时，油冷却系统起动，油被送到齿轮箱外的热交换器进行
+自然风冷或强制水冷。油温低于45℃时，冷却油回路切断， 
+停止冷却。齿轮箱油温过高一般都是由于风电机组长时间
+处于满发状态，润滑油因齿轮箱发热而温度上升超过正常值。
+6. 齿轮箱轴温(Tgear)：风机运行过程中风轮的受力状
+况极其恶劣，经常在急剧变化的重载荷下连续运行数十个
+小时，其受到的各种载荷都通过主轴直接传递给齿轮箱的
+低速箱，且风机通常要求在无人值守的条件下运行20 年之
+久，因而齿轮箱轴承的故障较为频繁。轴承的损坏主要是
+由于噪声、温度、速度、振动、润滑情况和轴承状态等因
+素造成。
+由于风电机组受外界环境(环境温度、风速等)的影响较
+大，本文对某风机的2011/01 月份的SCADA 数据进行分析
+和处理。该机组从2011/01/22 17:20:00 到2011/01/27 
+17:20:00 的721 个10 min SCADA 数据如图1 所示。
+图 1 中功率P(kw)曲线中所标识的1-6 是功率小于0 的
+时间段，与下列1-6 表分别对应。功率小于0 表示该风机
+此时未发电，并在使用上网电量的电。1-6 表中列出了该时
+间段时的SCADA 系统所记录的风机运行信息。其中，每
+图1 机组01/22 17:20:00 至01/27 17:20:00 时间段内的历史趋势图
+0 1 2 3 4 5 6 7 
+900
+0 
+25
+4
+0 
+-10 
+-20 
+10
+0 
+60 
+40 
+20 
+75 
+35 
+Tgear Toil Tc T U(m/s) P(kw) 
+
+第25 卷第12 期系统仿真学报 Vol. 25 No. 12 
+2013 年12 月Journal of System Simulation Dec., 2013 
+http:∥www.china-simulation.com 
+. 3012 . 
+一个故障码对应一个故障原因，故障码为0 表示当前没有
+故障。风机状态分为0 和1,0 表示风机当前处于停机状态， 
+1 表示风机当前处于运行状态。
+表1 机组SCADA 系统记录数据1 
+序号日期 时间 风速 有功 
+功率 
+故障码 风机 
+状态 
+故障 
+原因 
+1 2011/01/23 5:30:00 23.7 11.8 144 1 高风速
+2 2011/01/23 5:40:00 19.7 148.7 144 1 高风速
+表2 机组SCADA 系统记录数据2 
+序号日期 时间 风速 有功功率 故障码 风机状态 
+1 2011/01/24 9:40:00 5.9 -19.7 0 0 
+2 2011/01/24 9:50:00 7.9 -22 0 0 
+表3 机组SCADA 系统记录数据3 
+序号日期 时间 风速 有功功率故障码 风机状态
+1 2011/01/24 11:40:00 5.4 -7.6 0 0 
+2 2011/01/24 11:50:00 5.1 -16 0 3 
+3 2011/01/24 12:00:00 4.5 -15.1 0 0 
+表4 机组SCADA 系统记录数据4 
+序号日期 时间 风速 有功功率故障码 风机状态
+1 2011/01/24 17:20:00 4.9 -20.5 0 0 
+2 2011/01/24 17:30:00 3.6 -22 0 0 
+3 2011/01/24 17:40:00 3.9 -21.2 0 0 
+4 2011/01/24 17:50:00 6.9 -21.4 0 0 
+5 2011/01/24 18:00:00 6 -3.6 0 0 
+表5 机组SCADA 系统记录数据5 
+序号日期 时间 风速 有功功率 故障码 风机状态 故障原因 
+1 2011/01/25 17:50:00 5.4 -19.4 0 0 
+2 2011/01/25 18:10:00 4.4 -16.5 0 0 
+3 2011/01/25 18:20:00 5.9 -22 275 1 自动偏航
+4 2011/01/25 18:30:00 9.3 -21.4 275 1 自动偏航
+5 2011/01/25 18:40:00 8.6 -21.2 275 1 自动偏航
+6 2011/01/25 18:50:00 8.9 -3.4 275 1 自动偏航
+表6 机组SCADA 系统记录数据6 
+序号日期 时间 风速 有功功率 故障码 风机状态 故障原因 
+1 2011/01/27 7:40:00 22.7 -21.1 144 1 高风速
+2 2011/01/27 7:50:00 21.7 -20.9 144 1 高风速 
+3 2011/01/27 8:00:00 22.5 -21.1 144 1 高风速
+4 2011/01/27 8:10:00 20.3 -3 144 1 高风速
+在表1 中，风机在风速为23.7m/s 和19.7m/s 时报高风
+速故障码，该风速均未达到其切出风速而报高风速故障是
+由于风机在2011/1/23 5:20:00 时刻的风速为24.1m/s，几乎
+达到切出风速，由于系统的自我保护和系统的延迟，所以
+在2011/1/23 5:30:00 和2011/1/23 5:40:00 时刻报144 故障码。
+从表 2、表3 和表4 中可看到，风机状态均为0，故障
+码均为0，表示这3 次均是由于人为原因导致的停机，不
+存在故障，故称之为人工停机。人工停机是由于电网负荷
+限制该风场的发电负荷，使该风机处于停机状态。表4 中
+的2011/01/24 17:30:00 和2011/01/24 17:40:00 时刻风速均小
+于切入风速时也不发电。
+表 5 中前两次是人工停机，其余均是由于自动偏航导
+致有功功率小于0。表6 中报故障码144 是由于风机在
+2011/1/27 7:30:00 时刻风速为24.1m/s，几乎达到切出风速， 
+系统的延迟导致在下一时刻报该故障码。
+从以上 6 个表中可看出，该机组在2011/01/22 17:20:00- 
+2011/01/27 17:20:00 时间段内共发生了4 次停机，均是人工
+停机。同时，该机组在1 月份和后续月份中未发现齿轮箱
+故障和维修记录。MSET 建模中需选取正常运行数据和构
+建过程矩阵，本文将该时间段内功率小于0 的数据丢弃， 
+风速低于4 m/s 的定为4 m/s，风速高于25 m/s 的定为25 
+m/s，其余数据为机组正常运行数据，定义为过程记忆矩阵
+D。最终过程记忆矩阵D 中包含观测向量685 个，观测向
+量Xobs 为正常数据中的齿轮箱轴承温度。
+3.2 确定MSET 模型中的权值参数
+遗传算法(Genetic Algorithm)是通过模拟自然进化过程
+搜索最优解的方法，最初由美国Michigan 大学的J Holland 
+教授在1975 年提出。基本运算过程为： 
+1. 初始化：设置进化代数计数器t=0，最大进化次数T， 
+随机产生M 个个体作为初始种群。
+2. 个体评价：计算种群中各个个体的适应度。
+3. 选择(Selection)操作：从旧群体中一定概率选择个体
+到新群体中，个体被选中的概率跟适应度值有关，个体适
+应度值越好，被选中的概率越大。
+4. 交叉(crossover)操作：从个体中选择两个个体，通
+过两个染色体的交换组合来产生新的优秀个体。
+5. 变异(mutation)操作：从群体中任选一个个体，选择
+染色体中的一点进行变异，产生优秀的个体。
+本文采用轮盘赌选择法进行选择操作，实数交叉法进
+行交叉操作，实值变异进行变异操作。设定迭代次数为50， 
+种群规模为10，交叉概率Pc 为0.4，变异概率Pm 为0.2， 
+. 的取值范围为[0,1]，个体适应度值由观测矩阵与估计矩
+阵的误差绝对值和得到，公式如下： 
+obs i est i 
+1 
+- 
+N 
+i 
+F X X 
+. 
+. . （ ） （ ） (14) 
+式中，N为观测向量维数；Xobs(i)为观测向量的第i 个监测 
+参数； Xest(i)为估计向量的第i个监测参数。 
+3.3 齿轮箱温度MSET 模型有效验证
+利用该机组在 2011/01/22 17:20:00 到2011/01/2717:20: 
+
+第25 卷第12 期Vol. 25 No. 12 
+2013 年12 月孙建平, 等: 基于MSET 方法的风电机组齿轮箱预警仿真研究 Dec., 2013 
+http:∥www.china-simulation.com 
+. 3013 . 
+00 时间段内的685 个正常运行历史数据进行验证MSET 模
+型的正确性。在该时间段内，齿轮箱轴温的最大值为70℃， 
+最小值为50℃。图2 中的上图是齿轮箱轴温的观测向量和
+估计向量的对比图，图2 中的下图是两向量之间的残差图。
+遗传算法优化的MSET权值参数. . 0.5123。 
+图2 机组MSET 模型状态估计结果
+对残差采用滑动窗口残差统计方法进行分析，这里设
+定滑动窗口宽度N=10，得到的残差滑动窗口如图3 所示。
+图3 验证集合的残差滑动窗口统计特性
+运行后得到残差绝对值最大值Ev=0.0125，本文定义
+k1 . 2 ,从而得到残差阈值为EY . .0.0376。 
+3.4 测试齿轮箱温度
+为了验证 MSET 模型进行状态估计齿轮箱温度的有效
+性，在仿真过程中，人为对齿轮箱温度加入温度偏移，用
+来仿真当齿轮箱故障时导致齿轮箱温度升高的情况。对
+01/22 17:20:00 到01/27 17:20:00 的685 个正常运行时的数
+据从第301 点开始对齿轮箱温度变量加入步距为0.0005 
+的累积温度偏移。下图4 是对齿轮箱温度加入累积温度偏
+移后进行MSET 模型的估计仿真。图4 中的上图是观测
+向量和估计向量的对比图，图4 中的下图是两向量之间的
+残差。
+接着对残差进行滑动窗口残差统计处理，这里设定滑
+动窗口宽度N=10，齿轮箱人为加入温度偏移后对应的残差
+滑动窗口统计特性如图5 所示。
+从图 5 中可以看出，置信区间的上限在第461 个滑动
+窗口超出了预先设定的均值阈值，距离开始偏离的第301 
+点的位置为461+10-301=170，10 为滑动窗口的宽度。系统
+在第301+170=471 点处检测出齿轮箱轴温异常，该点处人
+为偏移后的齿轮箱温度与对应的原始正常齿轮箱温度间的
+偏差可以根据温度偏移步距和齿轮箱温度变化区间求出， 
+在该时间段内，齿轮箱温度的最大值是70，最小值是
+49.9895，即170*0.0005*(70 . 49.9895) .1.7℃。可见， 
+当齿轮箱存在故障隐患时，其温度变化异常，齿轮箱的动
+态特性发生改变，输入观测向量偏离正常工作空间，通过
+过程记忆矩阵D 中的历史观测向量的组合无法构造其对应
+的精确估计值，导致估计向量Xest 和观测向量Xobs 之间
+的偏差较大，估计精度下降。因而，该方法能及时发现齿
+轮箱实时运行中存在的安全隐患并及时预警，从而实现实
+时在线监测。
+图4 齿轮箱温度偏移后的预测结果
+图5 温度偏移后的残差滑动窗口统计特性
+4 结论
+本文是通过采集 SCADA 系统中某一台风机在一定时
+间段内的运行数据，对这些数据进行预处理和分析，然后
+对其中的异常数据进行进一步的分析，查找异常原因，并
+在进行MSET 状态估计时摒弃这些异常数据，使用有效数
+据进行齿轮箱的预警仿真。文中采用MSET 进行齿轮箱轴
+温的状态估计，该方法具有建模算法简单、物理意义明确
+等优点，非常适合对复杂随机过程进行建模。接着采用滑
+0 100 200 300 400 500 600 685 
+0.01
+0 
+-0.015 
+mean value 
+0 1 2 3 4 5 6 
+70 
+60 
+50 
+0.02
+0 
+-0.02 
+residual Tgear 
+0 1 2 3 4 5 6 
+70 
+65 
+50 
+0.2
+0 
+-0.05 
+residual Tgear 
+0 100 200 300 400 461 500 600 685 
+0.16 
+0.04 
+-0.02 
+Mean value 
+
+第25 卷第12 期系统仿真学报 Vol. 25 No. 12 
+2013 年12 月Journal of System Simulation Dec., 2013 
+http:∥www.china-simulation.com 
+. 3014 . 
+动窗口残差统计方法进行分析齿轮箱轴温的残差，滑动窗
+口残差统计方法能连续地反映残差分布特性的变化，并最
+快做出系统变量正常与否的决策，在同样精度下，滑动窗
+口残差统计能给出发展性故障信号的最早指示。仿真结果
+表明，基于MSET 方法的风电机组齿轮箱预警系统能实时
+监测风电机组齿轮箱的运行状况，并对齿轮箱的实时运行
+进行故障诊断，提前发现故障征兆，从而使得工作人员能
+够提前确定维护方案和维护时间，避免和减轻严重的设备
+损坏，缩短维护时间，降低维护成本，提高风电机组运行
+的经济性。
+参考文献： 
+[1] W Yang, P J Tavner, M R Wilkinson. Condition Monitoring and Fault 
+Diagnosis of a Wind Turbine Synchronous Generator Grive Grain [J]. 
+IET Renewable Power Generation (S1752-1416), 2009, 3(1): 1-11. 
+[2] Alan Jiang, Yinghua Zhao, Liwei Zhang. Experimental Study of 
+Acoustic Emission Characteristics of Underwater Concrete 
+Structures [C]// Symposium on Piezoelectricity, Acoustic Waves and 
+Device Applications, Nanjing, China. 2008: 252-257. 
+[3] Zaher A, McArther S D J, Infield D G, et al. Online Wind Turbine 
+Tautly Detection Through Automated SCADA Data Analysis [J]. 
+Wind Energy (S1095-4244), 2009, 12(6): 574-593. 
+[4] Hameed Z, Hong Y S, Cho Y M, et al. Condition Monitoring and 
+Fault Detection of Wind Turbines and Related Algorithms: a 
+Review [J]. Renewable and Sustainable Energy Reviews 
+(S1364-0321), 2009, 13(1): 1-39. 
+[5] Amirat Y, Benbouzid M, Al-Ahmar E. A Brief Status on Condition 
+Monitoring and Fault Diagnosis in Wind Energy Conversion Systems 
+[J]. Renewable and Sustainable Energy Reviews (S1364-0321), 
+2009, 13(9): 2629-2636. 
+[6] Lu Bin, Li Yaoyu, Wu Xin. A Review of Recent Advances in Wind 
+Turbine Condition Monitoring and Fault Diagnosis [C]// 
+Proceedings of Power Electronics and Machines in Wind 
+Application, USA: IEEE, 2009: 1-7. 
+[7] Yang Wenxian, Tavner P J, Crabtree C J, et al. Cost- Effective 
+Condition Monitoring for Wind Turbines [J]. IEEE Trans Industrial 
+Electronics (S0278-0046), 2010, 57(1): 263-271. 
+[8] Simon J W, Xiang B J, Yang Wenxian. Condition Monitoring of the 
+Power Output of Wind Turbine Generators using Wavelets [J]. IEEE 
+Trans. on Energy Conversion (S0885-8969), 2010, 25(3): 715-721. 
+[9] Yang W, Tavner P J, Wilkinson M R. Condition Monitoring and 
+Fault Diagnosis of a Wind Turbine Synchronous Generator Drive 
+Train [J]. Renewable Power Generation (S1752-1416), 2009, 3(1): 1-11. 
+[10] Michal R Wilkinson, Fabio Spinato, Peter J Tavner. Condition 
+Monitoring of Generators & Other Subassemblies in Wind Turbine 
+Drive Trains [C]// Proceedings of IEEE International Symposium 
+on Diagnostics for Electric Machines. USA: IEEE, 2007, 9: 
+388-392. 
+[11] Zaher A, McArther S D J, Infield D G, et al. Online Wind Turbine 
+Fault Detection Through Automated SCADA Data Analysis [J]. 
+Wind Energy (S1095-4244), 2009, 12(6): 574-593. 
+[12] Z Hameed, Y S Hong, Y M Cho, et al. Condition Monitoring and 
+Fault Detection of Wind Turbines and Related Algorithms: A review 
+[J]. Renewable and Sustainable Energy Review (S1364-0321), 2009, 
+13(1): 1-39. 
+[13] Gross K C, Singer R M, Wegerich S W, et al. Application of a 
+Model-Based Fault Detection System to Nuclear Plant Signals [C]// 
+Proceedings of 9th International Conference on Intelligent Systems 
+Application to Power System, Seoul. 1997: 653-669. 
+[14] Bockhorst F K, Gross K C, Herzog J P, et al. MSET Modeling of 
+Crystal River-3 Venturi Flow Meters [C]// Proceedings of International 
+Conference on Nuclear Engineering, USA: IEEE, 1998: 128-134. 
+[15] Cheng S F, Pecht M G. Multivariate State Estimation Technique for 
+Remaining Useful Life Prediction of Electronic Products [C]// 
+Proceedings of AAAI Fall Symp. Artif. Intel. Prognostics, USA: 
+IEEE, 2007: 26-32. 
+[16] Cassidy K J, Gross K C, Malekpour A. Advanced Pattern 
+Recognition for Detection of Complex Software Aging Phenomena 
+in Online Transaction Processing Servers [C]// Proceedings of 
+Dependable Systems and Networks, USA: IEEE, 2002: 1282-1295. 
+[17] Singer R M, Gross K C, Herzog J P, et al. Model-Based Nuclear: 
+Power Plant Monitoring and Fault Detection Theoretical Foundation 
+[C]// Proceedings of 9th International Conference on Intelligent 
+Systems Application to Power System, Seoul.1997: 865-879. 
+[18] J Wesley Hines, Alexander Usynin. MEST Performance 
+Optimization Through Regularization [J]. Nuclear Engineering and 
+Technology (S1738-5733), 2005, 37(2): 177-184. 
+[19] Black C L, Unrig R E, Hines J W. System Modeling and Instrument 
+Calibration Verification with a Nonlinear State Estimate Technique 
+[C]// Proceedings of Maintenance and Reliable Conference, USA: 
+IEEE, 1998: 128-142. 
+(上接第3008 页) 
+[3] Rufer Alfred. Energy storage for railway systems, energy recovery 
+and vehicle autonomy in Europe [C]// International Power 
+Electronics Conference–ECCE Asia, IPEC 2010. United States: IEEJ 
+(Association for Computing Machinery), 2010: 3124-3127. 
+[4] Chen Xiao-li, Yang Jian, Fang Yu. Model and simulation of a supercapacitor 
+braking energy recovery system for urban railway vehicles 
+[C]// Proceedings- 2010 WASE International Conference on Information 
+Engineering, ICIE 2010. United States: World Association of Science 
+Engineering (IEEE Computer Society), 2010: 295-300. 
+[5] 许爱国, 谢少军, 姚远, 等. 基于超级电容的城市轨道交通车辆
+再生制动能量吸收系统[J]. 电工技术学报, 2010, 25(3): 117-123. 
+[6] Li Yi-ling, Zhang Xiao-zhang, Dai Xing-jiang. Flywheel energy 
+storage system for city trains to save energy [J]. Advanced Materials 
+Research (S1022-6680), 2012, 512-515: 1045-1048. 
+[7] Nankyo M, Ishihara T, Inooka H. Feedback control of braking 
+deceleration on railway vehicle [J]. Journal of Dynamic Systems 
+Measurement and Control Transactions of the ASME (S0022-0434), 
+2006, 128(2): 244-250. 
+[8] 李建藩. 气压传动系统动力学[M]. 广州: 华南理工大学出版社, 
+1991. 
+[9] 付永领, 祁晓野. LMS Imagine.Lab AMESim系统建模和仿真参考
+手册[K]. 北京: 北京航空航天大学出版社, 2011. 
+

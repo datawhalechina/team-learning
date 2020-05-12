@@ -1,0 +1,3173 @@
+UFLDL教程
+From Ufldl 
+说明：本教程将阐述无监督特征学习和深入学习的主要观点。通过学习，你也将实现多个功能
+学习/深度学习算法，能看到它们为你工作，并学习如何应用/适应这些想法到新问题上。
+本教程假定机器学习的基本知识（特别是熟悉的监督学习，逻辑回归，梯度下降的想法），如果
+你不熟悉这些想法，我们建议你去这里
+机器学习课程 (http://openclassroom.stanford.edu/MainFolder/CoursePage.php? 
+course=MachineLearning) ，并先完成第II，III，IV章（到逻辑回归）。
+稀疏自编码器
+神经网络
+反向传导算法
+梯度检验与高级优化
+自编码算法与稀疏性
+可视化自编码器训练结果
+稀疏自编码器符号一览表
+Exercise:Sparse Autoencoder 
+矢量化编程实现
+矢量化编程
+逻辑回归的向量化实现样例
+神经网络向量化
+Exercise:Vectorization 
+预处理：主成分分析与白化
+主成分分析
+白化
+实现主成分分析和白化
+Exercise:PCA in 2D 
+Exercise:PCA and Whitening 
+Softmax回归
+Softmax回归
+Exercise:Softmax Regression 
+自我学习与无监督特征学习
+自我学习
+Exercise:Self-Taught Learning 
+Deep Learning - Ng 
+wbx
+
+建立分类用深度网络
+从自我学习到深层网络
+深度网络概览
+栈式自编码算法
+微调多层自编码算法
+Exercise: Implement deep networks for digit classification 
+自编码线性解码器
+线性解码器
+Exercise:Learning color features with Sparse Autoencoders 
+处理大型图像
+卷积特征提取
+池化
+Exercise:Convolution and Pooling 
+注意: 这条线以上的章节是稳定的。下面的章节仍在建设中，如有变更，恕不另行通知。请随
+意浏览周围并欢迎提交反馈/建议。
+混杂的
+MATLAB Modules 
+Style Guide 
+Useful Links 
+混杂的主题
+数据预处理
+用反向传导思想求导
+进阶主题: 
+稀疏编码
+稀疏编码
+稀疏编码自编码表达
+Exercise:Sparse Coding 
+独立成分分析样式建模
+独立成分分析
+Exercise:Independent Component Analysis 
+其它
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+Convolutional training 
+Restricted Boltzmann Machines 
+Deep Belief Networks 
+Denoising Autoencoders 
+K-means 
+Spatial pyramids / Multiscale 
+Slow Feature Analysis 
+Tiled Convolution Networks
+
+英文原文作者: Andrew Ng, Jiquan Ngiam, Chuan Yu Foo, Yifan Mai, Caroline Suen 
+
+Language : English 
+
+
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/UFLDL%E6%95%99%E7%A8%8B" 
+
+This page was last modified on 7 April 2013, at 18:26. 
+
+
+wbx 
+
+
+神经网络
+From Ufldl 
+Contents 
+1 概述
+2 神经网络模型
+3 中英文对照
+4 中文译者
+概述
+以监督学习为例，假设我们有训练样本集 ，那么神经网络算法能够提供一种复杂且
+非线性的假设模型 ，它具有参数 ，可以以此参数来拟合我们的数据。
+为了描述神经网络，我们先从最简单的神经网络讲起，这个神经网络仅由一个“神经元”构成，以
+下即是这个“神经元”的图示： 
+这个“神经元”是一个以 及截距 为输入值的运算单元，其输出为 
+，其中函数 被称为“激活函数”。
+在本教程中，我们选用sigmoid函数作为激活函数 
+可以看出，这个单一“神经元”的输入－输出映射关系其实就是一个逻辑回归（logistic 
+regression）。
+虽然本系列教程采用sigmoid函数，但你也可以选择双曲正切函数（tanh）： 
+Deep Learning - Ng 
+wbx
+
+8 
+
+-
+
+4
+
+-
+
+3
+
+1
+
+Deep Learning - Ng 
+
+-Uf
+l
+
+d
+
+l
+
+以下分别是sigmoid及tanh的函数图像
+
+
+函数是sigmoid函数的一种变体，它的取值范围为
+
+
+，而不是sigmoid函数的
+
+
+。
+
+注意，与其它地方（包括OpenClassroom公开课以及斯坦福大学CS229课程）不同的是，这里我们不
+
+再令
+
+
+。取而代之，我们用单独的参数
+
+
+来表示截距。
+最后要说明的是，有一个等式我们以后会经常用到：如果选择
+
+
+，也
+
+就是sigmoid函数，那么它的导数就是
+
+
+（如果选择tanh函数，那它的
+
+导数就是
+
+
+，你可以根据sigmoid（或tanh）函数的定义自行推导这个等
+
+式。 
+
+....
+
+/
+
+idhnexpp.
+
+/
+
+k
+
+iw
+
+/
+
+dlifddteepearnngsanoreu..
+
+........#E4B8ADE6
+
+8.
+1.
+9.E8E8.
+7.
+68.
+9.
+AF
+
+6
+
+/
+
+2
+
+5
+
+08.
+wbx 
+
+
+13-4-8 ........ - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/........#.E4.B8.AD.E6.96.87.E8.AF.91.E8.80.85 3/6 
+神经网络模型
+所谓神经网络就是将许多个单一“神经元”联结在一起，这样，一个“神经元”的输出就可以是另
+一个“神经元”的输入。例如，下图就是一个简单的神经网络： 
+我们使用圆圈来表示神经网络的输入，标上“ ”的圆圈被称为偏置节点，也就是截距项。神经
+网络最左边的一层叫做输入层，最右的一层叫做输出层（本例中，输出层只有一个节点）。中间
+所有节点组成的一层叫做隐藏层，因为我们不能在训练样本集中观测到它们的值。同时可以看
+到，以上神经网络的例子中有3个输入单元（偏置单元不计在内），3个隐藏单元及一个输出单
+元。
+我们用 来表示网络的层数，本例中 ，我们将第 层记为 ，于是 是输入层， 
+输出层是 。本例神经网络有参数 ，其中 （下面
+的式子中用到）是第 层第 单元与第 层第 单元之间的联接参数（其实就是连接线上
+的权重，注意标号顺序）， 是第 层第 单元的偏置项。因此在本例中， 
+， 。注意，没有其他单元连向偏置单元(即偏置单元没有输入)， 
+因为它们总是输出 。同时，我们用 表示第 层的节点数（偏置单元不计在内）。
+我们用 表示第 层第 单元的激活值（输出值）。当 时， ，也就是第 
+个输入值（输入值的第 个特征）。对于给定参数集合 ，我们的神经网络就可以按照函
+数 来计算输出结果。本例神经网络的计算步骤如下： 
+Deep Learning - Ng 
+wbx
+
+13-4-8 ........ - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/........#.E4.B8.AD.E6.96.87.E8.AF.91.E8.80.85 4/6 
+我们用 表示第 层第 单元输入加权和（包括偏置单元），比如， 
+，则 。
+这样我们就可以得到一种更简洁的表示法。这里我们将激活函数 扩展为用向量（分量的形
+式）来表示，即 ，那么，上面的等式可以更简洁地表
+示为： 
+我们将上面的计算步骤叫作前向传播。回想一下，之前我们用 表示输入层的激活值， 
+那么给定第 层的激活值 后，第 层的激活值 就可以按照下面步骤计算得到： 
+将参数矩阵化，使用矩阵－向量运算方式，我们就可以利用线性代数的优势对神经网络进行快速求
+解。
+目前为止，我们讨论了一种神经网络，我们也可以构建另一种结构的神经网络（这里结构指的是
+神经元之间的联接模式），也就是包含多个隐藏层的神经网络。最常见的一个例子是 层的神经
+网络，第 层是输入层，第 层是输出层，中间的每个层 与层 紧密相联。这种模式
+下，要计算神经网络的输出结果，我们可以按照之前描述的等式，按部就班，进行前向传播，逐一
+计算第 层的所有激活值，然后是第 层的激活值，以此类推，直到第 层。这是一个前
+馈神经网络的例子，因为这种联接图没有闭环或回路。
+神经网络也可以有多个输出单元。比如，下面的神经网络有两层隐藏层： 及 ，输出层 
+有两个输出单元。
+Deep Learning - Ng 
+wbx
+
+13-4-8 ........ - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/........#.E4.B8.AD.E6.96.87.E8.AF.91.E8.80.85 5/6 
+要求解这样的神经网络，需要样本集 ，其中 。如果你想预测的输出是多
+个的，那这种神经网络很适用。（比如，在医疗诊断应用中，患者的体征指标就可以作为向量的输
+入值，而不同的输出值 可以表示不同的疾病存在与否。） 
+中英文对照
+neural networks 神经网络
+activation function 激活函数
+hyperbolic tangent 双曲正切函数
+bias units 偏置项
+activation 激活值
+forward propagation 前向传播
+feedforward neural network 前馈神经网络(参照Mitchell的《机器学习》的翻译) 
+中文译者
+孙逊（sunpaofu@foxmail.com），林锋（xlfg@yeah.net），刘鸿鹏飞
+（just.dark@foxmail.com）, 许利杰（csxulijie@gmail.com） 
+神经网络 | 反向传导算法 | 梯度检验与高级优化 | 自编码算法与稀疏性 | 可视化自编码器训练结果 | 稀疏自编
+码器符号一览表 | Exercise:Sparse_Autoencoder 
+Deep Learning - Ng 
+wbx
+
+l 
+
+d
+
+l
+
+8
+
+-
+
+4
+
+-
+
+3
+
+1
+
+Deep Learning - Ng 
+
+Uf
+
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C" 
+
+This page was last modified on 7 April 2013, at 12:34. 
+
+-
+
+Language : English 
+
+
+....
+
+/
+
+idhnexpp.
+
+/
+
+k
+
+iw
+
+/
+
+dlifddteepearnngsanoreu..
+
+........#E4B8ADE6
+
+8.
+1.
+9.E8E8.
+7.
+68.
+9.
+AF
+
+wbx 
+
+6
+
+/
+
+6
+
+5
+
+08.
+
+反向传导算法
+From Ufldl 
+假设我们有一个固定样本集 ，它包含 个样例。我们可以用批量梯度下降法来求
+解神经网络。具体来讲，对于单个样例 ，其代价函数为： 
+这是一个（二分之一的）方差代价函数。给定一个包含 个样例的数据集，我们可以定义整体代价函数为： 
+以上公式中的第一项 是一个均方差项。第二项是一个规则化项（也叫权重衰减项），其目的是减小权重的
+幅度，防止过度拟合。
+[注：通常权重衰减的计算并不使用偏置项 ，比如我们在 的定义中就没有使用。一般来说，将偏置项包
+含在权重衰减项中只会对最终的神经网络产生很小的影响。如果你在斯坦福选修过CS229（机器学习）课程，或者在
+YouTube上看过课程视频，你会发现这个权重衰减实际上是课上提到的贝叶斯规则化方法的变种。在贝叶斯规则化方法
+中，我们将高斯先验概率引入到参数中计算MAP（极大后验）估计（而不是极大似然估计）。] 
+权重衰减参数 用于控制公式中两项的相对重要性。在此重申一下这两个复杂函数的含义： 是针对单
+个样例计算得到的方差代价函数； 是整体样本代价函数，它包含权重衰减项。
+以上的代价函数经常被用于分类和回归问题。在分类问题中，我们用 或 ，来代表两种类型的标签（回想一
+下，这是因为 sigmoid激活函数的值域为 ；如果我们使用双曲正切型激活函数，那么应该选用 和 作为
+标签）。对于回归问题，我们首先要变换输出值域（译者注：也就是 ），以保证其范围为 （同样地，如果我
+们使用双曲正切型激活函数，要使输出值域为 ）。
+我们的目标是针对参数 和 来求其函数 的最小值。为了求解神经网络，我们需要将每一个参数 
+和 初始化为一个很小的、接近零的随机值（比如说，使用正态分布 生成的随机值，其中 设
+置为 ），之后对目标函数使用诸如批量梯度下降法的最优化算法。因为 是一个非凸函数，梯度下降法
+很可能会收敛到局部最优解；但是在实际应用中，梯度下降法通常能得到令人满意的结果。最后，需要再次强调的是， 
+要将参数进行随机初始化，而不是全部置为 。如果所有参数都用相同的值作为初始值，那么所有隐藏层单元最终会
+得到与输入值有关的、相同的函数（也就是说，对于所有 ， 都会取相同的值，那么对于任何输入 都会有： 
+）。随机初始化的目的是使对称失效。
+梯度下降法中每一次迭代都按照如下公式对参数 和 进行更新： 
+其中 是学习速率。其中关键步骤是计算偏导数。我们现在来讲一下反向传播算法，它是计算偏导数的一种有效方
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+法。
+
+我们首先来讲一下如何使用反向传播算法来计算
+
+
+和，这两项是单个样例
+
+
+的代价函数
+
+
+的偏导数。一旦我们求出该偏导数，就可以推导出整体代价函数
+
+
+的偏导
+
+数：
+
+
+以上两行公式稍有不同，第一行比第二行多出一项，是因为权重衰减是作用于
+
+
+而不是。
+反向传播算法的思路如下：给定一个样例，我们首先进行“前向传导”运算，计算出网络中所有的激活值，包
+括
+
+
+的输出值。之后，针对第
+
+
+层的每一个节点，我们计算出其“残差”，该残差表明了该节点对最终
+输出值的残差产生了多少影响。对于最终的输出节点，我们可以直接算出网络产生的激活值与实际值之间的差距，我们
+
+将这个差距定义为
+
+
+（第
+
+
+层表示输出层）。对于隐藏单元我们如何处理呢？我们将基于节点（译者注：第
+层节点）残差的加权平均值计算，这些节点以
+作为输入。下面将给出反向传导算法的细节： 
+
+
+1.进行前馈传导计算，利用前向传导公式，得到
+直到输出层
+
+
+的激活值。 
+
+2.对于第
+层（输出层）的每个输出单元，我们根据以下公式计算残差： 
+3.对
+的各个层，第
+
+
+层的第
+个节点的残差计算方法如下：
+[译者注：完整推导过程如下：
+
+
+根据递推过程，将
+
+
+与
+
+
+的关系替换为
+与
+的关系，可以得到上面的结果：
+
+
+以上的逐步反向递推求导的过程就是“反向传播”算法的本意所在。] 
+
+4.计算我们需要的偏导数，计算方法如下： 
+wbx 
+
+
+最后，我们用矩阵-向量表示法重写以上算法。我们使用“ ” 表示向量乘积运算符（在Matlab或Octave里用“.*”表
+示，也称作阿达马乘积）。若 ，则 。在上一个教程中我们扩展了 的定义，使其包含向量运
+算，这里我们也对偏导数 也做了同样的处理（于是又有 ）。
+那么，反向传播算法可表示为以下几个步骤： 
+1. 进行前馈传导计算，利用前向传导公式，得到 直到输出层 的激活值。
+2. 对输出层（第 层），计算： 
+3. 对于 的各层，计算： 
+4. 计算最终需要的偏导数值： 
+实现中应注意：在以上的第2步和第3步中，我们需要为每一个 值计算其 。假设 是sigmoid函数，并
+且我们已经在前向传导运算中得到了 。那么，使用我们早先推导出的 表达式，就可以计算得到 
+。
+最后，我们将对梯度下降算法做个全面总结。在下面的伪代码中， 是一个与矩阵 维度相同的矩阵， 
+是一个与 维度相同的向量。注意这里“ ”是一个矩阵，而不是“ 与 相乘”。下面，我们
+实现批量梯度下降法中的一次迭代： 
+1. 对于所有 ，令 , （设置为全零矩阵或全零向量） 
+2. 对于 到 ， 
+a. 使用反向传播算法计算 和 。
+b. 计算 。
+c. 计算 。
+3. 更新权重参数： 
+现在，我们可以重复梯度下降法的迭代步骤来减小代价函数 的值，进而求解我们的神经网络。
+中英文对照
+反向传播算法 Backpropagation Algorithm 
+Deep Learning - Ng 
+wbx
+
+（批量）梯度下降法 (batch) gradient descent 
+（整体）代价函数 (overall) cost function 
+方差 squared-error 
+均方差 average sum-of-squares error 
+规则化项 regularization term 
+权重衰减 weight decay 
+偏置项 bias terms 
+贝叶斯规则化方法 Bayesian regularization method 
+高斯先验概率 Gaussian prior 
+极大后验估计 MAP 
+极大似然估计 maximum likelihood estimation 
+激活函数 activation function 
+双曲正切函数 tanh function 
+非凸函数 non-convex function 
+隐藏层单元 hidden (layer) units 
+对称失效 symmetry breaking 
+学习速率 learning rate 
+前向传导 forward pass 
+假设值 hypothesis 
+残差 error term 
+加权平均值 weighted average 
+前馈传导 feedforward pass 
+阿达马乘积 Hadamard product 
+前向传播 forward propagation 
+中文译者
+王方（fangkey@gmail.com），林锋（xlfg@yeah.net），许利杰（csxulijie@gmail.com） 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC%E7%AE%97%E6%B3%95" 
+This page was last modified on 7 April 2013, at 12:35. 
+Deep Learning - Ng 
+wbx
+
+梯度检验与高级优化
+From Ufldl 
+众所周知，反向传播算法很难调试得到正确结果，尤其是当实现程序存在很多难于发现的bug时。举例来说，索引的缺位错误（off-by-one error）会
+导致只有部分层的权重得到训练，再比如忘记计算偏置项。这些错误会使你得到一个看似十分合理的结果（但实际上比正确代码的结果要差）。因
+此，但从计算结果上来看，我们很难发现代码中有什么东西遗漏了。本节中，我们将介绍一种对求导结果进行数值检验的方法，该方法可以验证求导
+代码是否正确。另外，使用本节所述求导检验方法，可以帮助你提升写正确代码的信心。
+缺位错误（Off-by-one error）举例说明：比如 循环中循环 次，正确应该是 ，但有时程序员疏忽，会写成 
+，这就是缺位错误。
+假设我们想要最小化以 为自变量的目标函数。假设 ，则 。在一维的情况下，一次迭代的梯度下降公式是
+再假设我们已经用代码实现了计算 的函数 ，接着我们使用 来实现梯度下降算法。那么我们如何检验 的实现是否
+正确呢？ 
+回忆导数的数学定义： 
+那么对于任意 值，我们都可以对等式左边的导数用： 
+来近似。
+实际应用中，我们常将 设为一个很小的常量，比如在 数量级（虽然 的取值范围可以很大，但是我们不会将它设
+得太小，比如 ，因为那将导致数值舍入误差。） 
+给定一个被认为能计算 的函数，我们可以用下面的数值检验公式
+计算两端是否一样来检验函数是否正确。
+上式两端值的接近程度取决于 的具体形式。但是在假定 的情况下，你通常会发现上式左右两端至少有4位有效数字是一样的
+（通常会更多）。
+现在，考虑 是一个向量而非一个实数（那么就有个参数要学习得到），并且 。在神经网络的例子里我们使用 ，可
+以想象为把参数 组合扩展成一个长向量 。现在我们将求导检验方法推广到一般化，即 是一个向量的情况。
+假设我们有一个用于计算 的函数 ；我们想要检验 是否输出正确的求导结果。我们定义 ，其中
+是第 个基向量（维度和 相同，在第 行是“ ”而其他行是“ ”）。所以， 和 几乎相同，除了第 行元素增加了 。
+类似地， 得到的第 行减小了 。然后我们可以对每个 检查下式是否成立，进而验证 的正确
+性： 
+当用反射传播算法求解神经网络时，正确算法实现会得到： 
+Deep Learning - Ng 
+wbx
+
+以上结果与反向传播算法中的最后一段伪代码一致，都是计算梯度下降。为了验证梯度下降代码的正确性，使用上述数值检验方法计算 的
+导数，然后验证 与 是否能够给出正确的求导结果。
+迄今为止，我们的讨论都集中在使用梯度下降法来最小化 。如果你已经实现了一个计算 和 的函数，那么其实还有更精妙的算
+法来最小化 。举例来说，可以想象这样一个算法：它使用梯度下降，并能够自动调整学习速率 ，以得到合适的步长值，最终使 能够快速收
+敛到一个局部最优解。还有更妙的算法：比如可以寻找一个Hessian矩阵的近似，得到最佳步长值，使用该步长值能够更快地收敛到局部最优（和牛顿
+法类似）。此类算法的详细讨论已超出了这份讲义的范围，但是L-BFGS算法我们以后会有论述（另一个例子是共轭梯度算法）。你将在编程练习里使
+用这些算法中的一个。使用这些高级优化算法时，你需要提供关键的函数：即对于任一个 ，需要你计算出 和 。之后，这些优化算法
+会自动调整学习速率/步长值 的大小（并计算Hessian近似矩阵等等）来自动寻找 最小化时 的值。诸如L-BFGS和共轭梯度算法通常比梯度
+下降法快很多。
+中英文对照
+off-by-one error 缺位错误
+bias term 偏置项
+numerically checking 数值检验
+numerical roundoff errors 数值舍入误差
+significant digits 有效数字
+unrolling 组合扩展
+learning rate 学习速率
+Hessian matrix Hessian矩阵
+Newton's method 牛顿法
+conjugate gradient 共轭梯度
+step-size 步长值
+中文译者
+袁晓丹（shadowwalker1991@gmail.com），王方（fangkey@gmail.com），林锋（xlfg@yeah.net），许利杰（csxulijie@gmail.com） 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E6%A2%AF%E5%BA%A6%E6%A3%80%E9%AA%8C%E4%B8%8E%E9%AB%98%E7%BA%A7%E4%BC%98%E5%8C%96" 
+This page was last modified on 7 April 2013, at 12:37. 
+Deep Learning - Ng 
+wbx
+
+自编码算法与稀疏性
+From Ufldl 
+目前为止，我们已经讨论了神经网络在有监督学习中的应用。在有监督学习中，训练样本是有类别标签的。现在假设我们只有一个没有带类别标签的
+训练样本集合 ，其中 。自编码神经网络是一种无监督学习算法，它使用了反向传播算法，并让目标值等于输入
+值，比如 。下图是一个自编码神经网络的示例。
+自编码神经网络尝试学习一个 的函数。换句话说，它尝试逼近一个恒等函数，从而使得输出 接近于输入 。恒等函数虽然看上去
+不太有学习的意义，但是当我们为自编码神经网络加入某些限制，比如限定隐藏神经元的数量，我们就可以从输入数据中发现一些有趣的结构。举例
+来说，假设某个自编码神经网络的输入 是一张 图像（共100个像素）的像素灰度值，于是 ，其隐藏层 中有50个隐藏神经
+元。注意，输出也是100维的 。由于只有50个隐藏神经元，我们迫使自编码神经网络去学习输入数据的压缩表示，也就是说，它必须从50 
+维的隐藏神经元激活度向量 中重构出100维的像素灰度值输入 。如果网络的输入数据是完全随机的，比如每一个输入 都是一个跟
+其它特征完全无关的独立同分布高斯随机变量，那么这一压缩表示将会非常难学习。但是如果输入数据中隐含着一些特定的结构，比如某些输入特征
+是彼此相关的，那么这一算法就可以发现输入数据中的这些相关性。事实上，这一简单的自编码神经网络通常可以学习出一个跟主元分析（PCA）结果
+非常相似的输入数据的低维表示。
+我们刚才的论述是基于隐藏神经元数量较小的假设。但是即使隐藏神经元的数量较大（可能比输入像素的个数还要多），我们仍然通过给自编码神经
+网络施加一些其他的限制条件来发现输入数据中的结构。具体来说，如果我们给隐藏神经元加入稀疏性限制，那么自编码神经网络即使在隐藏神经元
+数量较多的情况下仍然可以发现输入数据中一些有趣的结构。
+稀疏性可以被简单地解释如下。如果当神经元的输出接近于1的时候我们认为它被激活，而输出接近于0的时候认为它被抑制，那么使得神经元大部分
+的时间都是被抑制的限制则被称作稀疏性限制。这里我们假设的神经元的激活函数是sigmoid函数。如果你使用tanh作为激活函数的话，当神经元输出
+为-1的时候，我们认为神经元是被抑制的。
+注意到 表示隐藏神经元 的激活度，但是这一表示方法中并未明确指出哪一个输入 带来了这一激活度。所以我们将使用 来表示在
+给定输入为 情况下，自编码神经网络隐藏神经元 的激活度。 进一步，让
+表示隐藏神经元 的平均活跃度（在训练集上取平均）。我们可以近似的加入一条限制
+其中， 是稀疏性参数，通常是一个接近于0的较小的值（比如 ）。换句话说，我们想要让隐藏神经元 的平均活跃度接近0.05。为了
+满足这一条件，隐藏神经元的活跃度必须接近于0。
+为了实现这一限制，我们将会在我们的优化目标函数中加入一个额外的惩罚因子，而这一惩罚因子将惩罚那些 和 有显著不同的情况从而使得
+隐藏神经元的平均活跃度保持在较小范围内。惩罚因子的具体形式有很多种合理的选择，我们将会选择以下这一种： 
+这里， 是隐藏层中隐藏神经元的数量，而索引 依次代表隐藏层中的每一个神经元。如果你对相对熵（KL divergence）比较熟悉，这一惩罚因
+子实际上是基于它的。于是惩罚因子也可以被表示为
+Deep Learning - Ng 
+wbx
+
+其中 是一个以 为均值和一个以 为均值的两个伯努利随机变量之间的相对熵。相对熵是一种标准
+的用来测量两个分布之间差异的方法。（如果你没有见过相对熵，不用担心，所有你需要知道的内容都会被包含在这份笔记之中。） 
+这一惩罚因子有如下性质，当 时 ，并且随着 与 之间的差异增大而单调递增。举例来说，在下图中，我们设定 
+并且画出了相对熵值 随着 变化的变化。
+我们可以看出，相对熵在 时达到它的最小值0，而当 靠近0或者1的时候，相对熵则变得非常大（其实是趋向于）。所以，最小化这一
+惩罚因子具有使得 靠近 的效果。 现在，我们的总体代价函数可以表示为
+其中 如之前所定义，而 控制稀疏性惩罚因子的权重。 项则也（间接地）取决于 ，因为它是隐藏神经元 的平均激活度，而
+隐藏层神经元的激活度取决于 。
+为了对相对熵进行导数计算，我们可以使用一个易于实现的技巧，这只需要在你的程序中稍作改动即可。具体来说，前面在后向传播算法中计算第二
+层（ ）更新的时候我们已经计算了
+现在我们将其换成
+就可以了。
+有一个需要注意的地方就是我们需要知道 来计算这一项更新。所以在计算任何神经元的后向传播之前，你需要对所有的训练样本计算一遍前向传
+播，从而获取平均激活度。如果你的训练样本可以小到被整个存到内存之中（对于编程作业来说，通常如此），你可以方便地在你所有的样本上计算
+前向传播并将得到的激活度存入内存并且计算平均激活度 。然后你就可以使用事先计算好的激活度来对所有的训练样本进行后向传播的计算。如果你
+的数据量太大，无法全部存入内存，你就可以扫过你的训练样本并计算一次前向传播，然后将获得的结果累积起来并计算平均激活度 （当某一个
+前向传播的结果中的激活度 被用于计算平均激活度 之后就可以将此结果删除）。然后当你完成平均激活度 的计算之后，你需要重新对
+每一个训练样本做一次前向传播从而可以对其进行后向传播的计算。对于后一种情况，你对每一个训练样本需要计算两次前向传播，所以在计算上的
+效率会稍低一些。
+证明上面算法能达到梯度下降效果的完整推导过程不再本教程的范围之内。不过如果你想要使用经过以上修改的后向传播来实现自编码神经网络，那
+么你就会对目标函数 做梯度下降。使用梯度验证方法，你可以自己来验证梯度下降算法是否正确。。
+中文译者
+周韬（ztsailing@gmail.com），葛燕儒（yrgehi@gmail.com），林锋（xlfg@yeah.net），余凯（kai.yu.cool@gmail.com） 
+Neural Networks | Backpropagation Algorithm | Gradient checking and advanced optimization | Autoencoders and Sparsity | Visualizing a Trained 
+Autoencoder | Sparse Autoencoder Notation Summary | Exercise:Sparse Autoencoder 
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+Language : English 
+
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E8%87%AA%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95%E4%B8%8E%E7%A8%80%E7%96%8F%E6%80%A7" 
+
+This page was last modified on 7 April 2013, at 12:42. 
+
+wbx 
+
+
+可视化自编码器训练结果
+From Ufldl 
+训练完（稀疏）自编码器，我们还想把这自编码器学到的函数可视化出来，好弄明白它到底学到了什么。我们以在10×10图像（即n=100）上训练自编码
+器为例。在该自编码器中，每个隐藏单元i对如下关于输入的函数进行计算： 
+我们将要可视化的函数，就是上面这个以2D图像为输入、并由隐藏单元i计算出来的函数。它是依赖于参数的（暂时忽略偏置项bi）。需要注意的
+是， 可看作输入的非线性特征。不过还有个问题：什么样的输入图像可让得到最大程度的激励？（通俗一点说，隐藏单元要找个什么样的特
+征？）。这里我们必须给加约束，否则会得到平凡解。若假设输入有范数约束，则可证（请读者自行推导）令隐藏单元得到最
+大激励的输入应由下面公式计算的像素给出（共需计算100个像素，j=1,…,100）： 
+当我们用上式算出各像素的值、把它们组成一幅图像、并将图像呈现在我们面前之时，隐藏单元所追寻特征的真正含义也渐渐明朗起来。
+假如我们训练的自编码器有100个隐藏单元，可视化结果就会包含100幅这样的图像——每个隐藏单元都对应一幅图像。审视这100幅图像，我们可以试着
+体会这些隐藏单元学出来的整体效果是什么样的。
+当我们对稀疏自编码器（100个隐藏单元，在10X10像素的输入上训练 ）进行上述可视化处理之后，结果如下所示： 
+上图的每个小方块都给出了一个（带有有界范数 的）输入图像，它可使这100个隐藏单元中的某一个获得最大激励。我们可以看到，不同的隐藏单元学
+会了在图像的不同位置和方向进行边缘检测。
+显而易见，这些特征对物体识别等计算机视觉任务是十分有用的。若将其用于其他输入域（如音频），该算法也可学到对这些输入域有用的表示或特征。
+中英文对照
+中文译者
+王方（fangkey@gmail.com），胡伦（hulun499@gmail.com），谢宇（msforbus@sina.com），@小琳爱肉肉（新浪微博账号）, 余凯
+（kai.yu.cool@gmail.com） 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E5%8F%AF%E8%A7%86%E5%8C%96%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%E8%AE%AD%E7%BB%83%E7%BB%93%E6%This page was last modified on 8 April 2013, at 05:24. 
+Deep Learning - Ng 
+wbx
+
+稀疏自编码器符号一览表
+From Ufldl 
+下面是我们在推导sparse autoencoder时使用的符号一览表： 
+符号含义
+训练样本的输入特征， . 
+输出值/目标值. 这里 可以是向量. 在autoencoder中， . 
+第 个训练样本
+输入为 时的假设输出，其中包含参数 . 该输出应当与目标值 具有相同的维数. 
+连接第 层 单元和第 层 单元的参数. 
+第 层 单元的偏置项. 也可以看作是连接第 层偏置单元和第 层 单元的参数. 
+参数向量. 可以认为该向量是通过将参数 组合展开为一个长的列向量而得到. 
+网络中第 层 单元的激活（输出）值. 
+另外，由于 层是输入层，所以 . 
+激活函数. 本文中我们使用 . 
+第 层 单元所有输入的加权和. 因此有 . 
+学习率
+第 层的单元数目（不包含偏置单元）. 
+网络中的层数. 通常 层是输入层， 层是输出层. 
+权重衰减系数. 
+对于一个autoencoder，该符号表示其输出值；亦即输入值 的重构值. 与 含义相同. 
+稀疏值，可以用它指定我们所需的稀疏程度
+（sparse autoencoder中）隐藏单元 的平均激活值. 
+（sparse autoencoder目标函数中）稀疏值惩罚项的权重. 
+中文译者
+邵杰（jiesh@hotmail.com），许利杰（csxulijie@gmail.com），余凯（kai.yu.cool@gmail.com） 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E7%A8%80%E7%96%8F%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%E7%AC%A6%E5%8F%B7%E4%B8%80%E8%A7%88%E8%This page was last modified on 7 April 2013, at 12:45. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:S parse A utoencoder - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:S parse_A utoencoder 1/6 
+Exercise:Sparse Autoencoder 
+From Ufldl 
+Contents 
+1 Download Related Reading 
+2 Sparse autoencoder implementation 
+2.1 Step 1: Generate training set 
+2.2 Step 2: Sparse autoencoder objective 
+2.3 Step 3: Gradient checking 
+2.4 Step 4: Train the sparse autoencoder 
+2.5 Step 5: Visualization 
+3 Results 
+Download Related Reading 
+sparseae_reading.pdf 
+(http://nlp.stanford.edu/~socherr/sparseAutoencoder_2011new.pdf) 
+sparseae_exercise.pdf (http://www.stanford.edu/class/cs294a/cs294a_2011- 
+assignment.pdf) 
+Sparse autoencoder implementation 
+In this problem set, you will implement the sparse autoencoder algorithm, and show 
+how it discovers that edges are a good representation for natural images. (Images 
+provided by Bruno Olshausen.) The sparse autoencoder algorithm is described in the 
+lecture notes found on the course website. 
+In the file sparseae_exercise.zip 
+(http://ufldl.stanford.edu/wiki/resources/sparseae_exercise.zip) , we have provided 
+some starter code in Matlab. You should write your code at the places indicated in 
+the files ("YOUR CODE HERE"). You have to complete the following files: sampleIMAGES.m, 
+sparseAutoencoderCost.m, computeNumericalGradient.m. The starter code in train.m shows how 
+these functions are used. 
+Specifically, in this exercise you will implement a sparse autoencoder, trained with 
+8×8 image patches using the L-BFGS optimization algorithm. 
+A note on the software: The provided .zip file includes a subdirectory minFunc 
+with 3rd party software implementing L-BFGS, that is licensed under a Creative 
+Commons, Attribute, Non-Commercial license. If you need to use this software for 
+commercial purposes, you can download and use a different function (fminlbfgs) that 
+can serve the same purpose, but runs ~3x slower for this exercise (and thus is less 
+recommended). You can read more about this in the Fminlbfgs_Details page. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:S parse A utoencoder - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:S parse_A utoencoder 2/6 
+Step 1: Generate training set 
+The first step is to generate a training set. To get a single training example x, 
+randomly pick one of the 10 images, then randomly sample an 8×8 image patch from 
+the selected image, and convert the image patch (either in row-major order or 
+column-major order; it doesn't matter) into a 64-dimensional vector to get a 
+training example 
+Complete the code in sampleIMAGES.m. Your code should sample 10000 image patches and 
+concatenate them into a 64×10000 matrix. 
+To make sure your implementation is working, run the code in "Step 1" of train.m. 
+This should result in a plot of a random sample of 200 patches from the dataset. 
+Implementational tip: When we run our implemented sampleImages(), it takes under 5 
+seconds. If your implementation takes over 30 seconds, it may be because you are 
+accidentally making a copy of an entire 512×512 image each time you're picking a 
+random image. By copying a 512×512 image 10000 times, this can make your 
+implementation much less efficient. While this doesn't slow down your code 
+significantly for this exercise (because we have only 10000 examples), when we scale 
+to much larger problems later this quarter with 106 or more examples, this will 
+significantly slow down your code. Please implement sampleIMAGES so that you aren't 
+making a copy of an entire 512×512 image each time you need to cut out an 8x8 image 
+patch. 
+Step 2: Sparse autoencoder objective 
+Implement code to compute the sparse autoencoder cost function Jsparse(W,b) (Section 
+3 of the lecture notes) and the corresponding derivatives of Jsparse with respect to 
+the different parameters. Use the sigmoid function for the activation function, 
+. In particular, complete the code in sparseAutoencoderCost.m. 
+The sparse autoencoder is parameterized by matrices , 
+vectors , . However, for subsequent notational convenience, we 
+will "unroll" all of these parameters into a very long parameter vector θ with s1s2 
++ s2s3 + s2 + s3 elements. The code for converting between the (W(1),W(2),b(1),b(2)) 
+and the θ parameterization is already provided in the starter code. 
+Implementational tip: The objective Jsparse(W,b) contains 3 terms, corresponding 
+to the squared error term, the weight decay term, and the sparsity penalty. You're 
+welcome to implement this however you want, but for ease of debugging, you might 
+implement the cost function and derivative computation (backpropagation) only for 
+the squared error term first (this corresponds to setting λ = β = 0), and 
+implement the gradient checking method in the next section to first verify that this 
+code is correct. Then only after you have verified that the objective and derivative 
+calculations corresponding to the squared error term are working, add in code to 
+Deep Learning - Ng 
+wbx
+
+E xercise:S parse A utoencoder - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:S parse_A utoencoder 3/6 
+compute the weight decay and sparsity penalty terms and their corresponding 
+derivatives. 
+Step 3: Gradient checking 
+Following Section 2.3 of the lecture notes, implement code for gradient checking. 
+Specifically, complete the code in computeNumericalGradient.m. Please use EPSILON = 10-4 
+as described in the lecture notes. 
+We've also provided code in checkNumericalGradient.m for you to test your code. This 
+code defines a simple quadratic function given by , 
+and evaluates it at the point x = (4,10)T. It allows you to verify that your 
+numerically evaluated gradient is very close to the true (analytically computed) 
+gradient. 
+After using checkNumericalGradient.m to make sure your implementation is correct, next 
+use computeNumericalGradient.m to make sure that your sparseAutoencoderCost.m is computing 
+derivatives correctly. For details, see Steps 3 in train.m. We strongly encourage you 
+not to proceed to the next step until you've verified that your derivative 
+computations are correct. 
+Implementational tip: If you are debugging your code, performing gradient 
+checking on smaller models and smaller training sets (e.g., using only 10 training 
+examples and 1-2 hidden units) may speed things up. 
+Step 4: Train the sparse autoencoder 
+Now that you have code that computes Jsparse and its derivatives, we're ready to 
+minimize Jsparse with respect to its parameters, and thereby train our sparse 
+autoencoder. 
+We will use the L-BFGS algorithm. This is provided to you in a function called 
+minFunc (code provided by Mark Schmidt) included in the starter code. (For the 
+purpose of this assignment, you only need to call minFunc with the default 
+parameters. You do not need to know how L-BFGS works.) We have already provided code 
+in train.m (Step 4) to call minFunc. The minFunc code assumes that the parameters to 
+be optimized are a long parameter vector; so we will use the "θ" parameterization 
+rather than the "(W(1),W(2),b(1),b(2))" parameterization when passing our parameters 
+to it. 
+Train a sparse autoencoder with 64 input units, 25 hidden units, and 64 output 
+units. In our starter code, we have provided a function for initializing the 
+parameters. We initialize the biases to zero, and the weights to random 
+numbers drawn uniformly from the interval , 
+where nin is the fan-in (the number of inputs feeding into a node) and nout is the 
+fan-in (the number of units that a node feeds into). 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:S parse A utoencoder - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:S parse_A utoencoder 4/6 
+The values we provided for the various parameters (λ,β,ρ, etc.) should work, but 
+feel free to play with different settings of the parameters as well. 
+Implementational tip: Once you have your backpropagation implementation correctly 
+computing the derivatives (as verified using gradient checking in Step 3), when you 
+are now using it with L-BFGS to optimize Jsparse(W,b), make sure you're not doing 
+gradient-checking on every step. Backpropagation can be used to compute the 
+derivatives of Jsparse(W,b) fairly efficiently, and if you were additionally 
+computing the gradient numerically on every step, this would slow down your program 
+significantly. 
+Step 5: Visualization 
+After training the autoencoder, use display_network.m to visualize the learned 
+weights. (See train.m, Step 5.) Run "print -djpeg weights.jpg" to save the visualization 
+to a file "weights.jpg" (which you will submit together with your code). 
+Results 
+To successfully complete this assignment, you should demonstrate your sparse 
+autoencoder algorithm learning a set of edge detectors. For example, this was the 
+visualization we obtained: 
+Our implementation took around 5 minutes to run on a fast computer. In case you end 
+up needing to try out multiple implementations or different parameter values, be 
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+13-4-8 Exercise:SparseAutoencoder-Ufldl 
+
+sure to budget enough time for debugging and to run the experiments you'll need. 
+
+Also, by way of comparison, here are some visualizations from implementations that 
+we do not consider successful (either a buggy implementation, or where the 
+parameters were poorly tuned): 
+
+
+deeplearning.stanford.edu/wiki/index.php/Exercise:Sparse_Autoencoder 5/6 
+
+wbx 
+
+
+13-4-8 E xercise:S parse A utoencoder - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:S parse_A utoencoder 6/6 
+Neural Networks | Backpropagation Algorithm | Gradient checking and advanced optimization | 
+Autoencoders and Sparsity | Visualizing a Trained Autoencoder | Sparse Autoencoder Notation 
+Summary | E x e r c i s e : S p a r s e A u t o e n c o d e r 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/Exercise:Sparse_Autoencoder" 
+Category: Exercises 
+This page was last modified on 10 July 2012, at 14:34. 
+Deep Learning - Ng 
+wbx
+
+矢量化编程
+From Ufldl 
+当使用学习算法时，一段更快的代码通常意味着项目进展更快。例如，如果你的学习算法需要花费20分钟运
+行完成，这意味着你每个小时能“尝试”3个新主意。但是假如你的程序需要20个小时来运行，这意味着你一
+天只能“尝试”一个新主意，因为你需要花费这么长时间来等待程序的反馈。对于后者，假如你可以提升代
+码的效率让其只需要运行10个小时，那么你的效率差不多提升一倍。
+矢量化编程是提高算法速度的一种有效方法。为了提升特定数值运算操作（如矩阵相乘、矩阵相加、矩阵- 
+向量乘法等）的速度，数值计算和并行计算的研究人员已经努力了几十年。矢量化编程的思想就是尽量使用
+这些被高度优化的数值运算操作来实现我们的学习算法。
+例如，假设 和 为向量，需要计算 ，那么可以按以下方式实现（使用
+Matlab）： 
+z = 0; 
+for i=1:(n+1), 
+z = z + theta(i) * x(i); 
+end; 
+或者可以更加简单的写为： 
+z = theta' * x; 
+第二段程序代码不仅简单，而且运行速度更快。
+通常，一个编写Matlab/Octave程序的诀窍是： 
+代码中尽可能避免显式的for循环。
+上面的第一段代码使用了一个显式的for循环。通过不使用for循环实现相同功能，可以显著提升运行速度。
+对Matlab/Octave代码进行矢量化的工作很大一部分集中在避免使用for循环上，因为这可以使得
+Matlab/Octave更多地利用代码中的并行性，同时其解释器的计算开销更小。
+关于编写代码的策略，开始时你会觉得矢量化代码更难编写、阅读和调试，但你需要在编码和调试的便捷性
+与运行时间之间做个权衡。因此，刚开始编写程序的时候，你可能会选择不使用太多矢量化技巧来实现你的
+算法，并验证它是否正确（可能只在一个小问题上验证）。在确定它正确后，你可以每次只矢量化一小段代
+码，并在这段代码之后暂停，以验证矢量化后的代码计算结果和之前是否相同。最后，你会有望得到一份正
+确的、经过调试的、矢量化且有效率的代码。
+一旦对矢量化常见的方法和技巧熟悉后，你将会发现对代码进行矢量化通常并不太费劲。矢量化可以使你的
+代码运行的更快，而且在某些情况下，还简化了你的代码。
+Deep Learning - Ng 
+wbx
+
+中英文对照
+矢量化 vectorization 
+中文译者
+彭君睿（07caleb@gmail.com）， 王文中（wangwenzhong@ymail.com），邓亚峰（dengyafeng@gmail.com） 
+矢量化编程 | 逻辑回归的向量化实现样例 | 神经网络向量化 | Exercise:Vectorization 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E7%9F%A2%E9%87%8F%E5%8C%96%E7%BC%96%E7%A8%8B" 
+This page was last modified on 8 April 2013, at 04:59. 
+Deep Learning - Ng 
+wbx
+
+逻辑回归的向量化实现样例
+From Ufldl 
+我们想用批量梯度上升法对logistic回归分析模型进行训练，其模型如下： 
+让我们遵从公开课程视频与CS229教学讲义的符号规范，设 ，于是 ， ， 为截距。假设我们有m个训练样本{( , ) 
+,...,( , )}，而批量梯度上升法的更新法则是： ,这里的 是对数似然函数， 是其导函数。
+[注：下文的符号规范与<公开课程视频>或<教学讲义CS229：机器学习>中的相同，详细内容可以参见公开课程视频或教学讲义#1 
+http://cs229.stanford.edu/] 
+于是，我们需要如下计算梯度： 
+我们用Matlab/Octave风格变量x表示输入数据构成的样本矩阵，x(:,i)代表第 i个训练样本，x(j,i)就代表（译者注：第i个训练样本向量的第j个
+元素）。同样，用Matlab/Octave风格变量y表示由训练样本集合的全体类别标号所构成的行向量，则该向量的第i个元素y(i)就代表上式中的
+。（注意这里跟公开课程视频及CS229的符号规范不同，矩阵x按列而不是按行存放输入训练样本，同样， 是行向量而不是列向
+量。） 
+以下是梯度运算代码的一种实现，非常恐怖，速度极慢： 
+% 代码1 
+grad = zeros(n+1,1); 
+for i=1:m, 
+h = sigmoid(theta'*x(:,i)); 
+temp = y(i) - h; 
+for j=1:n+1, 
+grad(j) = grad(j) + temp * x(j,i); 
+end; 
+end; 
+嵌套的for循环语句使这段代码的运行非常缓慢。以下是更典型的实现方式，它对算法进行部分向量化，带来更优的执行效率： 
+% 代码2 
+grad = zeros(n+1,1); 
+for i=1:m, 
+grad = grad + (y(i) - sigmoid(theta'*x(:,i)))* x(:,i); 
+end; 
+但是，或许可以向量化得更彻底些。如果去除for循环，我们就可以显著地改善代码执行效率。特别的，假定b是一个列向量，A是一个矩阵，我们用以下
+两种方式来计算A*b： 
+% 矩阵-向量乘法运算的低效代码
+grad = zeros(n+1,1); 
+for i=1:m, 
+grad = grad + b(i) * A(:,i); % 通常写法为A(:,i)*b(i) 
+end; 
+% 矩阵-向量乘法运算的高效代码
+grad = A*b; 
+我们看到，代码2是用了低效的for循环语句执行梯度上升（译者注：原文是下降）运算，将b(i)看成(y(i) - sigmoid(theta'*x(:,i)))，A看成x，我们
+就可以使用以下高效率的代码： 
+% 代码3 
+grad = x * (y- sigmoid(theta'*x)); 
+这里我们假定Matlab/Octave的sigmoid(z)函数接受一个向量形式的输入z，依次对输入向量的每个元素施行sigmoid函数，最后返回运算结果，因此
+sigmoid(z)的输出结果是一个与z有相同维度的向量。
+当训练数据集很大时，最终的实现（译者注：代码3）充分发挥了Matlab/Octave高度优化的数值线性代数库的优势来进行矩阵-向量操作，因此，比起之
+前代码要高效得多。
+想采用向量化实现并非易事，通常需要周密的思考。但当你熟练掌握向量化操作后，你会发现，这里面有固定的设计模式（对应少量的向量化技巧），可
+以灵活运用到很多不同的代码片段中。
+中英文对照
+中文译者
+Deep Learning - Ng 
+wbx
+
+林锋（xlfg@yeah.net），谭晓阳（x.tan@nuaa.edu.cn），邓亚峰（dengyafeng@gmail.com） 
+矢量化编程 | 逻辑回归的向量化实现样例 | 神经网络向量化 | Exercise:Vectorization 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E7%9A%84%E5%90%91%E9%87%8F%E5%8C%96%E5%AE%9E%E7%8E%B0%E6%This page was last modified on 8 April 2013, at 05:25. 
+Deep Learning - Ng 
+wbx
+
+神经网络向量化
+From Ufldl 
+在本节，我们将引入神经网络的向量化版本。在前面关于神经网络介绍的章节中，我们已经给出了一个部分向量化的实现，它在
+一次输入一个训练样本时是非常有效率的。下边我们看看如何实现同时处理多个训练样本的算法。具体来讲，我们将把正向传
+播、反向传播这两个步骤以及稀疏特征集学习扩展为多训练样本版本。
+Contents 
+1 正向传播
+2 反向传播
+3 稀疏自编码网络
+4 中英文对照
+5 中文译者
+正向传播
+考虑一个三层网络(一个输入层、一个隐含层、以及一个输出层)，并且假定x是包含一个单一训练样本 的列向量。则
+向量化的正向传播步骤如下： 
+这对于单一训练样本而言是非常有效的一种实现，但是当我们需要处理m个训练样本时，则需要把如上步骤放入一个for循环中。
+更具体点来说，参照逻辑回归向量化的例子，我们用Matlab/Octave风格变量x表示包含输入训练样本的矩阵，x(:,i)代表第个训
+练样本。则x正向传播步骤可如下实现： 
+% 非向量化实现
+for i=1:m, 
+z2 = W1 * x(:,i) + b1; 
+a2 = f(z2); 
+z3 = W2 * a2 + b2; 
+h(:,i) = f(z3); 
+end; 
+这个for循环能否去掉呢？对于很多算法而言，我们使用向量来表示计算过程中的中间结果。例如在前面的非向量化实现
+中，z2,a2,z3都是列向量，分别用来计算隐层和输出层的激励结果。为了充分利用并行化和高效矩阵运算的优势，我们希望算法
+能同时处理多个训练样本。让我们先暂时忽略前面公式中的b1和b2(把它们设置为0)，那么可以实现如下: 
+% 向量化实现 (忽略 b1, b2) 
+z2 = W1 * x; 
+a2 = f(z2); 
+z3 = W2 * a2; 
+h = f(z3) 
+在这个实现中，z2,a2,z3都是矩阵，每个训练样本对应矩阵的一列。在对多个训练样本实现向量化时常用的设计模式是，虽然前
+面每个样本对应一个列向量（比如z2），但我们可把这些列向量堆叠成一个矩阵以充分享受矩阵运算带来的好处。这样，在这个
+例子中，a2就成了一个s2 X m的矩阵(s2是网络第二层中的神经元数，m是训练样本个数)。矩阵a2的物理含义是，当第i个训练样
+Deep Learning - Ng 
+wbx
+
+本x(:i)输入到网络中时，它的第i列就表示这个输入信号对隐神经元 (网络第二层)的激励结果。
+在上面的实现中，我们假定激活函数f(z)接受矩阵形式的输入z，并对输入矩阵按列分别施以激活函数。需要注意的是，你在实
+现f(z)的时候要尽量多用Matlab/Octave的矩阵操作，并尽量避免使用for循环。假定激活函数采用Sigmoid函数，则实现代码如下
+所示: 
+% 低效的、非向量化的激活函数实现
+function output = unvectorized_f(z) 
+output = zeros(size(z)) 
+for i=1:size(z,1), 
+for j=1:size(z,2), 
+output(i,j) = 1/(1+exp(-z(i,j))); 
+end; 
+end; 
+end 
+% 高效的、向量化激活函数实现
+function output = vectorized_f(z) 
+output = 1./(1+exp(-z)); % "./" 在Matlab或Octave中表示对矩阵的每个元素分别进行除法操作
+end 
+最后，我们上面的正向传播向量化实现中忽略了b1和b2，现在要把他们包含进来，为此我们需要用到Matlab/Octave的内建函
+数repmat： 
+% 正向传播的向量化实现
+z2 = W1 * x + repmat(b1,1,m); 
+a2 = f(z2); 
+z3 = W2 * a2 + repmat(b2,1,m); 
+h = f(z3) 
+repmat(b1,1,m)的运算效果是，它把列向量b1拷贝m份，然后堆叠成如下矩阵： 
+这就构成一个s2 X m的矩阵。它和W1 * x相加，就等于是把W1 * x矩阵（译者注：这里x是训练矩阵而非向量, 所以W1 * x代表两个
+矩阵相乘，结果还是一个矩阵）的每一列加上b1。如果不熟悉的话，可以参考Matlab/Octave的帮助文档获取更多信息(输
+入“help repmat”)。rampat作为Matlab/Octave的内建函数，运行起来是相当高效的，远远快过我们自己用for循环实现的效果。
+反向传播
+现在我们来描述反向传播向量化的思路。在阅读这一节之前，强烈建议各位仔细阅读前面介绍的正向传播的例子代码，确保你已
+经完全理解。下边我们只会给出反向传播向量化实现的大致纲要，而由你来完成具体细节的推导（见向量化练习）。
+对于监督学习，我们有一个包含m个带类别标号样本的训练集。 (对于自编码网络，我们只需
+令y(i) = x(i)即可, 但这里考虑的是更一般的情况。) 
+假定网络的输出有s3维，因而每个样本的类别标号向量就记为。在我们的Matlab/Octave数据结构实现中，把这些输出
+按列合在一起形成一个Matlab/Octave风格变量y，其中第i列y(:,i)就是y(i)。
+现在我们要计算梯度项和。对于梯度中的第一项，就像过去在反向传播算法中所描述的那样，对于
+每个训练样本(x,y)，我们可以这样来计算： 
+Deep Learning - Ng 
+wbx
+
+在这里表示对两个向量按对应元素相乘的运算（译者注：其结果还是一个向量）。为了描述简单起见，我们这里暂时忽略对参
+数b(l)的求导，不过在你真正实现反向传播时，还是需要计算关于它们的导数的。
+假定我们已经实现了向量化的正向传播方法，如前面那样计算了矩阵形式的变量z2, a2, z3和h，那么反向传播的非向量化版本可
+如下实现： 
+gradW1 = zeros(size(W1)); 
+gradW2 = zeros(size(W2)); 
+for i=1:m, 
+delta3 = -(y(:,i) - h(:,i)) .* fprime(z3(:,i)); 
+delta2 = W2'*delta3(:,i) .* fprime(z2(:,i)); 
+gradW2 = gradW2 + delta3*a2(:,i)'; 
+gradW1 = gradW1 + delta2*a1(:,i)'; 
+end; 
+在这个实现中，有一个for循环。而我们想要一个能同时处理所有样本、且去除这个for循环的向量化版本。
+为做到这一点，我们先把向量delta3和delta2替换为矩阵，其中每列对应一个训练样本。我们还要实现一个函数fprime(z)，该函数
+接受矩阵形式的输入z，并且对矩阵的按元素分别执行。这样，上面for循环中的4行Matlab代码中每行都可单独向量化，以一
+行新的（向量化的）Matlab代码替换它（不再需要外层的for循环）。
+在向量化练习中，我们要求你自己去推导出这个算法的向量化版本。如果你已经能从上面的描述中了解如何去做，那么我们强烈
+建议你去实践一下。虽然我们已经为你准备了反向传播的向量化实现提示，但还是鼓励你在不看提示的情况下自己去推导一下。
+稀疏自编码网络
+稀疏自编码网络中包含一个额外的稀疏惩罚项，目的是限制神经元的平均激活率，使其接近某个（预设的）目标激活率ρ。其实
+在对单个训练样本上执行反向传播时，我们已经考虑了如何计算这个稀疏惩罚项，如下所示： 
+在非向量化的实现中，计算代码如下： 
+% 稀疏惩罚Delta 
+sparsity_delta = - rho ./ rho_hat + (1 - rho) ./ (1 - rho_hat); 
+for i=1:m, 
+... 
+delta2 = (W2'*delta3(:,i) + beta*sparsity_delta).* fprime(z2(:,i)); 
+... 
+end; 
+但在上面的代码中，仍旧含有一个需要在整个训练集上运行的for循环，这里delta2是一个列向量。
+作为对照，回想一下在向量化的情况下，delta2现在应该是一个有m列的矩阵，分别对应着m个训练样本。还要注意，稀疏惩罚
+项sparsity_delta对所有的训练样本一视同仁。这意味着要向量化实现上面的计算，只需在构造delta2时，往矩阵的每一列上分别
+加上相同的值即可。因此，要向量化上面的代码，我们只需简单的用repmat命令把sparsity_delta加到delta2的每一列上即可（译者
+Deep Learning - Ng 
+wbx
+
+注：这里原文描述得不是很清楚，看似应加到上面代码中delta2行等号右边第一项，即W2'*delta3上）。
+中英文对照
+向量化 vectorization 
+正向传播 forward propagation 
+反向传播 backpropagation 
+训练样本 training examples 
+激活函数 activation function 
+稀疏自编码网络 sparse autoencoder 
+稀疏惩罚 sparsity penalty 
+平均激活率 average firing rate 
+中文译者
+阎志涛（zhitao.yan@gmail.com）, 谭晓阳（x.tan@nuaa.edu.cn）, 邓亚峰（dengyafeng@gmail.com） 
+矢量化编程 | 逻辑回归的向量化实现样例 | 神经网络向量化 | Exercise:Vectorization 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%90%91%E9%87%8F%E5%8C%96" 
+This page was last modified on 8 April 2013, at 05:02. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:V ectorization - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:V ectorization 1/3 
+Exercise:Vectorization 
+From Ufldl 
+Contents 
+1 Vectorization 
+1.1 Support Code/Data 
+1.2 Step 1: Vectorize your Sparse Autoencoder Implementation 
+1.3 Step 2: Learn features for handwritten digits 
+Vectorization 
+In the previous problem set, we implemented a sparse autoencoder for patches taken 
+from natural images. In this problem set, you will vectorize your code to make it 
+run much faster, and further adapt your sparse autoencoder to work on images of 
+handwritten digits. Your network for learning from handwritten digits will be much 
+larger than the one you'd trained on the natural images, and so using the original 
+implementation would have been painfully slow. But with a vectorized implementation 
+of the autoencoder, you will be able to get this to run in a reasonable amount of 
+computation time. 
+Support Code/Data 
+The following additional files are required for this exercise: 
+MNIST Dataset (Training Images) (http://yann.lecun.com/exdb/mnist/train-imagesidx3-
+ubyte.gz) 
+MNIST Dataset (Training Labels) (http://yann.lecun.com/exdb/mnist/train-labelsidx1-
+ubyte.gz) 
+Support functions for loading MNIST in Matlab 
+Step 1: Vectorize your Sparse Autoencoder Implementation 
+Using the ideas from Vectorization and Neural Network Vectorization, vectorize your 
+implementation of sparseAutoencoderCost.m. In our implementation, we were able to 
+remove all for-loops with the use of matrix operations and repmat. (If you want to 
+play with more advanced vectorization ideas, also type help bsxfun. The bsxfun 
+function provides an alternative to repmat for some of the vectorization steps, but 
+is not necessary for this exercise). A vectorized version of our sparse autoencoder 
+code ran in under one minute on a fast computer (for learning 25 features from 10000 
+8x8 image patches). 
+(Note that you do not need to vectorize the code in the other files.) 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:V ectorization - U fldl 
+2/3 
+Step 2: Learn features for handwritten digits 
+Now that you have vectorized the code, it is easy to learn larger sets of features 
+on medium sized images. In this part of the exercise, you will use your sparse 
+autoencoder to learn features for handwritten digits from the MNIST dataset. 
+The MNIST data is available at [1] (http://yann.lecun.com/exdb/mnist/) . Download 
+the file train-images-idx3-ubyte.gz and decompress it. After obtaining the source 
+images, you should use helper functions that we provide to load the data into Matlab 
+as matrices. While the helper functions that we provide will load both the input 
+examples x and the class labels y, for this assignment, you will only need the input 
+examples x since the sparse autoencoder is an unsupervised learning algorithm. (In a 
+later assignment, we will use the labels y as well.) 
+The following set of parameters worked well for us to learn good features on the 
+MNIST dataset: 
+visibleSize = 28*28 
+hiddenSize = 196 
+sparsityParam = 0.1 
+lambda = 3e-3 
+beta = 3 
+patches = first 10000 images from the MNIST dataset 
+After 400 iterations of updates using minFunc, your autoencoder should have learned 
+features that resemble pen strokes. In other words, this has learned to represent 
+handwritten characters in terms of what pen strokes appear in an image. Our 
+implementation takes around 15-20 minutes on a fast machine. Visualized, the 
+features should look like the following image: 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:V ectorization - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:V ectorization 3/3 
+If your parameters are improperly tuned, or if your implementation of the 
+autoencoder is buggy, you may get one of the following images instead: 
+If your image looks like one of the above images, check your code and parameters 
+again. Learning these features are a prelude to the later exercises, where we shall 
+see how they will be useful for classification. 
+Vectorization | Logistic Regression Vectorization Example | Neural Network Vectorization | 
+E x e r c i s e : V e c t o r i z a t i o n 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/Exercise:Vectorization" 
+This page was last modified on 26 May 2011, at 11:00. 
+Deep Learning - Ng 
+wbx
+
+主成分分析
+From Ufldl 
+Contents 
+1 引言
+2 实例和数学背景
+3 旋转数据
+4 数据降维
+5 还原近似数据
+6 选择主成分个数
+7 对图像数据应用PCA算法
+8 参考文献
+9 中英文对照
+10 中文译者
+引言
+主成分分析（PCA）是一种能够极大提升无监督特征学习速度的数据降维算法。更重要的是，理解PCA算法， 
+对实现白化算法有很大的帮助，很多算法都先用白化算法作预处理步骤。
+假设你使用图像来训练算法，因为图像中相邻的像素高度相关，输入数据是有一定冗余的。具体来说，假如
+我们正在训练的16x16灰度值图像，记为一个256维向量 ，其中特征值 对应每个像素的亮度
+值。由于相邻像素间的相关性，PCA算法可以将输入向量转换为一个维数低很多的近似向量，而且误差非常
+小。
+实例和数学背景
+在我们的实例中，使用的输入数据集表示为 ，维度 即 。假设
+我们想把数据从2维降到1维。（在实际应用中，我们也许需要把数据从256维降到50维；在这里使用低维数
+据，主要是为了更好地可视化算法的行为）。下图是我们的数据集： 
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+
+这些数据已经进行了预处理，使得每个特征
+
+
+和
+具有相同的均值（零）和方差。
+为方便展示，根据
+值的大小，我们将每个点分别涂上了三种颜色之一，但该颜色并不用于算法而仅用于
+图解。
+PCA算法将寻找一个低维空间来投影我们的数据。从下图中可以看出，
+
+
+是数据变化的主方向，而
+是
+次方向。
+
+
+也就是说，数据在
+
+
+方向上的变化要比在
+方向上大。为更形式化地找出方向
+和
+，我们首先计 
+wbx 
+
+
+算出矩阵 ，如下所示： 
+假设 的均值为零，那么 就是x的协方差矩阵。（符号 ，读"Sigma"，是协方差矩阵的标准符号。虽
+然看起来与求和符号 比较像，但它们其实是两个不同的概念。） 
+可以证明，数据变化的主方向 就是协方差矩阵 的主特征向量，而 是次特征向量。
+注：如果你对如何得到这个结果的具体数学推导过程感兴趣，可以参看CS229（机器学习）PCA部分的课件
+（链接在本页底部）。但如果仅仅是想跟上本课，可以不必如此。
+你可以通过标准的数值线性代数运算软件求得特征向量（见实现说明）.我们先计算出协方差矩阵的特征向
+量，按列排放，而组成矩阵： 
+此处， 是主特征向量（对应最大的特征值）， 是次特征向量。以此类推，另记 为
+相应的特征值。
+在本例中，向量 和 构成了一个新基，可以用来表示数据。令 为训练样本，那么 就
+是样本点 在维度 上的投影的长度（幅值）。同样的， 是 投影到 维度上的幅值。
+旋转数据
+至此，我们可以把 用 基表达为： 
+（下标“rot”来源于单词“rotation”，意指这是原数据经过旋转（也可以说成映射）后得到的结果） 
+对数据集中的每个样本 分别进行旋转： for every ，然后把变换后的数据 显示
+在坐标图上，可得： 
+Deep Learning - Ng 
+wbx
+
+这就是把训练数据集旋转到 ， 基后的结果。一般而言，运算 表示旋转到基 , , ..., 之
+上的训练数据。矩阵 有正交性，即满足 ，所以若想将旋转后的向量 还原为
+原始数据 ，将其左乘矩阵即可： , 验算一下： . 
+数据降维
+数据的主方向就是旋转数据的第一维 。因此，若想把这数据降到一维，可令： 
+更一般的，假如想把数据 降到 维表示 （令 ）,只需选取 的前 个成
+分，分别对应前 个数据变化的主方向。
+PCA的另外一种解释是： 是一个 维向量，其中前几个成分可能比较大（例如，上例中大部分样本第一
+个成分 的取值相对较大），而后面成分可能会比较小（例如，上例中大部分样本的 
+较小）。
+PCA算法做的其实就是丢弃 中后面（取值较小）的成分，就是将这些成分的值近似为零。具体的说，设 
+是 的近似表示，那么将 除了前 个成分外，其余全赋值为零，就得到： 
+Deep Learning - Ng 
+wbx
+
+在本例中，可得 的点图如下（取 ）： 
+然而，由于上面 的后项均为零，没必要把这些零项保留下来。所以，我们仅用前 个（非零）成
+分来定义 维向量 。
+这也解释了我们为什么会以 为基来表示数据：要决定保留哪些成分变得很简单，只需取前 
+个成分即可。这时也可以说，我们“保留了前 个PCA（主）成分”。
+还原近似数据
+现在，我们得到了原始数据 的低维“压缩”表征量 ， 反过来，如果给定 ，我们应如
+何还原原始数据 呢？查看以往章节以往章节可知，要转换回来，只需 即可。进一步，我们
+把 看作将 的最后 个元素被置0所得的近似表示，因此如果给定 ，可以通过在其末
+尾添加 个0来得到对 的近似，最后，左乘 便可近似还原出原数据 。具体来说， 
+计算如下： 
+上面的等式基于先前对 的定义。在实现时，我们实际上并不先给 填0然后再左乘 ，因为这意味着
+大量的乘0运算。我们可用 来与 的前 列相乘，即上式中最右项，来达到同样的目的。将该算
+法应用于本例中的数据集，可得如下关于重构数据 的点图： 
+Deep Learning - Ng 
+wbx
+
+由图可见，我们得到的是对原始数据集的一维近似重构。
+在训练自动编码器或其它无监督特征学习算法时，算法运行时间将依赖于输入数据的维数。若用 
+取代 作为输入数据，那么算法就可使用低维数据进行训练，运行速度将显著加快。对于很多数据集来
+说，低维表征量 是原数据集的极佳近似，因此在这些场合使用PCA是很合适的，它引入的近似误差的很
+小，却可显著地提高你算法的运行速度。
+选择主成分个数
+我们该如何选择 ，即保留多少个PCA主成分？在上面这个简单的二维实验中，保留第一个成分看起来是自
+然的选择。对于高维数据来说，做这个决定就没那么简单：如果 过大，数据压缩率不高，在极限情况 
+时，等于是在使用原始数据（只是旋转投射到了不同的基）；相反地，如果 过小，那数据的近似
+误差太太。
+决定 值时，我们通常会考虑不同 值可保留的方差百分比。具体来说，如果 ，那么我们得到的
+是对数据的完美近似，也就是保留了100%的方差，即原始数据的所有变化都被保留下来；相反，如果 
+，那等于是使用零向量来逼近输入数据，也就是只有0%的方差被保留下来。
+一般而言，设 表示 的特征值（按由大到小顺序排列），使得 为对应于特征向量 
+的特征值。那么如果我们保留前 个成分，则保留的方差百分比可计算为： 
+在上面简单的二维实验中， ， 。因此，如果保留 个主成分，等于我们保留
+了 ，即91.3%的方差。
+对保留方差的百分比进行更正式的定义已超出了本教程的范围，但很容易证明， 。因此， 
+如果 ，则说明 也就基本上接近于0，所以用0来近似它并不会产生多大损失。这也解释了为
+Deep Learning - Ng 
+wbx
+
+什么要保留前面的主成分（对应的 值较大）而不是末尾的那些。 这些前面的主成分 变化性更
+大，取值也更大，如果将其设为0势必引入较大的近似误差。
+以处理图像数据为例，一个惯常的经验法则是选择 以保留99%的方差，换句话说，我们选取满足以下条件
+的最小 值： 
+对其它应用，如不介意引入稍大的误差，有时也保留90-98%的方差范围。若向他人介绍PCA算法详情，告诉他
+们你选择的 保留了95%的方差，比告诉他们你保留了前120个（或任意某个数字）主成分更好理解。
+对图像数据应用PCA算法
+为使PCA算法能有效工作，通常我们希望所有的特征 都有相似的取值范围（并且均值接近于
+0）。如果你曾在其它应用中使用过PCA算法，你可能知道有必要单独对每个特征做预处理，即通过估算每个
+特征 的均值和方差，而后将其取值范围规整化为零均值和单位方差。但是，对于大部分图像类型，我们
+却不需要进行这样的预处理。假定我们将在自然图像上训练算法，此时特征 代表的是像素 的值。所
+谓“自然图像”，不严格的说，是指人或动物在他们一生中所见的那种图像。
+注：通常我们选取含草木等内容的户外场景图片，然后从中随机截取小图像块（如16x16像素）来训练算法。
+在实践中我们发现，大多数特征学习算法对训练图片的确切类型并不敏感，所以大多数用普通照相机拍摄的
+图片，只要不是特别的模糊或带有非常奇怪的人工痕迹，都可以使用。
+在自然图像上进行训练时，对每一个像素单独估计均值和方差意义不大，因为（理论上）图像任一部分的统
+计性质都应该和其它部分相同，图像的这种特性被称作平稳性（stationarity）。
+具体而言，为使PCA算法正常工作，我们通常需要满足以下要求：(1)特征的均值大致为0；(2)不同特征的方
+差值彼此相似。对于自然图片，即使不进行方差归一化操作，条件(2)也自然满足，故而我们不再进行任何方
+差归一化操作（对音频数据,如声谱,或文本数据,如词袋向量，我们通常也不进行方差归一化）。实际上， 
+PCA算法对输入数据具有缩放不变性，无论输入数据的值被如何放大（或缩小），返回的特征向量都不改变。
+更正式的说：如果将每个特征向量 都乘以某个正数（即所有特征量被放大或缩小相同的倍数），PCA的输
+出特征向量都将不会发生变化。
+既然我们不做方差归一化，唯一还需进行的规整化操作就是均值规整化，其目的是保证所有特征的均值都在0 
+附近。根据应用，在大多数情况下，我们并不关注所输入图像的整体明亮程度。比如在对象识别任务中，图
+像的整体明亮程度并不会影响图像中存在的是什么物体。更为正式地说，我们对图像块的平均亮度值不感兴
+趣，所以可以减去这个值来进行均值规整化。
+具体的步骤是，如果 代表16x16的图像块的亮度（灰度）值（ ），可用如下算法来对
+每幅图像进行零均值化操作： 
+, for all 
+请注意：1）对每个输入图像块 都要单独执行上面两个步骤，2）这里的 是指图像块 的平均
+亮度值。尤其需要注意的是，这和为每个像素 单独估算均值是两个完全不同的概念。
+如果你处理的图像并非自然图像（比如，手写文字，或者白背景正中摆放单独物体），其他规整化操作就值
+得考虑了，而哪种做法最合适也取决于具体应用场合。但对自然图像而言，对每幅图像进行上述的零均值规
+整化，是默认而合理的处理。
+Deep Learning - Ng 
+wbx
+
+参考文献
+http://cs229.stanford.edu 
+中英文对照
+Principal Components Analysis 主成份分析
+whitening 白化
+intensity 亮度
+mean 平均值
+variance 方差
+covariance matrix 协方差矩阵
+basis 基
+magnitude 幅值
+stationarity 平稳性
+normalization 归一化
+eigenvector 特征向量
+eigenvalue 特征值
+中文译者
+郭亮（guoliang2248@gmail.com），张力（emma.lzhang@gmail.com），金峰（jinfengb@gmail.com）, @破
+破的桥（新浪微博）, 谭晓阳（x.tan@nuaa.edu.cn） 
+主成分分析 | 白化 | 实现主成分分析和白化 | Exercise:PCA in 2D | Exercise:PCA and Whitening 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90" 
+This page was last modified on 8 April 2013, at 05:04. 
+Deep Learning - Ng 
+wbx
+
+白化
+From Ufldl 
+Contents 
+1 介绍
+2 2D 的例子
+3 ZCA白化
+4 正则化
+5 中英文对照
+6 中文译者
+介绍
+我们已经了解了如何使用PCA降低数据维度。在一些算法中还需要一个与之相关的预处理步骤， 
+这个预处理过程称为白化（一些文献中也叫sphering）。举例来说，假设训练数据是图像，由
+于图像中相邻像素之间具有很强的相关性，所以用于训练时输入是冗余的。白化的目的就是降低
+输入的冗余性；更正式的说，我们希望通过白化过程使得学习算法的输入具有如下性质：(i)特
+征之间相关性较低；(ii)所有特征具有相同的方差。
+2D 的例子
+下面我们先用前文的2D例子描述白化的主要思想，然后分别介绍如何将白化与平滑和PCA相结
+合。
+如何消除输入特征之间的相关性? 在前文计算 时实际上已经消除了输入特征
+之间的相关性。得到的新特征 的分布如下图所示： 
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+
+这个数据的协方差矩阵如下：
+
+
+(注:严格地讲,这部分许多关于“协方差”的陈述仅当数据均值为0时成立。下文的论述都隐式
+地假定这一条件成立。不过即使数据均值不为0，下文的说法仍然成立，所以你无需担心这个。)
+
+
+协方差矩阵对角元素的值为
+
+
+和
+
+
+绝非偶然。并且非对角元素值为0;因此,
+和
+
+
+是不相关的,满足我们对白化结果的第一个要求 (特征间相关性降低)。
+
+为了使每个输入特征具有单位方差，我们可以直接使用
+
+
+作为缩放因子来缩放每个特征
+
+
+。具体地，我们定义白化后的数据
+
+
+如下：
+
+
+绘制出
+
+
+，我们得到: 
+
+wbx 
+
+
+这些数据现在的协方差矩阵为单位矩阵 。我们说， 是数据经过PCA白化后的版
+本: 中不同的特征之间不相关并且具有单位方差。
+白化与降维相结合。 如果你想要得到经过白化后的数据，并且比初始输入维数更低,可以仅保
+留 中前 个成分。当我们把PCA白化和正则化结合起来时(在稍后讨论)， 
+中最后的少量成分将总是接近于0，因而舍弃这些成分不会带来很大的问题。
+ZCA白化
+最后要说明的是，使数据的协方差矩阵变为单位矩阵 的方式并不唯一。具体地，如果 是
+任意正交矩阵，即满足 (说它正交不太严格， 可以是旋转或反射矩阵), 
+那么 仍然具有单位协方差。在ZCA白化中，令 。我们定义ZCA白化的结
+果为： 
+绘制 ，得到: 
+Deep Learning - Ng 
+wbx
+
+可以证明，对所有可能的 ，这种旋转使得 尽可能地接近原始输入数据 。
+当使用 ZCA白化时(不同于 PCA白化)，我们通常保留数据的全部 个维度，不尝试去降低它的
+维数。
+正则化
+实践中需要实现PCA白化或ZCA白化时，有时一些特征值 在数值上接近于0，这样在缩放步骤
+时我们除以 将导致除以一个接近0的值；这可能使数据上溢 (赋为大数值)或造成数值不稳
+定。因而在实践中，我们使用少量的正则化实现这个缩放过程，即在取平方根和倒数之前给特征
+值加上一个很小的常数 ： 
+当 在区间 上时, 一般取值为 。
+对图像来说, 这里加上 ，对输入图像也有一些平滑(或低通滤波)的作用。这样处理还能消除
+在图像的像素信息获取过程中产生的噪声，改善学习到的特征(细节超出了本文的范围)。
+ZCA 白化是一种数据预处理方法，它将数据从 映射到 。 事实证明这也是一种生
+物眼睛(视网膜)处理图像的粗糙模型。具体而言，当你的眼睛感知图像时，由于一幅图像中相邻
+Deep Learning - Ng 
+wbx
+
+的部分在亮度上十分相关，大多数临近的“像素”在眼中被感知为相近的值。因此，如果人眼需
+要分别传输每个像素值（通过视觉神经）到大脑中，会非常不划算。取而代之的是，视网膜进行
+一个与ZCA中相似的去相关操作 (这是由视网膜上的ON-型和OFF-型光感受器细胞将光信号转变为
+神经信号完成的)。由此得到对输入图像的更低冗余的表示，并将它传输到大脑。
+PCA | Whitening | Implementing PCA/Whitening | Exercise:PCA in 2D | Exercise:PCA and Whitening 
+中英文对照
+白化 whitening 
+冗余 redundant 
+方差 variance 
+平滑 smoothing 
+降维 dimensionality reduction 
+正则化 regularization 
+反射矩阵 reflection matrix 
+去相关 decorrelation 
+中文译者
+杨海川（yanghaichuan@outlook.com）, 王文中（wangwenzhong@ymail.com）, 谭晓阳
+（x.tan@nuaa.edu.cn） 
+主成分分析 | 白化 | 实现主成分分析和白化 | Exercise:PCA in 2D | Exercise:PCA and Whitening 
+Language : English 
+Retrieved from "http://deeplearning.stanford.edu/wiki/index.php/%E7%99%BD%E5%8C%96" 
+This page was last modified on 8 April 2013, at 05:07. 
+Deep Learning - Ng 
+wbx
+
+实现主成分分析和白化
+From Ufldl 
+在这一节里，我们将总结PCA, PCA白化和ZCA白化算法，并描述如何使用高效的线性代数库来实现它们。
+首先，我们需要确保数据的均值（近似）为零。对于自然图像，我们通过减去每个图像块(patch)的均值（近似地）来达到这一目标。为此，我们计算每
+个图像块的均值，并从每个图像块中减去它的均值。（译注：参见PCA一章中“对图像数据应用PCA算法”一节）。Matlab实现如下： 
+avg = mean(x, 1); % 分别为每个图像块计算像素强度的均值。 
+x = x - repmat(avg, size(x, 1), 1); 
+下面，我们要计算 ，如果你在Matlab中实现（或者在C++, Java等中实现，但可以使用高效的线性代数库），直接求和效率
+很低。不过，我们可以这样一气呵成。
+sigma = x * x' / size(x, 2); 
+（自己推导一下看看）这里，我们假设 x 为一数据结构，其中每列表示一个训练样本（所以 x 是一个 × 的矩阵）。
+接下来，PCA计算 Σ 的特征向量。你可以使用Matlab的 eig 函数来计算。但是由于 Σ 是对称半正定的矩阵，用 svd 函数在数值计算上更加稳定。
+具体来说，如果你使用
+[U,S,V] = svd(sigma); 
+那矩阵 U 将包含 Sigma 的特征向量（一个特征向量一列，从主向量开始排序），矩阵S 对角线上的元素将包含对应的特征值（同样降序排列）。矩阵 
+等于 的转置，可以忽略。
+（注意 svd 函数实际上计算的是一个矩阵的奇异值和奇异向量，就对称半正定矩阵的特殊情况来说，它们对应于特征值和特征向量，这里我们也只关心
+这一特例。关于奇异向量和特征向量的详细讨论超出了本文范围。） 
+最后，我们可以这样计 算 和 ： 
+xRot = U' * x; % 数据旋转后的结果。 
+xTilde = U(:,1:k)' * x; % 数据降维后的结果，这里k希望保留的特征向量的数目。 
+这以 的形式给出了数据的PCA表示。顺便说一下，如果 x 是一个包括所有训练数据的 × 矩阵，这也是一种向量化的实现方式，上面的式
+子可以让你一次对所有的训练样本计算出 xrot 和 。得到的 xrot 和 中，每列对应一个训练样本。
+为计算PCA白化后的数据 ，可以用
+xPCAwhite = diag(1./sqrt(diag(S) + epsilon)) * U' * x; 
+因为 S 的对角线包括了特征值 ，这其实就是同时为所有样本计算 的简洁表达。
+最后，你也可以这样计算ZCA白化后的数据: 
+xZCAwhite = U * diag(1./sqrt(diag(S) + epsilon)) * U' * x; 
+PCA | Whitening | Implementing PCA/Whitening | Exercise:PCA in 2D | Exercise:PCA and Whitening 
+中英文对照
+主成分分析 Principal Components Analysis (PCA) 
+白化 whitening 
+均值为零 zero-mean 
+均值 mean value 
+特征值 eigenvalue 
+特征向量 eigenvector 
+对称半正定矩阵 symmetric positive semi-definite matrix 
+数值计算上稳定 numerically reliable 
+降序排列 sorted in decreasing order 
+奇异值 singular value 
+奇异向量 singular vector 
+向量化实现 vectorized implementation 
+对角线 diagonal 
+中文译者
+Deep Learning - Ng 
+wbx
+
+周思远（visualzhou@gmail.com），张力（emma.lzhang@gmail.com），谭晓阳（x.tan@nuaa.edu.cn） 
+主成分分析 | 白化 | 实现主成分分析和白化 | Exercise:PCA in 2D | Exercise:PCA and Whitening 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E5%AE%9E%E7%8E%B0%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E5%92%8C%E7%99%BD%E5%8C%96 
+This page was last modified on 8 April 2013, at 05:08. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 
+deeplearning.stanford.edu/w iki/index.php/E xercise:P C A _in_2D 1/5 
+Exercise:PCA in 2D 
+From Ufldl 
+Contents 
+1 PCA, PCA whitening and ZCA whitening in 2D 
+1.1 Step 0: Load data 
+1.2 Step 1: Implement PCA 
+1.2.1 Step 1a: Finding the PCA basis 
+1.2.2 Step 1b: Check xRot 
+1.3 Step 2: Dimension reduce and replot 
+1.4 Step 3: PCA Whitening 
+1.5 Step 4: ZCA Whitening 
+PCA, PCA whitening and ZCA whitening in 2D 
+In this exercise you will implement PCA, PCA whitening and ZCA whitening, as 
+described in the earlier sections of this tutorial, and generate the images shown in 
+the earlier sections yourself. You will build on the starter code that has been 
+provided at pca_2d.zip (http://ufldl.stanford.edu/wiki/resources/pca_2d.zip) . You 
+need only write code at the places indicated by "YOUR CODE HERE" in the files. The 
+only file you need to modify is pca_2d.m. Implementing this exercise will make the 
+next exercise significantly easier to understand and complete. 
+Step 0: Load data 
+The starter code contains code to load 45 2D data points. When plotted using the 
+scatter function, the results should look like the following: 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:P C A in 2D - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:P C A _in_2D 2/5 
+Step 1: Implement PCA 
+In this step, you will implement PCA to obtain xrot, the matrix in which the data is 
+"rotated" to the basis comprising made up of the principal components. 
+As mentioned in the implementation notes, you should make use of MATLAB's svd 
+function here. 
+Step 1a: Finding the PCA basis 
+Find and , and draw two lines in your figure to show the resulting basis on 
+top of the given data points. You may find it useful to use MATLAB's hold on and hold 
+off functions. (After calling hold on, plotting functions such as plot will draw the 
+new data on top of the previously existing figure rather than erasing and replacing 
+it; and hold off turns this off.) You can use plot([x1,x2], [y1,y2], '-') to draw a line 
+between (x1,y1) and (x2,y2). Your figure should look like this: 
+Deep Learning - Ng 
+wbx
+
+If you are doing this in Matlab, you will probably get a plot that's identical to 
+ours. However, eigenvectors are defined only up to a sign. I.e., instead of 
+returning as the first eigenvector, Matlab/Octave could just as easily have 
+returned , and similarly instead of Matlab/Octave could have returned . 
+So if you wound up with one or both of the eigenvectors pointing in a direction 
+opposite (180 degrees difference) from what's shown above, that's okay too. 
+Step 1b: Check xRot 
+Compute xRot, and use the scatter function to check that xRot looks as it should, 
+which should be something like the following: 
+Because Matlab/Octave could have returned and/or instead of and , 
+it's also possible that you might have gotten a figure which is "flipped" or 
+"reflected" along the - and/or -axis; a flipped/reflected version of this figure 
+is also a completely correct result. 
+Step 2: Dimension reduce and replot 
+In the next step, set k, the number of components to retain, to be 1 (we have 
+already done this for you). Compute the resulting xHat and plot the results. You 
+should get the following (this figure should not be flipped along the - or - 
+axis): 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:P C A in 2D - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:P C A _in_2D 4/5 
+Step 3: PCA Whitening 
+Implement PCA whitening using the formula from the notes. Plot xPCAWhite, and verify 
+that it looks like the following (a figure that is flipped/reflected on either/both 
+axes is also correct): 
+Step 4: ZCA Whitening 
+Implement ZCA whitening and plot the results. The results should look like the 
+following (this should not be flipped/reflected along the - or -axis): 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:P C A in 2D - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:P C A _in_2D 5/5 
+PCA | Whitening | Implementing PCA/Whitening | E x e r c i s e : P C A i n 2 D | Exercise:PCA and 
+Whitening 
+Retrieved from "http://deeplearning.stanford.edu/wiki/index.php/Exercise:PCA_in_2D" 
+Category: Exercises 
+This page was last modified on 26 May 2011, at 11:01. 
+Deep Learning - Ng 
+wbx
+
+1 3 -4 -8 E xe rcise :P C A a n d W h ite n in g - U fld l 
+deeplearning.stanford.edu/w iki/index.php/E xercise:P C A _and_W hitening 1/4 
+Exercise:PCA and Whitening 
+From Ufldl 
+Contents 
+1 PCA and Whitening on natural images 
+1.1 Step 0: Prepare data 
+1.1.1 Step 0a: Load data 
+1.1.2 Step 0b: Zero mean the data 
+1.2 Step 1: Implement PCA 
+1.2.1 Step 1a: Implement PCA 
+1.2.2 Step 1b: Check covariance 
+1.3 Step 2: Find number of components to retain 
+1.4 Step 3: PCA with dimension reduction 
+1.5 Step 4: PCA with whitening and regularization 
+1.5.1 Step 4a: Implement PCA with whitening and regularization 
+1.5.2 Step 4b: Check covariance 
+1.6 Step 5: ZCA whitening 
+PCA and Whitening on natural images 
+In this exercise, you will implement PCA, PCA whitening and ZCA whitening, and apply them 
+to image patches taken from natural images. 
+You will build on the MATLAB starter code which we have provided in pca_exercise.zip 
+(http://ufldl.stanford.edu/wiki/resources/pca_exercise.zip) . You need only write code at the 
+places indicated by "YOUR CODE HERE" in the files. The only file you need to modify is 
+pca_gen.m. 
+Step 0: Prepare data 
+Step 0a: Load data 
+The starter code contains code to load a set of natural images and sample 12x12 patches 
+from them. The raw patches will look something like this: 
+Deep Learning - Ng 
+wbx
+
+1 3 -4 -8 E xe rcise :P C A a n d W h ite n in g - U fld l 
+deeplearning.stanford.edu/w iki/index.php/E xercise:P C A _and_W hitening 2/4 
+These patches are stored as column vectors in the matrix x. 
+Step 0b: Zero mean the data 
+First, for each image patch, compute the mean pixel value and subtract it from that image, 
+this centering the image around zero. You should compute a different mean value for each 
+image patch. 
+Step 1: Implement PCA 
+Step 1a: Implement PCA 
+In this step, you will implement PCA to obtain xrot, the matrix in which the data is 
+"rotated" to the basis comprising the principal components (i.e. the eigenvectors of Σ). 
+Note that in this part of the exercise, you should not whiten the data. 
+Step 1b: Check covariance 
+To verify that your implementation of PCA is correct, you should check the covariance 
+matrix for the rotated data xrot. PCA guarantees that the covariance matrix for the rotated 
+data is a diagonal matrix (a matrix with non-zero entries only along the main diagonal). 
+Implement code to compute the covariance matrix and verify this property. One way to do 
+this is to compute the covariance matrix, and visualise it using the MATLAB command imagesc. 
+The image should show a coloured diagonal line against a blue background. For this dataset, 
+because of the range of the diagonal entries, the diagonal line may not be apparent, so you 
+might get a figure like the one show below, but this trick of visualizing using imagesc will 
+come in handy later in this exercise. 
+Step 2: Find number of components to retain 
+Next, choose k, the number of principal components to retain. Pick k to be as small as 
+possible, but so that at least 99% of the variance is retained. In the step after this, you 
+will discard all but the top k principal components, reducing the dimension of the original 
+data to k. 
+Step 3: PCA with dimension reduction 
+Now that you have found k, compute , the reduced-dimension representation of the data. 
+This gives you a representation of each image patch as a k dimensional vector instead of a 
+Deep Learning - Ng 
+wbx
+
+1 3 -4 -8 E xe rcise :P C A a n d W h ite n in g - U fld l 
+deeplearning.stanford.edu/w iki/index.php/E xercise:P C A _and_W hitening 3/4 
+144 dimensional vector. If you are training a sparse autoencoder or other algorithm on this 
+reduced-dimensional data, it will run faster than if you were training on the original 144 
+dimensional data. 
+To see the effect of dimension reduction, go back from to produce the matrix , the 
+dimension-reduced data but expressed in the original 144 dimensional space of image 
+patches. Visualise and compare it to the raw data, x. You will observe that there is 
+little loss due to throwing away the principal components that correspond to dimensions 
+with low variation. For comparison, you may also wish to generate and visualise for when 
+only 90% of the variance is retained. 
+Raw images 
+PCA dimension-reduced images 
+(99% variance) 
+PCA dimension-reduced images 
+(90% variance) 
+Step 4: PCA with whitening and regularization 
+Step 4a: Implement PCA with whitening and regularization 
+Now implement PCA with whitening and regularization to produce the matrix xPCAWhite. Use the 
+following parameter value: 
+epsilon = 0.1 
+Step 4b: Check covariance 
+Similar to using PCA alone, PCA with whitening also results in processed data that has a 
+diagonal covariance matrix. However, unlike PCA alone, whitening additionally ensures that 
+the diagonal entries are equal to 1, i.e. that the covariance matrix is the identity 
+matrix. 
+That would be the case if you were doing whitening alone with no regularization. However, 
+in this case you are whitening with regularization, to avoid numerical/etc. problems 
+associated with small eigenvalues. As a result of this, some of the diagonal entries of the 
+covariance of your xPCAwhite will be smaller than 1. 
+To verify that your implementation of PCA whitening with and without regularization is 
+correct, you can check these properties. Implement code to compute the covariance matrix 
+and verify this property. (To check the result of PCA without whitening, simply set epsilon 
+to 0, or close to 0, say 1e-10). As earlier, you can visualise the covariance matrix with 
+imagesc. When visualised as an image, for PCA whitening without regularization you should 
+Deep Learning - Ng 
+wbx
+
+1 3 -4 -8 E xe rcise :P C A a n d W h ite n in g - U fld l 
+deeplearning.stanford.edu/w iki/index.php/E xercise:P C A _and_W hitening 4/4 
+see a red line across the diagonal (corresponding to the one entries) against a blue 
+background (corresponding to the zero entries); for PCA whitening with regularization you 
+should see a red line that slowly turns blue across the diagonal (corresponding to the 1 
+entries slowly becoming smaller). 
+Covariance for PCA whitening with 
+regularization 
+Covariance for PCA whitening without 
+regularization 
+Step 5: ZCA whitening 
+Now implement ZCA whitening to produce the matrix xZCAWhite. Visualize xZCAWhite and compare 
+it to the raw data, x. You should observe that whitening results in, among other things, 
+enhanced edges. Try repeating this with epsilon set to 1, 0.1, and 0.01, and see what you 
+obtain. The example shown below (left image) was obtained with epsilon = 0.1. 
+ZCA whitened images Raw images 
+PCA | Whitening | Implementing PCA/Whitening | Exercise:PCA in 2D | E x e r c i s e : P C A a n d W h i t e n i n g 
+Retrieved from "http://deeplearning.stanford.edu/wiki/index.php/Exercise:PCA_and_Whitening" 
+Category: Exercises 
+This page was last modified on 26 May 2011, at 11:01. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Softmax回归 - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Softmax回归1/7 
+Softmax回归
+From Ufldl 
+Contents 
+1 简介
+2 代价函数
+3 Softmax回归模型参数化的特点
+4 权重衰减
+5 Softmax回归与Logistic 回归的关系
+6 Softmax 回归 vs. k 个二元分类器
+7 中英文对照
+8 中文译者
+简介
+在本节中，我们介绍Softmax回归模型，该模型是logistic回归模型在多分类问题上的推广，在
+多分类问题中，类标签 可以取两个以上的值。 Softmax回归模型对于诸如MNIST手写数字分
+类等问题是很有用的，该问题的目的是辨识10个不同的单个数字。Softmax回归是有监督的，不
+过后面也会介绍它与深度学习/无监督学习方法的结合。（译者注： MNIST 是一个手写数字识别
+库，由NYU 的Yann LeCun 等人维护。http://yann.lecun.com/exdb/mnist/ ） 
+回想一下在 logistic 回归中，我们的训练集由 个已标记的样本构成： 
+，其中输入特征。（我们对符号的约定如下： 
+特征向量 的维度为 ，其中 对应截距项 。） 由于 logistic 回归是针对二
+分类问题的，因此类标记 。假设函数(hypothesis function) 如下： 
+我们将训练模型参数 ，使其能够最小化代价函数 ： 
+在 softmax回归中，我们解决的是多分类问题（相对于 logistic 回归解决的二分类问题），类
+标 可以取 个不同的值（而不是 2 个）。因此，对于训练集 
+，我们有 。（注意此处的类别下标从 1 
+开始，而不是 0）。例如，在 MNIST 数字识别任务中，我们有 个不同的类别。
+Deep Learning - Ng 
+wbx
+
+13-4-8 Softmax回归 - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Softmax回归2/7 
+对于给定的测试输入 ，我们想用假设函数针对每一个类别j估算出概率值 。也就
+是说，我们想估计 的每一种分类结果出现的概率。因此，我们的假设函数将要输出一个 
+维的向量（向量元素的和为1）来表示这 个估计的概率值。 具体地说，我们的假设函数 
+形式如下： 
+其中 是模型的参数。请注意 这一项对概率分布进行归一
+化，使得所有概率之和为 1 。
+为了方便起见，我们同样使用符号 来表示全部的模型参数。在实现Softmax回归时，将 用
+一个 的矩阵来表示会很方便，该矩阵是将 按行罗列起来得到
+的，如下所示： 
+代价函数
+现在我们来介绍 softmax 回归算法的代价函数。在下面的公式中， 是示性函数，其取值
+规则为： 
+值为真的表达式 
+， 值为假的表达式 。举例来说，表达式 的值为1 ， 
+的值为 0。我们的代价函数为： 
+值得注意的是，上述公式是logistic回归代价函数的推广。logistic回归代价函数可以改为： 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Softmax回归 - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Softmax回归3/7 
+可以看到，Softmax代价函数与logistic 代价函数在形式上非常类似，只是在Softmax损失函数
+中对类标记的 个可能值进行了累加。注意在Softmax回归中将 分类为类别 的概率为： 
+. 
+对于 的最小化问题，目前还没有闭式解法。因此，我们使用迭代的优化算法（例如梯度
+下降法，或 L-BFGS）。经过求导，我们得到梯度公式如下： 
+让我们来回顾一下符号 " " 的含义。 本身是一个向量，它的第 个元素 是
+对 的第 个分量的偏导数。
+有了上面的偏导数公式以后，我们就可以将它代入到梯度下降法等算法中，来最小化 。
+例如，在梯度下降法的标准实现中，每一次迭代需要进行如下更新: ( 
+）。
+当实现 softmax 回归算法时， 我们通常会使用上述代价函数的一个改进版本。具体来说，就是
+和权重衰减(weight decay)一起使用。我们接下来介绍使用它的动机和细节。
+Softmax回归模型参数化的特点
+Softmax 回归有一个不寻常的特点：它有一个“冗余”的参数集。为了便于阐述这一特点，假设
+我们从参数向量 中减去了向量 ，这时，每一个 都变成了 ( )。
+此时假设函数变成了以下的式子： 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Softmax回归 - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Softmax回归4/7 
+换句话说，从 中减去 完全不影响假设函数的预测结果！这表明前面的 softmax 回归模
+型中存在冗余的参数。更正式一点来说， Softmax 模型被过度参数化了。对于任意一个用于拟
+合数据的假设函数，可以求出多组参数值，这些参数得到的是完全相同的假设函数 。
+进一步而言，如果参数 是代价函数 的极小值点，那么 
+同样也是它的极小值点，其中 可以为任意向量。因此使 
+最小化的解不是唯一的。（有趣的是，由于 仍然是一个凸函数，因此梯度下降时不
+会遇到局部最优解的问题。但是 Hessian 矩阵是奇异的/不可逆的，这会直接导致采用牛顿法优
+化就遇到数值计算的问题） 
+注意，当 时，我们总是可以将 替换为（即替换为全零向量），并且这
+种变换不会影响假设函数。因此我们可以去掉参数向量 （或者其他 中的任意一个）而不
+影响假设函数的表达能力。实际上，与其优化全部的 个参数 
+（其中 ），我们可以令 ，只优化剩余的 个参数，这
+样算法依然能够正常工作。
+在实际应用中，为了使算法实现更简单清楚，往往保留所有参数 ，而不任意地
+将某一参数设置为 0。但此时我们需要对代价函数做一个改动：加入权重衰减。权重衰减可以解
+决 softmax 回归的参数冗余所带来的数值问题。
+权重衰减
+我们通过添加一个权重衰减项 来修改代价函数，这个衰减项会惩罚过大的参
+数值，现在我们的代价函数变为： 
+有了这个权重衰减项以后 ( )，代价函数就变成了严格的凸函数，这样就可以保证得到唯
+一的解了。 此时的 Hessian矩阵变为可逆矩阵，并且因为是凸函数，梯度下降法和 LBFGS 
+等算法可以保证收敛到全局最优解。
+Deep Learning - Ng 
+wbx
+
+13-4-8 Softmax回归 - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Softmax回归5/7 
+为了使用优化算法，我们需要求得这个新函数 的导数，如下： 
+通过最小化 ，我们就能实现一个可用的 softmax 回归模型。
+Softmax回归与Logistic 回归的关系
+当类别数 时，softmax 回归退化为 logistic 回归。这表明 softmax 回归是 logistic 
+回归的一般形式。具体地说，当 时，softmax 回归的假设函数为： 
+利用softmax回归参数冗余的特点，我们令 ，并且从两个参数向量中都减去向量 ，得
+到: 
+因此，用 来表示，我们就会发现 softmax 回归器预测其中一个类别的概率为 
+，另一个类别概率的为 ，这与 logistic回归是一致的。
+Softmax 回归 vs. k 个二元分类器
+如果你在开发一个音乐分类的应用，需要对k种类型的音乐进行识别，那么是选择使用 softmax 
+分类器呢，还是使用 logistic 回归算法建立 k 个独立的二元分类器呢？ 
+这一选择取决于你的类别之间是否互斥，例如，如果你有四个类别的音乐，分别为：古典音乐、
+乡村音乐、摇滚乐和爵士乐，那么你可以假设每个训练样本只会被打上一个标签（即：一首歌只
+能属于这四种音乐类型的其中一种），此时你应该使用类别数 k = 4 的softmax回归。（如果在
+Deep Learning - Ng 
+wbx
+
+13-4-8 Softmax回归 - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Softmax回归6/7 
+你的数据集中，有的歌曲不属于以上四类的其中任何一类，那么你可以添加一个“其他类”，并
+将类别数 k 设为5。） 
+如果你的四个类别如下：人声音乐、舞曲、影视原声、流行歌曲，那么这些类别之间并不是互斥
+的。例如：一首歌曲可以来源于影视原声，同时也包含人声 。这种情况下，使用4个二分类的
+logistic 回归分类器更为合适。这样，对于每个新的音乐作品 ，我们的算法可以分别判断它是
+否属于各个类别。
+现在我们来看一个计算视觉领域的例子，你的任务是将图像分到三个不同类别中。(i) 假设这三
+个类别分别是：室内场景、户外城区场景、户外荒野场景。你会使用sofmax回归还是 3个
+logistic 回归分类器呢？ (ii) 现在假设这三个类别分别是室内场景、黑白图片、包含人物的
+图片，你又会选择 softmax 回归还是多个 logistic 回归分类器呢？ 
+在第一个例子中，三个类别是互斥的，因此更适于选择softmax回归分类器 。而在第二个例子
+中，建立三个独立的 logistic回归分类器更加合适。
+中英文对照
+Softmax回归 Softmax Regression 
+有监督学习 supervised learning 
+无监督学习 unsupervised learning 
+深度学习 deep learning 
+logistic回归 logistic regression 
+截距项 intercept term 
+二元分类 binary classification 
+类型标记 class labels 
+估值函数/估计值 hypothesis 
+代价函数 cost function 
+多元分类 multi-class classification 
+权重衰减 weight decay 
+中文译者
+曾俊瑀（knighterzjy@gmail.com）, 王方（fangkey@gmail.com），王文中
+（wangwenzhong@ymail.com） 
+S o f t m a x回归 | Exercise:Softmax Regression 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/Softmax%E5%9B%9E%E5%BD%92" 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Softmax回归 - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Softmax回归7/7 
+This page was last modified on 8 April 2013, at 05:38. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Exercise:Softmax Regression - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Exercise:Softmax_Regression 1/5 
+Exercise:Softmax Regression 
+From Ufldl 
+Contents 
+1 Softmax regression 
+1.1 Dependencies 
+1.2 Step 0: Initialize constants and parameters 
+1.3 Step 1: Load data 
+1.4 Step 2: Implement softmaxCost 
+1.5 Step 3: Gradient checking 
+1.6 Step 4: Learning parameters 
+1.7 Step 5: Testing 
+Softmax regression 
+In this problem set, you will use softmax regression to classify MNIST images. The 
+goal of this exercise is to build a softmax classifier that you will be able to 
+reuse in the future exercises and also on other classification problems that you 
+might encounter. 
+In the file softmax_exercise.zip 
+(http://ufldl.stanford.edu/wiki/resources/softmax_exercise.zip) , we have provided some 
+starter code. You should write your code in the places indicated by "YOUR CODE HERE" 
+in the files. 
+In the starter code, you will need to modify softmaxCost.m and softmaxPredict.m for 
+this exercise. 
+We have also provided softmaxExercise.m that will help walk you through the steps in 
+this exercise. 
+Dependencies 
+The following additional files are required for this exercise: 
+MNIST Dataset (http://yann.lecun.com/exdb/mnist/) 
+Support functions for loading MNIST in Matlab 
+Starter Code (softmax_exercise.zip) 
+(http://ufldl.stanford.edu/wiki/resources/softmax_exercise.zip) 
+You will also need: 
+computeNumericalGradient.m from Exercise:Sparse Autoencoder 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Exercise:Softmax Regression - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Exercise:Softmax_Regression 2/5 
+If you have not completed the exercises listed above, we strongly suggest you 
+complete them first. 
+Step 0: Initialize constants and parameters 
+We've provided the code for this step in softmaxExercise.m. 
+Two constants, inputSize and numClasses, corresponding to the size of each input 
+vector and the number of class labels have been defined in the starter code. This 
+will allow you to reuse your code on a different data set in a later exercise. We 
+also initialize lambda, the weight decay parameter here. 
+Step 1: Load data 
+The starter code loads the MNIST images and labels into inputData and labels 
+respectively. The images are pre-processed to scale the pixel values to the range 
+[0,1], and the label 0 is remapped to 10 for convenience of implementation, so that 
+the labels take values in . You will not need to change any code in 
+this step for this exercise, but note that your code should be general enough to 
+operate on data of arbitrary size belonging to any number of classes. 
+Step 2: Implement softmaxCost 
+In softmaxCost.m, implement code to compute the softmax cost function J(θ). Remember 
+to include the weight decay term in the cost as well. Your code should also compute 
+the appropriate gradients, as well as the predictions for the input data (which will 
+be used in the cross-validation step later). 
+It is important to vectorize your code so that it runs quickly. We also provide 
+several implementation tips below: 
+Note: In the provided starter code, theta is a matrix where each the jth row is 
+Implementation Tip: Computing the ground truth matrix - In your code, you may 
+need to compute the ground truth matrix M, such that M(r, c) is 1 if y(c) = r and 0 
+otherwise. This can be done quickly, without a loop, using the MATLAB functions 
+sparse and full. Specifically, the command M = sparse(r, c, v) creates a sparse matrix 
+such that M(r(i), c(i)) = v(i) for all i. That is, the vectors r and c give the 
+position of the elements whose values we wish to set, and v the corresponding values 
+of the elements. Running full on a sparse matrix gives a "full" representation of 
+the matrix for use (meaning that Matlab will no longer try to represent it as a 
+sparse matrix in memory). The code for using sparse and full to compute the ground 
+truth matrix has already been included in softmaxCost.m. 
+Implementation Tip: Preventing overflows - in softmax regression, you will have 
+to compute the hypothesis 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Exercise:Softmax Regression - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Exercise:Softmax_Regression 3/5 
+When the products are large, the exponential function will become very 
+large and possibly overflow. When this happens, you will not be able to compute your 
+hypothesis. However, there is an easy solution - observe that we can multiply the 
+top and bottom of the hypothesis by some constant without changing the output: 
+Hence, to prevent overflow, simply subtract some large constant value from each of 
+the terms before computing the exponential. In practice, for each example, 
+you can use the maximum of the terms as the constant. Assuming you have a 
+matrix M containing these terms such that M(r, c) is , then you can use the 
+following code to accomplish this: 
+% M is the matrix as described in the text 
+M = bsxfun(@minus, M, max(M, [], 1)); 
+max(M) yields a row vector with each element giving the maximum value in that 
+column. bsxfun (short for binary singleton expansion function) applies minus along 
+each row of M, hence subtracting the maximum of each column from every element in 
+the column. 
+Implementation Tip: Computing the predictions - you may also find bsxfun useful in 
+computing your predictions - if you have a matrix M containing the terms, 
+such that M(r, c) contains the term, you can use the following code to compute 
+the hypothesis (by dividing all elements in each column by their column sum): 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Exercise:Softmax Regression - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Exercise:Softmax_Regression 4/5 
+% M is the matrix as described in the text 
+M = bsxfun(@rdivide, M, sum(M)) 
+The operation of bsxfun in this case is analogous to the earlier example. 
+Step 3: Gradient checking 
+Once you have written the softmax cost function, you should check your gradients 
+numerically. In general, whenever implementing any learning algorithm, you should 
+always check your gradients numerically before proceeding to train the model. The 
+norm of the difference between the numerical gradient and your analytical gradient 
+should be small, on the order of 10 . 9. 
+Implementation Tip: Faster gradient checking - when debugging, you can speed up 
+gradient checking by reducing the number of parameters your model uses. In this 
+case, we have included code for reducing the size of the input data, using the first 
+8 pixels of the images instead of the full 28x28 images. This code can be used by 
+setting the variable DEBUG to true, as described in step 1 of the code. 
+Step 4: Learning parameters 
+Now that you've verified that your gradients are correct, you can train your softmax 
+model using the function softmaxTrain in softmaxTrain.m. softmaxTrain which uses the LBFGS 
+algorithm, in the function minFunc. Training the model on the entire MNIST 
+training set of 60000 28x28 images should be rather quick, and take less than 5 
+minutes for 100 iterations. 
+Factoring softmaxTrain out as a function means that you will be able to easily reuse 
+it to train softmax models on other data sets in the future by invoking the function 
+with different parameters. 
+Use the following parameter when training your softmax classifier: 
+lambda = 1e-4 
+Step 5: Testing 
+Now that you've trained your model, you will test it against the MNIST test set, 
+comprising 10000 28x28 images. However, to do so, you will first need to complete 
+the function softmaxPredict in softmaxPredict.m, a function which generates predictions 
+for input data under a trained softmax model. 
+Once that is done, you will be able to compute the accuracy (the proportion of 
+correctly classified images) of your model using the code provided. Our 
+implementation achieved an accuracy of 92.6%. If your model's accuracy is 
+significantly less (less than 91%), check your code, ensure that you are using the 
+trained weights, and that you are training your model on the full 60000 training 
+images. Conversely, if your accuracy is too high (99-100%), ensure that you have not 
+accidentally trained your model on the test set as well. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 Exercise:Softmax Regression - Ufldl 
+deeplearning.stanford.edu/wiki/index.php/Exercise:Softmax_Regression 5/5 
+Softmax Regression | E x e r c i s e : S o f t m a x R e g r e s s i o n 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/Exercise:Softmax_Regression" 
+Category: Exercises 
+This page was last modified on 26 May 2011, at 11:02. 
+Deep Learning - Ng 
+wbx
+
+自我学习
+From Ufldl 
+Contents 
+1 综述
+2 特征学习
+3 数据预处理
+4 无监督特征学习的术语
+5 中英文对照
+6 中文译者
+综述
+如果已经有一个足够强大的机器学习算法，为了获得更好的性能，最靠谱的方法之一是给这个算法
+以更多的数据。机器学习界甚至有个说法：“有时候胜出者并非有最好的算法，而是有更多的数
+据。” 
+人们总是可以尝试获取更多的已标注数据，但是这样做成本往往很高。例如研究人员已经花了相当
+的精力在使用类似 AMT(Amazon Mechanical Turk) 这样的工具上，以期获取更大的训练数据集。
+相比大量研究人员通过手工方式构建特征，用众包的方式让多人手工标数据是一个进步，但是我们
+可以做得更好。具体的说，如果算法能够从未标注数据中学习，那么我们就可以轻易地获取大量无
+标注数据，并从中学习。自学习和无监督特征学习就是这种的算法。尽管一个单一的未标注样本蕴
+含的信息比一个已标注的样本要少，但是如果能获取大量无标注数据（比如从互联网上下载随机
+的、无标注的图像、音频剪辑或者是文本），并且算法能够有效的利用它们，那么相比大规模的手
+工构建特征和标数据，算法将会取得更好的性能。
+在自学习和无监督特征学习问题上，可以给算法以大量的未标注数据，学习出较好的特征描述。在
+尝试解决一个具体的分类问题时，可以基于这些学习出的特征描述和任意的（可能比较少的）已标
+注数据，使用有监督学习方法完成分类。
+在一些拥有大量未标注数据和少量的已标注数据的场景中，上述思想可能是最有效的。即使在只有
+已标注数据的情况下（这时我们通常忽略训练数据的类标号进行特征学习），以上想法也能得到很
+好的结果。
+特征学习
+我们已经了解到如何使用一个自编码器（autoencoder）从无标注数据中学习特征。具体来说，假
+定有一个无标注的训练数据集 （下标 代表“不带类标”）。现在用
+它们训练一个稀疏自编码器（可能需要首先对这些数据做白化或其它适当的预处理）。
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+
+利用训练得到的模型参数，给定任意的输入数据，可以计算隐藏单元的
+激活量（activations）。如前所述，相比原始输入
+
+
+来说，可能是一个更好的特征描述。
+下图的神经网络描述了特征（激活量）的计算。 
+wbx 
+
+
+Deep Learning - Ng 
+
+
+这实际上就是之前得到的稀疏自编码器，在这里去掉了最后一层。
+
+假定有大小为
+
+
+的已标注训练集（下标
+表
+示“带类标”），我们可以为输入数据找到更好的特征描述。例如，可以将输入到稀疏自编
+码器，得到隐藏单元激活量。接下来，可以直接使用来代替原始数据（“替代表
+示”,Replacement Representation）。也可以合二为一，使用新的向量来代替原始
+数据
+（“级联表示”,Concatenation Representation）。
+
+经过变换后，训练集就变成或者是
+（取决于使用
+
+
+替换
+还是将二者合并）。在实践中，将
+
+
+和
+
+
+合并通常表现的更好。但是考虑到内存和计
+
+
+算的成本，也可以使用替换操作。
+
+最终，可以训练出一个有监督学习算法（例如 svm, logistic regression等），得到一个判别函
+数对
+
+
+值进行预测。预测过程如下：给定一个测试样本，重复之前的过程，将其送入稀疏
+自编码器，得到。然后将
+
+
+（或者
+
+
+）送入分类器中，得到预测值。 
+
+wbx 
+
+
+数据预处理
+在特征学习阶段，我们从未标注训练集 中学习，这一过程中可能计算了
+各种数据预处理参数。例如计算数据均值并且对数据做均值标准化（mean normalization）；或者
+对原始数据做主成分分析（PCA），然后将原始数据表示为 (又或者使用 PCA 白化或 ZCA 
+白化)。这样的话，有必要将这些参数保存起来，并且在后面的训练和测试阶段使用同样的参数， 
+以保证数据进入稀疏自编码神经网络之前经过了同样的变换。例如，如果对未标注数据集进行PCA 
+预处理，就必须将得到的矩阵 保存起来，并且应用到有标注训练集和测试集上；而不能使用有
+标注训练集重新估计出一个不同的矩阵 （也不能重新计算均值并做均值标准化），否则的话可
+能得到一个完全不一致的数据预处理操作，导致进入自编码器的数据分布迥异于训练自编码器时的
+数据分布。
+无监督特征学习的术语
+有两种常见的无监督特征学习方式，区别在于你有什么样的未标注数据。自学习(self-taught 
+learning) 是其中更为一般的、更强大的学习方式，它不要求未标注数据 和已标注数据 
+来自同样的分布。另外一种带限制性的方式也被称为半监督学习，它要求 和 服从同样的分
+布。下面通过例子解释二者的区别。
+假定有一个计算机视觉方面的任务，目标是区分汽车和摩托车图像；也即训练样本里面要么是汽车
+的图像，要么是摩托车的图像。哪里可以获取大量的未标注数据呢？最简单的方式可能是从互联网
+上下载一些随机的图像数据集，在这些数据上训练出一个稀疏自编码器，从中得到有用的特征。这
+个例子里，未标注数据完全来自于一个和已标注数据不同的分布（未标注数据集中，或许其中一些
+图像包含汽车或者摩托车，但是不是所有的图像都如此）。这种情形被称为自学习。
+相反，如果有大量的未标注图像数据，要么是汽车图像，要么是摩托车图像，仅仅是缺失了类标号
+（没有标注每张图片到底是汽车还是摩托车）。也可以用这些未标注数据来学习特征。这种方式， 
+即要求未标注样本和带标注样本服从相同的分布，有时候被称为半监督学习。在实践中，常常无法
+找到满足这种要求的未标注数据（到哪里找到一个每张图像不是汽车就是摩托车，只是丢失了类标
+号的图像数据库？）因此，自学习在无标注数据集的特征学习中应用更广。
+中英文对照
+自我学习/自学习 self-taught learning 
+无监督特征学习 unsupervised feature learning 
+自编码器 autoencoder 
+白化 whitening 
+激活量 activation 
+稀疏自编码器 sparse autoencoder 
+Deep Learning - Ng 
+wbx
+
+半监督学习 semi-supervised learning 
+中文译者
+张灵（lingzhang001@outlook.com），晓风（xiaofeng.zhb@alibaba-inc.com），王文中
+（wangwenzhong@ymail.com）
+自我学习 | Exercise:Self-Taught Learning 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E8%87%AA%E6%88%91%E5%AD%A6%E4%B9%A0" 
+This page was last modified on 8 April 2013, at 05:35. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 
+deeplearning.stanford.edu/w iki/index.php/E xercise:S elf-Taught_Learning 1/3 
+Exercise:Self-Taught Learning 
+From Ufldl 
+Contents 
+1 Overview 
+2 Dependencies 
+3 Step 1: Generate the input and test data sets 
+4 Step 2: Train the sparse autoencoder 
+5 Step 3: Extracting features 
+6 Step 4: Training and testing the logistic regression model 
+7 Step 5: Classifying on the test set 
+Overview 
+In this exercise, we will use the self-taught learning paradigm with the sparse 
+autoencoder and softmax classifier to build a classifier for handwritten digits. 
+You will be building upon your code from the earlier exercises. First, you will 
+train your sparse autoencoder on an "unlabeled" training dataset of handwritten 
+digits. This produces feature that are penstroke-like. We then extract these learned 
+features from a labeled dataset of handwritten digits. These features will then be 
+used as inputs to the softmax classifier that you wrote in the previous exercise. 
+Concretely, for each example in the the labeled training dataset , we forward 
+propagate the example to obtain the activation of the hidden units . We now 
+represent this example using (the "replacement" representation), and use this 
+to as the new feature representation with which to train the softmax classifier. 
+Finally, we also extract the same features from the test data to obtain predictions. 
+In this exercise, our goal is to distinguish between the digits from 0 to 4. We will 
+use the digits 5 to 9 as our "unlabeled" dataset which which to learn the features; 
+we will then use a labeled dataset with the digits 0 to 4 with which to train the 
+softmax classifier. 
+In the starter code, we have provided a file stlExercise.m that will help walk you 
+through the steps in this exercise. 
+Dependencies 
+The following additional files are required for this exercise: 
+MNIST Dataset (http://yann.lecun.com/exdb/mnist/) 
+Support functions for loading MNIST in Matlab 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:S elf-Taught Learning - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:S elf-Taught_Learning 2/3 
+Starter Code (stl_exercise.zip) 
+(http://ufldl.stanford.edu/wiki/resources/stl_exercise.zip) 
+You will also need your code from the following exercises: 
+Exercise:Sparse Autoencoder 
+Exercise:Vectorization 
+Exercise:Softmax Regression 
+If you have not completed the exercises listed above, we strongly suggest you 
+complete them first. 
+Step 1: Generate the input and test data sets 
+Download and decompress stl_exercise.zip 
+(http://ufldl.stanford.edu/wiki/resources/stl_exercise.zip) , which contains starter code 
+for this exercise. Additionally, you will need to download the datasets from the 
+MNIST Handwritten Digit Database for this project. 
+Step 2: Train the sparse autoencoder 
+Next, use the unlabeled data (the digits from 5 to 9) to train a sparse autoencoder, 
+using the same sparseAutoencoderCost.m function as you had written in the previous 
+exercise. (From the earlier exercise, you should have a working and vectorized 
+implementation of the sparse autoencoder.) For us, the training step took less than 
+25 minutes on a fast desktop. When training is complete, you should get a 
+visualization of pen strokes like the image shown below: 
+Informally, the features learned by the sparse autoencoder should correspond to 
+penstrokes. 
+Step 3: Extracting features 
+Deep Learning - Ng 
+wbx
+
+13-4-8 
+3/3 
+After the sparse autoencoder is trained, you will use it to extract features from 
+the handwritten digit images. 
+Complete feedForwardAutoencoder.m to produce a matrix whose columns correspond to 
+activations of the hidden layer for each example, i.e., the vector a(2) 
+corresponding to activation of layer 2. (Recall that we treat the inputs as layer 
+1). 
+After completing this step, calling feedForwardAutoencoder.m should convert the raw 
+image data to hidden unit activations a(2). 
+Step 4: Training and testing the logistic regression model 
+Use your code from the softmax exercise (softmaxTrain.m) to train a softmax 
+classifier using the training set features (trainFeatures) and labels (trainLabels). 
+Step 5: Classifying on the test set 
+Finally, complete the code to make predictions on the test set (testFeatures) and see 
+how your learned features perform! If you've done all the steps correctly, you 
+should get an accuracy of about 98% percent. 
+As a comparison, when raw pixels are used (instead of the learned features), we 
+obtained a test accuracy of only around 96% (for the same train and test sets). 
+Self-Taught Learning | E x e r c i s e : S e l f - T a u g h t L e a r n i n g 
+Retrieved from "http://deeplearning.stanford.edu/wiki/index.php/Exercise:Self- 
+Taught_Learning" 
+Category: Exercises 
+This page was last modified on 26 May 2011, at 11:02. 
+Deep Learning - Ng 
+wbx
+
+从自我学习到深层网络
+From Ufldl 
+在前一节中，我们利用自编码器来学习输入至 softmax 或 logistic 回归分类器的特征。这些特征仅利用未标注数据学习获得。在本节中，我们描述如
+何利用未标注数据进行微调，从而进一步优化这些特征。如果有大量已标注数据，通过微调就可以显著提升分类器的性能。
+在自我学习中，我们首先利用未标注数据训练一个稀疏自编码器。随后，给定一个新样本 ，我们通过隐含层提取出特征 。上述过程图示如下： 
+我们感兴趣的是分类问题，目标是预测样本的类别标号 。我们拥有标注数据集 ，包含 个标注样
+本。此前我们已经说明，可以利用稀疏自编码器获得的特征 来替代原始特征。这样就可获得训练数据集 。最终， 
+我们训练出一个从特征 到类标号 的 logistic 分类器。为说明这一过程，我们按照神经网络一节中的方式，用下图描述 logistic 回归单元
+（橘黄色）。
+考虑利用这个方法所学到的分类器（输入-输出映射）。它描述了一个把测试样本 映射到预测值 的函数。将此前的两张图片结合起来， 
+就得到该函数的图形表示。也即，最终的分类器可以表示为： 
+Deep Learning - Ng 
+wbx
+
+该模型的参数通过两个步骤训练获得：在该网络的第一层，将输入 映射至隐藏单元激活量 的权值 可以通过稀疏自编码器训练过程获得。在
+第二层，将隐藏单元 映射至输出 的权值 可以通过 logistic 回归或 softmax 回归训练获得。
+这个最终分类器整体上显然是一个大的神经网络。因此，在训练获得模型最初参数（利用自动编码器训练第一层，利用 logistic/softmax 回归训练第二
+层）之后，我们可以进一步修正模型参数，进而降低训练误差。具体来说，我们可以对参数进行微调，在现有参数的基础上采用梯度下降或者 L-BFGS 来
+降低已标注样本集 上的训练误差。
+使用微调时，初始的非监督特征学习步骤（也就是自动编码器和logistic分类器训练）有时候被称为预训练。微调的作用在于，已标注数据集也可以用来
+修正权值 ，这样可以对隐藏单元所提取的特征 做进一步调整。
+到现在为止，我们描述上述过程时，都假设采用了“替代 (Replacement)”表示而不是“级联 (Concatenation)”表示。在替代表示中，logistic 分类
+器所看到的训练样本格式为 ；而在级联表示中，分类器所看到的训练样本格式为 。对级联表示同样可以进行微调（在级联
+表示神经网络中，输入值 也直接被输入至 logistic 分类器。对此前的神经网络示意图稍加更改，即可获得其示意图。具体的说，第一层的输入节点
+除了与隐层联接之外，还将越过隐层，与第三层输出节点直接相连）。但是对于微调来说，级联表示相对于替代表示几乎没有优势。因此，如果需要开展
+微调，我们通常使用替代表示的网络（但是如果不开展微调，级联表示的效果有时候会好得多）。
+在什么时候应用微调？通常仅在有大量已标注训练数据的情况下使用。在这样的情况下，微调能显著提升分类器性能。然而，如果有大量未标注数据集
+（用于非监督特征学习/预训练），却只有相对较少的已标注训练集，微调的作用非常有限。
+中英文对照
+自我学习 self-taught learning 
+深层网络 deep networks 
+微调 fine-tune 
+稀疏自编码器 sparse autoencoder 
+梯度下降 gradient descent 
+非监督特征学习 unsupervised feature learning 
+预训练 pre-training 
+中文译者
+杨耀（iamyangyao@163.com），阎志涛（zhitao.yan@gmail.com），王文中（wangwenzhong@ymail.com） 
+从自我学习到深层网络 | 深度网络概览 | 栈式自编码算法 | 微调多层自编码算法 | Exercise: Implement deep networks for digit classification 
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+Language : English 
+
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E4%BB%8E%E8%87%AA%E6%88%91%E5%AD%A6%E4%B9%A0%E5%88%B0%E6%B7%B1%E5%B1%82%E7%BD%91%E7%B 
+
+This page was last modified on 8 April 2013, at 05:13. 
+
+wbx 
+
+
+深度网络概览
+From Ufldl 
+Contents 
+1 概述
+2 深度网络的优势
+3 训练深度网络的困难
+3.1 数据获取问题
+3.2 局部极值问题
+3.3 梯度弥散问题
+4 逐层贪婪训练方法
+4.1 数据获取
+4.2 更好的局部极值
+5 中英文对照
+6 中文译者
+概述
+在之前的章节中，你已经构建了一个包括输入层、隐藏层以及输出层的三层神经网络。虽然该网络对于MNIST手写数字
+数据库非常有效，但是它还是一个非常“浅”的网络。这里的“浅”指的是特征（隐藏层的激活值 ）只使用一层
+计算单元（隐藏层）来得到的。
+在本节中，我们开始讨论深度神经网络，即含有多个隐藏层的神经网络。通过引入深度网络，我们可以计算更多复杂的
+输入特征。因为每一个隐藏层可以对上一层的输出进行非线性变换，因此深度神经网络拥有比“浅层”网络更加优异的
+表达能力（例如可以学习到更加复杂的函数关系）。
+值得注意的是当训练深度网络的时候，每一层隐层应该使用非线性的激活函数 。这是因为多层的线性函数组合在
+一起本质上也只有线性函数的表达能力（例如，将多个线性方程组合在一起仅仅产生另一个线性方程）。因此，在激活
+函数是线性的情况下，相比于单隐藏层神经网络，包含多隐藏层的深度网络并没有增加表达能力。
+深度网络的优势
+为什么我们要使用深度网络呢？使用深度网络最主要的优势在于，它能以更加紧凑简洁的方式来表达比浅层网络大得多
+的函数集合。正式点说，我们可以找到一些函数，这些函数可以用 层网络简洁地表达出来（这里的简洁是指隐层单
+元的数目只需与输入单元数目呈多项式关系）。但是对于一个只有 层的网络而言，除非它使用与输入单元数目
+呈指数关系的隐层单元数目，否则不能简洁表达这些函数。
+举一个简单的例子，比如我们打算构建一个布尔网络来计算 个输入比特的奇偶校验码（或者进行异或运算）。假设
+网络中的每一个节点都可以进行逻辑“或”运算（或者“与非”运算），亦或者逻辑“与”运算。如果我们拥有一个仅
+仅由一个输入层、一个隐层以及一个输出层构成的网络，那么该奇偶校验函数所需要的节点数目与输入层的规模 呈
+指数关系。但是，如果我们构建一个更深点的网络，那么这个网络的规模就可做到仅仅是 的多项式函数。
+当处理对象是图像时，我们能够使用深度网络学习到“部分-整体”的分解关系。例如，第一层可以学习如何将图像中
+的像素组合在一起来检测边缘（正如我们在前面的练习中做的那样）。第二层可以将边缘组合起来检测更长的轮廓或者
+简单的“目标的部件”。在更深的层次上，可以将这些轮廓进一步组合起来以检测更为复杂的特征。
+最后要提的一点是，大脑皮层同样是分多层进行计算的。例如视觉图像在人脑中是分多个阶段进行处理的，首先是进入
+大脑皮层的“V1”区，然后紧跟着进入大脑皮层“V2”区，以此类推。
+Deep Learning - Ng 
+wbx
+
+训练深度网络的困难
+虽然几十年前人们就发现了深度网络在理论上的简洁性和较强的表达能力，但是直到最近，研究者们也没有在训练深度
+网络方面取得多少进步。 问题原因在于研究者们主要使用的学习算法是：首先随机初始化深度网络的权重，然后使用
+有监督的目标函数在有标签的训练集 上进行训练。例如通过使用梯度下降法来降
+低训练误差。然而，这种方法通常不是十分奏效。这其中有如下几方面原因： 
+数据获取问题
+使用上面提到的方法，我们需要依赖于有标签的数据才能进行训练。然而有标签的数据通常是稀缺的，因此对于许多问
+题，我们很难获得足够多的样本来拟合一个复杂模型的参数。例如，考虑到深度网络具有强大的表达能力，在不充足的
+数据上进行训练将会导致过拟合。
+局部极值问题
+使用监督学习方法来对浅层网络（只有一个隐藏层）进行训练通常能够使参数收敛到合理的范围内。但是当用这种方法
+来训练深度网络的时候，并不能取得很好的效果。特别的，使用监督学习方法训练神经网络时，通常会涉及到求解一个
+高度非凸的优化问题（例如最小化训练误差 ，其中参数 是要优化的参数。对深度网络
+而言，这种非凸优化问题的搜索区域中充斥着大量“坏”的局部极值，因而使用梯度下降法（或者像共轭梯度下降法， 
+L-BFGS等方法）效果并不好。
+梯度弥散问题
+梯度下降法（以及相关的L-BFGS算法等）在使用随机初始化权重的深度网络上效果不好的技术原因是：梯度会变得非常
+小。具体而言，当使用反向传播方法计算导数的时候，随着网络的深度的增加，反向传播的梯度（从输出层到网络的最
+初几层）的幅度值会急剧地减小。结果就造成了整体的损失函数相对于最初几层的权重的导数非常小。这样，当使用梯
+度下降法的时候，最初几层的权重变化非常缓慢，以至于它们不能够从样本中进行有效的学习。这种问题通常被称
+为“梯度的弥散”. 
+与梯度弥散问题紧密相关的问题是：当神经网络中的最后几层含有足够数量神经元的时候，可能单独这几层就足以对有
+标签数据进行建模，而不用最初几层的帮助。因此，对所有层都使用随机初始化的方法训练得到的整个网络的性能将会
+与训练得到的浅层网络（仅由深度网络的最后几层组成的浅层网络）的性能相似。
+逐层贪婪训练方法
+那么，我们应该如何训练深度网络呢？逐层贪婪训练方法是取得一定成功的一种方法。我们会在后面的章节中详细阐述
+这种方法的细节。简单来说，逐层贪婪算法的主要思路是每次只训练网络中的一层，即我们首先训练一个只含一个隐藏
+层的网络，仅当这层网络训练结束之后才开始训练一个有两个隐藏层的网络，以此类推。在每一步中，我们把已经训练
+好的前 层固定，然后增加第 层（也就是将我们已经训练好的前 的输出作为输入）。每一层的训练可
+以是有监督的（例如，将每一步的分类误差作为目标函数），但更通常使用无监督方法（例如自动编码器，我们会在后
+边的章节中给出细节）。这些各层单独训练所得到的权重被用来初始化最终（或者说全部）的深度网络的权重，然后对
+整个网络进行“微调”（即把所有层放在一起来优化有标签训练集上的训练误差）. 
+逐层贪婪的训练方法取得成功要归功于以下几方面： 
+数据获取
+虽然获取有标签数据的代价是昂贵的，但获取大量的无标签数据是容易的。自学习方法（self-taught learning）的潜
+Deep Learning - Ng 
+wbx
+
+力在于它能通过使用大量的无标签数据来学习到更好的模型。具体而言，该方法使用无标签数据来学习得到所有层（不
+包括用于预测标签的最终分类层） 的最佳初始权重。相比纯监督学习方法，这种自学习方法能够利用多得多的数
+据，并且能够学习和发现数据中存在的模式。因此该方法通常能够提高分类器的性能。
+更好的局部极值
+当用无标签数据训练完网络后，相比于随机初始化而言，各层初始权重会位于参数空间中较好的位置上。然后我们可以
+从这些位置出发进一步微调权重。从经验上来说，以这些位置为起点开始梯度下降更有可能收敛到比较好的局部极值
+点，这是因为无标签数据已经提供了大量输入数据中包含的模式的先验信息。
+在下一节中，我们将会具体阐述如何进行逐层贪婪训练。
+中英文对照
+深度网络 Deep Networks 
+深度神经网络 deep neural networks 
+非线性变换 non-linear transformation 
+激活函数 activation function 
+简洁地表达 represent compactly 
+“部分-整体”的分解 part-whole decompositions 
+目标的部件 parts of objects 
+高度非凸的优化问题 highly non-convex optimization problem 
+共轭梯度 conjugate gradient 
+梯度的弥散 diffusion of gradients 
+逐层贪婪训练方法 Greedy layer-wise training 
+自动编码器 autoencoder 
+微调 fine-tuned 
+自学习方法 self-taught learning 
+中文译者
+郑胤（yzheng3xg@gmail.com)， 谭晓阳（x.tan@nuaa.edu.cn）， 许利杰（csxulijie@gmail.com） 
+从自我学习到深层网络 | 深度网络概览 | 栈式自编码算法 | 微调多层自编码算法 | Exercise: Implement deep networks for digit 
+classification 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88" 
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+This page was last modified on 8 April 2013, at 05:15. 
+
+
+wbx 
+
+
+栈式自编码算法
+From Ufldl 
+Contents 
+1 概述
+2 训练
+3 具体实例
+4 讨论
+5 中英文对照
+6 中文译者
+概述
+逐层贪婪训练法依次训练网络的每一层，进而预训练整个深度神经网络。在本节中，我们将会学习如何将自编码器“栈化”到逐
+层贪婪训练法中，从而预训练（或者说初始化）深度神经网络的权重。
+栈式自编码神经网络是一个由多层稀疏自编码器组成的神经网络，其前一层自编码器的输出作为其后一层自编码器的输入。对于
+一个 层栈式自编码神经网络，我们沿用自编码器一章的各种符号，假定用 表示第 个自编码
+器对应的 参数，那么该栈式自编码神经网络的编码过程就是，按照从前向后的顺序执行每一层自编码器
+的编码步骤： 
+同理，栈式神经网络的解码过程就是，按照从后向前的顺序执行每一层自编码器的解码步骤： 
+其中， 是最深层隐藏单元的激活值，其包含了我们感兴趣的信息，这个向量也是对输入值的更高阶的表示。
+通过将 作为softmax分类器的输入特征，可以将栈式自编码神经网络中学到的特征用于分类问题。
+训练
+一种比较好的获取栈式自编码神经网络参数的方法是采用逐层贪婪训练法进行训练。即先利用原始输入来训练网络的第一层，得
+到其参数 ；然后网络第一层将原始输入转化成为由隐藏单元激活值组成的向量（假设该向量为
+A），接着把A作为第二层的输入，继续训练得到第二层的参数 ；最后，对后面的各层同样采用的策
+略，即将前层的输出作为下一层输入的方式依次训练。
+对于上述训练方式，在训练每一层参数的时候，会固定其它各层参数保持不变。所以，如果想得到更好的结果，在上述预训练过
+程完成之后，可以通过反向传播算法同时调整所有层的参数以改善结果，这个过程一般被称作“微调（fine-tuning）”。
+实际上，使用逐层贪婪训练方法将参数训练到快要收敛时，应该使用微调。反之，如果直接在随机化的初始权重上使用微调，那
+么会得到不好的结果，因为参数会收敛到局部最优。
+如果你只对以分类为目的的微调感兴趣，那么惯用的做法是丢掉栈式自编码网络的“解码”层，直接把最后一个隐藏层的 
+作为特征输入到softmax分类器进行分类，这样，分类器（softmax）的分类错误的梯度值就可以直接反向传播给编码层了。
+Deep Learning - Ng 
+wbx
+
+具体实例
+让我们来看个具体的例子，假设你想要训练一个包含两个隐含层的栈式自编码网络，用来进行MNIST手写数字分类（这将会是你的
+下一个练习）。 首先，你需要用原始输入 训练第一个自编码器，它能够学习得到原始输入的一阶特征表示（如下图
+所示）。
+接着，你需要把原始数据输入到上述训练好的稀疏自编码器中，对于每一个输入，都可以得到它对应的一阶特征表示
+。然后你再用这些一阶特征作为另一个稀疏自编码器的输入，使用它们来学习二阶特征 。（如下图所示） 
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+
+同样，再把一阶特征输入到刚训练好的第二层稀疏自编码器中，得到每个
+
+
+对应的二阶特征激活值。接下来，你可
+
+以把这些二阶特征作为softmax分类器的输入，训练得到一个能将二阶特征映射到数字标签的模型。
+
+
+如下图所示，最终，你可以将这三层结合起来构建一个包含两个隐藏层和一个最终softmax分类器层的栈式自编码网络，这个网络
+能够如你所愿地对MNIST数字进行分类。 
+
+wbx 
+
+
+讨论
+栈式自编码神经网络具有强大的表达能力及深度神经网络的所有优点。
+更进一步，它通常能够获取到输入的“层次型分组”或者“部分-整体分解”结构。为了弄清这一点，回顾一下，自编码器倾向于
+学习得到能更好地表示输入数据的特征。因此，栈式自编码神经网络的第一层会学习得到原始输入的一阶特征（比如图片里的边
+缘），第二层会学习得到二阶特征，该特征对应一阶特征里包含的一些模式（比如在构成轮廓或者角点时，什么样的边缘会共
+现）。栈式自编码神经网络的更高层还会学到更高阶的特征。
+举个例子，如果网络的输入数据是图像，网络的第一层会学习如何去识别边，第二层一般会学习如何去组合边，从而构成轮廓、
+角等。更高层会学习如何去组合更形象且有意义的特征。例如，如果输入数据集包含人脸图像，更高层会学习如何识别或组合眼
+睛、鼻子、嘴等人脸器官。
+中英文对照
+自编码器 Autoencoder 
+逐层贪婪训练法 Greedy layer-wise training 
+预训练 PreTrain 
+栈式自编码神经网络 Stacked autoencoder 
+微调 Fine-tuning 
+原始输入 Raw inputs 
+层次型分组 Hierarchical grouping 
+部分-整体分解 Part-whole decomposition 
+一阶特征 First-order features 
+二阶特征 Second-order features 
+更高阶特征 Higher-order features 
+激活值 Activation 
+Deep Learning - Ng 
+wbx
+
+中文译者
+张天雷（ztl2004@gmail.com）, 邓亚峰（dengyafeng@gmail.com）, 许利杰（csxulijie@gmail.com） 
+从自我学习到深层网络 | 深度网络概览 | 栈式自编码算法 | 微调多层自编码算法 | Exercise: Implement deep networks for digit 
+classification 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E6%A0%88%E5%BC%8F%E8%87%AA%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95" 
+This page was last modified on 8 April 2013, at 05:15. 
+Deep Learning - Ng 
+wbx
+
+微调多层自编码算法
+From Ufldl 
+Contents 
+1 介绍
+2 一般策略
+3 使用反向传播法进行微调
+4 中英文对照
+5 中文译者
+介绍
+微调是深度学习中的常用策略，可以大幅提升一个栈式自编码神经网络的性能表现。从更高的视角来讲，微调将栈式自编码神经网络的所有层视为一
+个模型，这样在每次迭代中，网络中所有的权重值都可以被优化。
+一般策略
+幸运的是，实施微调栈式自编码神经网络所需的工具都已齐备！为了在每次迭代中计算所有层的梯度，我们需要使用稀疏自动编码一节中讨论的反向
+传播算法。因为反向传播算法可以延伸应用到任意多层，所以事实上，该算法对任意多层的栈式自编码神经网络都适用。
+使用反向传播法进行微调
+为方便读者，以下我们简要描述如何实施反向传播算法： 
+1. 进行一次前馈传递，对 层、 层直到输出层 ，使用前向传播步骤中定义的公式计算各层上的激活值（激励响应）。
+2. 对输出层（ 层），令
+（当使用softmax分类器时，softmax层满足： ，其中 为输入数据对应的类别标签， 为条件概率向量。） 
+3. 对 
+令
+4. 计算所需的偏导数： 
+注：我们可以认为输出层softmax分类器是附加上的一层，但是其求导过程需要单独处理。具体地说，网络“最后一层”的特征会进入softmax分类
+器。所以，第二步中的导数由 计算，其中 。
+中英文对照
+栈式自编码神经网络（可以考虑翻译为“多层自动编码机”或“多层自动编码神经网络”） Stacked autoencoder 
+微调 Fine tuning 
+反向传播算法 Backpropagation Algorithm 
+Deep Learning - Ng 
+wbx
+
+前馈传递 feedforward pass 
+激活值 （可以考虑翻译为“激励响应”或“响应”） activation 
+中文译者
+崔巍（watsoncui@gmail.com）, 余凯（kai.yu.cool@gmail.com）, 许利杰（csxulijie@gmail.com） 
+从自我学习到深层网络 | 深度网络概览 | 栈式自编码算法 | 微调多层自编码算法 | Exercise: Implement deep networks for digit classification 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E5%BE%AE%E8%B0%83%E5%A4%9A%E5%B1%82%E8%87%AA%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95" 
+This page was last modified on 8 April 2013, at 05:16. 
+Deep Learning - Ng 
+wbx
+
+Exercise: Implement deep networks for digit 
+classification 
+From Ufldl 
+Contents 
+1 Overview 
+2 Dependencies 
+3 Step 0: Initialize constants and parameters 
+4 Step 1: Train the data on the first stacked autoencoder 
+5 Step 2: Train the data on the second stacked autoencoder 
+6 Step 3: Train the softmax classifier on the L2 features 
+7 Step 4: Implement fine-tuning 
+8 Step 5: Test the model 
+Overview 
+In this exercise, you will use a stacked autoencoder for digit classification. This exercise is very similar 
+to the self-taught learning exercise, in which we trained a digit classifier using a autoencoder layer 
+followed by a softmax layer. The only difference in this exercise is that we will be using two autoencoder 
+layers instead of one and further finetune the two layers. 
+The code you have already implemented will allow you to stack various layers and perform layer-wise 
+training. However, to perform fine-tuning, you will need to implement backpropogation through both layers. 
+We will see that fine-tuning significantly improves the model's performance. 
+In the file stackedae_exercise.zip (http://ufldl.stanford.edu/wiki/resources/stackedae_exercise.zip) , we 
+have provided some starter code. You will need to complete the code in stackedAECost.m, stackedAEPredict.m 
+and stackedAEExercise.m. We have also provided params2stack.m and stack2params.m which you might find helpful 
+in constructing deep networks. 
+Dependencies 
+The following additional files are required for this exercise: 
+MNIST Dataset (http://yann.lecun.com/exdb/mnist/) 
+Support functions for loading MNIST in Matlab 
+Starter Code (stackedae_exercise.zip) (http://ufldl.stanford.edu/wiki/resources/stackedae_exercise.zip) 
+You will also need your code from the following exercises: 
+Exercise:Sparse Autoencoder 
+Exercise:Vectorization 
+Exercise:Softmax Regression 
+Exercise:Self-Taught Learning 
+If you have not completed the exercises listed above, we strongly suggest you complete them first. 
+Step 0: Initialize constants and parameters 
+Open stackedAEExercise.m. In this step, we set meta-parameters to the same values that were used in previous 
+exercise, which should produce reasonable results. You may to modify the meta-parameters if you wish. 
+Step 1: Train the data on the first stacked autoencoder 
+Train the first autoencoder on the training images to obtain its parameters. This step is identical to the 
+corresponding step in the sparse autoencoder and STL assignments, complete this part of the code so as to 
+learn a first layer of features using your sparseAutoencoderCost.m and minFunc. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise: Im plem ent deep netw orks for digit classification - U fldl 
+deeplearning.stanford.edu/w iki/κ/E xercise:_Im plem ent_deep_netw orks_for_digit_classification 2/2 
+Step 2: Train the data on the second stacked autoencoder 
+We first forward propagate the training set through the first autoencoder (using feedForwardAutoencoder.m that 
+you completed in Exercise:Self-Taught_Learning) to obtain hidden unit activations. These activations are 
+then used to train the second sparse autoencoder. Since this is just an adapted application of a standard 
+autoencoder, it should run similarly with the first. Complete this part of the code so as to learn a first 
+layer of features using your sparseAutoencoderCost.m and minFunc. 
+This part of the exercise demonstrates the idea of greedy layerwise training with the same learning 
+algorithm reapplied multiple times. 
+Step 3: Train the softmax classifier on the L2 features 
+Next, continue to forward propagate the L1 features through the second autoencoder (using 
+feedForwardAutoencoder.m) to obtain the L2 hidden unit activations. These activations are then used to train 
+the softmax classifier. You can either use softmaxTrain.m or directly use softmaxCost.m that you completed in 
+Exercise:Softmax Regression to complete this part of the assignment. 
+Step 4: Implement fine-tuning 
+To implement fine tuning, we need to consider all three layers as a single model. Implement stackedAECost.m 
+to return the cost and gradient of the model. The cost function should be as defined as the log likelihood 
+and a gradient decay term. The gradient should be computed using back-propagation as discussed earlier. The 
+predictions should consist of the activations of the output layer of the softmax model. 
+To help you check that your implementation is correct, you should also check your gradients on a synthetic 
+small dataset. We have implemented checkStackedAECost.m to help you check your gradients. If this checks 
+passes, you will have implemented fine-tuning correctly. 
+Note: When adding the weight decay term to the cost, you should regularize only the softmax weights (do not 
+regularize the weights that compute the hidden layer activations). 
+Implementation Tip: It is always a good idea to implement the code modularly and check (the gradient of) 
+each part of the code before writing the more complicated parts. 
+Step 5: Test the model 
+Finally, you will need to classify with this model; complete the code in stackedAEPredict.m to classify using 
+the stacked autoencoder with a classification layer. 
+After completing these steps, running the entire script in stackedAETrain.m will perform layer-wise training 
+of the stacked autoencoder, finetune the model, and measure its performance on the test set. If you've done 
+all the steps correctly, you should get an accuracy of about 87.7% before finetuning and 97.6% after 
+finetuning (for the 10-way classification problem). 
+From Self-Taught Learning to Deep Networks | Deep Networks: Overview | Stacked Autoencoders | Fine-tuning Stacked AEs | 
+E x e r c i s e : I m p l e m e n t d e e p n e t w o r k s f o r d i g i t c l a s s i f i c a t i o n 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/Exercise:_Implement_deep_networks_for_digit_classification" 
+This page was last modified on 26 May 2011, at 11:04. 
+Deep Learning - Ng 
+wbx
+
+线性解码器
+From Ufldl 
+Contents 
+1 稀疏自编码重述
+2 线性解码器
+3 中英文对照
+4 中文译者
+稀疏自编码重述
+稀疏自编码器包含3层神经元，分别是输入层，隐含层以及输出层。 从前面（神经网络）自编码器描述可
+知，位于神经网络中的神经元都采用相同的激励函数。 在注解中，我们修改了自编码器定义，使得某些神经
+元采用不同的激励函数。这样得到的模型更容易应用，而且模型对参数的变化也更为鲁棒。
+回想一下，输出层神经元计算公式如下： 
+其中 a(3) 是输出. 在自编码器中, a(3) 近似重构了输入 x = a(1)。
+S 型激励函数输出范围是 [0,1]，当 f(z(3)) 采用该激励函数时，就要对输入限制或缩放，使其位于 [0,1] 
+范围中。一些数据集，比如 MNIST，能方便将输出缩放到 [0,1] 中，但是很难满足对输入值的要求。比如， 
+PCA 白化处理的输入并不满足 [0,1] 范围要求，也不清楚是否有最好的办法可以将数据缩放到特定范围中。
+线性解码器
+设定 a(3) = z(3) 可以很简单的解决上述问题。从形式上来看，就是输出端使用恒等函数 f(z) = z 作为激
+励函数，于是有 a(3) = f(z(3)) = z(3)。我们称该特殊的激励函数为 线性激励函数 （称为恒等激励函数
+可能更好些）。
+需要注意，神经网络中隐含层的神经元依然使用S型（或者tanh）激励函数。这样隐含单元的激励公式为 
+,其中 是 S 型函数, x 是输入, W(1) 和 b(1) 分别是隐单元的权重和偏差
+项。我们仅在输出层中使用线性激励函数。
+一个 S 型或 tanh 隐含层以及线性输出层构成的自编码器，我们称为线性解码器。
+在这个线性解码器模型中， 。因为输出 是隐单元激励输出的线性函
+数，改变 W(2) ，可以使输出值 a(3) 大于 1 或者小于 0。这使得我们可以用实值输入来训练稀疏自编码
+器，避免预先缩放样本到给定范围。
+随着输出单元的激励函数的改变，这个输出单元梯度也相应变化。回顾之前每一个输出单元误差项定义为： 
+Deep Learning - Ng 
+wbx
+
+其中 y = x 是所期望的输出, 是自编码器的输出, 是激励函数.因为在输出层激励函数为 f(z) = 
+z, 这样 f'(z) = 1，所以上述公式可以简化为
+当然，若使用反向传播算法来计算隐含层的误差项时: 
+因为隐含层采用一个 S 型（或 tanh）的激励函数 f,在上述公式中， 依然是 S 型（或 tanh）函数的
+导数。
+中英文对照
+线性解码器 Linear Decoders 
+稀疏自编码 Sparse Autoencoder 
+输入层 input layer 
+隐含层 hidden layer 
+输出层 output layer 
+神经元 neuron 
+神经网络 neural network 
+自编码器 autoencoder 
+激励函数 activation function 
+鲁棒 robust 
+S型激励函数 sigmoid activation function 
+tanh激励函数 tanh function 
+线性激励函数 linear activation function 
+恒等激励函数 identity activation function 
+隐单元 hidden unit 
+权重 weight 
+偏差项 error term 
+反向传播算法 backpropagation 
+中文译者
+Deep Learning - Ng 
+wbx
+
+严晓东（yan.endless@gmail.com），姚涛（yaothinker@gmail.com），晓风（xiaofeng.zhb@alibabainc.
+com） 
+线性解码器 | Exercise:Learning color features with Sparse Autoencoders 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E7%BA%BF%E6%80%A7%E8%A7%A3%E7%A0%81%E5%99%A8" 
+This page was last modified on 8 April 2013, at 05:18. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:Learning color features w ith S parse Autoencoders - U fldl 
+deeplearning.stanford.edu/w iki/κ/E xercise:Learning_color_features_w ith_S parse_Autoencoders 1/3 
+Exercise:Learning color features with Sparse 
+Autoencoders 
+From Ufldl 
+Contents 
+1 Learning color features with Sparse Autoencoders 
+1.1 Dependencies 
+1.2 Learning from color image patches 
+1.3 Step 0: Initialization 
+1.4 Step 1: Modify your sparse autoencoder to use a linear decoder 
+1.5 Step 2: Learn features on small patches 
+Learning color features with Sparse Autoencoders 
+In this exercise, you will implement a linear decoder (a sparse autoencoder whose output layer uses a 
+linear activation function). You will then apply it to learn features on color images from the STL-10 
+dataset. These features will be used in an later exercise on convolution and pooling for classifying STL-10 
+images. 
+In the file linear_decoder_exercise.zip (http://ufldl.stanford.edu/wiki/resources/linear_decoder_exercise.zip) we have 
+provided some starter code. You should write your code at the places indicated "YOUR CODE HERE" in the 
+files. 
+For this exercise, you will need to copy and modify sparseAutoencoderCost.m from the sparse autoencoder 
+exercise. 
+Dependencies 
+You will need: 
+sparseAutoencoderCost.m (and related functions) from Exercise:Sparse Autoencoder 
+The following additional file is also required for this exercise: 
+Sampled 8x8 patches from the STL-10 dataset (stl10_patches_100k.zip) 
+(http://ufldl.stanford.edu/wiki/resources/stl10_patches_100k.zip) 
+If you have not completed the exercise listed above, we strongly suggest you complete it first. 
+Learning from color image patches 
+In all the exercises so far, you have been working only with grayscale images. In this exercise, you will 
+get to work with RGB color images for the first time. 
+Conveniently, the fact that an image has three color channels (RGB), rather than a single gray channel, 
+presents little difficulty for the sparse autoencoder. You can just combine the intensities from all the 
+color channels for the pixels into one long vector, as if you were working with a grayscale image with 3x 
+the number of pixels as the original image. 
+Step 0: Initialization 
+In this step, we initialize some parameters used in the exercise (see starter code for details). 
+Step 1: Modify your sparse autoencoder to use a linear decoder 
+Copy sparseAutoencoderCost.m to the directory for this exercise and rename it to sparseAutoencoderLinearCost.m. 
+Rename the function sparseAutoencoderCost in the file to sparseAutoencoderLinearCost, and modify it to use a 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:Learning color features w ith S parse Autoencoders - U fldl 
+deeplearning.stanford.edu/w iki/κ/E xercise:Learning_color_features_w ith_S parse_Autoencoders 2/3 
+linear decoder. In particular, you should change the cost and gradients returned to reflect the change from 
+a sigmoid to a linear decoder. After making this change, check your gradients to ensure that they are 
+correct. 
+Step 2: Learn features on small patches 
+You will now use your sparse autoencoder to learn features on a set of 100,000 small 8x8 patches sampled 
+from the larger 96x96 STL-10 images (The STL-10 dataset (http://www.stanford.edu/~acoates//stl10/) 
+comprises 5000 training and 8000 test examples, with each example being a 96x96 labelled color image 
+belonging to one of ten classes: airplane, bird, car, cat, deer, dog, horse, monkey, ship, truck.) 
+The code provided in this step trains your sparse autoencoder for 400 iterations with the default 
+parameters initialized in step 0. This should take around 45 minutes. Your sparse autoencoder should learn 
+features which when visualized, look like edges and "opponent colors," as in the figure below. 
+If your parameters are improperly tuned (the default parameters should work), or if your implementation of 
+the autoencoder is buggy, you might instead get images that look like one of the following: 
+The learned features will be saved to STL10Features.mat, which will be used in the later exercise on 
+convolution and pooling. 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/Exercise:Learning_color_features_with_Sparse_Autoencoders" 
+This page was last modified on 21 June 2011, at 21:00. 
+Deep Learning - Ng 
+wbx
+
+Deep Learning - Ng 
+
+13-4-8 Exercise:Learningcolorfeaturesw ithSparse Autoencoders -Ufldl 
+
+deeplearning.stanford.edu/wiki/κ/Exercise:Learning_color_features_with_Sparse_Autoencoders 3/3 
+
+wbx 
+
+
+卷积特征提取
+From Ufldl 
+Contents 
+1 概述
+2 全联通网络
+3 部分联通网络
+4 卷积
+5 中英文对照
+6 中文译者
+概述
+前面的练习中，解决了一些有关低分辨率图像的问题，比如：小块图像，手写数字小幅图像等。在这部分中，我们将把
+已知的方法扩展到实际应用中更加常见的大图像数据集。
+全联通网络
+在稀疏自编码章节中，我们介绍了把输入层和隐含层进行“全连接”的设计。从计算的角度来讲，在其他章节中曾经用
+过的相对较小的图像（如在稀疏自编码的作业中用到过的 8x8 的小块图像，在MNIST数据集中用到过的28x28 的小块图
+像），从整幅图像中计算特征是可行的。但是，如果是更大的图像（如 96x96 的图像），要通过这种全联通网络的这
+种方法来学习整幅图像上的特征，从计算角度而言，将变得非常耗时。你需要设计 10 的 4 次方（=10000）个输入单
+元，假设你要学习 100 个特征，那么就有 10 的 6 次方个参数需要去学习。与 28x28 的小块图像相比较， 96x96 的
+图像使用前向输送或者后向传导的计算方式，计算过程也会慢 10 的 2 次方（=100）倍。
+部分联通网络
+解决这类问题的一种简单方法是对隐含单元和输入单元间的连接加以限制：每个隐含单元仅仅只能连接输入单元的一部
+分。例如，每个隐含单元仅仅连接输入图像的一小片相邻区域。（对于不同于图像输入的输入形式，也会有一些特别的
+连接到单隐含层的输入信号“连接区域”选择方式。如音频作为一种信号输入方式，一个隐含单元所需要连接的输入单
+元的子集，可能仅仅是一段音频输入所对应的某个时间段上的信号。） 
+网络部分连通的思想，也是受启发于生物学里面的视觉系统结构。视觉皮层的神经元就是局部接受信息的（即这些神经
+元只响应某些特定区域的刺激）。
+卷积
+自然图像有其固有特性，也就是说，图像的一部分的统计特性与其他部分是一样的。这也意味着我们在这一部分学习的
+特征也能用在另一部分上，所以对于这个图像上的所有位置，我们都能使用同样的学习特征。
+更恰当的解释是，当从一个大尺寸图像中随机选取一小块，比如说 8x8 作为样本，并且从这个小块样本中学习到了一
+些特征，这时我们可以把从这个 8x8 样本中学习到的特征作为探测器，应用到这个图像的任意地方中去。特别是，我
+们可以用从 8x8 样本中所学习到的特征跟原本的大尺寸图像作卷积，从而对这个大尺寸图像上的任一位置获得一个不
+同特征的激活值。
+下面给出一个具体的例子：假设你已经从一个 96x96 的图像中学习到了它的一个 8x8 的样本所具有的特征，假设这是
+Deep Learning - Ng 
+wbx
+
+由有 100 个隐含单元的自编码完成的。为了得到卷积特征，需要对 96x96 的图像的每个 8x8 的小块图像区域都进行
+卷积运算。也就是说，抽取 8x8 的小块区域，并且从起始坐标开始依次标记为（1，1），（1，2），...，一直到
+（89，89），然后对抽取的区域逐个运行训练过的稀疏自编码来得到特征的激活值。在这个例子里，显然可以得到 100 
+个集合，每个集合含有 89x89 个卷积特征。
+假设给定了 的大尺寸图像，将其定义为 xlarge。首先通过从大尺寸图像中抽取的 的小尺寸图像样本
+xsmall 训练稀疏自编码，计算 f = σ(W(1)xsmall + b(1))（σ 是一个 sigmoid 型函数）得到了 k 个特征， 其中
+W(1) 和 b(1) 是可视层单元和隐含单元之间的权重和偏差值。对于每一个 大小的小图像 xs，计算出对应的值
+fs = σ(W(1)xs + b(1))，对这些 fconvolved 值做卷积，就可以得到 个卷积后的特
+征的矩阵。
+在接下来的章节里，我们会更进一步描述如何把这些特征汇总到一起以得到一些更利于分类的特征。
+中英文对照
+全联通网络 Full Connected Networks 
+稀疏编码 Sparse Autoencoder 
+前向输送 Feedforward 
+反向传播 Backpropagation 
+部分联通网络 Locally Connected Networks 
+连接区域 Contiguous Groups 
+视觉皮层 Visual Cortex 
+卷积 Convolution 
+固有特征 Stationary 
+池化 Pool 
+中文译者
+Deep Learning - Ng 
+wbx
+
+孔德硕 (tobluestone@gmail.com)，郭亮（guoliang2248@gmail.com）， 晓风（xiaofeng.zhb@alibaba-inc.com） 
+卷积特征提取 | 池化 | Exercise:Convolution and Pooling 
+Language : English 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/%E5%8D%B7%E7%A7%AF%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96" 
+This page was last modified on 8 April 2013, at 05:20. 
+Deep Learning - Ng 
+wbx
+
+池化
+From Ufldl 
+Contents 
+1 池化: 概述
+2 池化的不变性
+3 形式化描述
+4 中英文对照
+5 中文译者
+池化: 概述
+在通过卷积获得了特征 (features) 之后，下一步我们希望利用这些特征去做分类。理论上讲，人们可以用所有提取得到的特
+征去训练分类器，例如 softmax 分类器，但这样做面临计算量的挑战。例如：对于一个 96X96 像素的图像，假设我们已经学
+习得到了400个定义在8X8输入上的特征，每一个特征和图像卷积都会得到一个 (96 . 8 + 1) * (96 . 8 + 1) = 7921 维的
+卷积特征，由于有 400 个特征，所以每个样例 (example) 都会得到一个 892 * 400 = 3,168,400 维的卷积特征向量。学习一
+个拥有超过 3 百万特征输入的分类器十分不便，并且容易出现过拟合 (over-fitting)。
+为了解决这个问题，首先回忆一下，我们之所以决定使用卷积后的特征是因为图像具有一种“静态性”的属性，这也就意味着
+在一个图像区域有用的特征极有可能在另一个区域同样适用。因此，为了描述大的图像，一个很自然的想法就是对不同位置的
+特征进行聚合统计，例如，人们可以计算图像一个区域上的某个特定特征的平均值 (或最大值)。这些概要统计特征不仅具有低
+得多的维度 (相比使用所有提取得到的特征)，同时还会改善结果(不容易过拟合)。这种聚合的操作就叫做池化 (pooling)，有
+时也称为平均池化或者最大池化 (取决于计算池化的方法)。
+下图显示池化如何应用于一个图像的四块不重合区域。
+池化的不变性
+Deep Learning - Ng 
+wbx
+
+如果人们选择图像中的连续范围作为池化区域，并且只是池化相同(重复)的隐藏单元产生的特征，那么，这些池化单元就具有
+平移不变性 (translation invariant)。这就意味着即使图像经历了一个小的平移之后，依然会产生相同的 (池化的) 特征。
+在很多任务中 (例如物体检测、声音识别)，我们都更希望得到具有平移不变性的特征，因为即使图像经过了平移，样例(图像) 
+的标记仍然保持不变。例如，如果你处理一个MNIST数据集的数字，把它向左侧或右侧平移，那么不论最终的位置在哪里，你都
+会期望你的分类器仍然能够精确地将其分类为相同的数字。
+(*MNIST 是一个手写数字库识别库: http://yann.lecun.com/exdb/mnist/) 
+形式化描述
+形式上，在获取到我们前面讨论过的卷积特征后，我们要确定池化区域的大小(假定为)，来池化我们的卷积特征。那
+么，我们把卷积特征划分到数个大小为 的不相交区域上，然后用这些区域的平均(或最大)特征来获取池化后的卷积特
+征。这些池化后的特征便可以用来做分类。
+中英文对照
+特征 features 
+样例 example 
+过拟合 over-fitting 
+平移不变性 translation invariant 
+池化 pooling 
+提取 extract 
+物体检测 object detection 
+中文译者
+陈玉栓 (chris_chen_cys@hotmail.com) ， 刘鸿鹏飞（just.dark@foxmail.com）， 邓亚峰（dengyafeng@gmail.com）, 晓风
+（xiaofeng.zhb@alibaba-inc.com） 
+卷积特征提取 | 池化 | Exercise:Convolution and Pooling 
+Language : English 
+Retrieved from "http://deeplearning.stanford.edu/wiki/index.php/%E6%B1%A0%E5%8C%96" 
+This page was last modified on 8 April 2013, at 05:21. 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:C onv olution and P ooling - U fldl 
+1/5 
+Exercise:Convolution and Pooling 
+From Ufldl 
+Contents 
+1 Convolution and Pooling 
+1.1 Dependencies 
+1.2 Step 1: Load learned features 
+1.3 Step 2: Implement and test convolution and pooling 
+1.3.1 Step 2a: Implement convolution 
+1.3.2 Step 2b: Check your convolution 
+1.3.3 Step 2c: Pooling 
+1.3.4 Step 2d: Check your pooling 
+1.4 Step 3: Convolve and pool with the dataset 
+1.5 Step 4: Use pooled features for classification 
+1.6 Step 5: Test classifier 
+Convolution and Pooling 
+In this exercise you will use the features you learned on 8x8 patches sampled from 
+images from the STL-10 dataset in the earlier exercise on linear decoders for 
+classifying images from a reduced STL-10 dataset applying convolution and pooling. 
+The reduced STL-10 dataset comprises 64x64 images from 4 classes (airplane, car, 
+cat, dog). 
+In the file cnn_exercise.zip (http://ufldl.stanford.edu/wiki/resources/cnn_exercise.zip) we 
+have provided some starter code. You should write your code at the places indicated 
+"YOUR CODE HERE" in the files. 
+For this exercise, you will need to modify cnnConvolve.m and cnnPool.m. 
+Dependencies 
+The following additional files are required for this exercise: 
+A subset of the STL10 Dataset (stlSubset.zip) 
+(http://ufldl.stanford.edu/wiki/resources/stlSubset.zip) 
+Starter Code (cnn_exercise.zip) 
+(http://ufldl.stanford.edu/wiki/resources/cnn_exercise.zip) 
+You will also need: 
+sparseAutoencoderLinear.m or your saved features from Exercise:Learning color 
+features with Sparse Autoencoders 
+feedForwardAutoencoder.m (and related functions) from Exercise:Self-Taught 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:C onv olution and P ooling - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:C onv olution_and_P ooling 2/5 
+Learning 
+softmaxTrain.m (and related functions) from Exercise:Softmax Regression 
+If you have not completed the exercises listed above, we strongly suggest you 
+complete them first. 
+Step 1: Load learned features 
+In this step, you will use the features from Exercise:Learning color features with 
+Sparse Autoencoders. If you have completed that exercise, you can load the color 
+features that were previously saved. To verify that the features are good, the 
+visualized features should look like the following: 
+Step 2: Implement and test convolution and pooling 
+In this step, you will implement convolution and pooling, and test them on a small 
+part of the data set to ensure that you have implemented these two functions 
+correctly. In the next step, you will actually convolve and pool the features with 
+the STL-10 images. 
+Step 2a: Implement convolution 
+Implement convolution, as described in feature extraction using convolution, in the 
+function cnnConvolve in cnnConvolve.m. Implementing convolution is somewhat involved, 
+so we will guide you through the process below. 
+First, we want to compute σ(Wx(r,c) + b) for all valid (r,c) (valid meaning that 
+the entire 8x8 patch is contained within the image; this is as opposed to a full 
+convolution, which allows the patch to extend outside the image, with the area 
+outside the image assumed to be 0), where W and b are the learned weights and biases 
+from the input layer to the hidden layer, and x(r,c) is the 8x8 patch with the upper 
+left corner at (r,c). To accomplish this, one naive method is to loop over all such 
+patches and compute σ(Wx(r,c) + b) for each of them; while this is fine in theory, 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:C onv olution and P ooling - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:C onv olution_and_P ooling 3/5 
+it can very slow. Hence, we usually use Matlab's built in convolution functions, 
+which are well optimized. 
+Observe that the convolution above can be broken down into the following three small 
+steps. First, compute Wx(r,c) for all (r,c). Next, add b to all the computed values. 
+Finally, apply the sigmoid function to the resulting values. This doesn't seem to 
+buy you anything, since the first step still requires a loop. However, you can 
+replace the loop in the first step with one of MATLAB's optimized convolution 
+functions, conv2, speeding up the process significantly. 
+However, there are two important points to note in using conv2. 
+First, conv2 performs a 2-D convolution, but you have 5 "dimensions" - image number, 
+feature number, row of image, column of image, and (color) channel of image - that 
+you want to convolve over. Because of this, you will have to convolve each feature 
+and image channel separately for each image, using the row and column of the image 
+as the 2 dimensions you convolve over. This means that you will need three outer 
+loops over the image number imageNum, feature number featureNum, and the channel 
+number of the image channel. Inside the three nested for-loops, you will perform a 
+conv2 2-D convolution, using the weight matrix for the featureNum-th feature and 
+channel-th channel, and the image matrix for the imageNum-th image. 
+Second, because of the mathematical definition of convolution, the feature matrix 
+must be "flipped" before passing it to conv2. The following implementation tip 
+explains the "flipping" of feature matrices when using MATLAB's convolution 
+functions: 
+Implementation tip: Using conv2 and convn 
+Because the mathematical definition of convolution involves "flipping" the matrix 
+to convolve with (reversing its rows and its columns), to use MATLAB's convolution 
+functions, you must first "flip" the weight matrix so that when MATLAB "flips" it 
+according to the mathematical definition the entries will be at the correct place. 
+For example, suppose you wanted to convolve two matrices image (a large image) and 
+W (the feature) using conv2(image, W), and W is a 3x3 matrix as below: 
+If you use conv2(image, W), MATLAB will first "flip" W, reversing its rows and 
+columns, before convolving W with image, as below: 
+If the original layout of W was correct, after flipping, it would be incorrect. 
+For the layout to be correct after flipping, you will have to flip W before 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:C onv olution and P ooling - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:C onv olution_and_P ooling 4/5 
+passing it into conv2, so that after MATLAB flips W in conv2, the layout will be 
+correct. For conv2, this means reversing the rows and columns, which can be done 
+with flipud and fliplr, as shown below: 
+% Flip W for use in conv2 
+W = flipud(fliplr(W)); 
+Next, to each of the convolvedFeatures, you should then add b, the corresponding bias 
+for the featureNum-th feature. 
+However, there is one additional complication. If we had not done any preprocessing 
+of the input patches, you could just follow the procedure as described above, and 
+apply the sigmoid function to obtain the convolved features, and we'd be done. 
+However, because you preprocessed the patches before learning features on them, you 
+must also apply the same preprocessing steps to the convolved patches to get the 
+correct feature activations. 
+In particular, you did the following to the patches: 
+1. subtract the mean patch, meanPatch to zero the mean of the patches 
+2. ZCA whiten using the whitening matrix ZCAWhite. 
+These same three steps must also be applied to the input image patches. 
+Taking the preprocessing steps into account, the feature activations that you should 
+compute is , where T is the whitening matrix and is the mean 
+patch. Expanding this, you obtain , which suggests that you 
+should convolve the images with WT rather than W as earlier, and you should add 
+, rather than just b to convolvedFeatures, before finally applying the 
+sigmoid function. 
+Step 2b: Check your convolution 
+We have provided some code for you to check that you have done the convolution 
+correctly. The code randomly checks the convolved values for a number of (feature, 
+row, column) tuples by computing the feature activations using feedForwardAutoencoder 
+for the selected features and patches directly using the sparse autoencoder. 
+Step 2c: Pooling 
+Implement pooling in the function cnnPool in cnnPool.m. You should implement mean 
+pooling (i.e., averaging over feature responses) for this part. 
+Step 2d: Check your pooling 
+We have provided some code for you to check that you have done the pooling 
+correctly. The code runs cnnPool against a test matrix to see if it produces the 
+expected result. 
+Step 3: Convolve and pool with the dataset 
+Deep Learning - Ng 
+wbx
+
+13-4-8 E xercise:C onv olution and P ooling - U fldl 
+deeplearning.stanford.edu/w iki/index.php/E xercise:C onv olution_and_P ooling 5/5 
+In this step, you will convolve each of the features you learned with the full 64x64 
+images from the STL-10 dataset to obtain the convolved features for both the 
+training and test sets. You will then pool the convolved features to obtain the 
+pooled features for both training and test sets. The pooled features for the 
+training set will be used to train your classifier, which you can then test on the 
+test set. 
+Because the convolved features matrix is very large, the code provided does the 
+convolution and pooling 50 features at a time to avoid running out of memory. 
+Step 4: Use pooled features for classification 
+In this step, you will use the pooled features to train a softmax classifier to map 
+the pooled features to the class labels. The code in this section uses softmaxTrain 
+from the softmax exercise to train a softmax classifier on the pooled features for 
+500 iterations, which should take around a few minutes. 
+Step 5: Test classifier 
+Now that you have a trained softmax classifier, you can see how well it performs on 
+the test set. These pooled features for the test set will be run through the softmax 
+classifier, and the accuracy of the predictions will be computed. You should expect 
+to get an accuracy of around 80%. 
+Retrieved from 
+"http://deeplearning.stanford.edu/wiki/index.php/Exercise:Convolution_and_Pooling" 
+This page was last modified on 3 June 2011, at 19:16. 
+Deep Learning - Ng 
+wbx
+

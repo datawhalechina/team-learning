@@ -1,0 +1,1016 @@
+DOI:10.13335/j.1000-3673.pst.2013.08.038 
+
+第 
+37卷第 
+8期电网技术 
+Vol. 37 No. 8 
+2013年 
+8月 
+Power System Technology Aug. 2013 
+
+文章编号：1000-3673（2013）08-2297-06 中图分类号：TM 835.4 文献标志码：A 学科代码：470·4034
+
+基于快速鲁棒性特征匹配的
+电气化铁路绝缘子不良状态检测
+
+
+杨红梅，刘志刚，韩烨，韩志伟
+
+（西南交通大学电气工程学院，四川省成都市 610031） 
+
+
+Defective Condition Detection of Insulators in Electrified Railway Based on 
+Feature Matching of Speeded-up Robust Features 
+
+YANG Hongmei, LIU Zhigang, HAN Ye, HAN Zhiwei 
+(School of Electrical Engineering, Southwest Jiaotong University, Chengdu 610031, Sichuan Province, China) 
+
+ABSTRACT: In allusion to automatic identification and 
+location of defective insulators in overhead contact line of 
+electrified railway by non-contact image detection, a detection 
+method based on feature matching of speeded-up robust 
+features (SURF) is proposed. Firstly, the feature extraction and 
+matching of insulator in the image to be detected are performed 
+by SURF; secondly, the pre-processing of insulator such as 
+angle correction and morphological operation is carried out; 
+finally, longitudinal statistics of insulator grayscale is 
+implemented and according to the regularity of distribution of 
+the minimal value of the grayscale the defective insulator can 
+be identified and located. Experimental results show that using 
+the proposed method the defective insulators can be identified 
+rapidly and accurately, and the automatic identification results 
+of defective conditions of insulators are more accurate. 
+
+KEY WORDS: image processing; insulator; speeded-up 
+robust features; defective condition detection 
+
+摘要：针对电气化铁路接触网非接触式图像检测中绝缘子不
+良状态的自动识别定位问题，提出一种基于快速鲁棒性特征 
+(speeded-up robust features，SURF)匹配的检测方法。该方法
+首先通过 
+SURF进行待检测图像中绝缘子的特征提取与匹
+配；接着对绝缘子进行角度校正及形态学操作等预处理；最
+后纵向统计绝缘子灰度并根据其灰度极小值分布规律识别
+和定位其不良状态。实验表明，该方法能较准确快速地识别
+绝缘子，且对其不良状态的自动识别结果也较为准确，为电
+气化铁路接触网绝缘安全检测问题提供新的参考。
+
+关键词：图像处理；绝缘子；快速鲁棒性特征算法；不良状
+态检测 
+
+
+0 引言
+
+目前我国铁路供电部门对绝缘瓷瓶的检查主要
+
+基金项目：国家自然科学基金项目(U1134205，51007074)。 
+
+
+Project Supported by National Natural Science Foundation of China 
+(U1134205, 51007074).
+
+以人工方式定期对绝缘子进行清扫和检查，这种方
+式很难实时监控绝缘子状态。在电力系统中，基于
+图像处理技术的绝缘子检测方法的研究相对较多，
+如：何洪英等结合图像处理和人工智能技术实现了
+绝缘子污秽特征提取及污秽等级检测[1-2]；李佐胜等
+研究了基于方差分析的绝缘子特征选取方法[3]；黄
+宵宁等通过最大熵阈值方法进行图像分割，应用连
+通区域方法对绝缘子串进行识别与提取[4]；林聚财
+等利用颜色和直方图匹配方法识别玻璃绝缘子损
+伤区域[5]；姚建刚等利用相对温度分布特征和人工
+神经网络模型相结合的方法实现不同污秽等级和
+湿度条件下的绝缘子识别[6]；葛玉敏等利用颜色突
+变对电力系统中绝缘子污秽和裂纹进行检测[7]；仝
+卫国利用形状、颜色、不变矩等多特征融合方法识
+别输电线路中的绝缘子[8]等。目前电气化铁路弓网
+系统中绝缘子的研究相对较少，林萍等研究了基于 
+SIFT的高速列车车顶绝缘瓷瓶的识别方法 
+[9]；陈昌
+龙等分析了车顶绝缘子表面涂覆半导体涂料的优
+化方案以减少覆冰现象[10]。由于接触网悬挂装置图
+像过于复杂，目前国内外通过图像处理方法对其进
+行故障分析与检测的研究甚少。
+
+图像匹配作为图像处理领域中的关键技术之
+一，其特征点的提取方法很多，Forstner算子[11]、 
+Harris算子[12]、Moravec算子[13]、尺度不变特征变
+换(scale invariant feature transform，SIFT)算子[14]等
+都是常用算法。快速鲁棒性特征(speeded-up robust 
+features，SURF)匹配算法[15]与 
+SIFT算法一样，都
+具有对尺度和旋转的鲁棒性，文献[16]的实验表明 
+SURF算法的速度比 
+SIFT算法快很多。 
+
+
+
+
+2298 杨红梅等：基于快速鲁棒性特征匹配的电气化铁路绝缘子不良状态检测 
+Vol. 37 No. 8 
+
+本文以检测车获取的接触网悬挂装置全局图
+像为研究对象，利用 
+SURF特征匹配方法准确快速
+识别并提取绝缘子，接着对其进行角度校正等预处
+理，最终通过绝缘子灰度统计图中极小值规律判别
+其状态。 
+
+
+1 SURF算法理论 
+
+
+1.1 特征点检测 
+SURF算法通过将积分图像、Hessian矩阵和二
+维 
+Haar小波响应相结合提高速度。 
+
+
+1）积分图像。
+积分图像完成图像卷积操作，可以大幅提高计
+算效率。对于积分图像中某点 
+P(, )xy，该点的 
+I () 表示原始图像中原点和点 
+P形成的矩形区域
+
+.P
+
+内所有像素值之和，如式(1)所示： 
+
+
+ixjy 
+
+I () ..Ii j (, ) (1)
+
+P
+..
+..
+
+00ij..
+式中：I(,)ij
+
+表示原始图像对应 
+i，j坐标的像素值； 
+I () 为对应 
+(, )坐标的积分图像。
+
+.Pxy
+
+计算积分图像时，只需遍历一次原图像，计算
+量很小。若矩形区域由 
+A、B、C和 
+D四点构成，
+矩形窗口灰度值之和为 
+
+
+SA....BC D (2) 
+
+2）近似的 
+Hessian矩阵。 
+SURF的特征点检测是基于 
+Hessian矩阵的，
+它依靠 
+Hessian矩阵行列式的局部最大值定位特征
+点位置。对于图像 
+I中某点 
+X .(, ) 
+
+xy ，在点 
+X的.
+尺度上的 
+Hessian矩阵定义为 
+. 
+(,.) (,.)
+
+LX
+
+LX xy . 
+HX(,.) .. 
+xx . 
+(3)
+.xy yy ..
+
+
+LX
+
+LX(,.) (,.) 
+式中： 
+LX(,.) 表示高斯二阶偏导在 
+X处与图像 
+I
+
+xx
+
+的卷积； 
+LX(,.) 、 
+LX(,.) 具有相似含义。
+
+xyyy
+
+Bay等人[15]用箱式滤波器近似高斯的二阶偏
+导，将近似模板与图像卷积的结果用 
+Dxx 、Dyy 、Dxy 
+
+表示，用其代替 
+Lxx 、Lyy 、Lxy 得到近似 
+Hessian矩
+
+阵，其行列式为 
+
+
+det .DD .(wD )2 (4)
+
+xxyy xy 
+
+式中 
+w为权重系数，实际应用中一般取其固定值 
+
+
+0.9。按照上式近似矩阵行列式的计算方法，对图像
+中每一点求取响应得到尺度.上的响应图。 
+1.2 特征点描述
+以特征点为中心，取半径为 
+6 s(s为特征点所在
+的尺度值)的圆形区域，计算区域内的像素点在 
+x、 
+
+
+y方向上的 
+Haar小波响应值 
+dx、dy。对加权后的响
+应值进行直方图统计。从 
+x轴开始，对圆形区域 
+60.
+范围内的 
+Haar小波响应值相加得到新的矢量。每
+隔 
+5.以同样的方法计算矢量，遍历整个圆形区域，
+得到 
+72个新的矢量。选择最长的矢量方向作为该
+特征点的主方向。然后，确定大小为 
+20 s的矩形区
+域为特征提取区域。将区域划分为 
+4×4的子区域。
+在每一个子区域内对 
+dx、dy、|dx|、|dy|求和，得到式 
+
+
+(5)所示的特征 
+V。将 
+16个子区域特征加入到特征
+向量中，就形成一个 
+64维的特征向量： 
+V.( d , d ,| d |, | d |) (5) 
+
+... 
+. 
+
+
+xyx y 
+
+2 基于 
+SURF的绝缘子识别与提取方法
+
+由于拍摄角度不同，实际图片中绝缘子存在角
+度、尺寸上的多变性，同时全局图像复杂，特征点
+多，故采用具有旋转、尺度不变，且能实现快速匹
+配的 
+SURF方法识别绝缘子。利用 
+SURF检测和描
+述待检测图像、绝缘子模板的特征点，通过计算两
+幅图像中特征点的最小欧氏距离与次最小欧氏距
+离的比值完成绝缘子的识别。
+
+采用欧氏距离计算 
+2个特征点描述子的相似性
+度量.Dis,ij： 
+
+
+.ij jk (6)
+
+kn.
+21/2Dis,[()]ikXX...
+
+0k.
+式中：
+
+Xik为待匹配图中第 
+i个特征描述子的第 
+k个
+元素； 
+X jk为模版图像中第 
+j个特征描述子的第 
+k
+个元素； 
+n为特征向量的维数。
+
+对于待匹配图像上的特征点，计算它到模板图
+像上所有特征点的欧氏距离，得到距离集合，通过
+对距离集合进行比较运算得到最小欧氏距离和次
+最小欧氏距离。当最小欧氏距离与次最小欧氏距离
+的比值小于所设阈值时，认为两个特征点是匹配
+的，否则没有点与该特征点相匹配。
+
+应用 
+SURF分别提取和描述绝缘子模板(图 
+1)
+与待检测图像 
+2(a)的特征点，并用上述准则实现两
+者间的匹配，如图 
+2(b)所示(红圈内为绝缘子模板)。
+
+图 
+2(b)中存在少量误匹配点，为快速准确识别
+绝缘子，提出以下误匹配消除方法： 
+
+
+1）特征点聚类。将待检测图像中提取到的特
+图 
+1绝缘子模板 
+Fig. 1 Insulator template 
+
+
+
+第 
+37卷第 
+8期电网技术 2299 
+
+征点由空间距离阈值进行聚类，这样可以快速消除
+离散的误匹配点。 
+
+
+2）求取每一类中的匹配点数 
+Ni和绝缘子模板
+特征点数 
+N。如果 
+Ni小于 
+N的 
+0.6倍，即认为该类
+为误匹配；如果 
+Ni大于 
+N的 
+0.6倍，即认为该类匹
+配成功，由其匹配点坐标即可提取出绝缘子。通过
+实验，设置匹配阈值如下： 
+.Ni. 
+0.6 N，匹配成功
+
+. 
+(7)
+
+.Ni. 
+0.6 N，误匹配
+
+由于绝缘子的强对称性，在绝缘子区域内部存
+在少数匹配不严格情况。考虑到接触网图像匹配难
+度大，同时相对于同一图像中非绝缘子类的误匹配
+点，该类匹配点仍为绝缘子的特征点，因此不再检
+测并消除绝缘子区域内的不严格匹配点。
+
+图 
+2(c)为消除误匹配点后的效果图，对比图 
+2(b)、(c)可以看出，误匹配消除效果良好，由各类
+匹配点坐标可准确提取图中绝缘子。 
+
+
+
+(a) 待检测图像 
+(b) SURF特征匹配效果图 
+(c) 消除误匹配后效果图
+图 
+2绝缘子特征匹配效果 
+Fig. 2 Diagram of feature matching effect 
+
+
+3 绝缘子状态检测步骤 
+
+
+3.1 概述
+通过上述方法在待检测图像中提取出绝缘子
+后，分别检测其状态。由于绝缘子具有较强的分布
+规律，而片缺失、夹杂异物等不良状态将破坏其规
+
+律性，故求取绝缘子的纵向灰度统计图，利用其灰
+度极小值分布规律的突变判别状态。考虑到绝缘子
+的倾斜角度、低对比度会导致其灰度统计图不能很
+好地保持其分布特征，如图 
+3(a)(b)所示，因此先对
+绝缘子进行角度校正、形态学膨胀运算、对比度调
+节等预处理。 
+
+
+3.2 绝缘子预处理 
+1）基于最小二乘法直线拟合的绝缘子角度校正。
+利用绝缘子的对称特性，首先检测边缘得到其
+边缘曲线 
+l1和 
+l2，通过式(8)(9)对 
+l1和 
+l2进行最小二
+乘法直线拟合，得到绝缘子对称直线 
+l，即得到其
+与水平方向的夹角.，则校正角度为 
+180...，这样
+保证了即将分析的绝缘子为水平方向。 
+
+
+. 
+0 1 (8) 
+
+ya.ax 
+
+R2201iiaax....N[ y( )] (9)
+
+1i.
+式中：xi，yi为边缘曲线上的点； 
+a0为拟合直线截
+距；ai为拟合直线斜率； 
+R2为偏差平方和。 
+
+
+2）形态学膨胀运算突出不良状态特征。
+为突出绝缘子的不良状态(如异物、缺失处)，
+对提取的绝缘子图像先进行形态学膨胀运算操作
+以突出可能存在的不良状态特征。
+
+考虑两幅图像 
+A与 
+B，定义其膨胀运算为 
+
+
+. 
+(, ) . 
+{ . 
+| . 
+, .} (10)
+
+AB aba AbB 
+
+选取的模块过小，膨胀效果不明显，过大会使
+其模糊。通过实验，选用 
+4×8的矩形模块进行膨胀
+操作。 
+
+
+3）绝缘子局部对比度调节。
+为提高绝缘子片与片间的对比度，得到更规则
+的灰度统计图，需对绝缘子进行局部对比度调节，
+使绝缘子片更突出、清晰，而连接处由于灰度很低
+被抑制。对比度增强公式如下： 
+
+
+.0 (,) . 
+Iin
+
+，Imn 
+
+. 
+(,) . 
+.
+. 
+[( ( Imn,) . 
+L] Hout . 
+Lout . 
+L ，
+
+. 
+in out Mmn Hin . 
+Lin (11)
+
+. 
+
+
+L . 
+Imn ( ,) . 
+H
+
+in in
+
+. 
+
+
+.0 (,) . 
+Hin
+
+. 
+，Imn 
+
+式中：I为原始图像；M为对比度调节后的图像；Lin
+和 
+Hin 为原始图像中增强的像素范围； 
+Lout和 
+Hout 
+为增强后的像素范围。
+
+预处理效果如图 
+3所示。对比 
+3(b)与 
+3(d)可看
+出，预处理后灰度统计曲线更清晰、规则。
+
+
+
+2300 杨红梅等：基于快速鲁棒性特征匹配的电气化铁路绝缘子不良状态检测 
+Vol. 37 No. 8 
+
+
+(a) 倾斜绝缘子 
+灰度值/bit 灰度值/bit 
+
+9 0007 000 
+5 000 
+3 000 
+
+
+0 50 100 150 200 
+图像像素点/pix 
+
+(b) 倾斜绝缘子灰度统计图 
+(c) 预处理效果图 
+12 000
+
+8 000 
+
+4 000 
+
+0 
+
+
+0 50 100 150 200 250 
+
+图像像素点/pix 
+
+(d) 预处理后灰度统计图
+图 
+3绝缘子预处理效果 
+Fig. 3 Diagram of insulator pretreatment effect 
+
+
+3.3 基于灰度统计的绝缘子状态检测
+统计预处理后绝缘子每列的灰度总和，得到其
+灰度统计图。由图 
+3(c)与 
+3(d)看出绝缘子与其灰度
+统计图存在唯一对应关系。其中，第 
+1处极大值为
+套头与第 
+1片间的连接处，后面的极大值依次对应
+绝缘子片，极小值对应片间连接处。对于正常绝缘
+子，其极小值大体一致；对于绝缘子片缺失的地方，
+其表层破损露出灰度值很低的芯棒部分，对比度调
+节时，灰度被抑制，导致此处出现远小于同组极小
+值的极小值；对于夹杂异物的地方，其极小值远大
+于同组极小值。因此由极小值分布规律可判别绝缘
+子状态。
+
+由于存在拍摄角度不同的问题，可能导致其灰
+度统计图中极小值出现整体递减的情况。同时在套
+头与第 
+1片的连接处，以及片缺失处前后也可能存
+在极小值异常情况。为使状态判断不受此影响，有
+必要将异常值排除，使判据全为同一绝缘子中的正
+
+常部分，以提高判据的准确性与稳定性。
+检测步骤如下： 
+
+
+1）取出灰度图中的极小值 
+Rmin，并求取其均
+值 
+Mmin； 
+2）每次取出一个极小值，重新计算剩余极小
+值均值 
+Mmin.，若 
+Mmin.与 
+Mmin的差值大于所设阈值 
+(通过大量实验，设置阈值为 
+0.05Mmin 可以准确剔除
+可能存在的不正常极小值)，则认为该值为不正常极
+小值 
+Rw min (包括两端套头与绝缘子片的连接处、片
+缺失处前后对应的极小值)，记录其大小和个数；若 
+Mmin.与 
+Mmin相差值小于阈值，则认为该值为正常
+极小值 
+R (绝缘子正常部分对应的极小值)； 3）骤 
+2）中不正常极小值 
+Rw min 个数为零，
+则认为绝缘子正常；否则需继续以下检测步骤； 
+若步(rmin) 
+4）求取步骤 
+2）中所有 
+Rr min 的均值 
+Mmin.
+..，检
+测步骤 
+2）中的 
+Rw min ，若其小于 
+Mmin..的 
+0.4倍，则
+认为此处存在绝缘子片缺失故障；若同时存在大于 
+Mmin. 
+..1.5倍的 
+Rw min ，则需判断此极小值的位置，若
+其位于片缺失处前后或两端套头与绝缘子片间的
+连接处，则仅存在绝缘子缺失故障，否则认为其同
+时存在夹杂异物故障。 
+
+
+5）在没有绝缘子片缺失的情况下，若步骤 
+2）
+中 
+Rw min 大于 
+Mmin.
+..的 
+1.5倍(除两端套头与绝缘子片
+间的连接处外)，则认为此处夹杂异物，否则认为其
+正常。
+通过大量实验，设置状态判据如式(12)所示： 
+. 
+R . 
+0.4M .. 
+，存在绝缘子片缺失故障
+
+w min min
+
+. 
+..
+0.4M .. 
+. 
+R . 
+1.5M .. 
+，绝缘子正常(12)
+
+. 
+min w min min 
+
+. 
+
+
+.Rw . 
+1.5M .. 
+，存在绝缘子片间夹杂异物
+
+.min min 
+
+4 绝缘子状态检测实例分析 
+
+
+4.1 绝缘子的识别与提取
+为验证本文所提检测方法的有效性，对图库中
+不同条件下拍摄的故障图片和非故障图片进行实
+验。首先利用 
+SURF特征匹配方法识别并提取待
+检测图像中的绝缘子；然后对其进行预处理及灰
+度统计；最后由灰度统计图中的极值规律判别其
+状态。
+
+应用 
+SURF匹配待检测图中的绝缘子，图 
+4(a)
+为片缺失绝缘子匹配图，4(b)为夹杂异物绝缘子匹
+配图。
+
+由图 
+4和表 
+1可看出，本文匹配方法在准确度
+和速度上达到实验要求。
+
+
+
+第 
+37卷第 
+8期电网技术 
+2301 
+
+
+0.4M . 
+..( 为序号 
+2、3、4、8、9、10的均值)，
+min M min.
+..
+
+判断此处绝缘子片缺失。 
+
+
+(a) 
+片缺失绝缘子匹配图 (b)夹杂异物绝缘子匹配图
+图 
+4 SURF特征匹配效果 
+(a) 中间片缺失绝缘子 (b)预处理效果图 
+Fig. 4 Diagram of SURF feature matching effect 
+
+2
+
+
+表 
+1待匹配图像匹配时间统计 
+Tab. 1 Image matching time statistic 
+
+灰度值/104bit 
+
+1
+
+图像 
+4(a) 4(b)
+匹配时间/s 2.565 979 3.060 103 
+
+4.2 绝缘子状态检测
+在待检测图像中提取绝缘子后，对其进行预处
+理，然后统计其灰度并进行状态检测。 
+
+
+1）边缘片缺失绝缘子检测。预处理效果如图 
+5
+所示。绝缘子灰度统计极小值如表 
+2所示。 
+(a) 边缘片缺失绝缘子 (b)预处理效果图 
+2
+
+0
+
+图像像素点/pix 
+
+(c) 灰度统计图
+图 
+6中间片缺失绝缘子检测 
+
+
+Fig. 6 Piece missing detection of middle-insulator
+表 
+3绝缘子灰度统计极小值 
+Tab. 3 Minimum of insulator gray statistic 
+
+
+0 100 200 300 
+
+序号极小值/104序号极小值/104 
+1 1.26 6 0.06 
+2 0.84 7 1.25 
+3 0.91 8 0.83 
+4 0.83 9 0.91 
+5 0.42 10 0.86 
+
+
+灰度值/104bit
+
+3）绝缘子夹杂异物检测。预处理效果如图 
+7
+所示。绝缘子灰度统计极小值如表 
+4所示。
+1 
+
+0
+
+图像像素点/pix 
+
+
+(c) 灰度统计图(a) 夹杂异物绝缘子 (b)预处理效果图 
+图 
+5边缘片缺失绝缘子检测 
+12 000
+0 100 200 300 
+
+
+Fig. 5 Piece missing detection of insulator terminal 
+
+表 
+2绝缘子灰度统计极小值 
+Tab. 2 Minimum of insulator gray statistic 
+
+序号极小值/104序号极小值/104 
+1 0.02 6 1.02 
+2 1.39 7 1.04 
+3 1.01 8 0.89 
+4 1.07 9 0.79 
+5 1.01
+
+灰度值/bit
+
+8 000
+
+4 000 
+
+由表 
+2(表中序号对应灰度统计图中极小值的
+顺序)得出，第 
+1个极小值满足判据 
+R . 
+0.4M . 
+..
+
+w min min 
+
+( Mmin..为剔除 
+1、2后的均值)，判断此处绝缘子片
+缺失。 
+
+
+2）中间片缺失绝缘子检测。预处理效果如图 
+6
+所示。绝缘子灰度统计极小值如表 
+3所示。
+由表 
+3得出，第 
+6个极小值满足判据 
+Rw min . 
+
+
+0
+
+图像像素点/pix 
+
+(c)灰度统计图
+图 
+7绝缘子夹杂异物检测 
+Fig. 7 Foreign body detection of insulator 
+表 
+4绝缘子灰度统计极小值 
+Tab. 4 Minimum of insulator gray statistic 
+
+
+0 100 200 300 
+
+序号极小值/1031 2.73 
+2 2.46 
+3 2.15 
+4 2.08 
+5 4.59 
+
+序号极小值/103 
+6 2.02 
+7 1.86 
+8 1.38 
+9 1.15 
+10 0.93 
+
+
+
+2302 
+杨红梅等：基于快速鲁棒性特征匹配的电气化铁路绝缘子不良状态检测 
+Vol. 37 No. 8 
+
+由表 
+4得出，该组第 
+5个极小值满足判据 
+R . 
+1.5 M .. 
+( 为剔除 
+5、9、10后的均值 
+)，
+
+wmin min M min..
+
+从而判断绝缘子在此处，即第 
+4与第 
+5片之间夹杂
+有异物。
+
+对图像检测实验结果如表 
+5所示。本文方法检
+测准确率较高，达到识别和检测要求。出现误检是
+因绝缘子绝大部分被遮挡，导致提取的特征点远远
+小于阈值而漏检。调整拍摄角度可以极大改善此类
+问题。
+
+表 5绝缘子检测实验统计结果 
+Tab. 5 Statistical results of experiments
+
+
+真实值正确识别数误检数
+实验总数 37 36 1 
+含绝缘子张数 29 28 1 
+绝缘子故障张数 
+4 4 0 
+
+5 
+结论 
+
+1）应用 
+SURF局部特征匹配方法实现接触网
+悬挂装置图像中绝缘子的识别，所检测的局部特征
+在图像旋转、尺度变换、角度变化等条件下具有良
+好的不变性，克服了因拍摄角度不同、光照不均等
+客观因素引起的特征变化、失效等问题。同时 
+SURF
+算法具有的快速鲁棒性可实现绝缘子快速、准确的
+识别定位。 
+2）对于绝缘子片缺失、夹杂异物等不良状态，
+以绝缘子局部图像纵向灰度统计的极小值规律为
+不良状态判据，具有一定的稳定性和通用性，可以
+准确识别且定位绝缘子的不良状态。
+参考文献 
+
+[1] 
+何洪英，姚建刚，蒋正龙，等．基于支持向量机的高压绝缘子污
+秽等级红外热像检测[J]．电力系统自动化， 
+2005，29(24)：70-74． 
+He Hongying，Yao Jiangang，Jiang Zhenglong，et al．Infrared thermal 
+image detecting of high voltage insulator contamination grades based 
+on support vector machine[J]． 
+Automation of Electric Power 
+Systems，2005，29(24)：70-74(in Chinese)． 
+[2] 
+何洪英，姚建刚，罗滇生，等．基于 
+K-L变换的污秽绝缘子红外
+图像特征提取方法[J]．电力系统自动化，2006，30(17)：76-80． 
+He Hongying，Yao Jiangang，Luo Diansheng，et al．Characteristic 
+extraction method of contaminated insulator infrared image based 
+onK-Ltransform[J]．Automation of Electric Power Systems，2006， 
+30(17)：76-80(in Chinese)． 
+[3] 
+李佐胜，姚建刚，杨迎建，等．基于方差分析的绝缘子红外热像
+特征选择方法[J]．电网技术，2009，33(1)：92-96． 
+Li Zuosheng，Yao Jiangang，Yang Yingjian，et al．Feature selection 
+method of insulator infrared thermal image based on variance analysis 
+[J]．Power System Technology，2009，33(1)：92-96(in Chinese)． 
+[4] 
+黄宵宁，张真良．直升机巡检航拍图像中绝缘子图像的提取算法 
+[J]．电网技术，2010，34(1)：194-197． 
+Huang Xiaoning，Zhang Zhenliang．A method to extract insulator 
+image from aerial image of helicopter patrol[J]．Power System 
+Technology，2010，34(1)：194-197(in Chinese)． 
+
+
+[5] 
+林聚财，韩军，陈舫明，等．基于彩色图像的玻璃绝缘子缺陷诊
+断[J]．电网技术，2011，35(1)：127-133． 
+Lin Jucai，Han Jun，Chen Fangming，et al．Defects detection of glass 
+insulator based on color image[J]．Power System Technology，2011， 
+35(1)：127-133(in Chinese)． 
+[6] 
+姚建刚，关石磊，陆佳政，等．相对于温度分布特征与人工神经
+网络相结合的零值绝缘子识别方法 
+[J]．电网技术， 
+2012，36(2)： 
+170-175． 
+Yao Jiangang，Guan Shilei，Lu Jiazheng，et al．Identification of zero 
+resistance insulator by combining relative temperature distribution 
+characteristics with artificial neural network[J]． 
+Power System 
+Technology，2012，36(2)：170-175(in Chinese)． 
+[7] 
+葛玉敏，李宝树，赵淑涛，等．基于航拍图像的绝缘子表面状态
+检测[J]．高压电器，2010，46(4)：65-68． 
+Ge Yumin，Li Baoshu，Zhao Shutao，et al．A method based on aerial 
+images to detect the surface state of insulators [J]．High Voltage 
+Apparatus，2010，46(4)：65-68(in Chinese)． 
+[8] 
+仝卫国．基于航拍图像的输电线路识别与状态检测方法研究[D]．
+北京：华北电力大学，2011． 
+[9] 
+林萍，王黎，罗林．基于 
+SIFT的高速列车车顶瓷瓶识别方法 
+[J]．
+机车电传动，2012(5)：87-89． 
+Lin Ping，Wang Li，Luo Lin．High-speed locomotive porcelain 
+position method based on SIFT [J]．Electric Drive for Locomotives， 
+2012(5)：87-89(in Chinese)． 
+[10] 
+陈昌龙，王黎明．电力机车车顶绝缘子电场计算[J]．高电压器， 
+2011，47(1)：53-56． 
+Chen Changlong，Wang Liming．Electric field calculation for electric 
+locomotive roof insulator[J]．High Voltage Apparatus，2011，47(1)： 
+53-56(in Chinese)． 
+[11] 
+Frstner W，Gülch E．A fast operator for detection and precise location 
+of distinct points，corners and centers of circular features 
+[C]//Proceedings of the ISPRS Inter Commission Workshop， 
+Interlaken，1987：149-155． 
+[12] 
+Harris C J，Stephens M．A combined corner and edge detector[C]// 
+Proceedings of the 4th Alive Vision Conference，UK，1988：147-151． 
+[13] 
+Moravec H．Rover visual obstacle avoidance[C]//Proceedings of the 
+7th International Joint Conference on Artificial Intelligence， 
+Vancouver，Canada，1981：785-790． 
+[14] 
+David G Lowe．Distinctive image features from scale-invariant key 
+points [J]．International Journal of Computer Vision，2004，60(2)： 
+91-110． 
+[15] Bay H，Tuyteplaars T，Van Gool L．SURF：speeded up robust features 
+[C]//Proceedings of the European Conference Computer Vision， 
+Graz，Austris，2006：404-417． 
+[16] 
+Juan L，Gwun O．A comparison of SIFT，PCA-SIFT and SURF [J]． 
+International Journal of Image Processing，2009，3(4)：143-152．
+收稿日期： 2013-01-18。
+
+作者简介：
+
+杨红梅(1987)，女，硕士研究生，研究方向为检
+
+测技术在电力系统中的应用， 
+E-mail： 
+
+
+meizi_689@163.com；
+
+刘志刚(1975)，男，教授，博士生导师，研究方
+向为现代信号处理及其在电力系统与牵引供电系统
+杨红梅中的应用。
+
+（责任编辑马晓华）
+
+
+

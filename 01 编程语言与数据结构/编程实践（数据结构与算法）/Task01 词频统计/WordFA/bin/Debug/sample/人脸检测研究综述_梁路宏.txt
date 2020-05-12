@@ -1,0 +1,876 @@
+第25卷　第5期
+2002年5月
+计　　算　　机　　学　　报
+CHIN ESE J. COM PU TERS 
+Vo l. 25 No. 5 
+May 2002 
+　
+人脸检测研究综述
+梁路宏　艾海舟　徐光　张　钹
+(清华大学计算机科学与技术系　北京100084) 
+(清华大学智能技术与系统国家重点实验室　北京100084) 
+收稿日期: 2001-03-07; 修改稿收到日期: 2002-01-31. 本课题得到国家“八六三”高技术研究发展计划( 863-805-512-9805-11)和清华大学
+研究支持基金(百005)资助. 梁路宏, 男, 1973年生,博士,现工作于Int el中国研究院. 艾海舟,男, 1964 年生, 博士,副教授. 研究方向为
+计算机视觉、模式识别、移动机器人. E-mai l: ah z@ mail. tsinghua. edu. cn. 徐光, 男, 1940年生,教授,博士生导师. 研究方向为计算机
+视觉、人机交互技术和多媒体技术.张　钹,男, 1935年生, 教授,博士生导师, 中国科学院院士.研究方向为人工智能的理论与应用. 
+摘　要　人脸检测问题最初作为自动人脸识别系统的定位环节被提出,近年来由于其在安全访问控制、视觉监测、
+基于内容的检索和新一代人机界面等领域的应用价值,开始作为一个独立的课题受到研究者的普遍重视.该文从
+人脸检测问题的分类、人脸模式的分析、特征提取与特征综合、性能评价等角度,系统地整理分析了人脸检测问题
+的研究文献,将人脸检测方法主要划分为基于知识的人脸验证方法和基于统计的学习方法,指出统计学习方法优
+于启发式验证方法. 
+关键词　人脸检测,人脸识别,模式识别,计算机视觉
+中图法分类号: TP391 
+A Survey of Human Face Detection 
+LIAN G Lu-Hong　AI Hai-Zho u　X U Guang-You　ZHANG Bo 
+(Depar tment of Comp uter Science an d Technology , Tsin ghua Uni versit y, Beij ing 100084) 
+( State Key Labor atory of Intel l igen t Technology an d Systems , Tsin ghua Un iversit y, Beij in g 100084) 
+Abstract　Thi s paper presents a surv ey o n the sta te of the art o f face detectio n resea rch based on 
+systema tic analy si s o f related pa pers. Firstly face detectio n problem i s divided into sev eral classes 
+acco rding to the type o f input images, backg round complex ity, pose v aria nce, applicatio n domain 
+etc. , and then face pa ttern is analy zed based o n v arious fea tures and thei r possible fusio n method 
+fo r the purpo se o f face detectio n. The li terature i s review ed in tw o part s: feature ex tractio n a nd 
+fea ture fusion for face detectio n. Feature ex t ractio n includes skin-co lor segmentation and va rious 
+g ray lev el features such as the out line of face, g ray lev el dist ributio n, o rganic feature, symmet 
+ry , template etc. Fea ture fusio n metho ds include know ledg e-based heuri stic face verificatio n, 
+sta tistical lea rning approaches ( Eig enface, Clustering , ANN, SVM, HMM, EM probabilistic 
+model) . Performance compa rison of some well know n methods is given o n MIT+ CMU test set. 
+In conclusio n, sta ti stical learning methods are superior to those know ledg e based methods, and in 
+all tho se learning based methods, the key problem is the t raining complexi ty , even by bo ot st rap 
+method it remains a great challenge due to the div ersity of no n-face samples compared wi th face 
+samples. We sugg est a subspace method fo r dow nsi zing the t raining space by desig ning a fi lter 
+( such as templa te matching fil ter) that ex cludes mo st of no n face candidates and then t raining in 
+the dow nsi zed subspace. It i s pointed out that statistical lea rning methods depend on the acco rda 
+nce of sample pat terns ( syntactic info rmatio n) , w hich cannot take into co nsideratio ns of much 
+impo rtant sema ntic info rmatio n. Thi s dif fers much f rom human being s in face cog ni tio n. There is 
+a limi t for statistical o nly approaches and the help of knowledg e based methods i s needed. 
+Keywords　face detection, face recog nition, pat tern recog ni tio n, computer v isio n
+
+1　引　言
+人脸检测( face detectio n)是指在输入图像中确
+定所有人脸(如果存在)的位置、大小、位姿的过程. 
+人脸检测作为人脸信息处理中的一项关键技术,近
+年来成为模式识别与计算机视觉领域内一项受到普
+遍重视、研究十分活跃的课题. 
+人脸检测问题最初来源于人脸识别( face recogni 
+tio n) . 人脸识别的研究可以追溯到20世纪60— 
+70年代,经过几十年的曲折发展已日趋成熟[ 1, 2] .人
+脸检测是自动人脸识别系统中的一个关键环节,但
+是早期的人脸识别研究主要针对具有较强约束条件
+的人脸图像(如无背景的图像) ,往往假设人脸位置
+已知或很容易获得,因此人脸检测问题并未受到重
+视. 近几年随着电子商务等应用的发展,人脸识别成
+为最有潜力的生物身份验证手段,这种应用背景要
+求自动人脸识别系统能够对一般环境图像具有一定
+的适应能力,由此所面临的一系列问题使得人脸检
+测开始作为一个独立的课题受到研究者的重视. 今
+天,人脸检测的应用背景已经远远超出了人脸识别
+系统的范畴,在基于内容的检索、数字视频处理、视
+觉监测等方面有着重要的应用价值. 
+人脸检测研究具有重要的学术价值. 人脸是一
+类具有相当复杂的细节变化的自然结构目标,此类
+目标的检测问题的挑战性在于[3 ]: ( 1)人脸由于外
+貌、表情、肤色等不同,具有模式的可变性; ( 2)一般
+意义下的人脸上, 可能存在眼镜、胡须等附属物; 
+( 3)作为三维物体的人脸的影像不可避免地受由光
+照产生的阴影的影响. 因此, 如果能够找到解决这
+些问题的方法,成功构造出人脸检测与跟踪系统, 
+将为解决其它类似的复杂模式检测问题提供重要
+的启示. 
+目前,国外对人脸检测问题的研究很多,比较著
+名的有MIT, CMU等; 国内的清华大学[ 4— 8]、北京
+工业大学[9, 10 ]、中国科学院计算技术研究所[11 ]和中
+国科学院自动化研究所[12 ]等都有人员从事人脸检
+测相关的研究. 而且, MPEG7标准组织已经建立了
+人脸识别草案小组,人脸检测算法也是一项征集的
+内容. 随着人脸检测研究的深入,国际上发表的有关
+论文数量也大幅度增长,如IEEE的FG( IEEE Inter 
+natio nal Co nference on Automatic Face and Gesture 
+Recog ni tio n)、ICIP ( Interna tional Conference 
+on Imag e Processing )、CV PR( Co nference o n Computer 
+Vision a nd Pa t tern Recog nition)等重要国际
+会议上每年都有大量关于人脸检测的论文,占有关
+人脸研究论文的近1 /3之多. 有关人脸检测的内容
+在人脸识别研究的综述中有所涉及[1, 2 ] ,但仅仅侧重
+于人脸识别系统的输入环节,目前较为详尽的人脸
+检测与跟踪综述为文献[13 ] ,着重于介绍各种方法
+所使用的特征和模型,本文则系统地整理分析了相
+关的研究文献,按照人脸检测的问题分类与模式分
+析、人脸特征的提取与综合等线索对近年来的研究
+进行了综述. 
+2　人脸检测问题的分类与
+人脸模式分析
+人脸检测问题所包含的内容十分广泛,从不同
+的角度可以有多种分类方法(表1) . 本文主要讨论
+静止图像中的人脸检测问题. 动态图像中单帧内的
+人脸检测与静止图像的情况基本相同,若考虑动态
+信息则属于人脸跟踪( face t racking )问题,将不在本
+文讨论. 
+表1　人脸检测问题的分类
+分类依据类别
+图像
+类型
+图像来源
+静止图像(包括如数字化的照片、数码相机拍摄的图片等, 
+目前考虑的主要问题是算法的适应性和鲁棒性,算法速度
+在其次) 
+动态图像(即视频序列,包括工作台前的人脸序列、保安监
+控录像、影视资料等, 往往与人脸的跟踪问题交织在一起, 
+对算法的速度有很高的要求) 
+颜色信息彩色灰度
+图像
+前景
+镜头类型头肩部图像半身/全身图像
+人脸姿态正面(包括端正及平面内旋转) 侧面(包括俯仰、侧影及旋转) 
+人脸数目
+单人(又可以称为人脸定位,是人脸检测问题在已知人脸数
+目情况下的特例) 
+未知(需要判定图像中是否存在人脸,人脸的数目以及各个
+人脸的尺度和位置,即是完全的检测问题) 
+图像背景
+复杂程度
+简单背景(指无背景或背景的特征被严格约束,在该条件下
+只利用人脸的轮廓、颜色、运动等少量特征,就能够进行准
+确检测) 
+复杂背景(指背景的类型和特征不受约束,某些区域可能在
+色彩、纹理等特征上与人脸相似,必须利用较多的人脸特征
+才能做到准确检测) 
+应用领域人脸信息处理(验证、识别、表情分析等)系统、视频会议或远程教育系统、视觉监视与跟踪、基于内容的图像与视频检索等等. 
+人脸图像所包含的模式特征十分丰富,如图1 所示. 这些特征中哪些是最有用的、如何利用这些特
+450 计　　算　　机　　学　　报　2002年
+
+征,是人脸检测要研究的一个关键问题.人脸模式具
+有复杂而细致的变化,因此一般需要采用多种模式
+特征综合的方法,如图2所示. 归纳起来,根据利用
+特征的色彩属性可以将人脸检测方法分为基于肤色
+特征的方法和基于灰度特征的方法两类. 前者适用
+于构造快速的人脸检测和人脸跟踪算法,后者利用
+了人脸区别于其它物体的更为本质的特征,是人脸
+检测领域研究的重点. 根据特征综合时采用的不同
+模型,可以将基于灰度特征的方法分为两大类: 基于
+启发式(知识)模型的方法和基于统计模型的方法. 
+由于人脸检测问题的复杂性,无论哪一类方法都无
+法适应所有的情况,一般都针对人脸检测领域内某
+个或某些特定的问题. 
+3　人脸模式的特征提取
+人脸模式的特征包括肤色特征和灰度特征. 
+3. 1　肤色特征
+肤色是人脸的重要信息,不依赖于面部的细节
+特征,对于旋转、表情等变化情况都能适用,具有相
+对的稳定性并且和大多数背景物体的颜色相区别. 
+因此肤色特征在人脸检测中是最常用的一种特征. 
+肤色特征主要由肤色模型描述. 
+使用何种形式的肤色模型与色度空间( chrominance 
+space)的选择密切相关.可以从两个方面考察
+某种色度空间: ( 1)在该色度空间中能否用给定的模
+型描述“肤色”区域的分布; ( 2)色度空间中“肤色”与
+“非肤色”区域的重叠有多少[14 ] . 人脸检测常用的色
+度空间主要有RGB(红、绿、蓝三基色) [5, 15 ]、rg b(亮
+度归一化的三基色) [11 ]、SHI (饱和度、色调、亮
+度) [16 ]、Y IQ ( N T SC 制的光亮度和色度模型) [17 ]、
+YUV ( PAL 制的光亮度和色度模型) [18 ]、YCbCr 
+( CCIR601编码方式的色度模型,与YUV 在数学上
+具有等价性) [19 ]、CIEL* a* b(国际照明委员会提出
+的基于色度学的彩色模型) [2 0— 23]等. 
+常用的肤色模型有高斯模型、混合高斯模型和
+直方图模型. Ter rillo n等[14 ]考察了归一化的r-g、
+CIE-x y、归一化的T SL、CIE-DSH、HSV、YIQ、
+Y ES、CIE-L* u* v 和CIE-L* a* b 9种色度空间, 比
+较了高斯模型和混合高斯模型在不同色度空间中的
+性能,发现除了少数情况外,一般需要使用混合高斯
+模型才能较好地描述肤色区域的分布. Terrillo n等
+同时指出,最终限制检测性能的因素是不同色度空
+间中“肤色”与“非肤色”区域的重叠程度. 
+Jo nes等[15 ]研究了RGB空间中“肤色”与“非肤
+色”像素的分布,根据标定出肤色区域的近2万幅图
+片(包含约20亿个像素)建立了三维直方图,在此基
+础上比较了直方图模型和混合高斯模型,发现前者
+的性能略好于后者. 
+除上述3种肤色模型外,还有直接利用几何参
+数描述肤色区域分布范围的模型[ 24]、三维投影模
+型[18 ]、基于神经网的肤色模型[19, 25 ]等. 此外也有同
+时考虑“肤色”与“非肤色”像素分布的基于贝叶斯方
+法的模型[26 ] . 
+3. 2　灰度特征
+灰度特征包括人脸轮廓特征、人脸灰度分布特
+征(镶嵌图特征、直方图特征等)、器官特征(对称性
+等)、模板特征等. 
+轮廓是人头部的重要特征. Craw 等[27 ]首先在
+低分辨率图像中使用一个轮廓模板匹配出人脸的大
+致范围,然后在高分辨率图像中使用Sobel算子获
+得边缘的位置和方向,并连接出完整的人脸轮廓. 
+Wang 等[ 12]提取边缘特征并根据广义Houg h 变换
+抽取椭圆形状信息. 
+人脸核心区域(眼睛、鼻子、嘴区域)具有独特的
+灰度分布特征. Yang 等[28 ]首先提出了人脸的镶嵌
+图(mosaic imag e,又称为马赛克图)特征.所谓镶嵌
+图就是将图像划分为一组大小相同的方格,每个方
+格的灰度为格中各个像素的平均值. 镶嵌图特征是
+5期 梁路宏等: 人脸检测研究综述 451
+
+指这些块的值应满足的约束规则. Lu等[4 ]依据人脸
+的左右对称性,通过提取投影直方图特征检测人脸
+的旋转角度,再提取镶嵌图特征. Dai等[29 ]提取空间
+灰度共现矩阵( SGLD)特征等等. 
+人脸区域内的各个器官(如双眼、鼻子、嘴等)是
+人脸的重要特征. Kouzani等[ 30]使用人工神经网分
+别检测眼睛、鼻子、嘴以及人脸的整体特征. 
+人脸区域的灰度本身可以作为模板特征,通常
+取仅包含双眼、鼻子和嘴的面部中心区域作为共性
+的人脸模板特征[3 ] ,排除掉头发、脸颊两侧变化很大
+的部分.被广泛地用于基于统计学习的人脸检测方
+法中. 
+4　人脸模式的特征综合
+人脸的检测过程实际上就是对人脸模式特征的
+综合判断过程,包括多种方法. 
+4. 1　肤色区域分割与人脸验证方法
+对于彩色图像,在确定肤色模型之后,首先可以
+进行肤色检测.在检测出肤色像素后,需要根据它们
+在色度上的相似性和空间上的相关性分割出可能的
+人脸区域,同时利用区域的几何特征或灰度特征进
+行是否是人脸的验证,以排除其它色彩类似肤色的
+物体.区域分割与验证在很多方法中是密切结合、统
+一考虑的. 
+在一些情况下,仅根据肤色像素的聚积特性即
+可完成区域分割. Yoo 等[16 ]利用肤色像素的连通性
+分割出区域,使用椭圆拟合各个区域,根据椭圆长短
+轴的比率判断其是否为人脸. Cai等[23 ]根据肤色模
+型提供的像素的似然度,采用从局部最大值处逐渐
+扩展的方法得到肤色区域,然后使用灰度平均脸模
+板匹配的方法验证区域内是否有人脸. 
+对于较为复杂的情况,则需要考虑两方面的问
+题: ( 1)由于光照和脸部器官的影响,人脸可能被割
+裂为若干互不连通的肤色区域; ( 2)人脸区域可能与
+其它类肤色区域连接在一起. 
+聚类-归并-验证策略是较常用的解决方法: 首
+先将肤色像素按照较为严格的颜色一致性和几何约
+束条件聚类为区域,然后按照一定规则进行归并,归
+并后或归并过程中利用其它特征进行验证. Garcia 
+等[31 ]按照色度的差异将肤色进一步量化为不同的
+类型,将类型相同且相邻的肤色像素聚类为区域,根
+据几何位置、形状和色调相容性进行归并,归并过程
+中利用区域的小波特征进行验证. Yang 等[ 20]根据
+色度的一致性和空间距离将肤色像素聚类成区域, 
+然后逐步归并直到得到符合一定先验知识的椭圆区
+域为止,最后检查区域中由眼睛、嘴巴等特征形成的
+暗区或空洞, 以确定是否为人脸. Abdel-Mo t taleb 
+等[18 ]首先排除了局部邻域内亮度变化较大的肤色
+像素,对其余肤色像素进行聚类,从而得到色度一致
+的区域; 然后使用基于邻接图的方法归并不连通的
+区域,并且检查区域内亮度在邻域中变化较大的像
+素(可能对应于眼睛、嘴等特征)所占的比率,对归并
+结果进行验证. 
+另一种策略是先用较弱的条件将肤色像素聚类
+为区域, 再将符合一定条件的区域分裂开. Wei 
+等[17 ]根据区域的大小和形状找出可能的人脸,剩下
+的区域按照一定规则不断分裂,以便找出与类肤色
+背景连接在一起的人脸,最后利用亮度信息对各个
+区域进行验证. 
+还有一些方法使用肤色模板进行搜索匹配. 
+Karleka r等[19 ]对YCbCr格式的彩色图像进行了小
+波变换,训练一个多层感知器在Cb , Cr 平面的低通
+色度子图中检测肤色像素,然后使用一个“人脸-背
+景”二值人脸模板匹配搜索,最后利用亮度分量的小
+波变换系数验证搜索结果. Wu等[21, 22 ]采用了模糊
+模板匹配方法,该方法不仅建立了肤色模型,同时也
+建立了头发颜色的模型. 根据人脸位姿的不同,构造
+了5种“肤色-发色”模板,并定义了相应的隶属度函
+数和模糊匹配规则,对所有可能尺度和位置的区域
+进行搜索. 
+此外,还有在分割之前就将肤色检测的结果与
+其它特征融合在一起的方法,如Sun等[ 32]提出的基
+于肤色与对称信息的方法、Kim等[33 ]提出的肤色信
+息与深度信息相结合的方法等. 
+4. 2　基于启发式模型的方法
+基于启发式模型的方法首先抽取几何形状、灰
+度、纹理等特征,然后检验它们是否符合人脸的先验
+知识.
+Govindaraju 等[34 ]使用变形模板( defo rmable 
+templa te)匹配头顶轮廓线和左右两条面颊轮廓线, 
+实现人脸定位. 
+Yang 等[ 28]提出了基于镶嵌图( mosaic imag e, 
+又称为马赛克图)的人脸检测方法. Yang 等将人脸
+的五官区域分别划分为4× 4个和8× 8个马赛克
+块,使用一组规则进行检验,并且利用边缘特征进一
+步验证.卢春雨等[ 6]对镶嵌图方法进行了改进,按照
+人脸器官的分布将人脸划分为3× 3个马赛克块,在
+452 计　　算　　机　　学　　报　2002年
+
+检测中自适应地调整各块的大小,使用一组基于各
+块灰度和梯度统计特征的知识规则检验该区域是否
+为人脸,取得了较好的实验结果. 
+人脸区域内的各个器官也具有较为恒定的模
+式, 因此一些方法首先检测器官(如双眼、鼻子、嘴
+等)或局部特征,然后根据它们的相对位置关系判断
+整个区域是否为人脸. Ko uza ni 等[30 ]将使用人工神
+经网分别检测出来的眼睛、鼻子、嘴以及人脸的整体
+特征及相互间的位置关系输入一个模糊神经元网
+络,根据其中的领域知识判断被检测的区域是否为
+人脸. Miao 等[9 ]从输入图像中提取可能对应于眉
+毛、眼睛、嘴等器官的水平方向的马赛克边缘( mosaic 
+edge) ,计算各段边缘的“重心” ( g ravi ty center) 
+后,使用“重心”模板进行匹配,最后使用灰度和边缘
+特征验证匹配的结果. 该方法对人脸位姿的变化具
+有较强的适应能力. 采用局部特征检测方法的还有
+基于双眼检测的方法[35 ]、基于概率框架的局部特征
+聚类方法[ 36]以及结构模型、纹理模型和特征模型相
+结合的方法[37 ]等. 
+人脸灰度模板也可以看作是一种启发式模型.梁
+路宏等[7 ]使用了直接的平均脸模板匹配方法. 与Cai 
+等[ 23]的方法不同,该方法考虑到眼睛在人类辨识人
+脸过程中的特殊作用,使用双眼模板首先进行粗筛
+选,然后使用不同长宽比的人脸模板进行匹配,最后
+使用马赛克规则进行验证.使用的模板参见图3. 
+此外还有Lu 等[4 ]根据投影直方图分析首先确
+定人脸的旋转角度,然后使用基于镶嵌图的方法检测
+人脸; Dai等[29 ]根据空间灰度共现矩阵特征检测人脸
+等等. 其它基于知识模型的方法可以参见文献[2]. 
+利用人脸的轮廓、对称性等少量特征的方法适
+用于较强约束条件下(如简单背景、头肩图像)的人
+脸检测. 由于使用的特征较少,此类算法可以达到较
+高的检测速度,实现实时检测与跟踪. 利用人脸五官
+分布特征的知识模型方法能够在一定程度上适用于
+复杂背景图像中的人脸检测,同时达到较高的检测
+速度,如文献[9, 28]等. 但是需要看到,要想进一步
+提高知识模型的适应能力,需要综合更多的特征,这
+实际上涉及到图像理解这一困难的问题. 这是此类
+方法进一步发展遇到的主要障碍. 
+4. 3　基于统计模型的方法
+由于人脸图像的复杂性,显式地描述人脸特征
+具有一定困难,因此另一类方法—— 基于统计模型
+的方法越来越受到重视. 此类方法将人脸区域看作
+一类模式,即模板特征,使用大量的“人脸”与“非人
+脸”样本训练、构造分类器,通过判别图像中所有可
+能区域属于哪类模式的方法实现人脸的检测. 实际
+上,人脸检测问题被转化为统计模式识别的二分类
+问题. 
+4. 3. 1　基于特征空间的方法
+此类方法将人脸区域图像变换到某一特征空
+间,根据其在特征空间中的分布规律划分“人脸”与
+“非人脸”两类模式. 
+主分量分析( Principal-Compo nent Analy si s, 
+PCA)是一种常用的方法.它根据图像的统计特性进
+行正交变换( K-L变换) ,以消除原有向量各个分量
+间的相关性.变换得到对应特征值依次递减的特征
+向量,即特征脸[ 38] . Moghaddam等[ 38]发现人脸在特
+征脸空间的投影聚集比较紧密,因此利用前若干张
+特征脸将人脸向量投影到主元子空间F 和与其正
+交的补空间F - 
+, 相应的距离度量分别称为DIFS 
+( Di stance In Fea ture Space ) 和DFFS ( Di stance 
+From Feature Space) . 对于人脸检测问题,由于没
+有考虑“非人脸”样本的分布,需要同时使用DIFS 
+和DFFS才能取得较好的效果. 
+MIT 的Sung 等[3 ]提出了基于事例学习的方
+法,同时使用了19× 19像素分辨率的“人脸”和“非
+人脸”样本.样本预处理后按行列顺序展开为样本向
+量进行主分量分解.采用k-均值聚类方法在特征空
+间中建立6个“人脸”簇( Clusters) , 同时建立包围
+“人脸”簇的6个“非人脸”簇, 以使“人脸”与“非人
+脸”模式的边界更为清晰. Sung 等使用样本到各个
+簇中心的距离训练一个多层感知器进行分类. 需要
+指出的是,人脸检测中“非人脸”样本的选取是一个
+较为困难的问题. Sung 等使用了“自举” ( boo tst rap) 
+方法加以解决: 首先建立一个仅使用“人脸”簇的初
+始分类器对一组图像进行检测,将所有的错误报警
+(不是人脸而被错检为“人脸”的结果)加入“非人脸” 
+样本库,构造新的使用“人脸”与“非人脸”簇的分类
+器重新检测.以上过程不断迭代,直到收集了足够的
+“非人脸”样本. 
+属于特征空间方法的还有因子分解方法( Facto 
+r Analysis, FA)和Fisher 准则方法( Fisher Linea 
+r Discriminant, FLD) . Ya ng 等[ 39]在混合线性子
+空间( mix tures o f linear subspaces)中对“人脸”和
+5期 梁路宏等: 人脸检测研究综述 453
+
+“非人脸”样本的分布进行建模,分别使用基于EM 
+算法[40 ]的扩展FA方法和基于自组织映射( Self- 
+Org anizing Map, SOM ) [ 41] 的FLD方法构造检测
+器. 此外, 小波变换也被用于人脸检测, 如文献
+[42, 43]中使用了小波变换提取人脸的多分辨率特
+征作为分类的依据. 
+4. 3. 2　基于人工神经网的方法
+人工神经网( ANN)方法是把模式的统计特性
+隐含在ANN的结构和参数之中,对于人脸这类复
+杂的、难以显式描述的模式,基于ANN 的方法具有
+独特的优势. 
+CMU 的Rowley 等[44— 46 ]使用了多个ANN 检
+测多姿态的人脸,算法的框架如图4所示.图中显示
+了两类ANN: 1个位姿检测器( pose estimator )用于
+估计输入窗口中人脸的位姿、3个检测器( detector ) 
+分别检测正面( f ro ntal )、半侧面( half profi le)和侧
+面( profile)的人脸. 使用经过对准和预处理的“人
+脸”样本以及采用“自举” ( bo ot st rap)方法收集分类
+器错分的样本作为“非人脸”样本训练各个ANN,进
+一步修正分类器. 检测时对输入图像中所有可能位
+置和尺度的区域首先使用位姿检测器估计人脸位
+姿,经校准和预处理后送入3个检测器中,最后对检
+测器的分类结果进行仲裁. 
+在上述框架下, Row ley等对正面端正人脸和正
+面旋转人脸的检测单独进行了研究[ 44, 45, 46 ] .对于正
+面端正的人脸,仅使用了正面人脸检测ANN,是一
+种三层前向网: 输入层对应20× 20像素的图像区
+域; 隐层节点分为对应不同人脸区域的若干组,与输
+入层部分连接; ANN 输出1到- 1区间的值表示这
+个区域是否为人脸. Row ley等使用相同的“人脸”样
+本和不同“自举”过程收集的“非人脸”样本训练了多
+个正面人脸检测ANN, 对它们的检测结果进行仲
+裁,以进一步减少错误报警. 对于正面旋转人脸的检
+测使用了旋转角度检测器及正面人脸检测ANN,并
+使用相似的多ANN仲裁方法降低错误报警. 
+基于人工神经网的方法还有Juell等[47 ]和Kouzani
+等[ 30]提出的基于人脸器官检测的多级网络方
+法、Ani fantis等[48 ]提出的双输出人工神经网的检测
+算法等. 
+4. 3. 3　基于概率模型的方法
+基于概率模型方法的一种思路是计算输入图像
+区域region 属于人脸模式object 的后验概率p (object|
+region ) , 据此对所有可能的图像窗口进行判
+别. CM U的Schneiderma n等[ 49, 50]提出一种基于后
+验概率估计的人脸检测方法. 该方法利用贝叶斯原
+理将后验概率估计转化为一个似然度求解问题: 
+P ( region|object ) 
+P ( region|object ) 
+　
+object 
+>
+< 
+object
+λ= 
+P (object ) 
+P (object ) , 
+将难以估计的先验概率P (object )和P (object )用一
+个比率参数λ代替,作为调节检测器敏感度的参量. 
+Schneiderma n等采用64× 64像素的模式区域, 将
+其分为16个子区域,通过子区域独立性等假设降低
+“人脸” 和“非人脸” 模式分布表达式P ( region| 
+object )和P ( region|object )的复杂性,最后转化为稀
+疏编码的直方图,通过计算训练样本的频度求得两
+种模式的概率分布. Schneiderman等还将概率估计
+的方法用于检测正面旋转人脸和侧面人脸,同时使
+用多分辨率信息复用和由粗到精搜索的策略提高检
+测的速度[50 ] .属于这一类的还有Weber[51 ]等提出的
+视点不变性学习(View point-Inv aria nt Learning )的
+方法等. 
+另一种概率模型是用于描述信号统计特性的隐
+马尔可夫模型( Hidden Markov Models, HMM) ,目
+前也被应用于人脸检测与识别. Nefian等[52 ]根据正
+面人脸由上到下各个区域(头发、额头、双眼、鼻子、
+嘴)具有自然不变的顺序这一事实,使用一个包含五
+个状态的一维连续HMM加以表示. 将头部图像按
+454 计　　算　　机　　学　　报　2002年
+
+照这五个区域划分为互有重叠的条块,对各块进行
+K-L变换,选取前若干个变换系数作为观测向量训
+练HMM. Nefian等[53 ]还提出了基于嵌入式HMM 
+的人脸检测方法. 该方法同时考虑到人脸由左到右
+各个特征的自然顺序,使用了二维HMM,并且采用
+二维DC T 变换的系数作为观察向量. 此外还有
+Meng 等[43 ]使用HMM描述人脸的小波特征中不同
+级间的相关性等方法.基于HMM的方法一般只使
+用“人脸”样本进行训练,主要针对用于人脸识别的
+头肩部图像. 
+4. 3. 4　基于支持向量机的方法
+支持向量机( Suppo rt Vector Machines, SVM) 
+是Vapnik 等提出的基于结构风险最小化原理
+( St ructural Risk Minimi zatio n Principle, SRM)的
+统计学习理论[54, 55 ] ,用于分类与回归问题. SRM使
+V C ( Vapnik Cherov nenkis)维数的上限最小化,这
+使得SVM方法比基于经验风险最小化( Empi rical 
+Ri sk Minimi za tion Principle, ERM)的人工神经网
+方法具有更好的泛化能力. Osuna 等[56 ]将SVM方
+法用于人脸检测,取得了较好的实验结果. 该方法的
+基本思路是对每一个19× 19像素的检测窗口使用
+SVM 进行分类, 以区分“人脸”和“非人脸”窗口. 
+SVM 的训练使用了大量人脸样本和“自举”方法[ 3] 
+收集的“非人脸”样本,并且使用逼近优化的方法[ 57] 
+减少支持矢量的数量. 需要说明的是, 长期以来
+SVM的训练需要求解计算复杂度极高的二次规划
+问题, 限制了该方法的应用. Plat t[58 ]提出的SMO 
+( Sequential Minimal Optimi zatio n ) 算法解决了
+SVM训练困难的问题. 
+4. 3. 5　基于统计模型的方法总结
+基于统计模型的方法是目前比较流行的方法, 
+是解决复杂的人脸检测问题的有效途径.它具有如
+下优点[ 3]: ( 1)不依赖于人脸的先验知识和参数模
+型,可以避免不精确或不完整的知识造成的错误; 
+( 2)采用了实例学习的方法获取模型的参数,统计意
+义上更为可靠; ( 3)通过增加学习的实例可以扩充检
+测模式的范围、提高检测系统的鲁棒性. 基于统计模
+型的方法大多适用于复杂背景图像中的人脸检测. 
+目前基于统计模型的方法主要针对正面端正人
+脸的检测. 评估不同方法的性能需要共同的测试集, 
+目前比较公认的测试集是Sung 等的MI T测试集[3 ] 
+和Row ley等的CMU测试集(涵盖了Sung 等的测
+试集) [45 ] . 表2列出了几个具有代表性的算法在该
+测试集上的检测结果统计. 由于基于统计的方法对
+训练样本具有较强的依赖性,因此表中同时列出了
+各种方法使用的样本规模.需要指出的是,由于人脸
+检测问题本身的复杂性,加之不同方法往往具有不
+同的针对性,表2所列数据并不是为了比较各种方
+法的优劣,而是用来说明目前的研究所达到的大致
+水平. 
+表2　几种基于统计模型方法的实验结果统计
+方法样本规模Sung测试集上的结果
+( 23幅图像, 149个人脸) 
+Row ley测试集上的结果
+( 130幅图像, 507个人脸) 
+基于事例学习
+( Sung等[3] ) 
+人脸样本4150 个( 1067个人脸图像变换得
+到) ; 非人脸样本6189个(“自举”方法收集) 
+79. 9% 
+( 5个错误报警) 
+N /A 
+基于线性子空间
+( Yang等[39] ) 
+人脸样本16810 个( 1681个人脸图像变换得
+到) ; 非人脸样本8422个(“自举”方法收集) 
+FA方法: 89. 4% 
+( 3个错误报警) 
+FLD方法: 91. 5% 
+( 1个错误报警)① 
+FA方法: 92. 3% 
+( 82个错误报警) 
+FLD方法: 93. 6% 
+( 74个错误报警)② 
+基于人工神经网
+( Row l ey等[45] ) 
+人脸样本15750 个( 1050个人脸图像变换得
+到) ; 非人脸样本约8000个(“自举”方法收集) 
+84. 5% 
+( 8个错误报警)③④ 
+86. 2% 
+( 23个错误报警)④ 
+基于概率模型
+( Schn eiderman等[49 ] ) 
+人脸图像991幅,每幅变换生成120 个人脸样
+本; 非人脸样本从1552幅图像中生成
+89. 0% 
+( 3个错误报警)① 
+90. 5% 
+( 33个错误报警)② 
+基于支持向量机
+( Osuna等[56] ) 
+N /A 
+74. 2% 
+( 20个错误报警)③ N /A 
+① 除去5幅画线图,使用其余20幅图像(包含136个人脸) . 
+② 除去5幅画线图,使用其余125幅图像(包含483个人脸) . 
+③ 按照155个人脸计算(包含6个侧面人脸) . 
+④ 使用两个神经网进行仲裁(系统11[45] )的检测结果. 
+基于统计模型的方法具有很强的适应能力和鲁
+棒性,但由于需要对所有可能的检测窗口进行穷举
+搜索,计算复杂度很高,因此检测速度有待于提高, 
+另外“非人脸”样本的选取仍然是一个较为困难的问
+题. 此类方法主要针对正面端正人脸的检测,旋转人
+脸、多姿态人脸的检测由于比较复杂和困难,有效的
+方法还不多. 
+5　总结与展望
+本文结合近年来人脸检测问题上的研究工作,综
+述了人脸检测问题的研究现状. 随着人机交互技术日
+5期 梁路宏等: 人脸检测研究综述 455
+
+益成为当前研究的一个中心,人脸检测问题越来越受
+到重视,成为模式识别与计算机视觉领域研究的一个
+热点.人脸检测问题的内涵十分广泛,已有的方法一
+般都是针对某一类问题提出的.由于人脸检测问题的
+复杂性,实现通用的人脸检测方法还不现实,因此解
+决特定约束条件下或某种应用背景下的人脸检测问
+题仍将是该领域研究的主要课题. 
+总的来说,基于统计模型的方法具有很大的优
+越性.统计模型的建立需要较为一致的模式,因而使
+用的特征一般仅限于人脸的五官区域. 但是有一些
+“人脸”与“非人脸”样本即使是人也较难区分(如
+图5) .这说明在此分辨率下五官区域的信息对于辨
+识人脸仍然是不够的. 然而受图像质量、检测速度等
+因素的约束,提高检测窗口图像的分辨率又很困难. 
+我们认为出路在于与基于知识模型的方法相结合, 
+充分利用头部乃至全身的特征及相关的知识.但这
+将涉及到图像理解这个十分困难的问题. 
+“非人脸”样本的多样性和不易界定(只能用“不
+是人脸的样本都是非人脸”来描述)是基于统计的方
+法中的一个难题. “自举”方法[3, 45 ]是通过收集原分
+类器错分样本的方式添加到“非人脸”样本中迭代训
+练的方法,但是不加约束的“非人脸”样本空间庞大、
+所需迭代次数多、收敛十分困难.我们认为,问题的
+症结在于没有考虑“人脸”及“非人脸”在图像空间中
+的子空间特性,如果能够有效地设计一个滤波器将
+绝大部分“非人脸”滤掉,就可以显著地改变目前的
+困境.我们采用模板匹配的方法作为粗筛选,将模式
+分类问题限定在一个子空间中,以降低训练的难度, 
+取得了很好的效果[8, 59, 60 ] . 
+目前复杂背景图像中的人脸检测方法多针对正
+面端正的人脸.多姿态人脸的检测(特别是侧面人脸
+的检测)还存在很大的困难,有效的方法还不多. 这
+方面的研究也将是一个重点. 
+随着人脸检测研究的深入,必然产生对各种方
+法进行客观评价的要求.这就需要一系列的为研究
+者所公认的测试图像集. 文献中较为常用的是
+CMU 的灰度图像测试集[45 ] ,此外还有柯达公司的
+测试集[61 ] . 它们虽然具有一定规模和涵盖面,但仍
+不能满足评价的要求.因此还有待于建立规模更大、
+覆盖面更广的测试集和针对不同具体应用背景(如网
+上图片检索)的测试集. 值得关注的是,在MPEG7标
+准的制定中,也将针对人脸检测问题提出公用的测
+试集. 我们相信,此类测试集的推出以及在此基础上
+的检测算法的征集与评测工作,必然对人脸检测研
+究的深入开展起到很大的推动作用. 
+我们认为人脸检测研究的趋势是利用多种线索
+(头发、肤色、器官、轮廓、模板等) ,综合多种分类方
+法(混合高斯模型、概率模型、神经网与支持向量机
+等) ,启发式信息与统计学习方法相结合. 
+最后,需要指出的是人脸检测是个发展很快的
+研究方向, 新的方法层出不穷,新近提出[62 ]的一种
+基于积分图像特征,采用Adabo ost学习算法挑选
+少量关键分类特征,构造出一组弱分类器,级联起来
+进行人脸检测,速度近乎实时且性能与目前最好的
+接近,十分新颖.总之,人脸检测新方法将不断涌现, 
+必将与人脸识别研究等一道逐步走向实际应用. 
+参考文献
+1 Ch ell appa R, Wils on C L, Si roh ey S. Human and machine 
+recogni tion of f aces: A su rvey. Proceedings of th e IEEE, 
+1995, 83( 5): 705- 740 
+2 Zh ou Jie, Lu Chun-Yu, Zh ang Chang-Sh ui et al . A s urvey of 
+aut omatic f ace recogni tion. AC TA Elect roni ca Sinica, 2000, 
+28( 4): 102- 106( in Chinese) 
+(周　杰,卢春雨,张长水等. 人脸自动识别方法综述. 电子学
+报, 2000, 28( 4): 102- 106) 
+3 Sung K, Poggi o T. Example-based learning f or vi ew bas ed h uman 
+face det ection. IEEE Trans Pat t ern Analysis and Machine 
+Int el ligence, 1998, 20( 1): 39- 51 
+4 Lu X G, Zhou J, Zhang C S. A novel algorithm fo r rotat ed h uman 
+f ace det ection. In: Proc IEEE Conference on Compu ter 
+Visi on and Pat t ern Recognit ion, Hil ton Head Island, South 
+Carolina, USA, 2000. 760- 764 
+5 Lu Ch un-Yu. Research on s ome is sues of f ace recogni tion and 
+s ys t em impl ement ation [ Ph D di ssert ation ]. Tsinghua Universi 
+ty, Beijing , 1998( in Chin ese) 
+(卢春雨. 人脸自动识别若干问题研究与系统实现[博士学位
+论文] . 清华大学,北京, 1998) 
+6 Lu Chun-Yu, Zhang Ch ang-Shui , Wen Fang et al . Fas t face 
+det ection meth od based on regi on f eatures. Journal of Tsingh 
+ua Universi ty, 1999, 39( 1): 101- 105( in Chinese) 
+(卢春雨,张长水,闻　方等. 基于区域特征的快速人脸检测法. 
+清华大学学报(自然科学版) , 1999, 39( 1): 101- 105) 
+7 Liang Lu-Hong, Ai Hai-Zh ou, He Ke-Zh ong. M ult i-t em platemat 
+ching-based single f ace d et ecti on. Chin ese Jou rnal of Image 
+and Graphics, 1999, 4A( 10): 823- 830( in Chin ese) 
+456 计　　算　　机　　学　　报　2002年
+
+(梁路宏,艾海舟,何克忠. 基于多模板匹配的单人脸检测. 中
+国图象图形学报, 1999, 4A( 10): 823- 830) 
+8 Ai H Z, Li ang L H, Xu G Y. A general f ramew ork for f ace detect 
+ion. In: Tan Ti e-Niu, Shi Yuan-Ch un, Gao Wen eds. In: 
+Proc the 3rd Conf erence on Mul timodal In terfaces , Lecture 
+Notes in Com put er Science, 1948, Berlin: Springer-Verl ag, 
+2000. 119- 126 
+9 Mi ao J, Yin B C, Wang K Q et al . A hierachical mul tiscale and 
+mul tiangle s ys tem f or h uman face det ection in a compl ex backg 
+round using gravi t y-cent er t empl at e. Pat tern Recogni tion, 
+1999, 32( 10): 1237- 1248 
+10 Xing Xin, Wang Kong-Qiao, Shen Lan-Sun. Organ-based real-
+tim e f ace t racking method. AC TA Elect ronica Sinica, 2000, 
+28( 6): 29- 31( in Chines e) 
+(刑　昕, 汪孔桥, 沈兰荪. 基于器官跟踪的人脸实时跟踪方
+法. 电子学报, 2000, 28( 6): 29- 31) 
+11 Liu Ming-Bao, Yao Hong-Xu n, Gao Wen. Real-time f ace 
+t racking meth od in col or imag es. Ch inese Journal of Compu ter, 
+1998, 21( 6): 527- 532( in Chinese) 
+(刘明宝,姚鸿勋,高　文. 彩色图像的实时人脸跟踪方法. 计
+算机学报, 1998, 21( 6): 527- 532) 
+12 Wang J G, Tan T N. A n ew f ace det ection method bas ed on 
+shape inf ormati on. Pat tern Recognit ion Let t ers , 2000, 21( 6— 
+7): 463- 471 
+13 Yang M H, Kriegman D, Ahu ja N. Det ecting f aces in imag es: 
+A su rvey. IE EE Trans Pat t ern Anal ysis and Machin e In tellig 
+ence, 2002, 24( 1): 34- 58 
+14 Terrill on J C, Shi razi M N, Fukamachi H et al . Comparat ive 
+perf ormance of dif f erent s kin ch rominance model s and chrominance 
+s paces f or th e aut omatic det ection of human faces in color 
+imag es. In: Proc Conference on Au tomati c Face and Ges ture 
+Recognit ion, Grenobl e, France, 2000. 54- 61 
+15 Jones M J, Rehg JM. S tati sti cal color m od els wi th application 
+to skin det ecti on. In: Proc IEEE Conf erence on Comput er Visi 
+on and Pat t ern Recognit ion, For t Collins , Col orado, 1999. 
+274- 280 
+16 Yoo T W, Oh I S. A f ast alg ori thm fo r t racking h uman faces 
+bas ed on ch romatic his t og rams. Pat tern Recog ni ti on Let ters, 
+1999, 20( 10): 967- 978 
+17 Wei G, Seth i I K. Face d et ecti on f or imag e annot ation. Pat t ern 
+Recognit ion Lett ers, 1999, 20( 11— 13): 1313- 1321 
+18 Abdel-Mot tal eb M, Elgammal A. Face det ection in compl ex 
+environm en ts f rom color images. In: Proc IEEE Conf erence on 
+Image Proces sing, Kobe, Japan, 1999, 3: 622- 626 
+19 Karl ekar J, Desai U B. Finding f aces in color images using 
+wavel et t rans fo rm. In: Proc IEEE Conf erence on Imag e Analysi 
+s and Processing, Venice, Ital y, 1999. 1085- 1088 
+20 Yang M H, Ahuja N. Detecting human f aces in col or imag es. 
+In: Proc IEEE Conf erence on Image Proces sing, Chicago, 
+1998. 127- 139 
+21 Wu H Y, Ch en Q, Yachida M. A fu zzy-th eo ry-bas ed face detect 
+or. In: Proc Conf erence on Pat tern Recog ni ti on, Vi en na, 
+Aust ria, 1996, 3: 406- 410 
+22 Wu H Y, Ch en Q, Yachida M. Face detect ion f rom color images 
+using a fuz zy pat t ern matching meth od. IEEE Trans Pattern 
+Anal ysis and Machine Int el ligence, 1999, 21( 6): 557- 
+563 
+23 Cai J, Gosh tasby A. Det ecting human f aces in color imag es. 
+Image and Visi on Computing, 1999, 18( 1): 63- 75 
+24 Garcia C, Zikos G, Tzi ri tas G. Face d et ecti on in color images 
+using w avelet packet analysi s, In: Proc. Mul tim edia Computing 
+and Sys tems, Cent ro Aff ari , Fl orence, It al y, 1999, 1: 703 
+- 708 
+25 Ishii H, Fuk umi M, Akamat su N. Face det ection based on 
+s kin colo r inf ormati on in vis ual s cenes by n eu ral netw orks. In: 
+Proc Sys tems, Man, and Cyb erneti cs , Tok yo, Japan , 1999, 
+5: 350- 355 
+26 Zari t B D, Su per B J, Quek F K H. Com paris on of f ive color 
+models in skin pi xel classif ication. In: Proc Works hop on 
+Recog ni ti on, Analysi s, and Tracking of Faces and Gestures in 
+Real-Time s ys t ems , Co rfu, Greece, 1999. 58- 63 
+27 Craw I, Elli s H, Lis hman J. Aut omatic ext racti on of f ace f eatures. 
+Pat t ern Recogni tion Let ters, 1987, 5( 2): 183- 187 
+28 Yang G Z, Huang T S. Human f ace det ection in a complex 
+backg round. Pat t ern Recog ni ti on, 1994, 27( 1): 53- 63 
+29 Dai Y, Nakano Y. Face-tex ture model bas ed on SGLD and i ts 
+application in face d et ecti on in a color scen e. Pat t ern Recog niti 
+on, 1996, 29( 6): 1007- 1017 
+30 Kouzani A Z, He F, Sam mut K. Comm on sense k nowl edgebased 
+face d et ecti on. In: Proc Conf erence on Int el ligent Engineering 
+Sys t ems , Budapast , Hungary, 1997. 215- 220 
+31 Garcia C, Tzi ri tas G. Face d et ecti on using quanti zed skin color 
+regi ons merging and wavel et pack et anal ysis. IEEE Tran s Multimedia, 
+1999, 1( 3): 264- 277 
+32 Sun Q B, Huang W M, Wu J K. Face det ection based on color 
+and local sym metry inf ormation. In: Proc Conf erence Aut omatic 
+Face and Ges tu re Recogni tion, Nara, Japan, 1998. 130 
+- 135 
+33 Kim S H, Kim H G. Face detection using m ulti-modal inf ormati 
+on. In: Proc Conf erence on Aut omatic Face and Ges tu re 
+Recog ni ti on, Grenoble, France, 2000. 70- 76 
+34 Govindaraju V, Srihari S N, Sh er D B. A compu tati onal model 
+f or face locati on. In: Proc IEE E Conf erence on Compu ter Vision 
+, Osaka, Japan, 1990. 718- 721 
+35 Lam K M. A fas t app roach fo r d et ecting human faces in a complex 
+backg rou nd. In: Proc Symposium on Ci rcui ts and Syst 
+ems , Mont erey, 1998, 4: 85- 88 
+36 Yow K C, Cipolla R. A p robabili st ic f ramew ork f or perceptual 
+grouping of f eatu res f or human face detection. In: Proc Conf 
+erence on Automat ic Face and Gesture Recog ni tion , Ki llingt 
+on, V ermon t, U SA, 1996. 16- 21 
+37 Huang W M , Sun Q B, Lam C P et al . A robus t approach t o 
+f ace and eyes detection f rom images w ith clu tt ered background. 
+In: Proc Conf erence on Pat t ern Recogni tion, Brisbane, 
+Aus t ralia, 1998, 1: 110- 113 
+38 Mogh addam B, Pent land A. Probabi lis tic vis ual l earning f or 
+object representati on. IEEE Trans Pat tern Anal ysi s and Machine 
+Int el li gence, 1997, 19( 7): 696- 710 
+39 Yang M H, Ahu ja N, Kriegman D. Face detect ion using mi xtures 
+of linear s ubs paces. In: Proc Conf erence on Aut omatic 
+Face and Ges tu re Recogni tion, Grenobl e, France, 2000. 70- 
+76 
+40 Ghahramani Z, Hint on G E. The EM algo ri thm f or mixtures of 
+f act or analy zers. Univ ersi t y of Toront o: Technical Report 
+CRG-T R-96-1, 1996. ht tp: / /ww w . gats by. ucl. ac. uk /Hint 
+on / ch ronol ogi cal. h tml 
+5期 梁路宏等: 人脸检测研究综述 457
+
+41 Koh onen T. Sel f-Organizing Maps. In: Sp ringer Seri es in Inf 
+ormati on Sciences, vol 30. Berlin, Heidelberg, New York: 
+Spring er, 2001 
+42 Zh u Y, Schw art z S, Orch ard M. Fast f ace det ection using subs 
+pace dis criminan t w av el et f eatures . In: Proc IEEE Conf erence 
+on Com put er Visi on and Pat tern Recogni tion, Hil ton Head Isl 
+and , South Carolina, U SA, 2000. 636- 642 
+43 Meng L, Nguyen T Q, Cas tanon D A. An image-bas ed 
+Bayesian f ramew ork f or f ace det ection. In: Proc IE EE Conf erence 
+on Comput er Vi sion and Pat tern Recog ni ti on, Hi lt on Head 
+Is land, South Carolina, USA, 2000. 302- 307 
+44 Row ley H A, Baluja S, Kanade T. Rot ation invarian t neu ral 
+netw ork-based face detecti on. Carnegi e Mellon Univ ersi ty, 
+Pi t ts burgh PA: Technical Repo rt CM U-CS-97-201, 1997 
+45 Row ley H A, Balu ja S, Kanade T. Neural n etw ork-based f ace 
+det ecti on. IE EE T rans Patt ern Analysi s and Machin e In tellig 
+ence, 1998, 20( 1): 23- 38 
+46 Row ley H A. Neu ral netw ork-based f ace detecti on. Carnegi e 
+Mel lon Universit y, Pi t ts burgh PA:
+Tech ni cal Report CMUCS-
+99-117, 1999 
+47 Juell P, Marsh R. A hierarchical neural netw ork for human 
+face d et ecti on. Pat tern Recogni tion, 1996, 29( 5): 781- 787 
+48 Ani fan tis D, Dermatas E, Kok kinakis G. A neural netw ork 
+method f or accu rate face det ection on arbi t ray images. In: Proc 
+Conf erence on El ect ronics, Ci rcuit s and Syst ems, Paf os, 
+Cyprus , 1999, 1: 109- 112 
+49 Sch neid erman H, Kanade T. Probabilis tic modeling of local 
+appearance and s patial rel ationships f or ob ject recogniti on. In: 
+Proc IEEE Conf erence on Comp uter Visi on and Pat t ern Recogni 
+tion , San ta Barbara, Calif orni a, 1998. 45- 51 
+50 Sch neid erman H. A s tati st ical approach t o 3D ob ject det ection 
+appli ed to f aces and cars. Carnegi e M ell on Universi ty, Pi tt sburgh 
+PA: Technical Repor t CM U-RI-TR-00-06, 2000 
+51 Weber M et al . View point-inv ariant l earning and det ection of 
+h uman h ead s. In: Proc Conf erence on Aut omatic Face and 
+Ges ture Recogniti on, Grenoble, France, 2000 
+52 Nefi an A V, Hayes M H. Face det ection and recognit ion using 
+hidden Markov model s. In: Proc IEEE Conf erence on Image 
+Proces sing , Chicag o, 1998. 141- 145 
+53 Nefi an A V , Hayes M H. An emb edden HM M based approach 
+f or f ace det ection and recog ni tion. In: Proc IEEE Conf erence 
+on Acous tics, Speech , and Sig nal Processing, Phoenix, Arizona, 
+1999, 6: 3553- 3556 
+54 Boser B E, Guyon IM , Vapnik V N. A t raining algo ri thm f or 
+opt imal margin classi fier. In: Proc of the 5th ACM Worksh op 
+on Compu tati onal Learning Th eory, Pi t ts burgh , 1992. 144- 
+152 
+55 Gunn S R. Sup port v ector machines f or cl as sifi cati on and regression. 
+Image Speech and Int el ligent Syst em s Research 
+group , Universi ty of Southapt on: IS IS Tech ni cal Report , ISIS- 
+1-98, 1998 
+56 Osu na E, Freund R, Gi rosi F. Training suppo rt v ecto r machines: 
+An applicat ion to f ace detecti on. In: Proc Compu ter 
+Visi on and Pat t ern Recog ni ti on, Puert o Ri co, 1997. 130- 136 
+57 Scholk opf B et a l. Fast app roximation of sup port v ecto r kernel 
+expansions , and an Int erp ret ation of Clu st ering as Approximati 
+on in Feature Spaces. In: Levi P, Sch an z M , Ahl ers R-J, 
+May F ed s. M ust ererkennung. Berlin: Spring er-Verlag, 1998. 
+124- 132. h t tp: / /sv m. fi rst . gmd. de /publi cation s. html 
+58 Plat t J C. Sequential minimal optimi zati on: A f ast alg ori thm 
+f or t raining s upport v ecto r machines. MSR: Tech ni cal Report 
+M SR-T R-98-14, 1998 
+59 Ai Hai-Zhou, Liang Lu-Hong, Xu Guang-You. Face detecti on 
+in t emplat e matching cons t rained s ubspace. In: Proc Conf erence 
+on Artif ici al Int el ligence, Las Vegas , Nevada, USA, 
+2001, II: 603- 608 
+60 Liang Lu-Hong, Ai Hai-Zh ou, Xu Guang-You, Zh ang Bo. 
+Face det ection based on t em pl ate mat ching and neural netw ork 
+veri fication. ACT A Elect ronica Sinica, 2001, 29( 6): 744- 747 
+( in Chin es e) 
+(梁路宏, 艾海舟, 徐光,张　钹. 基于多关联模板匹配与人
+工神经网确认的人脸检测,电子学报, 2001, 29( 6): 744- 747) 
+61 Loui A C, Judice C N, Liu S. An image database f or b ench - 
+marking of au tomatic f ace detect ion and recog ni ti on algorithms. 
+In: Proc IEE E Conf erence on Image Processing, 
+Chicag o, 1998 
+62 Viola Paul , Jones Mich ael. Rapid object det ection using a 
+boos ted cas cade of simpl e featu res. In: Proc IEEE Conf erence 
+on Com put er Visi on and Pat tern Recog ni ti on, Kauai , Haw aii , 
+USA, 2001 
+LIANG Lu-Hong, male, bo rn in 
+1973, Ph. D. candida te a t Computer Depar 
+tment o f Tsing hua Univ ersity , resear 
+ch to pic: face detectio n. 
+AI Hai-Zhou, ma le , bor n in 1964, Ph. D. , associa te 
+pro fesso r a t Computer Depar tment of Tsinghua Univ ersity, 
+r esea rch inter ests include computer visio n, patter n recog nition 
+and mobile ro bo tics. 
+XU Guang-You, ma le, bo rn in 1940, pro fesso r a t Computer 
+Depar tment o f Tsinghua Univ er sity , Ph. D. supe rviso 
+r, r esea rch interests include computer vision, HCI and 
+multimedia techno lo gy. 
+ZHANG Bo, male, bor n in 1935, member o f Chinese 
+Academy o f Sciences, pr ofessor a t Computer Depar tment of 
+Tsinghua Univ er sity , Ph. D. supe rviso r , research interests 
+include theo ry and applica tio n o f ar tificial intellige nce. 
+458 计　　算　　机　　学　　报　2002年
+

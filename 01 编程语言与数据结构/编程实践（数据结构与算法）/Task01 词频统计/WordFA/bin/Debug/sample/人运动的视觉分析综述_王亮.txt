@@ -1,0 +1,1104 @@
+第25卷　第3期
+2002年3月
+计　　算　　机　　学　　报
+CHIN ESE J. COM PU TERS 
+Vo l. 25 No. 3 
+Mar. 2002 
+　
+人运动的视觉分析综述
+王　亮　胡卫明　谭铁牛
+(中国科学院自动化研究所模式识别国家重点实验室　北京100080) 
+收稿日期: 2001-03-14; 修改稿收到日期: 2001-11-10.本课题得到国家自然科学基金( 69825105, 60105002)及中国科学院自动化研究所
+创新基金( 1M 01J02)资助. 王　亮,男, 1977年生,博士研究生,主要研究方向是模式识别、计算机视觉、数字图像分析和处理、视觉监控
+等. E-mai l: { lw ang , wmh u, tnt }@ nlpr. i a. ac. cn. 胡卫明,男, 1968年生,博士,副研究员,主要的研究方向是动态场景的视觉监控、神经
+网络、图像处理、计算机图形学等.谭铁牛,男, 1964年生,博士,研究员, 博士生导师,主要的研究方向是语音与图像处理、计算机视觉、模
+式识别、多媒体与机器人等. 
+摘　要　目前,人运动的视觉分析是计算机视觉领域中最活跃的研究主题之一,其核心是利用计算机视觉技术从
+图像序列中检测、跟踪、识别人并对其行为进行理解与描述,它在虚拟现实、视觉监控、感知接口等领域均有着广阔
+的应用前景.人运动的视觉分析系统一般遵从下述的处理过程: ( 1)运动检测, ( 2)运动目标分类, ( 3)人的跟踪, ( 4) 
+行为理解与描述.该文将重点从此四个方面回顾人运动分析的发展水平和常用的处理方法,并对研究难点及未来
+的发展趋势作了较为详细的分析. 
+关键词　人的运动,视觉分析,运动检测,跟踪,行为理解
+中图法分类号: TP391 
+A Survey of Visual Analysis of HumanMotion 
+WAN G Liang　HU Wei-Ming TAN Tie-Niu 
+( Nat ional Laboratory of Pat tern Recog nition , Inst itute of Automat ion , Chinese Academy of Sciences , Bei jing 100080) 
+Abstract　Visual analy sis of human mo tio n is current ly o ne of the most activ e research to pics in 
+the domain of computer vi sion. This st rong interest i s driv en by a wide spectrum of promising applicatio 
+ns in many a reas such as v ir tua l reali ty, smart surv eillance, perceptual user interface, 
+content-based imag e storag e and ret rieval , a thletic performa nce analy sis, etc. Human motion 
+analysis aims at at tempting to detect , t rack a nd identi fy people, and more generally , to understand 
+huma n behavio rs, f rom image sequences invo lv ing humans. This paper prov ides a comprehensiv 
+e surv ey o f recent develo pments of visio n-based human mo tio n a nalysi s, and i t keeps up 
+w ith the latest research ranging mainly from 1995 to 2000. Dif ferent f rom prev ious review s, o ur 
+emphasi s is o n fo ur majo r i ssues inv olved in a g eneral f ramew o rk of huma n mo tion analy si s, 
+namely mo tio n detectio n, mov ing object classi fica tion, huma n t racking , and activi ty recog nition 
+and description. Thi s paper focuses mo re o n ov erall methods a nd general characteri stics inv olved 
+in the abov e four issues, so each i ssue is accordingly divided into sub-processes a nd categ ories of 
+appro aches so as to provide mo re detai led di scussions. At fi rst, w e int roduce some potential applicatio 
+ns of huma n mo tio n analysis. Then, va rious exi sting metho ds fo r each key issue a re clea rly 
+discussed to examine the sta te-of-the-art in human mo tio n a nalysi s. Mo tion detection prov ides 
+a focus of at tentio n fo r later processes because o nly tho se changing pixels need be considered. 
+Three types of techniques a re addressed, namely backg round subtractio n, tempo ral differencing 
+and optical flow. As far as mov ing object classi fica tion is co ncer ned, shape-based o r motionbased 
+methods are presented. Tracking is equivalent to establishing co rrespo ndence of imag e fea
+
+tures betw een co nsecutiv e f rames, and fo ur approaches studied intensively in past wo rk are described: 
+model-based, activ e-conto ur-based, region-based a nd feature-based. The task of recogni 
+zing human activi ty in image sequences assumes that fea ture t racking fo r reco gni tio n has been 
+accomplished. Tw o ty pes of techniques, templa te matching and state-space approaches, are review 
+ed. Altho ugh a large amount of w o rk has been do ne in the field o f huma n mo tio n analy si s, 
+many issues still remain open such as segmentatio n, modeling and occlusion ha ndling. At the end 
+o f thi s surv ey , some detailed di scussions o n research challeng es and future di rectio ns in human 
+motio n analysi s a re al so provided. Past achievements show to some ex tent tha t vi sion sy stems 
+hav e considerable abili ty to cope wi th complex human mov ements, so w e are looking fo rwa rd to 
+more new techniques to devo te thi s field. 
+Keywords　human mo tio n, vi sual analysis, motion detection, tracking, behavior understa nding 
+1　引　言
+人运动的视觉分析[1 ]是近年来计算机视觉领域
+中备受关注的前沿方向,它从包含人的图像序列中
+检测、识别、跟踪人并对其行为进行理解和描述,属
+于图像分析和理解的范畴. 从技术角度而言,人的运
+动分析的研究内容相当丰富,主要涉及到模式识别、
+图像处理、计算机视觉、人工智能等学科知识;同时, 
+动态场景中运动的快速分割、人体的非刚性运动、人
+体自遮挡和目标之间互遮挡的处理等也为人的运动
+分析研究带来了一定的挑战. 
+由于人的运动分析在高级人机交互、安全监控、
+视频会议、医疗诊断及基于内容的图像存储与检索
+等方面具有广泛的应用前景和潜在的经济价值,从
+而激发了国内外广大科研工作者及相关商家的浓厚
+兴趣,尤其在美国、英国等国家已经开展了大量相关
+项目的研究. 例如, 1997年美国国防高级研究项目
+署( Defense Adv anced Research Pro jects Ag ency ) 
+设立了以卡内基梅隆大学( Ca rnegie Mellon Universi 
+ty )为首、麻省理工学院( Massachusett s Institute 
+of Techno log y)等高校参与的视觉监控重大项
+目V SAM ( Vi sual Surv ei llance And Mo ni to ring 
+) [2 ] ,主要研究用于战场及普通民用场景进行监
+控的自动视频理解技术;实时视觉监控系统W4 [3 ]不
+仅能够定位人和分割出人的身体部分,而且通过建
+立外观模型来实现多人的跟踪,并可以检测人是否
+携带物体等简单行为; 英国的雷丁大学( Univ ersi ty 
+o f Reading ) [4 ]已开展了对车辆和行人的跟踪及其交
+互作用识别的相关研究; IBM与Microsof t等公司
+也正逐步将基于视觉的手势识别接口应用于商业领
+域中[5— 6 ] . 当前,国际上一些权威期刊如I JCV ( Inter 
+natio nal Jo ur nal o f Computer Vi sion ) , CV IU 
+( Computer Vi sion and Image Understanding ) , PAMI( 
+IEEE Trans o n Pat tern Analysis and Machine 
+Intelligence) , IV C ( Imag e and Vi sion Computing ) 
+和重要的学术会议如ICCV ( Internatio nal Co nference 
+on Computer Vi sion) , CV PR( IEEE Computer 
+Society Conference o n Computer Vision a nd Patter 
+n Reco gni tio n) , ECCV ( European Co nference on 
+Computer Vi sion ) , IWV S ( IEEE International 
+Wo rksho p on Visual Surv eillance)等将人的运动分
+析研究作为主题内容之一,为该领域的研究人员提
+供了更多的交流机会. 
+基于视觉的人的运动分析在最近几年里取得了
+一定的进展,如Agga rwal与Cai的文章[7 ]从人体部
+分的运动分析、单一视角或多摄像机下人的运动跟
+踪及图像序列中人的行为识别三个方面对研究现状
+作了回顾. 该文覆盖了1998年以前的研究工作,但
+缺乏研究难点分析及未来发展方向的介绍; Gav rila
+[1 ]从局限于人或者手的运动的研究工作出发, 重
+点回顾了目前所采用的不同分析方法(拥有明确形
+状模型的二维方法、没有明确形状模型的二维方法
+及三维方法) . 同样地,该文也缺乏具体的研究难点
+分析,同时也仅仅提出三维跟踪和行为识别为未来
+的研究方向; Pent land[8 ]围绕人脸识别、视觉监控、
+三维人的跟踪、智能房间/感知接口四个问题介绍了
+“人的观察” ( looking at people)领域目前的发展水
+平和常用的数学工具,并简单总结了一些研究挑战
+和机遇. 
+上述三篇文献的共同缺点是主要从跟踪和行为
+识别上加以回顾,缺少人运动分析中运动分割、目标
+226 计　　算　　机　　学　　报　2002年
+
+分类、行为描述等的具体介绍,同时文献的阐述由于
+没有明确的分类而显得混乱.与以上不同的是,为了
+使广大相关科研人员对人的运动分析领域的研究现
+状有着更加清晰明确的了解,本文将特地从人的运
+动分析系统的一般处理框架, 即运动检测、目标分
+类、人的跟踪、行为理解与描述出发,分层次地回顾
+了从低级、中级处理到高级处理各个阶段的目前发
+展水平; 为避免对于每篇论文的详细总结,我们重点
+回顾了各个处理阶段常用的处理方法,并将每个阶
+段相应地划分为不同方法的子类以便于讨论;最后, 
+我们对研究难点作了一定的分析,同时对未来的发
+展趋势作了较为详尽的总结和阐述. 
+2　典型应用
+人运动的视觉分析研究具有广泛的应用前景, 
+Gav rila[1 ]总结了它的一些主要应用领域,下面据此
+对其典型应用做出进一步的介绍. 
+( 1)智能监控( smart surv eilla nce) 
+智能监控[9, 10 ]系统的需求主要来自那些对安全
+要求敏感的场合,如银行、商店、停车场等. 目前监控
+摄像机在商业应用中已经普遍存在,但并没有充分
+发挥其实时主动的监督作用,因为它们通常是将摄
+像机的输出结果记录下来,当异常情况(如停车场中
+的车辆被盗)发生后,保安人员才通过记录的结果观
+察发生的事实,但往往为时已晚. 而我们需要的监控
+系统应能够每天连续24小时的实时监视,并自动分
+析摄像机捕捉的图像数据,当盗窃发生或发现到具
+有异常行为的可疑的人时,系统能向保卫人员准确
+及时地发出警报,从而避免犯罪的发生,同时也减少
+了雇佣大批监视人员所需要的人力、物力和财力的
+投入;在访问控制( access co nt ro l)场合,可以利用人
+脸或者步态的跟踪识别技术[1 1— 16]以便确定来人是
+否有进入该安全领域的权利; 另外,人的运动分析在
+自动售货机、ATM、交通管理、公共场所行人的拥挤
+状态分析[ 17, 18]及商店中消费者流量统计等监控方
+面也有着相应的应用. 
+( 2)感知接口( perceptua l interface) 
+在高级用户接口应用领域中,我们希望未来的
+机器能像人一样与我们更加容易和便捷地交流,如
+手势驱动控制、手语翻译等. 人与人之间的信息交流
+主要是依靠语言,并适当结合手势、身体姿势和面部
+表情等,因此视觉信息可以作为语音和自然语言理
+解的有效补充来完成更加智能的人机交互. 这就要
+求未来的计算机必须具备感知外部环境的能力,即
+代替传统的键盘或鼠标输入模式、独立地提取周围
+环境的重要信息(如检测到人的存在等) ; 更进一步
+的能力是进行人的识别和行为理解,结合面部表情、
+身体姿势和手势等[ 19— 22]的分析来与人进行相应的
+交流. 对于机场等高噪声的场合,基于视觉的高级用
+户接口能够提供比语音识别更加准确的信息输
+入[23 ] . 
+( 3)运动分析( mo tion analysis) 
+分割图像中的人体部分并在图像序列中跟踪分
+析感兴趣的关节运动,对于建立人体的几何模型、解
+释人体的运动行为机制从而提高它的运动性能有着
+积极的推动作用,这可以应用于体育运动、舞蹈等训
+练中; 传统的步态分析是肌电图学、关节动力学的研
+究范畴,而目前的医学步态分析[ 24— 26]是一个旨在提
+供诊断和治疗支持的研究领域,它可以提供人体正
+常步态建模的线索,有助于开发生物反馈系统来分
+析病人的步态,判断其腿部受伤情况或者畸形程度, 
+从而做出积极的整形补偿或有效的治疗; 当然,步态
+分析也可以作为独特的生物特征用于远距离的身份
+识别[16 ] ; 另外,人的运动分析和行为识别也可以用
+于从体育活动数据库中进行基于内容的快速搜
+索等.
+( 4)虚拟现实(vi rtual reali ty ) 
+目前许多电脑游戏中人的形体、运动和行为交
+互的设计逼真性实际得益于物理空间中人的运动分
+析,包括人体模型和关节运动机制的获取及姿势的
+恢复等; 基于互联网络的交互式空间的开发刚刚起
+步,如虚拟聊天室,它在通过文本交流的同时可以通
+过二维图标来导航用户,如果增加手势、头的姿势、
+面部表情等线索,将会给参与者们提供更加丰富的
+交互形式; 另外,人的运动分析在视频会议、人物动
+画、虚拟工作室等其它虚拟现实场合也有着相当广
+泛的应用. 
+3　研究现状
+人运动的视觉分析主要是针对包含人的运动图
+像序列进行分析处理,它通常涉及到运动检测、目标
+分类、人的跟踪及行为理解与描述几个过程,其一般
+性处理框架如图1所示. 其中,运动检测、目标分类、
+人的跟踪属于视觉中低级和中级处理部分( lowlev 
+el a nd intermedia te-lev el vi sion) ,而行为理解和
+描述则属于高级处理( high-level vision) . 当然, 它
+3期 王　亮等: 人运动的视觉分析综述 227
+
+们之间也可能存在交叉(比如有时跟踪过程中运动
+检测的使用) .下面将重点从处理方法入手回顾这几
+个方面国内外的发展现状. 
+3. 1　运动检测
+运动检测的目的是从序列图像中将变化区域从
+背景图像中提取出来. 运动区域的有效分割对于目
+标分类、跟踪和行为理解等后期处理非常重要,因为
+以后的处理过程仅仅考虑图像中对应于运动区域的
+像素. 然而,由于背景图像的动态变化, 如天气、光
+照、影子及混乱干扰等的影响,使得运动检测成为一
+项相当困难的工作. 下面归纳出目前几种常用的
+方法.
+( 1)背景减除( backg ro und subt ractio n) 
+背景减除[3, 27— 33 ]方法是目前运动分割中最常
+用的一种方法,它是利用当前图像与背景图像的差
+分来检测运动区域的一种技术. 它一般能够提供最
+完全的特征数据,但对于动态场景的变化,如光照和
+外来无关事件的干扰等特别敏感. 最简单的背景模
+型是时间平均图像,大部分研究人员目前都致力于
+开发不同的背景模型,以期减少动态场景变化对于
+运动分割的影响. 例如, Ha ri taog lu等[3 ]利用最小、
+最大强度值和最大时间差分值为场景中每个像素进
+行统计建模,并且进行周期性的背景更新; McKenna
+等[27 ]利用像素色彩和梯度信息相结合的自适应
+背景模型来解决影子和不可靠色彩线索对于分割的
+影响; Karmann与Brandt[ 28]、Kilg er[29 ]采用基于卡
+尔曼滤波( Kalman filtering )的自适应背景模型以
+适应天气和光照的时间变化; Stauf fer 与Grimson
+[ 30]利用自适应的混合高斯背景模型(即对每个
+像素利用混合高斯分布建模) ,并且利用在线估计来
+更新模型,从而可靠地处理了光照变化、背景混乱运
+动的干扰等影响. 
+( 2)时间差分( tempo ral dif ference) 
+时间差分[34, 35 ]方法是在连续的图像序列中两
+个或三个相邻帧间采用基于像素的时间差分并且阈
+值化来提取图像中的运动区域. 例如, Lipton等[34 ] 
+利用两帧差分方法从实际视频图像中检测运动目
+标,进而用于目标的分类与跟踪;一个改进的方法是
+利用三帧差分代替两帧差分,如V SAM[2 ]开发了一
+种自适应背景减除与三帧差分相结合的混合算法, 
+它能够快速有效地从背景中检测出运动目标. 时间
+差分运动检测方法对于动态环境具有较强的自适应
+性,但一般不能完全提取出所有相关的特征像素点, 
+在运动实体内部容易产生空洞现象. 
+( 3)光流( optica l f low ) 
+基于光流方法[26, 36, 37 ]的运动检测采用了运动
+目标随时间变化的光流特性,如Meyer 等[26 ]通过计
+算位移向量光流场来初始化基于轮廓的跟踪算法, 
+从而有效地提取和跟踪运动目标. 该方法的优点是
+在摄像机运动存在的前提下也能检测出独立的运动
+目标.然而,大多数的光流计算方法相当复杂,且抗
+噪性能差,如果没有特别的硬件装置则不能被应用
+于全帧视频流的实时处理. 关于光流更加详细的讨
+论可参见Barro n等的文章[ 36] . 
+当然,在运动变化检测中还有一些其它的方法, 
+如Friedman 与Russell[38 ]利用扩展的EM[39 ] ( Expectation 
+Max imi za tion)算法,为每个像素建立了混
+合高斯分类模型,该模型可以自动更新,并能自适应
+地将每个像素分类为背景、影子或者运动前景,在目
+标运动速度缓慢的情况下亦能较好地完成运动区域
+的分割, 同时可以有效地消除影子的影响; 另外, 
+St ringa[40 ]也提出了一种新颖的基于数学形态学的
+场景变化检测算法,在变化的环境条件下获得了相
+对稳定的分割效果. 
+3. 2　目标分类
+目标分类的目的是从检测到的运动区域中将对
+应于人的运动区域提取出来. 不同的运动区域可能
+对应于不同的运动目标,比如交通道路上监控摄像
+机所捕捉的序列图像中可能包含行人、车辆及其它
+诸如飞鸟、流云、摇动的树枝等运动物体,为了便于
+进一步对行人进行跟踪和行为分析,运动目标的正
+确分类是完全必要的.注意,这个步骤在一些情况下
+可能是不必要的(比如已经知道场景中仅仅存在人
+的运动时) .下面仅给出两种常用的目标分类方法. 
+( 1)基于形状信息的分类( shape-based classification) 
+228 计　　算　　机　　学　　报　2002年
+
+基于形状信息的分类是利用检测出的运动区域
+的形状特征进行目标分类的方法. 例如, V SAM[2 ]采
+用区域的分散度、面积、宽高比等作为特征,利用三
+层神经网络方法将运动目标划分为人、人群、车和背
+景干扰; Lipto n等[34 ]利用分散度和面积信息对二维
+运动区域进行分类,主要是区分人、车及混乱扰动, 
+时间一致性约束使其分类更加准确; Kuno 与
+Wa tanabe[41 ]使用简单的人体轮廓模式的形状参数
+从图像中检测运动的人. 
+( 2)基于运动特性的分类( mo tio n-based classificatio 
+n) 
+基于运动特性的分类是利用人体运动的周期性
+进行目标分类的方法[ 42— 44 ] .例如, Cut ler与Dav is[ 42] 
+通过跟踪感兴趣的运动目标,计算出目标随着时间
+变化的自相关特性,而人的周期性运动使得其自相
+关也是周期性的,因此通过时频化方法分析目标是
+否存在周期性的运动特性而将人识别出来; Lipton[43 ] 
+通过计算运动区域的残余光流( residual f low )来分
+析运动实体的刚性和周期性,非刚性的人的运动相
+对于刚性的车辆运动而言具有较高的平均残余光
+流,同时它也呈现了周期性的运动特征,据此可以将
+人区分出来. 
+上述两种常用的目标分类方法有时可以结合起
+来使用[3 ] ,甚至可以考虑运动物体色彩或速度等特
+征, 以期得到更加准确的分类结果. 另外, Stauffer
+[ 45]提出了利用时间共生矩阵进行分层分类的方
+法,该方法不仅可以用来区分物体,还可以用来区分
+行为. 
+3. 3　人的跟踪
+跟踪等价于在连续的图像帧间创建基于位置、速
+度、形状、纹理、色彩等有关特征的对应匹配问题,常
+用的数学工具有卡尔曼滤波[46 ] ( Kalman fi ltering )、
+Co ndensation算法[47 ]及动态贝叶斯网络[ 48] (dynamic 
+Bay esia n netwo rk)等.其中Kalma n滤波是基于高
+斯分布的状态预测方法, 不能有效地处理多峰模式
+( multi-mode)的分布情况; Co ndensa tion算法是以因
+子抽样为基础的条件密度传播方法,结合可学习的动
+态模型,可完成鲁棒的运动跟踪. 目前,就跟踪对象而
+言,有跟踪如手、脸、头、腿等身体部分[12, 21, 22, 50— 54 ]与
+跟踪整个人体的[55— 83 ] ; 就跟踪视角而言,有对应于
+单摄像机的单一视角[ 49— 66]、对应于多摄像机的多视
+角[67— 71 ]和全方位视角[72 ] ; 当然还可以通过跟踪空间
+(二维或三维)、跟踪环境(室内或户外)、跟踪人数
+(单人、多人、人群)、摄像机状态(运动或固定)等方
+面进行分类.下面仅依据不同的跟踪方法来加以分
+类介绍. 
+( 1)基于模型的跟踪( mo del-based t racking ) 
+传统的人体表达方法有如下三种[ 81]: ( a)线图
+法( stick figure) . 人运动的实质是骨骼的运动,因此
+该表达方法将身体的各个部分以直线来近似,例如, 
+Karaulov a[66 ]建立了人体运动学的分层模型, 用于
+单目视频序列中人体的跟踪. ( b )二维轮廓( 2-D 
+co ntour ) . 该人体表达方法的使用直接与人体在图
+像中的投影有关,如Ju等[ 81]提出的纸板人模型,它
+将人的肢体用一组连接的平面区域块来表达,该区
+域块的参数化运动受关节运动( ar ticulated mov ement 
+)的约束,该模型被用于关节运动图像的分析; 
+Niyogi与Adelso n[65 ]利用时空切片方法进行人的跟
+踪: 首先观察由人的下肢轨迹所产生的时空交织模
+式,然后在时空域中定位头的运动投影,接下来识别
+其它关节的轨迹,最后利用这些关节轨迹勾画出一
+个行人的轮廓. ( c)立体模型(v olumet ric model ) . 它
+是利用广义锥台、椭圆柱、球等三维模型来描述人体
+的结构细节,因此要求更多的计算参数和匹配过程
+中更大的计算量. 例如, Rohr[82 ]使用14个椭圆柱体
+模型来表达人体结构,坐标系统的原点被定位在躯
+干的中心,目的是利用该模型来产生人行走的三维
+描述; Wach ter 与Nag el[ 63]利用椭圆锥台建立三维
+人体模型,通过在连续的图像帧间匹配三维人体模
+型的投影来获得人运动的定量描述.其中,它利用了
+迭代的扩展卡尔曼滤波方法,结合边缘、区域信息及
+身体解析约束确定的身体关节运动的自由度,实现
+单目图像序列中人的跟踪. 
+( 2)基于区域的跟踪( regio n-based t racking ) 
+基于区域的跟踪方法目前已有较多的应用,例
+如, Wren等[31 ]利用小区域特征进行室内单人的跟
+踪,文中将人体看作由头、躯干、四肢等身体部分所
+对应的小区域块所组成,利用高斯分布建立人体和
+场景的模型,属于人体的像素被规划于不同的身体
+部分,通过跟踪各个小区域块来完成整个人的跟踪. 
+基于区域跟踪的难点是处理运动目标的影子和遮
+挡,这或许可利用彩色信息以及阴影区域缺乏纹理
+的性质来加以解决, 如McKenna 等[27 ]首先利用色
+彩和梯度信息建立自适应的背景模型,并且利用背
+景减除方法提取运动区域,有效地消除了影子的影
+响;然后,跟踪过程在区域、人、人群三个抽象级别上
+执行,区域可以合并和分离,而人是由许多身体部分
+区域在满足几何约束的条件下组成的,同时人群又
+3期 王　亮等: 人运动的视觉分析综述 229
+
+是由单个的人组成的,因此利用区域跟踪器并结合
+人的表面颜色模型,在遮挡情况下也能够较好地完
+成多人的跟踪. 
+( 3)基于活动轮廓的跟踪(activ e co ntour based 
+t racking ) 
+基于活动轮廓的跟踪[75— 80 ]思想是利用封闭的
+曲线轮廓来表达运动目标,并且该轮廓能够自动连
+续地更新.例如, Paragios 与Deriche[76 ]利用短线程
+的活动轮廓,结合Level Set理论在图像序列中检测
+和跟踪多个运动目标; Peterf reund[ 78]采用基于卡尔
+曼滤波的活动轮廓来跟踪非刚性的运动物体; Isa rd 
+与Blake[ 79]利用随机微分方程去描述复杂的运动模
+型,并与可变形模板相结合应用于人的跟踪.相对于
+基于区域的跟踪方法,轮廓表达有减少计算复杂度
+的优点,如果开始能够合理地分开每个运动目标并
+实现轮廓初始化的话,既使在部分遮挡存在的情况
+下也能连续地进行跟踪,然而初始化通常却是很困
+难的.
+( 4)基于特征的跟踪( feature-ba sed t racking ) 
+基于特征的跟踪包括特征提取和特征匹配两个
+过程. Polana与Nelson的文章[83 ]就是一个很好的
+点特征跟踪的例子,文中将每个行人用一个矩形框
+封闭起来,封闭框的质心被选择作为跟踪的特征; 在
+跟踪过程中若两人出现相互遮挡时,只要质心的速
+度能被区分开来,跟踪仍能被成功地执行; 该方法的
+优点是实现简单,并能利用人体运动来解决遮挡问
+题,但是它仅仅考虑了平移运动,如果结合纹理、彩
+色及形状等特征可能会进一步提高跟踪的鲁棒性. 
+另外, Seg en与Ping ali的跟踪系统[57 ]使用了运动轮
+廓的角点作为对应特征,这些特征点采用基于位置
+和点的曲率值的距离度量在连续帧间进行匹配. 以
+卡尔曼滤波形式的点、线特征的跟踪技术在计算机
+视觉领域中已被很好地开发,如Jang 与Choi[ 54]利
+用区域的形状、纹理、色彩和边缘特征信息建立了活
+动模板,结合卡尔曼滤波的预测方法,使特征匹配能
+量函数最小化来完成运动目标的跟踪过程,该活动
+模型对于非刚性物体的跟踪具有很好的自适应性. 
+需要指出,基于多摄像机的人的运动跟踪也得
+到了一定的研究, 如Ut sumi[69 ]利用多摄像机对人
+进行跟踪,通过选择最好的视点来解决人与人之间
+的互遮挡和自身遮挡问题; Cai等[70 ]提出了在不同
+摄像机之间进行目标匹配的概率方法,并且对相邻
+摄像机之间的自动切换问题作了探讨.不过,目前有
+关多摄像机研究的文章并不是很多. 
+3. 4　行为理解与描述
+运动检测、目标分类与人的跟踪是人运动分析
+中研究较多的三个问题,而人的行为理解与描述是
+近年来被广泛关注的研究热点,它是指对人的运动
+模式进行分析和识别,并用自然语言等加以描述. 行
+为理解可以简单地认为是时变数据的分类问题,即
+将测试序列与预先标定的代表典型行为的参考序列
+进行匹配. 由此可见,行为理解的关键问题是如何从
+学习样本中获取参考行为序列,并且学习和匹配的
+行为序列能够处理在相似的运动模式类别中空间和
+时间尺度上轻微的特征变化. 
+匹配时变数据的技术通常有( a)动态时间规整
+DTW[85 ] ( Dy namic Time Warping ) . DTW 具有概
+念简单、算法鲁棒的优点,早期被广泛应用于语音识
+别中, 并且最近才被用于匹配人的运动模式[86, 87 ]; 
+对DTW而言,既使测试序列模式与参考序列模式
+的时间尺度不能完全一致,只要时间次序约束存在, 
+它仍能较好完成测试序列和参考序列之间的模式匹
+配. ( b )隐马尔可夫模型HMMs[88 ] ( Hidden Markov 
+Models) . HMMs是更加成熟的匹配时变数据的技
+术,它是随机状态机器. HMMs的使用涉及到训练
+和分类两个阶段,训练阶段包括指定一个隐马尔克
+夫模型的隐藏状态数,并且优化相应的状态转换和
+输出概率以便于产生的输出符号与在特定的运动类
+别之内所观察到的图像特征相匹配. 对于每一个运
+动类别,一个HMM是必须的. 匹配阶段涉及到一
+个特定的HMM 可能产生相应于所观察图像特征
+的测试符号序列的概率计算. HMMs在学习能力和
+处理未分割的连续数据流方面比DTW有更好的优
+越性,当前被广泛应用于人的运动模式匹配中[89— 92 ] . 
+( c)神经网络NN( N eural Netw o rk ) . 它同样也是目
+前比较感兴趣的匹配时变数据的方法,如Guo等[93 ] 
+用其分析人的运动模式; Ro senblum等[94 ]使用径向
+基函数网络从运动中识别人的情感. 
+对于人的行为识别而言,目前主要有下述两种
+方法.
+( 1) 模板匹配方法( templa te matching ) 
+采用模板匹配技术[22, 83, 95, 96 ]的行为识别方法
+首先将图像序列转换为一组静态形状模式,然后在
+识别过程中和预先存储的行为标本相比较. 例如, 
+Bo bick与Davi s[95 ]采用运动能量图像MEI( Motion 
+Energ y Imag es)和运动历史图像MHI( Mo tion Histo 
+ry Imag es)来解释图像序列中人的运动. 序列中
+的运动图像首先经差分运算并二值化; 而后这些包
+230 计　　算　　机　　学　　报　2002年
+
+含运动区域的二值化运动图像随着时间累加形成
+MEI; 最后MEI增强为MHI, MHI中每个像素的值
+与该位置的持续运动时间成比例. 每个行为由不同
+视角下图像序列的M EI和M HI所组成,从中可以
+提取出基于矩的行为特征用于识别阶段的模板匹
+配. Po lana 与Nelso n[83 ]利用二维网格的特征进行人
+的运动识别,首先计算连续帧间的光流场,并将每个
+光流帧在空间栅格上沿X 和Y 方向分解,每个单元
+格的幅度被累加,从而形成一高维特征向量用于识
+别; 为了归一化运动的持续时间,他们假设人的运动
+是周期性的,并将整个序列分解为该行为的许多循
+环过程; 最后,采用最近邻算法进行行为识别.模板
+匹配技术的优点是计算复杂度低、实现简单,然而它
+对于噪声和运动时间间隔的变化是敏感的. 
+( 2) 状态空间方法( state space approaches) 
+基于状态空间模型[8 9— 92, 9 7— 98]的方法定义每个
+静态姿势作为一个状态,这些状态之间通过某种概
+率联系起来. 任何运动序列可以看作为这些静态姿
+势不同状态之间的一次遍历过程,在这些遍历期间
+计算联合概率,其最大值被选择作为分类行为的标
+准. 目前,状态空间模型已经被广泛应用于时间序列
+的预测、估计和检测,最有代表性的是HMMs. 每个
+状态中可用于识别的特征包括点、线或二维小区域. 
+例如, Yamato 等[91 ]利用二维小区域块的运动、彩
+色、纹理等特征进行人的行为识别: 人的运动区域块
+的网格特征被用作学习和识别的低级特征; 学习是
+利用HMMs来为每个类别产生符号模式; 模型参数
+的优化是利用Baum-Welch 算法实现的; 识别是以
+给定序列图像下前向计算( forw ard calculatio n)的
+结果而确定的. Breg ler[97 ]基于人体动力学在不同抽
+象等级的统计分解提出了一个综合性的网络用来识
+别人的运动: 识别过程起始于低级处理,基于运动、
+彩色相似度和空间接近程度等的小区域块以混合高
+斯模型来估计,不同的身体部分区域在图像序列中
+被跟踪; 在中级处理阶段,具有一致运动特性的区域
+被匹配为动力学系统中的简单运动(如行走被认为
+是两个简单运动的组成,一个是腿的支撑,一个是腿
+在空中的摆动) ; 在高级阶段, HMMs被用来作为这
+些中级动力系统的混合模型来表达复杂的运动,识
+别过程通过最大化HMMs的后验概率来完成. 状态
+空间方法虽然能克服模板匹配的缺点,但通常涉及
+到复杂的迭代运算. 
+人的行为的语义描述[99— 102 ]近来得到了一定的
+研究,它是应用自然语言的概念,选择一组运动词语
+或短句来报告场景中运动目标的行为.比如Ko jima 
+等[100 ]提出了一种新的方法,用于产生实时视频图像
+中人的行为的自然语言描述: 首先,从每帧图像中提
+取出代表整个人体的头部区域,并利用基于模型的
+方法,估计其三维姿势和位置; 然后,这些参数轨迹
+被分解为单一运动的基元,评估每个基元的诸如姿
+势和位置的变化度、与环境中其它一些目标的相对
+距离等概念特征,并且选择最合适的词语和其它语
+义元素; 最后,利用机器翻译技术,产生人行为描述
+的自然语言文本. Remagnino 等[101 ]提出了一个包含
+行人与车辆的基于事件的视觉监控系统,该系统提
+供了三维场景中目标动态活动的文字性描述. 
+相比于车辆运动而言,图像序列中人的运动描
+述是更加复杂的;而且,关于行为、事件、状态有着不
+同的概念,因此如何选择有效充分的表达方式来传
+达场景的内容是很困难的. 目前人的行为描述还只
+局限于简单的语义解释,对复杂场景中人行为的语
+义描述工作还相当艰巨. 
+4　难点与发展趋势
+尽管人的运动分析研究已经取得了一定的成
+果,但下述几个方面仍是今后研究的难点问题,迫切
+需要引起广大科研工作者的高度关注. 
+( 1)运动分割( mo tion segmentation) 
+快速准确的运动分割是个相当重要但又是比较
+困难的问题.这是由于动态环境中捕捉的图像受到
+多方面的影响,比如天气的变化、光照条件的变化、
+背景的混乱干扰、运动目标的影子[ 103 ]、物体与环境
+之间或者物体与物体之间的遮挡、甚至摄像机的运
+动等,这些都给准确有效的运动分割带来了挑战. 就
+以运动目标的影子为例,它可能与被检测的目标相
+连,也可能与目标分离. 在前者情况下,影子扭曲了
+目标的形状,从而使得以后基于形状的识别方法不
+再可靠;在后者情况下,影子有可能被误认为场景中
+一个完全错误的目标.尽管目前图像分割主要利用
+背景减除方法,但如何建立对于任何复杂环境的动
+态变化均具有自适应性的背景模型仍是相当困难的
+问题. 一个可喜的发展是,一些研究者们正利用时空
+统计的方法构建自适应的背景模型,这也许对于不
+受限环境中的运动分割而言是个更好的选择. 
+( 2)遮挡处理( occlusion handling ) 
+目前,大部分人的运动分析系统都不能很好地
+解决目标之间互遮挡和人体自遮挡问题,尤其是在
+3期 王　亮等: 人运动的视觉分析综述 231
+
+拥挤状态下,多人的检测和跟踪问题更是难于处理. 
+遮挡时,人体只有部分是可见的,而且这个过程一般
+是不可训练的,简单依赖于背景减除进行运动分割
+的技术此时将不再可靠,为了减少遮挡或深度所带
+来的歧义性问题,必须开发更好的模型来处理遮挡
+时特征与身体各部分之间的准确对应问题.另外,一
+般系统也不能完成何时停止和重新开始身体部分的
+跟踪,即遮挡前后的跟踪初始化缺少自举方法. 当
+然,可喜的进步是利用统计方法从可获得的图像信
+息中进行人体姿势、位置等的预测; 不过,对于解决
+遮挡问题最有实际意义的潜在方法应该是基于多摄
+像机的跟踪系统. 
+( 3)三维建模与跟踪( 3-D modeling and t racking 
+) 
+二维方法在早期人的运动分析中证明是很成功
+的,尤其对于那些不需要精确的姿势恢复或低图像
+分辨率的应用场合(如交通监控中的行人跟踪) . 二
+维跟踪有着简单快速的优点,主要的缺点是受摄像
+机角度的限制.而三维方法在不受限的复杂的人的
+运动判断(如人的徘徊、握手与跳舞等)、更加准确的
+物理空间的表达、遮挡的准确预测和处理等方面的
+优点是二维方法所不能比拟的[51, 68, 71 ] ;它能提供更
+加有意义的与身体姿势直接相关的可视化特征用于
+行为识别;同时,三维恢复对于虚拟现实应用也是必
+需的.目前基于视觉的三维跟踪研究仍相当有限,三
+维姿势恢复的实例亦很少,且大部分系统由于要求
+鲁棒性而引入了简化的约束条件. 三维跟踪也导致
+了从图像中人体模型的获取[104 ]、遮挡处理、人体参
+数化建模、摄像机的标定等一系列难题. 以建模为
+例,人体模型通常使用许多形状参数来表达. 然而, 
+目前的模型很少利用关节的角度约束和人体部分的
+动态特性; 而且过去的一些工作几乎都假设3-D模
+型依据先验条件而提前被指定,实际上这些形状参
+数应当从图像中估计出来. 总之, 3-D建模与跟踪在
+未来工作中应值得更多的关注. 
+( 4)多摄像机的使用( use of mul tiple cameras) 
+使用单一摄像机的三维人的跟踪研究还很缺
+乏,身体姿势和运动在单一视角下由于遮挡或深度
+影响而容易产生歧义现象,因此使用多摄像机进行
+三维姿势跟踪和恢复的优点是很明显的.同时,多摄
+像机的使用不仅可以扩大监视的有效范围,而且可
+以提供多个不同的方向视角以用于解决遮挡问题. 
+很明显,未来的人运动分析系统将极大受益于多摄
+像机的使用. 对于多摄像机跟踪系统而言,我们需要
+确定在每个时刻使用哪一个摄像机或哪一幅图像. 
+也就是说,多摄像机之间的选择和信息融合是一个
+比较关键的问题. 
+( 5)性能评估( performa nce evaluatio n) 
+一般而言,鲁棒性、准确度、速度是人运动分析
+系统的三个基本要求.例如,系统的鲁棒性对于监控
+应用特别重要,这是因为它们通常被要求是自动、连
+续地工作,因此这些系统对于如噪声、光照、天气等
+因素的影响不能太敏感; 系统的准确度对于控制应
+用特别重要,例如,基于行为或姿势识别的接口控制
+场合; 而系统的处理速度对于那些需要实时高速的
+监控系统而言更是非常关键. 因此,如何选择有效的
+工作方案来提高系统性能、降低计算代价是个特别
+值得考虑的问题. 同时,如何利用来自不同用户、不
+同环境、不同实验条件的大量数据测试系统的实时
+性、鲁棒性亦相当重要. 
+随着人运动分析研究和其它相关技术的发展, 
+下述几个方面已经成为未来的发展趋势: 
+( i)音频与视觉相结合的多模态接口
+人的相互交流主要是依据语言,过去的许多工
+作是语音理解,但语音识别受距离和环境噪声的限
+制,尤其在机场等高噪声环境,将会严重影响语音识
+别的性能. 人的可视化描述与语音解释一样重要,研
+究者们正逐渐将语音与视觉信息集成起来[ 105]以产
+生更加自然的高级接口. 当前一些接口系统在视觉
+方面仅仅做了如脸的表情、身体姿势等的大尺度分
+析,但还不能分析大多数人的正常姿势,这意味着人
+机之间的通信仅局限于几个特定的姿势,这个局限
+是由于人的姿势结构的不易理解造成的,而且跟踪
+多人的系统由于来自摄像机的分辨率、计算机处理
+能力和视角的影响而不能准确地估计身体姿势. 为
+了完成优化尺度和广域的分析,可以寻求准确实时
+的多摄像机的信息融合方法,以便机器更好地理解
+人的通信行为. 目前音频和视频的信号处理相对独
+立,如何更好地集成音频和视频信息用于多模态用
+户接口是一个严峻的挑战. 
+( ii )人的运动分析与生物特征识别相结合
+在智能房间的门禁系统、军事安全基地的视觉
+监控系统、高级人机交互等应用中,人的运动分析与
+生物特征识别相结合的研究日益显得重要. 在人机
+交互中不仅需要机器能知道人是否存在、人的位置
+和行为,而且还需要利用特征识别技术来识别与其
+交流的人是谁. 远距离的身份识别已经越来越重要, 
+比如2000 年DARPA 赞助的重大项目—— HID 
+232 计　　算　　机　　学　　报　2002年
+
+( Human Identificatio n at a Distance)计划. 目前的
+研究主要集中在人的脸像识别、步态识别或特定行
+为的识别. 近距离时一般可以通过跟踪人脸来加以
+身份识别;如果是远距离的监控,脸的特征可能被隐
+藏,或者分辨率太低而不易识别,然而进入监控领域
+的人的运动步态是可见的,这激活了步态作为一个
+独特的生物行为特征应用于人的身份鉴别. 由于步
+态具有非接触性、易于感知、非侵犯性、难于伪装等
+优点,近来已引起了计算机视觉研究者们浓厚的研
+究兴趣[14— 16 ] . 
+( iii )人的运动分析向行为理解与描述高层处理
+的转变
+人的行为理解是需要引起高度注意并且是最具
+挑战的研究方向,因为观察人的最终目标就是分析
+和理解人的个人行为、人与人之间及人与其它目标
+之间的交互行为等,如W4系统[3 ]可以分析人是否携
+带物体、放置物体、交换物体等简单行为. 目前人的
+行为理解仍集中于人的跟踪、标准姿势识别、简单行
+为识别等问题,如人的一组最通常的行为(跑、蹲、
+站、跳、爬、指等)的定义和分类. 近年来利用机器学
+习工具构建人行为的统计模型的研究有了一定的进
+展,但行为识别仍旧处于初级阶段,连续特征的典型
+匹配过程中常引入人运动模型的简化约束条件来减
+少歧义性,而这些限制与一般的图像条件却是不吻
+合的,因此行为理解的难点仍是在于特征选择和机
+器学习. 目前,用于行为识别的状态空间方法和模板
+匹配方法通常在计算代价和运动识别的准确度之间
+进行折衷,故仍需要寻找和开发新的技术以利于提
+高行为识别性能的同时,又能有效地降低计算的复
+杂度.另外,如何借助先进的视觉算法和人工智能等
+领域的成果,将现有的简单的行为识别与语义理解
+推广到更为复杂场景下的自然语言描述,是将计算
+机视觉低、中层次的处理推向高层抽象思维的关键
+问题. 
+5　结束语
+人的运动分析,尤其是人的行为理解与描述,已
+经成为计算机视觉中一个重要的研究领域,它在智
+能监控、虚拟现实、用户接口等方面的应用前景引起
+了广大科研人员的浓厚兴趣. 近来的技术发展更是
+证明了视觉系统具有成功处理人的复杂运动的能
+力,而且许多研究者们正逐步将其成果推向更加智
+能的应用场合.本文从人运动分析的一般处理过程
+出发,回顾了各个处理阶段的目前发展情况和常用
+的方法,同时对研究难点和未来的发展趋势作了较
+为详细的阐述,希望能对相关领域的研究人员和工
+程技术人员有所裨益. 
+参考文献
+1 Gav ril a D. The vi sual analysi s of human mov ement: A s urvey. 
+Compu ter Vi sion and Image Unders tanding , 1999, 73 
+( 1): 82- 98 
+2 Collins Ret al . A sys tem for video s urv eill ance and monit oring: 
+V SAM f inal report. Carn egie Mel lon Universi ty: Tech - 
+nical Report CMU-RI-TR-00-12, 2000 
+3 Hari t aoglu I, Harw ood D, Davi s L. W4: Real-tim e s urveillance 
+of peopl e and th eir activit ies. IE EE Trans Pat t ern Analysis 
+and Machin e Int elli gence, 2000, 22( 8) : 809- 830 
+4 Remagnino P, Tan T, Bak er K. Mul ti-agent vi sual s urveillance 
+of dynami c s cenes. Imag e and Visi on Comp uting, 1998, 
+16( 8): 529- 532 
+5 Maggioni C, Kammerer B. Ges tu re Compu ter: Hi st ory, Desig 
+n, and Appli cati ons. Com put er Vi sion f or Human-Machine 
+Int eraction. Cambridge: Cam bridge Univ ersi ty Pres s, 1998 
+6 Freeman W, Wei ssman C. Televi sion con t rol by hand gestures. 
+In: Proc Int ernat ional Conf erence on Au tomati c Face 
+and Ges tu re Recog ni ti on, Zu ri ch, Swi t zerland, 1995. 179- 
+183 
+7 Aggarw al J, Cai Q. Human m otion analysis:
+A review. Comput 
+er Visi on and Imag e Und ers tanding , 1999, 73( 3): 428 - 
+440 
+8 Pentl and A. Looking at people: Sensing f or ubiquit ous and 
+w earable comp uting. IEE E Trans Pat t ern Anal ysis and Machine 
+Int el li gence, 2000, 22( 1): 107- 119 
+9 Collins R, Lip ton A, Kanade T. In troducti on t o th e speci al 
+s ection on video s urv eil lance. IEEE Trans Pat t ern Analysis 
+and Machine In tellig ence, 2000, 22( 8): 745- 746 
+10 Maybank S, Tan T. In troducti on--special secti on on vis ual 
+s urv eil lance. Int ernati onal Journal of Com put er Visi on, 2000, 
+37( 2): 173- 173 
+11 Steff ens J, Elagin E, Neven H. Person s pot ter-f as t and robus 
+t sys t em fo r human detect ion, t racking and recogniti on. 
+In: Proc IEEE Internati onal Conf erence on Aut omatic Face 
+and Gesture Recogniti on, Nara, Japan, 1998. 516- 521 
+12 Yang J, Waibel A. A real-time face t racker. In: Proc IEEE 
+Worksh op on Applicati ons of Compu ter Visi on, Saras ota, 
+USA, 1996. 142- 147 
+13 Mogh addam B, Wahid W, Pent land A. Beyond eig enf aces: 
+Probabi lis tic mat ching f or f ace recogni tion. In: Proc IEEE Int 
+ernat ional Conf erence on Au tomati c Face and Ges ture Recognit 
+ion, Nara, Japan, 1998. 30- 35 
+14 Li tt le J, Boyd J.
+Recog ni zing peopl e by thei r gait: The sh ape 
+of moti on. Journal of Com put er Visi on Research, 1998, 1 
+3期 王　亮等: 人运动的视觉分析综述 233
+
+( 2): 2- 32 
+15 Shu tl er J D, Nixon M , Har ris C. S tati sti cal gai t des crip tion 
+via vel ocit y moment s. In: Proc IEEE Sou thw est Sym posium 
+on Image Analysi s and Int erpret ation , Aus tin, Tex as , 2000. 
+291- 295 
+16 Huang P, Harris C, Ni xon M. Human gait recognit ion in 
+canoni cal s pace using t em poral templat es. Image Signal Proces 
+s, 1999, 146( 2): 93- 100 
+17 Bogh ossian B, Velas tin S. Imag e proces sing sys t em for 
+pedest rian moni toring using n eu ral classi fi cation of normal 
+moti on pat t erns. M easu rement and Cont rol, 1999, 32 ( 9 ): 
+261- 264 
+18 Bogh ossian B, Velastin S. Mot ion-based machine vi sion techniques 
+f or th e manag ement of large crow ds. In: Proc IE EE 
+6th Int ernat ional Conf erence on Elect ronics, Ci rcuit s and Systems, 
+Paf os, Cyprus , 1999 
+19 Li Y, Ma S, Lu H. Human pos tu re recognit ion using mul tiscale 
+m orph ological meth od and Kalman mo tion es timation. 
+In: Proc IE EE In ternational Conference on Pat t ern Recognition, 
+Bri sbane, Aus t rali a, 1998. 175- 177 
+20 Seg en J, Kumar S. Shadow gestures: 3D h and pose es timation 
+using a single camera. In: Proc IEEE Conf erence on 
+Comput er Visi on and Pat t ern Recogni tion , Fort Col lins , Colo 
+rado, 1999. 479- 485 
+21 Yang M-H, Ah uja N. Recognizing hand ges ture using m otion 
+t raject ories. In: Proc IEE E Conf erence on Comput er Vi sion 
+and Pat tern Recognit ion, Fo rt Collins, Colorado, 1999. 468- 
+472 
+22 Cui Y, Weng J. Hand segmentat ion u sing learning-bas ed predicti 
+on and veri fication f or hand sign recogni tion. In: Proc 
+IEEE Con ference on Comput er Vi sion and Pat tern Recognition, 
+Puerto Rico, 1997. 88- 93 
+23 Tu rk M. Vis ual int eracti on wi th lif elike charact ers. In: Proc 
+IEEE In ternational Conf erence on Aut omatic Face and Gestu 
+re Recogni tion, Killingt on, V ermon t USA, 1996. 368 - 
+373 
+24 Lakany H, Haycs G, Hazlewood M, Hi llman S. Human 
+walking: Tracking and anal ysi s. In: Proc IE E Colloquium on 
+Moti on Anal ysi s and Tracking, Savoy Place, Lond on, 1999. 
+5 /1- 5 /14 
+25 K h le M, Merkl D, Kastner J. Clinical gai t analysis by neural 
+netw orks: Is sues and ex periences. In: Proc IE EE Symposium 
+on Compu ter-Bas ed Medical Sys t ems , Maribor, Slov enia, 
+1997. 138- 143 
+26 Meyer D, Den zl er J, Niemann H. Model bas ed ext racti on of 
+ar ticulat ed ob jects in image sequences f or gait analysis. In: 
+Proc IEEE Int ernat ional Conf erence on Imag e Proces sing, 
+Santa Barbara, Calif ornia 1997. 78- 81 
+27 McKenna S et al . Tracking g roups of peopl e. Com put er Visi 
+on and Imag e Unders tanding, 2000, 80(1) : 42- 56 
+28 Karmann K, Brandt A. Moving obj ect recog ni ti on using an 
+adaptiv e back ground m emory. In: Capp ellini V ed. Timevarying 
+Image Proces sing and Moving Object Recogni tion. 2. 
+El sevier, Amst erdam , The Neth erl ands , 1990 
+29 Kilg er M. A s hadow handler in a vid eo-based real-time t raf fic 
+moni toring sys tem. In: Proc IEEE Wo rk shop on Applications 
+of Com put er Vi sion, Palm Springs , CA, 1992. 1060- 1066 
+30 Stauf f er C, Grimson W. Adaptiv e backg rou nd mi xture model 
+s f or real-tim e t racking. In: Proc IEEE Conf erence on Comput 
+er Visi on and Pat tern Recogni tion, Fort Col lins , Colorad 
+o, 1999, 2: 246- 252 
+31 Wren C, Azarbayejani A, Darrell T, Pentl and A. Pf inder: 
+Real-time t racking of the human bod y. IEEE Trans on Patt 
+ern Analysis and Machine Int el li gence, 1997, 19( 7): 780- 
+785 
+32 Ars eneau S, Coopers t ock J. Real-time image seg men tati on 
+f or action recognit ion. In: Proc IE EE Paci fic Rim Conf erence 
+on Com municati ons, Comput ers and Signal Proces sing, Vict 
+ori a, Canada, 1999. 86- 89 
+33 Sun H, Feng T, Tan T. Robus t ex tract ion of moving objects 
+f rom imag e sequences. In: Proc the Fou rth Asian Conf erence 
+on Compu ter Visi on, Taiwan, 2000. 961- 964 
+34 Lip ton A, Fujiyoshi H, Pati l R. Moving target cl as sif icati on 
+and t racking f rom real-tim e video. In: Proc IEEE Worksh op 
+on Applications of Comput er Vision , Princet on, N J, 1998. 8 
+- 14 
+35 Anderson C, Bert P, Vander Wal G. Ch ang e d et ecti on and 
+t racking using pyramid s t ransf ormation techniques. In: Proc 
+SPIE Conf erence on In telligent Robot s and Compu ter Visi on, 
+Camb ridg e, M A, 1985, 579: 72- 78 
+36 Barron J, Fl eet D, Beauchemin S. Perf ormance of optical 
+f low t ech niques. In ternati onal Journal of Com put er Visi on, 
+1994, 12( 1): 42- 77 
+37 Verri A, Uras S, DeMich eli E. M otion s egment ation f rom 
+opti cal f low. In: Proc th e 5th Alvey Vi sion Conf erence, 
+Brigh ton, U K, 1989. 209- 214 
+38 Friedman N, Rus sell S. Imag e seg men tati on in video sequences: 
+A probabilis ti c app roach. In: Proc th e Thi rt eenth 
+Conf erence on Uncertaint y in Arti fi cial Int el ligence, Rhode 
+Isl and , USA, 1997 
+39 McLachlan G, Kri shnan T. The EM Algori thm and Ex tensions. 
+Wiley In tersci ence, 1997 
+40 St ring a E. Morphol ogi cal change d et ecti on alg ori thms f or 
+s urv eil lance applicat ions. In: Proc Bri tish M ach ine Visi on 
+Conf erence, Bri st ol, U K, 2000. 402- 411 
+41 Kuno Y, Watanabe T, Shimos ak oda Y, Nakagawa S. Aut omat 
+ed detect ion of h uman for visual s urveil lance sys tem. In: 
+Proc IEEE Int ernati onal Conf erence on Pat tern Recogniti on, 
+Vienna, 1996. 865- 869 
+42 Cu tl er R, Davis L. Robu st real-time periodic mo tion d et ecti 
+on, analysi s, and appli cati ons. IE EE Trans Pat tern Analysis 
+and Machin e Int elli gence, 2000, 22( 8): 781- 796 
+43 Lip ton A. Local application of optic f low to analys e ri gid versus 
+non-ri gid motion. In: h t tp: / /ww w . eecs. lehi gh. ed u / 
+234 计　　算　　机　　学　　报　2002年
+
+FRAM E /Lipton /iccvf rame. h tm l 
+44 Selinger A, Wix son L. Classif ying moving object s as rigid or 
+non-rigid w i thou t corres pondences. In: Proc DAPRA Image 
+Underst anding Wo rk shop, Mon terey, CA, 1998, 1: 341 - 
+358 
+45 St au ff er C. Aut omatic hi erachi cal cl as sif icati on using timebas 
+e co-occu rrences. In: Proc IEEE CS Conf erence on Comp 
+ut er Vi sion and Pat tern Recogni tion, 1999. 333- 339 
+46 Welch G, Bish op G. An in t roducti on to th e Kalman fi lt er. 
+UNC-ChapelHill Technical Report: T R95-041, 2000. In: 
+h t tp: / /w w w . cs. unc. edu 
+47 Is ard M, Blake A. Conden sation—— condi ti onal d ensi ty 
+propagati on f or vis ual t racking. Int ernat ional Journal of Comp 
+ut er Vi sion, 1998, 29( 1): 5- 28 
+48 Pavlovic ′ 
+V, Rehg J, Cham T-J, Mu rphy K. A dynami c 
+Bayes ian n etw ork app roach to fig ure t racking using learned 
+d ynami c mod els. In: Proc IEEE Int ernational Conf erence on 
+Comput er Visi on, Co rfu, Greece, 1999. 94- 101 
+49 Hari taoglu I, Harw ood D, Davis L. W4: w h o? w hen? w here? 
+wh at? A real time s yst em f or det ecting and t racking people. 
+In: Proc IEEE Int ernational Conf erence on Au tomati c Face 
+and Ges ture Recogni tion, Nara, Japan, 1998. 222- 227 
+50 Goncalv es L, Bernardo E, Ursella E, Perona P. Monocul ar 
+t racking of th e h uman arm in 3D. In: Proc the 5th Int ernational 
+Conf erence on Comput er Visi on, Cambridg e, 1995. 
+764- 770 
+51 Reh g J, Kanad e T. Visual t racking of high DO F articulat ed 
+st ructu res: An applicat ion t o h uman hand t racking. In: Proc 
+European Conf erence on Compu ter Vision , Stockholm, Sw ed 
+en, 1994. 35- 46 
+52 Meyer D et al . Gait classi fication wi th HM Ms f or t rajecto ri es 
+of body parts ex t ract ed by mix tu re d ensi ti es. In: Proc Bri ti sh 
+Machine Visi on Conf erence, South am pton , Eng land, 1998. 
+459- 468 
+53 Fi egu th P, Terzopoul os D. Col or-bas ed t racking of h eads and 
+oth er mobile ob jects at video f ram e rate. In: Proc IEEE Conf 
+erence on Compu ter Vi sion and Patt ern Recognit ion, Puerto 
+Rico, 1997. 21- 27 
+54 Jang D-S, Choi H-I. Active models f or tracking moving objects. 
+Pat tern Recogni tion, 2000, 33( 7): 1135- 1146 
+55 Azarbayejani A, Pent land A. Real-time self-calibrating s tereo 
+pers on t racking using 3D sh ape est imati on f rom blob featu res. 
+In: Proc Int ernational Conf erence on Pat t ern Recogni tion, Vienna, 
+1996. 627- 632 
+56 Cai Q, Mi tiche A, Aggarwal J. Tracking human moti ons in 
+an indoor envi ronment. In: Proc In ternational Conf erence on 
+Im age Processing, Was hing ton, DC, USA, 1995, 1: 215- 
+218 
+57 Seg en J, Pingali S. A cam era-based s yst em f or t racking peopl 
+e in real time. In: Proc Int ernational Conf erence on Pat t ern 
+Recognit ion, Vi enna, 1996. 63- 67 
+58 Reh g J, Kanade T. Model-bas ed t racking of self-occluding 
+arti culat ed objects. In: Proc th e 5th In ternational Conf erence 
+on Compu ter Visi on, Camb ridge, 1995. 612- 617 
+59 Chang I-C, Huang C-L. Ribbon-based mot ion analysi s of h uman 
+body mov ement s. In: Proc Int ernational Conference on 
+Pat tern Recognit ion, Vi enna, 1996. 436- 440 
+60 Cham T-J, Reh g J. A mul tiple hypo thesis approach t o f igu re 
+t racking. In: Proc IEEE Conf erence on Comp ut er Vi sion and 
+Pat tern Recog ni ti on, Fort Collins , Colorado, 1999. 239- 245 
+61 Ri cquebourg Y, Bou th emy P. Real-time t racking of moving 
+persons by expl oi ting spati o-temporal image slices. IEEE 
+Trans Pat t ern Analysis and Machine In telligence, 2000, 22 
+( 8): 797- 808 
+62 Darrell T, Gordon G, Harvi lle M, Wood fil l J. In tegrated 
+person t racking using s tereo, colo r, and pat tern detecti on. 
+Int ernational Journal of Com put er Vi sion, 2000, 37 ( 2 ): 175 
+- 185 
+63 Wach t er S, Nagel H-H. Tracking pers ons in monocular image 
+s equences. Com put er Vi sion and Imag e Underst anding, 
+1999, 74( 3): 174- 192 
+64 Rossi M , Boz zoli A. Tracking and count ing people. In: Proc 
+Int ernational Conf erence on Image Processing, Aus tin, 1994. 
+212- 216 
+65 Niyogi S, Adel son E. Anal yzing and recognizing w alking fi gures 
+in XYT. In: Proc IEEE Conf erence on Comput er Visi on 
+and Pat t ern Recogni tion , Seat tl e, USA, 1994. 469- 474 
+66 Karaul ova I, Hal l P, Marsh al l A. A hierarchical model of dynami 
+cs f or t racking people w ith a single vid eo camera. In: 
+Proc Bri ti sh Machine Vi sion Conf erence, Bris tol , UK, 2000. 
+352- 361 
+67 Chang T, Gong S, Ong E. Tracking m ultiple people under 
+occlusi on using m ult iple cameras. In: Proc Brit ish Machine 
+Visi on Conf erence, Bri s tol, U K, 2000. 566- 575 
+68 Kakadiaris I, Metaxas D. Model-based est imati on of 3-D h uman 
+moti on wi th occlusion bas ed on active mul ti-vi ew point select 
+ion. In: Proc IEEE Conf erence on Compu ter Visi on and 
+Pat tern Recognit ion, San Franci sco, 1996. 81- 87 
+69 Uts umi A, Mori H, Oh ya J, Yachida M. Mul tiple-vi ew - 
+based t racking of mul tiple humans. In: Proc IE EE Int ernati 
+onal Conf erence on Pat t ern Recognit ion, Bris bane, Au st ralia, 
+1998. 597- 601 
+70 Cai Q, Ag garw al J.
+Tracking human moti on using m ultiple 
+cameras. In: Proc Int ernat ional Conf erence on Pat t ern Recognit 
+ion, Vi enna, 1996. 68- 72 
+71 Gav ril a D, Davi s L. 3-D model-based t racking of humans in 
+act ion: A mul ti-view approach. In: Proc IEE E Conf erence on 
+Comp uter Visi on and Pat t ern Recogni tion, San Francisco, 
+1996. 73- 80 
+72 Boul t T. Frame-rat e mul ti-bod y t racking f or s urveil lance. In: 
+Proc DARPA Imag e Unders tanding Wo rk shop, Mont erey, 
+Calif ornia. 1998 
+73 Goddard N. Increm ent al model-based discriminati on of articulat 
+ed movemen t f rom moti on featu res. In: Proc IEE E Work- 
+3期 王　亮等: 人运动的视觉分析综述 235
+
+s hop on Moti on of Non-Ri gid and Articulat ed Object s, 
+Aust in, 1994. 89- 94 
+74 Fuji yoshi H, Lip ton A. Real-time h uman moti on anal ysi s by 
+imag e sk elet oni zation. In: Proc IEEE Worksh op on Applications 
+of Comput er Visi on, Princeton, N J, 1998. 15- 21 
+75 Zhong Y, Jain A, Dub ui ss on-Joll y M. Ob ject t racking using 
+d ef ormable templat es. IE EE Trans Pat tern Anal ysis and Machine 
+In tellig ence, 2000, 22( 5): 544- 549 
+76 Paragi os N, Deri ch e R. Geodesic active cont ours and lev el 
+sets f or th e detecti on and tracking of moving ob jects. IE EE 
+T rans Pat tern Anal ysi s and Machine Int elli gence, 2000, 22 
+( 3): 266- 280 
+77 Bert almio M, Sapiroo G, Randll G. Morphing active contou 
+rs. IEEE Trans Patt ern Anal ysi s and Mach ine In tellig 
+ence, 2000, 22( 7): 733- 737 
+78 Pet erf reund N. Robus t tracking of posi tion and v eloci t y w i th 
+Kalman snakes. IEEE Trans Patt ern Analysi s and Machine 
+In tellig ence, 2000, 22( 6): 564- 569 
+79 Is ard M, Bl ak e A. Cont our t racking by st ochas tic propagation 
+of condi ti onal d ensi t y. In: Proc Eu ropean Con ference on 
+Comput er Visi on, Camb ridg e, 1996, 343- 356 
+80 Baum berg A, Hogg D. An ef fici en t method for cont our t racking 
+using activ e sh ape models. In: Proc IEEE Works hop on 
+Moti on of Non-Rigid and Articulat ed Ob jects , Aus tin, 1994. 
+194- 199 
+81 Ju S, Black M, Yaccob Y. Card board people: A paramet eri 
+zed model of articulat ed imag e moti on. In: Proc IEE E Int ernat 
+ional Conf erence on Au tomati c Face and Ges tu re Recognition, 
+Ki llingt on, Vermont USA, 1996. 38- 44 
+82 Roh r K. Towards model-based recogni tion of human movem 
+en ts in imag e s equences. CV GIP: Im age Unders tanding, 
+1994, 59( 1): 94- 115 
+83 Pol ana R, Nels on R. Low lev el recog ni ti on of h uman m otion. 
+In: Proc IEEE Worksh op on Moti on of Non-Rigid and Arti cul 
+ated Obj ects , Aus tin, TX, 1994. 77- 82 
+84 Aggarw al J, Cai Q, Liao W, Sabat a B. Non-Rigid m otion 
+analysi s: Art icu lated& elasti c mo tion. Comp ut er Vision and 
+Im age Underst anding, 1998, 70( 2): 142- 156 
+85 Myers C, Rabini er L, Rosenberg A. Perf ormance t radeof f s in 
+d ynami c tim e warping algorithms f or is olat ed wo rd recognition. 
+IEE E Trans Acoust ics , Speech , and Signal Proces sing , 
+1980, 28( 6): 623- 635 
+86 Bobick A, Wil son A. A s tat e-based t echnique f or the sum mari 
+zation and recog ni ti on of ges ture. In: Proc In ternational 
+Conf erence on Com put er Vi sion, Camb ridg e, 1995. 382- 388 
+87 Takah ashi K, Seki S et al. Recogniti on of dex terous manipul 
+ations f rom time varying imag es. In: Proc IEEE Wo rk shop 
+on Moti on of Non-Rigid and Ar ticulated Objects , Aus tin, 
+1994. 23- 28 
+88 Po ri t z A. Hidden Markov model s: A guid ed t our. In: Proc 
+IEEE In ternati onal Conf erence on Acousti cs , Sp eech and Signal 
+Processing, New York Ci ty, NY, 1988. 7- 13 
+89 Rabini er L. A tut ori al on hidden Markov models and s el ected 
+applicat ions in speech recog ni ti on. Proceedings of the IEEE, 
+1989, 77( 2): 257- 285 
+90 Starner T, Pentl and A. Real-time Ameri can sign l ang uage 
+recogni tion f rom video using hidden Mark ov model s. In: Proc 
+Int ernational Symposium on Comput er Visi on, Coral Gables , 
+Florida, 1995. 265- 270 
+91 Yamato J, Oh ya J, Ishii K. Recogni zing hum an action in 
+t ime-sequen tial imag es using h idden Mark ov model. In: Proc 
+IE EE Conf erence on Compu ter Visi on and Patt ern Recog niti 
+on, Ch ampaign , Illinoi s, 1992. 379- 385 
+92 Brand M, Oliver N, Pen tland A. Cou pled hidden Markov 
+models fo r compl ex action recogni tion. In: Proc IEE E Conf erence 
+Compu ter Vi sion and Pat tern Recogni tion, Puerto Rico, 
+1997. 994- 999 
+93 Guo Y, Xu G, Tsuji S. Unders tanding human moti on patt 
+erns. In: Proc Int ernational Conf erence on Pat t ern Recog niti 
+on, Jerus al em , Is rael , 1994. 325- 329 
+94 Rosen blum M, Yacoob Y, Davis L. Human emo tion recog niti 
+on f rom m otion using a radial basis fu nct ion netw ork archit 
+ecture. In: Proc IEEE Worksh op on Mot ion of Non-Ri gid 
+and Articulat ed Object s, Aus tin , 1994. 43- 49 
+95 Bobick A, Davi s J. Real-time recogniti on of activit y using 
+t emporal templat es. In: Proc IEEE Wo rk shop on Appli cati 
+ons of Compu ter Vi sion, Saras ota, Fl orida, 1996. 39- 42 
+96 Davis J, Bobick A. Th e repres en tation and recogni ti on of acti 
+on using temporal templat es. M IT M edia Lab, Perceptual 
+Comp uting Group: Tech ni cal Report 402, 1997 
+97 Breg ler C. Learning and recognizing human dynami cs in vid eo 
+s equences. In: Proc IEEE Con ference on Comput er Visi on 
+and Pat t ern Recogni tion , Puert o Ri co, 1997. 568- 574 
+98 Campbell L, Bobick A. Recog ni ti on of h uman body moti on 
+using ph ase s pace cons t raint s. In: Proc Internati onal Conf erence 
+on Compu ter Visi on, Camb ridge, 1995. 624- 630 
+99 Int ill e S, Bobick A. Rep resent ation and vi sual recogni tion of 
+com plex , mul ti-agent actions using belief n etw orks. Perceptual 
+Compu ting Sect ion, M IT M edia Lab: Technical Report 
+454, 1998 
+100 Kojima et al . Generating natu ral l ang uag e descripti on of h uman 
+beh aviors f rom video imag es. In: Proc IEEE Int ernati onal 
+Conf erence on Pat tern Recogni tion, Barcelona, 2000. 728 
+- 731 
+101 Remagnino P, Tan T, Baker K. Agent o ri ent at ed an notati on 
+in model bas ed vi sual s urv eill ance. In: Proc IEEE Int ernati 
+onal Conf erence on Comput er Vi sion, Bombay, India, 1998. 
+857- 862 
+102 Herzog G, Roh r K. Int eg rating visi on and language: Tow ards 
+aut omatic d escript ion of h uman movemen ts. In: Proc 19th 
+Ann ual German Conf erence on Arti fi cial In tellig ence, Bi elef 
+eld , 1995. 257- 268 
+103 Onoguchi K. Sh adow elimination meth od for moving object 
+det ection. In: Proc IEE E Internati onal Conf erence on Pat tern 
+236 计　　算　　机　　学　　报　2002年
+
+Recognit ion, Bri sbane, Aus t ralia, 1998. 583- 587 
+104 Kakadiari s I, Met axas D. Three-dimensional human body 
+model acquisi tion f rom mul tipl e vi ew s. In ternational Journal 
+of Compu ter Visi on, 1998, 30( 3): 191- 218 
+105 Sh arma R, Pavl ovic V , Huang T. Tow ard mu ltimodel h uman-
+comput er int erf ace. In: Proc IEEE Special Iss ue on Multimedia 
+Signal Processing, 1998, 86( 5): 853- 869 
+WANG Liang, ma le, bo r n in 
+1977. He r eceiv ed his B. S. deg r ee 
+( 1997) a nd M. S. deg r ee ( 2000) in th e 
+Depa rtment of Elec tro nics Enginee ring 
+a nd Info rmation Science from Anhui Univ 
+ersity, China. He is cur rently a Ph. 
+D. candidate in the Natio na l Labor ato ry 
+o f Pa ttern Reco g nitio n, Institute o f Automa tio n, Chinese 
+Academy of Sciences, Beijing , China. His main resear ch inter 
+ests include patte rn recog nitio n, computer v ision, digital 
+imag e pro cessing and analysis, v isual surv eillance, etc. 
+HU Wei-Ming, male, bo rn in 1968. He receiv ed his 
+Ph. D. deg ree f rom the Depa rtment of Computer Science 
+and Engineering , Zhejiang Univ er sity , China. From April 
+1998 to March 2000, he w o rked a s a Postdocto ra l Resea rch 
+Fellow a t the Institute of Computer Science and Technology 
+, Founde r Resear ch a nd Desig n Center , Peking Univ ersity. 
+From April 2000, he w o rked a t the Natio na l Labor ato ry 
+o f Pa ttern Reco g nitio n, Institute o f Automa tio n, Chinese 
+Academy o f Sciences, as a n Associa te Pro fesso r. His resea 
+rch inte rests ar e in visua l surv eillance a nd mo nito ring o f 
+dy namic scenes, neura l netw or k, imag e pr ocessing , 3D 
+comput er g raphics, etc. 
+TAN Tie-Niu, male , bor n in 1964. He receiv ed his B. 
+S. deg r ee( 1984) in electr onic engineering fr om Xi’ an Jiaoto 
+ng Univ ersity , China, and M. S. deg ree ( 1986) , DIC 
+( 1986) a nd Ph. D. deg ree ( 1989) in electro nic engineering 
+from Imperial Co lleg e of Science, Technolog y and 
+Medicine, Lo ndo n, U. K. In Octo be r 1989, he joined the 
+Computa tio nal Visio n Gr oup at the Depar tment o f Compute 
+r Science, Th e Univ ersity o f Reading , Eng land, whe re he 
+wo rked as Research Fellow , Se nio r Resear ch Fellow and 
+Lectur er. In Ja nuar y 1998, he r eturned to China to join the 
+Na tio nal Labo ra to ry of Pa tter n Recog nition, the Institute of 
+Automatio n of the Chinese Academy o f Sciences, Beijing , 
+China. He is cur rently Professo r a nd Dir ector o f th e Natio nal 
+Labor ato ry o f Pat tern Recog nitio n a nd Dir ecto r of the Institute 
+of Automatio n, Chinese Academy o f Sciences. His 
+cur rent r esea rch inter ests include speech and imag e processing 
+, machine a nd computer v ision, patte rn recog nitio n, 
+multimedia , and robo tics. 
+3期 王　亮等: 人运动的视觉分析综述 237
+
