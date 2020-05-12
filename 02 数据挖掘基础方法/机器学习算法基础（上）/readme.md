@@ -2,7 +2,6 @@
 
 ### Task01：机器学习概述（1天）
 
-https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task1_ml_overvirew.md
 
 
 <b>理论部分</b>
@@ -37,7 +36,6 @@ https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task1_m
 
 <b>练习部分</b>
 
-https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task2_Linear_regression.ipynb
 
 - 基于线性回归的房价预测问题
 - 利用`sklearn`解决回归问题
@@ -66,7 +64,6 @@ https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task2_L
 
 <b>练习部分</b>
 
-https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task3_logistic_regression.ipynb
 
 - 利用`sklearn`解决分类问题
 - `sklearn.linear_model.LogisticRegression`
@@ -86,7 +83,6 @@ https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task3_l
 
 <b>练习部分</b>
 
-https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task4_decision_tree.ipynb
 
 - 利用`sklearn`解决分类问题和回归预测。
 - `sklearn.tree.DecisionTreeClassifier`
@@ -118,7 +114,6 @@ https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task4_d
 
 <b>练习部分</b>
 
-https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task5_cluster_plus.ipynb
 
 - 利用`sklearn`解决聚类问题。
 - `sklearn.cluster.KMeans`
@@ -149,7 +144,6 @@ https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task5_c
 
 <b>练习部分</b>
 
-https://github.com/datawhalechina/team-learning/blob/master/初级算法梳理/Task6_bayes_plus.ipynb
 
 - 利用`sklearn`解决聚类问题。
 - `sklearn.naive_bayes.GaussianNB`
