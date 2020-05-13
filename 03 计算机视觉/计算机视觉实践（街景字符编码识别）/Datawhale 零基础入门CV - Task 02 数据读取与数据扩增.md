@@ -158,8 +158,9 @@ data = SVHNDataset(train_path, train_label,
       
 接下来我们将在定义好的Dataset基础上构建DataLoder，你可以会问有了Dataset为什么还要有DataLoder？其实这两个是两个不同的概念，是为了实现不同的功能。                 
 - Dataset：对数据集的封装，提供索引方式的对数据样本进行读取；      
-- DataLoder：对Dataset进行封装，提供批量读取的迭代读取；      
-- 加入DataLoder后，数据读取代码改为如下：      
+- DataLoder：对Dataset进行封装，提供批量读取的迭代读取；    
+       
+ 加入DataLoder后，数据读取代码改为如下：      
 ```python
 import os, sys, glob, shutil, json
 import cv2
