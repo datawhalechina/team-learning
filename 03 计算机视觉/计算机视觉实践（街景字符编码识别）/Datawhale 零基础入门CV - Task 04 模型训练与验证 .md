@@ -131,7 +131,7 @@ def validate(val_loader, model, criterion):
 ``` 
 ### 4.4 模型保存与加载
 在Pytorch中模型的保存和加载非常简单，比较常见的做法是保存和加载模型参数：        
-       ``` torch.save(model_object.state_dict(), 'model.pt') ```
+       ``` torch.save(model_object.state_dict(), 'model.pt') ```            
        ```model.load_state_dict(torch.load(' model.pt')) ``` 
        
  ### 4.5 模型调参流程     
