@@ -81,7 +81,7 @@ class SVHNDataset(Dataset):
         return len(self.img_path)
 ```
      
-- ### 步骤2：定义好读取图像的Dataset     
+- ### 步骤2：定义好训练数据和验证数据的Dataset     
 ```python
 train_path = glob.glob('../input/train/*.png')
 train_path.sort()
