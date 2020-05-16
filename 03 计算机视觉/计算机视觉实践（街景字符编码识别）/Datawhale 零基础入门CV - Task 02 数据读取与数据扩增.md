@@ -1,5 +1,7 @@
 # Datawhale 零基础入门CV赛事-Task2 数据读取与数据扩增
-     
+       
+在上一章节，我们给大家讲解了赛题的内容和三种不同的解决方案。从本章开始我们将逐渐的学习使用【定长字符识别】思路来构建模型，逐步讲解赛题的解决方案和相应知识点。     
+      
 ## 2 数据读取与数据扩增     
 本章主要内容为数据读取、数据扩增方法和Pytorch读取赛题数据三个部分组成。     
        
@@ -155,9 +157,10 @@ data = SVHNDataset(train_path, train_label,
 |![IMG](IMG/Task02/144_1.png) | ![IMG](IMG/Task02/144_2.png)| ![IMG](IMG/Task02/144_3.png)|
       
 接下来我们将在定义好的Dataset基础上构建DataLoder，你可以会问有了Dataset为什么还要有DataLoder？其实这两个是两个不同的概念，是为了实现不同的功能。                 
-- Dataset：对数据集的封装，提供索引方式的对数据样本进行读取；      
-- DataLoder：对Dataset进行封装，提供批量读取的迭代读取；      
-- 加入DataLoder后，数据读取代码改为如下：      
+- Dataset：对数据集的封装，提供索引方式的对数据样本进行读取      
+- DataLoder：对Dataset进行封装，提供批量读取的迭代读取    
+       
+ 加入DataLoder后，数据读取代码改为如下：      
 ```python
 import os, sys, glob, shutil, json
 import cv2
