@@ -88,7 +88,7 @@
           
 ## 直播安排
 
-- #### 第一次直播：5月21日晚，Baseline讲解          
+- #### 第一次直播：5月21日晚19:00，Baseline讲解          
   #### 直播人：阿水      
   #### 链接：https://tianchi.aliyun.com/course/live?spm=5176.12586971.1001.1.11be32bcSt2XSi&liveId=41167    
       
