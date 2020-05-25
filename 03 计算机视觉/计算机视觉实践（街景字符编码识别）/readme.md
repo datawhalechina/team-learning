@@ -99,7 +99,7 @@
   #### 直播人：安晟
         
    
-## 论文推荐    
+## 论文推荐       
 1、Characters as Graphs: Recognizing Online Handwritten Chinese Characters via Spatial Graph Convolutional Network     
 https://arxiv.org/abs/2004.09412    
 2、ScanSSD: Scanning Single Shot Detector for Mathematical Formulas in PDF Document Images       
@@ -118,7 +118,8 @@ https://arxiv.org/abs/1801.09919
 https://arxiv.org/abs/1906.09266       
 9、Efficient, Lexicon-Free OCR using Deep Learning      
 https://arxiv.org/abs/1906.01969      
-10、
+10、Attention-based Extraction of Structured Information from Street View Imagery     
+https://arxiv.org/pdf/1704.03549.pdf         
 
 
     
