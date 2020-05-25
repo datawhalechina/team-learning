@@ -98,7 +98,7 @@
 - #### 第三次直播：5月31晚20:00，模型训练与验证 和 模型集成介绍
   #### 直播人：安晟
         
-   
+---        
 ## 论文推荐       
 1、Characters as Graphs: Recognizing Online Handwritten Chinese Characters via Spatial Graph Convolutional Network     
 https://arxiv.org/abs/2004.09412    
