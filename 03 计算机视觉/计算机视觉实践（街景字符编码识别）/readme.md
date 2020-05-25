@@ -97,3 +97,30 @@
             
 - #### 第三次直播：5月31晚20:00，模型训练与验证 和 模型集成介绍
   #### 直播人：安晟
+        
+   
+## 论文推荐    
+1、Characters as Graphs: Recognizing Online Handwritten Chinese Characters via Spatial Graph Convolutional Network     
+https://arxiv.org/abs/2004.09412    
+2、ScanSSD: Scanning Single Shot Detector for Mathematical Formulas in PDF Document Images       
+https://arxiv.org/abs/2003.08005     
+3、Fast Dense Residual Network: Enhancing Global Dense Feature Flow for Text Recognition     
+https://arxiv.org/abs/2001.09021     
+4、Das_DewarpNet_Single-Image_Document_Unwarping_With_Stacked_3D_and_2D_Regression_ICCV_2019       
+http://openaccess.thecvf.com/content_ICCV_2019/papers/Das_DewarpNet_Single-Image_Document_Unwarping_With_Stacked_3D_and_2D_Regression_ICCV_2019_paper.pdf                 
+5、Handwritten Optical Character Recognition (OCR): A Comprehensive Systematic Literature Review (SLR)     
+https://arxiv.org/abs/2001.00139      
+6、EATEN: Entity-aware Attention for Single Shot Visual Text Extraction       
+http://xxx.itp.ac.cn/abs/1909.09380    
+7、E2E-MLT - an Unconstrained End-to-End Method for Multi-Language Scene Text    
+https://arxiv.org/abs/1801.09919     
+8、A Multitask Network for Localization and Recognition of Text in Images      
+https://arxiv.org/abs/1906.09266       
+9、Efficient, Lexicon-Free OCR using Deep Learning      
+https://arxiv.org/abs/1906.01969      
+10、
+
+
+    
+
+
