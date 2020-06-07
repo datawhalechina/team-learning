@@ -6,7 +6,7 @@
 
 - 理解赛题背景和赛题数据
 - 完成赛题报名和数据下载，理解赛题的解题思路
-- 数据下载链接：https://tianchi.aliyun.com/competition/entrance/531795/information
+- 数据集下载链接：https://tianchi.aliyun.com/competition/entrance/531795/information
 
 <b>了解赛题</b>
 
