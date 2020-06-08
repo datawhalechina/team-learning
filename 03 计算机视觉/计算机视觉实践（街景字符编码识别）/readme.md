@@ -102,7 +102,9 @@
   #### 链接：https://tianchi.aliyun.com/course/live?spm=5176.12586971.1001.1.11be32bckJA8q2&liveId=41169 
     
  - #### 直播PPT下载       
-   https://pan.baidu.com/s/1ZpLvmNrgBzgwmanfXzoR5g     提取码：
+   https://pan.baidu.com/s/1ZpLvwNrgBzgwmanfXzoR5g             
+   提取码：zw3j
+   
 ---        
 ## 论文推荐       
 1、Characters as Graphs: Recognizing Online Handwritten Chinese Characters via Spatial Graph Convolutional Network     
