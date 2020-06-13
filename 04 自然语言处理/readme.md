@@ -11,7 +11,7 @@
 ## 基本信息
 
 - 学习名称：NLP组队学习
-- 学习周期：16天
+- 学习周期：15天
 - 学习形式：视频学习+实践
 - 人群定位：具备一定编程基础，有学习和梳理自然语言处理算法的需求
 - 难度等级：中
@@ -100,7 +100,7 @@
    - [作业链接](Assignments/official/homework1/FastText/)
    - [讨论区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/21) 
 
-1. Bert 探索
+4. Bert 探索
    - 练习任务
      - Bert 做分类
    - [作业链接](Assignments/official/homework1/Bert/)
