@@ -47,7 +47,7 @@
 
 - 王程伟，南昌航空大学硕士，主要方向是图像处理与模式识别，博客：https://blog.csdn.net/weixin_40647819
 - 张强，宁波大学计算机硕士，Github：https://github.com/QiangZiBro
-- 李芝翔，华北电力大学硕士，主要方向计算机视觉，GitHub：https://sandy1230.github.io/，博客：https://blog.csdn.net/weixin_39940512
+- 李芝翔，华北电力大学硕士，主要方向计算机视觉，GitHub：https://sandy1230.github.io/ ， 博客：https://blog.csdn.net/weixin_39940512
 
 **定位人群**：具备一定编程基础，了解 OpenCV，有学习和梳理图像处理算法的需求，参与过图像处理（上）组队学习者优先。
 
