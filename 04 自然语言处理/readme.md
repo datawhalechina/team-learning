@@ -1,4 +1,4 @@
-# Datawhale 第14期组队学习 -CS224n-预训练模块（上）
+# Datawhale 第12期组队学习 -CS224n-预训练模块（上）
 
 ## 项目动机
 
@@ -11,13 +11,15 @@
 ## 基本信息
 
 - 学习名称：NLP组队学习
-- 学习周期：15天
+- 学习周期：16天
 - 学习形式：视频学习+实践
 - 人群定位：具备一定编程基础，有学习和梳理自然语言处理算法的需求
 - 难度等级：中
 - 先修组队学习：无
 - 后续推荐组队学习：CS224n (中)
 - 编程语言：不限
+
+Hello! 遇到问题了吧！ 还不发上来让我们帮忙解答！！！
 
 ## 课程介绍
 
@@ -32,7 +34,7 @@
   - 资源
     - [slides](Lecture/Lecture1/slides/) 
     - [official notes](Lecture/Lecture1/official_notes/)
-  - [问题解答区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/1)
+  - [问题解答区](https://github.com/datawhalechina/team-learning/issues/13)
   
 - Task 2: Word Vectors and Word Senses （3天）
   - 理论部分
@@ -45,7 +47,7 @@
   - 资源
     - [slides](Lecture/Lecture2/slides/) 
     - [official notes](Lecture/Lecture2/official_notes/)
-  - [问题解答区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/2)
+  - [问题解答区](https://github.com/datawhalechina/team-learning/issues/14)
   
 - Task 3: Subword Models （3天）
   - 理论部分
@@ -58,7 +60,7 @@
   - 资源
     - [slides](Lecture/Lecture12/slides/) 
     - [official notes](Lecture/Lecture12/official_notes/) 
-  - [问题解答区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/12)
+  - [问题解答区](https://github.com/datawhalechina/team-learning/issues/15)
 
 - Task 4: Contextual Word Embeddings  （3天）
   - 理论部分
@@ -71,7 +73,7 @@
   - 资源
     - [slides](Lecture/Lecture13/slides/) 
     - [official notes](Lecture/Lecture14/official_notes/)
-  - [问题解答区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/13)
+  - [问题解答区](https://github.com/datawhalechina/team-learning/issues/16)
 
 - Task 5: Homework （3天）（组队完成）
 
@@ -81,7 +83,7 @@
    - 练习任务
      - 完成 CS224n 配套作业
    - [作业链接](Assignments/official/homework1/en/)
-   - [讨论区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/21)
+   - [讨论区](https://github.com/datawhalechina/team-learning/issues/17)
    
 2. 中文词向量的探索
    - 练习任务
@@ -91,20 +93,20 @@
      - word2vec 简单应用
      - 利用 one-hot 、TF-idf、word2vec 构建句向量，然后 采用 朴素贝叶斯、条件随机场做分类
    - [作业链接](Assignments/official/homework1/zh/)
-   - [讨论区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/21) 
+   - [讨论区](https://github.com/datawhalechina/team-learning/issues/18) 
   
 3. FastText 探索
    - 练习任务
      - FastText 词向量训练
      - FastText 做分类
    - [作业链接](Assignments/official/homework1/FastText/)
-   - [讨论区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/21) 
+   - [讨论区](https://github.com/datawhalechina/team-learning/issues/19) 
 
-4. Bert 探索
+1. Bert 探索
    - 练习任务
      - Bert 做分类
    - [作业链接](Assignments/official/homework1/Bert/)
-   - [讨论区](https://github.com/km1994/Datawhale_NLP_CS224n/issues/21) 
+   - [讨论区](https://github.com/datawhalechina/team-learning/issues/20) 
 
 ## 致谢
 
