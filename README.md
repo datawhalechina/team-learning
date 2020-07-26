@@ -3,12 +3,31 @@
 
 第15期 Datawhale 组队学习活动马上就要开始啦！
 
-本次组队学习的内容为：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)、[自然语言处理实践（新闻文本分类）](https://github.com/datawhalechina/team-learning-nlp/tree/master/NewsTextClassification)。
+
+
+本次组队学习的内容为：
+
+- [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)
+- [自然语言处理实践（新闻文本分类）](https://github.com/datawhalechina/team-learning-nlp/tree/master/NewsTextClassification)
+
+
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
 ---
 # [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)
+
+## 天池体验
+
+![](https://img-blog.csdnimg.cn/20200726211534488.png)
+
+- [Python入门（一）](https://developer.aliyun.com/ai/scenario/0e79900540a44163b17a58f37433dc59)
+- [Python入门（二）](https://developer.aliyun.com/ai/scenario/72fd191415564071b57aead45b279856)
+
+## PDF 下载
+
+![Datawhale](https://img-blog.csdnimg.cn/2020072621074658.png)
+
 
 ## 基本信息
 - 内容设计：徐韬、马燕鹏
@@ -33,7 +52,7 @@
 
 ## 任务安排
 
-### Task01： 变量、运算符、数据类型及位运算(2天)
+### Task01：变量、运算符、数据类型及位运算(2天)
 
 **理论部分**
 
@@ -61,7 +80,7 @@
 
 
 
-### Task03：异常处理(1天)
+### Task03：异常处理(2天)
 
 **理论部分**
 
@@ -74,84 +93,49 @@
 
 
 
-### Task04：列表(1天)
+### Task04：列表、元组和字符串(3天)
 
 **理论部分**
 
 - 掌握列表的定义与创建。
 - 熟练添加、删除和获取列表中的元素。
 - 了解列表的常用操作符及其他方法。
-
-**练习部分**
-
-- 列表操作练习
-- 课后思考题
-- leetcode练习题
-
-
-
-### Task05：元组(1天)
-
-**理论部分**
-
 - 掌握元组定义，熟悉创建和访问元组。
 - 熟悉更新和删除元组。
 - 了解元组相关的操作符和内置方法，以及解压元组。
-
-**练习部分**
-
-- 课后思考题
-- 知识扩展
-
-
-
-### Task06：字符串(1天)
-
-**理论部分**
-
 - 掌握字符串的定义。
 - 熟悉字符串的切片和拼接。
 - 掌握字符串的常用内置方法和格式化。
 
+
 **练习部分**
 
+- 列表操作练习
+- 元组操作练习
 - 字符串操作练习
 - 实现`isdigit`函数
 - leetcode练习题
 
 
-
-### Task07：字典(1天)
+### Task05：字典、集合和序列(3天)
 
 **理论部分**
 
 - 掌握字典的定义，创建和访问字典。
 - 熟悉字典的可变类型和不可变类型。
 - 了解字典的内置方法。
+- 掌握集合的创建与访问，熟悉集合的内置方法。
+- 熟悉集合的转换，了解不可变集合。
+- 熟悉针对序列的内置函数
 
 **练习部分**
 
 - 字典操作练习
-- 编程练习
-
-
-
-### Task08：集合、序列(1天)
-
-**理论部分**
-
-- 掌握集合的创建与访问，熟悉集合的内置方法。
-- 熟悉集合的转换，了解不可变集合。
-- 熟悉针对序列的内置函数。
-
-**练习部分**
-
 - 集合操作练习
 - 序列内置函数练习
 
 
-
-### Task09：函数与Lambda表达式(2天)
+### Task06：函数与Lambda表达式(2天)
 
 **理论部分**
 
@@ -165,7 +149,7 @@
 - `lambda`表达式应用
 - 汉诺塔游戏
 
-### Task10：类、对象与魔法方法(3天)
+### Task07：类、对象与魔法方法(3天)
 
 **理论部分**
 
@@ -179,7 +163,7 @@
 - 编程实践
 
 
-### Task11：模块与datetime模块(2天)
+### Task08：模块与datetime模块(2天)
 
 **理论部分**
 
@@ -193,7 +177,7 @@
 - 编程实践
 
 
-### Task12： 文件与文件系统(1天)
+### Task09： 文件与文件系统(1天)
 
 **理论部分**
 
@@ -216,6 +200,25 @@
 ---
 # [自然语言处理实践（新闻文本分类）](https://github.com/datawhalechina/team-learning-nlp/tree/master/NewsTextClassification)
 
+## 天池新人赛
+
+![](https://img-blog.csdnimg.cn/20200726212529716.png)
+
+- [零基础入门NLP - 新闻文本分类](https://tianchi.aliyun.com/competition/entrance/531810/introduction)
+- [Task01：赛题理解](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.6.6406111aIKCSLV&postId=118252)
+- [Task02：数据读取与数据分析](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.9.6406111aIKCSLV&postId=118253)
+- [Task03：基于机器学习的文本分类](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.12.6406111aIKCSLV&postId=118254)
+- [Task04：基于深度学习的文本分类1](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.15.6406111aIKCSLV&postId=118255)
+- [Task05：基于深度学习的文本分类2](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.18.6406111aIKCSLV&postId=118268)
+- [Task06：基于深度学习的文本分类3](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.27.6406111aIKCSLV&postId=118260)
+- [录播：赛题理解以及数据分析、基于机器学习的文本分类](https://tianchi.aliyun.com/course/live?liveId=41190)
+
+
+
+
+## PDF 下载
+
+![Datawhale](https://img-blog.csdnimg.cn/2020072621074658.png)
 
 ## 基本信息
 - 内容设计：刘羽中、张帆、陈海顺、但扬杰、王翔
@@ -301,3 +304,7 @@
 
 - 完成Bert Pretrain和Finetune的过程。
 - 阅读Bert官方文档，找到相关参数进行调参。
+
+
+---
+![Datawhale](https://img-blog.csdnimg.cn/20200726211045814.png)
