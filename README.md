@@ -24,11 +24,6 @@
 - [Python入门（一）](https://developer.aliyun.com/ai/scenario/0e79900540a44163b17a58f37433dc59)
 - [Python入门（二）](https://developer.aliyun.com/ai/scenario/72fd191415564071b57aead45b279856)
 
-## PDF 下载
-
-![Datawhale](https://img-blog.csdnimg.cn/2020072621074658.png)
-
-
 ## 基本信息
 - 内容设计：徐韬、马燕鹏
 - 教辅人员：马燕鹏、徐韬、何煊、韩绘锦、任帅
@@ -214,12 +209,6 @@
 - [录播：赛题理解以及数据分析、基于机器学习的文本分类](https://tianchi.aliyun.com/course/live?liveId=41190)
 
 
-
-
-## PDF 下载
-
-![Datawhale](https://img-blog.csdnimg.cn/2020072621074658.png)
-
 ## 基本信息
 - 内容设计：刘羽中、张帆、陈海顺、但扬杰、王翔
 - 教辅人员：周郴莲、胡明豪、朱鑫海
@@ -304,6 +293,12 @@
 
 - 完成Bert Pretrain和Finetune的过程。
 - 阅读Bert官方文档，找到相关参数进行调参。
+
+
+---
+本次组队学习的 PDF 文档可到Datawhale的知识星球下载：
+
+![Datawhale](https://img-blog.csdnimg.cn/2020072621074658.png)
 
 
 ---
