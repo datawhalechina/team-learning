@@ -208,7 +208,7 @@
 
 ## 天池新人赛
 
-![](https://img-blog.csdnimg.cn/20200726212529716.png)
+![](https://img-blog.csdnimg.cn/20200801001354118.png)
 
 - [零基础入门NLP - 新闻文本分类](https://tianchi.aliyun.com/competition/entrance/531810/introduction)
 - [Task01：赛题理解](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.6.6406111aIKCSLV&postId=118252)
