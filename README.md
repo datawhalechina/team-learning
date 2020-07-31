@@ -37,8 +37,7 @@
 - [Python入门（二）](https://developer.aliyun.com/ai/scenario/72fd191415564071b57aead45b279856)
 
 ## 基本信息
-- 内容设计：徐韬、马燕鹏
-- 教辅人员：马燕鹏、徐韬、何煊、韩绘锦、任帅
+- 贡献人员：马燕鹏、徐韬、何煊、韩绘锦、任帅
 - 学习周期：17天 2-3h/天
 - 学习形式：理论学习 + 练习
 - 人群定位：Python小白，对Python语言有兴趣。
@@ -218,12 +217,12 @@
 - [Task04：基于深度学习的文本分类1](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.15.6406111aIKCSLV&postId=118255)
 - [Task05：基于深度学习的文本分类2](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.18.6406111aIKCSLV&postId=118268)
 - [Task06：基于深度学习的文本分类3](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.27.6406111aIKCSLV&postId=118260)
-- [录播：赛题理解以及数据分析、基于机器学习的文本分类](https://tianchi.aliyun.com/course/live?liveId=41190)
+- [录播01：赛题理解以及数据分析、基于机器学习的文本分类](https://tianchi.aliyun.com/course/live?liveId=41190)
+- [录播02：文本分类架构HAN、TextCNN](https://tianchi.aliyun.com/course/live?liveId=41192)
 
 
 ## 基本信息
-- 内容设计：刘羽中、张帆、陈海顺、但扬杰、王翔
-- 教辅人员：周郴莲、胡明豪、朱鑫海
+- 贡献人员：刘羽中，张帆，陈海顺，但扬杰，王翔、周郴莲、胡明豪、朱鑫海
 - 学习周期：15天 2-3h/天
 - 学习形式：理论学习 + 练习
 - 人群定位：有一定的Python和nlp基础，对参加天池新人赛有兴趣。
