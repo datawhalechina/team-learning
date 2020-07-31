@@ -7,7 +7,7 @@
 
 本次组队学习的内容为：
 
-- [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)
+- [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
 - [自然语言处理实践（新闻文本分类）](https://github.com/datawhalechina/team-learning-nlp/tree/master/NewsTextClassification)
 
 
@@ -20,14 +20,14 @@
 - [00 组队学习计划](https://github.com/datawhalechina/team-learning)
 - [01 编程语言与数据结构](https://github.com/datawhalechina/team-learning-program)
 - [02 数据挖掘基础算法](https://github.com/datawhalechina/team-learning-data-mining)
-- [03 计算机视觉](https://github.com/datawhalechina/team-learning-nlp)
-- [04 自然语言处理](https://github.com/datawhalechina/team-learning-cv)
+- [03 自然语言处理](https://github.com/datawhalechina/team-learning-nlp)
+- [04 计算机视觉](https://github.com/datawhalechina/team-learning-cv)
 - 05 推荐系统
 
 
 
 ---
-# [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)
+# [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
 
 ## 天池体验
 
