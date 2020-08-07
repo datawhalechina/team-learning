@@ -219,6 +219,7 @@
 - [Task06：基于深度学习的文本分类3](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.27.6406111aIKCSLV&postId=118260)
 - [录播01：赛题理解以及数据分析、基于机器学习的文本分类](https://tianchi.aliyun.com/course/live?liveId=41190)
 - [录播02：文本分类架构HAN、TextCNN](https://tianchi.aliyun.com/course/live?liveId=41192)
+- [录播03：预训练语言模型BERT](https://tianchi.aliyun.com/course/video?liveId=41193)
 
 
 ## 基本信息
