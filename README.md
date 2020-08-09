@@ -15,16 +15,6 @@
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
 
-有关Datawhale组队学习的开源内容如下：
-
-- [00 组队学习计划](https://github.com/datawhalechina/team-learning)
-- [01 编程语言与数据结构](https://github.com/datawhalechina/team-learning-program)
-- [02 数据挖掘基础算法](https://github.com/datawhalechina/team-learning-data-mining)
-- [03 自然语言处理](https://github.com/datawhalechina/team-learning-nlp)
-- [04 计算机视觉](https://github.com/datawhalechina/team-learning-cv)
-- 05 推荐系统
-
-
 
 ---
 # [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
@@ -313,6 +303,17 @@
 - 在每次任务截止之前在群内填写问卷打卡，遇到问题在群内讨论。
 - 未按时打卡的同学视为自动放弃，被抱出学习群。
 
+---
+# 备注
+
+有关Datawhale组队学习的开源内容如下：
+
+- [00 组队学习计划](https://github.com/datawhalechina/team-learning)
+- [01 编程语言与数据结构](https://github.com/datawhalechina/team-learning-program)
+- [02 数据挖掘基础算法](https://github.com/datawhalechina/team-learning-data-mining)
+- [03 自然语言处理](https://github.com/datawhalechina/team-learning-nlp)
+- [04 计算机视觉](https://github.com/datawhalechina/team-learning-cv)
+- [05 推荐系统](https://github.com/datawhalechina/team-learning-rs)
 
 
 
