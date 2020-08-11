@@ -9,7 +9,7 @@
 - [AI入门体验](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
 - [动手学数据分析](https://github.com/datawhalechina/hands-on-data-analysis)
 - [编程实践（LeetCode 分类练习）](https://github.com/datawhalechina/team-learning-program/tree/master/LeetCodeClassification)
-- [数据挖掘实践（资金流入流出预测）]
+- [数据挖掘实践（资金流入流出预测）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/PurchaseAndRedemptionForecast)
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
@@ -128,21 +128,91 @@
 
 
 ---
-# [数据挖掘实践（资金流入流出预测）]
+# [数据挖掘实践（资金流入流出预测）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/PurchaseAndRedemptionForecast)
 
 ## 基本信息
-- 贡献人员：薛传雨、车弘书
-- 学习周期：
-- 学习形式：
-- 人群定位：
-- 先修内容：无
-- 难度系数：低
-
+- 贡献人员：小雨姑娘，AI蜗牛车
+- 学习周期：7天 2-3h/天
+- 学习形式：理论学习 + 实战
+- 人群定位：有 python 编程、数据挖掘基础，希望从事数据分析工作的学习者，希望体验时间序列比赛的学习者，对金融时间序列感兴趣的学习者。
+- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)，[编程实践（Pandas）](https://github.com/datawhalechina/joyful-pandas)
+- 难度系数：中
 
 ## 学习目标
 
+熟悉数据分析的流程，了解金融时间序列分析的一般方法。
 
 ## 任务安排
+
+### Task01：数据探索与分析（2天）
+
+<b>理论部分</b>
+
+- 熟悉常用的数据绘图与统计分析方法
+- 了解针对时间序列数据的分析方法
+- 了解探索性数据分析的思想与流程
+
+<b>实战部分</b>
+
+- 完成数据探索与分析的代码
+
+### Task02：时间序列规则（1天）
+
+<b>理论部分</b>
+
+- 了解时间序列问题的基础知识
+- 了解时序数据的Pandas操作技巧
+- 了解时间序列周期因子建模方法
+
+<b>实战部分</b>
+
+- 完成时间序列规则代码，在Tianchi平台提交baseline
+
+### Task03：时间序列模型（1天）
+
+<b>理论部分</b>
+
+- 了解几种经典的时间序列统计模型
+- 学习时间序列统计模型的代码
+
+### Task04：特征工程（1天）
+
+<b>理论部分</b>
+
+- 掌握通过数据分析构建特征的一般方法
+- 掌握利用Pandas快速提取特征的方法
+- 掌握判断构建特征有效应的方法
+- 了解对于金融时间序列的特征工程方法
+
+<b>实战部分</b>
+
+- 完成特征工程代码
+
+### Task05：建模预测（1天）
+
+**理论部分**
+
+- 掌握建模预测的基本流程
+- 掌握基本的时间序列模型验证方法
+- 了解几种机器学习模型的原理与优劣
+- 了解基于残差的模型融合方法
+
+**实战部分**
+
+完成建模预测代码，并在Tianchi平台提交建模预测的结果
+
+### Task06：学习总结（1天）
+
+**理论部分**
+
+- 系统回顾学习到的知识点与操作
+
+**实战部分**
+
+- 自己尝试获得更好的预测结果
+
+
+
 
 
 ---
