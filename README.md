@@ -19,19 +19,43 @@
 ---
 # [AI入门体验](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
 
+
 ## 基本信息
-- 贡献人员：
-- 学习周期：
-- 学习形式：
-- 人群定位：
-- 先修内容：无
+- 贡献人员：肖然、薛传雨、陈泽、李云龙、汪健麟
+- 学习周期：7天
+- 学习形式：天池notebook实践
+- 人群定位：懂一些python语言，希望对机器学习算法有所了解的学员。
+- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
 - 难度系数：低
 
 
 ## 学习目标
 
+了解knn、svm、决策树的算法原理，能够在天池notebook环境运行并理解代码。
 
 ## 任务安排
+
+### Task01：K近邻(k-nearest neighbors)初探（2天）
+
+- 了解KNN的基本原理。
+- 能够完整运行KNN的实现代码。
+- 天池notebook：https://developer.aliyun.com/ai/scenario/febc2223e46f419dae84df47b1760ffc
+
+
+### Task02：基于决策树的分类预测（2天）
+
+- 了解决策树的基本原理。
+- 能够完整运行决策树的实现代码。
+- 天池notebook：https://developer.aliyun.com/ai/scenario/bb2fe211e5e94017840ce42cc31fe621
+
+
+### Task03：基于支持向量机的分类预测（3天）
+
+- 了解SVM的基本原理。
+- 能够完整运行SVM的实现代码。
+- 天池notebook：https://developer.aliyun.com/ai/scenario/b6c1ef3172d84236ae10c3b91798a796
+
+
 
 
 ---
@@ -52,12 +76,11 @@
 ## 任务安排
 
 
-
 ---
 # [编程实践（LeetCode 分类练习）](https://github.com/datawhalechina/team-learning-program/tree/master/LeetCodeClassification)
 
 ## 基本信息
-- 贡献人员：胡联粤、王嘉鹏、Yaxe、韩绘锦、姚行志、李云龙、汪健麟
+- 贡献人员：胡联粤、王嘉鹏、Yaxe、韩绘锦、姚行志
 - 学习周期：10天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动。
 - 学习形式：理论学习 + 练习
 - 人群定位：具有一定编程语言基础；
