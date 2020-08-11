@@ -1,15 +1,15 @@
-
 # Datawhale 组队学习
 
-第15期 Datawhale 组队学习活动马上就要开始啦！
 
 
+第16期 Datawhale 组队学习活动马上就要开始啦！
 
 本次组队学习的内容为：
 
-- [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
-- [自然语言处理实践（新闻文本分类）](https://github.com/datawhalechina/team-learning-nlp/tree/master/NewsTextClassification)
-
+- [AI入门体验](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
+- [动手学数据分析](https://github.com/datawhalechina/hands-on-data-analysis)
+- [编程实践（LeetCode 分类练习）](https://github.com/datawhalechina/team-learning-program/tree/master/LeetCodeClassification)
+- [数据挖掘实践（资金流入流出预测）]
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
@@ -17,291 +17,133 @@
 
 
 ---
-# [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
-
-## 天池体验
-
-![](https://img-blog.csdnimg.cn/20200726211534488.png)
-
-- [Python入门（一）](https://developer.aliyun.com/ai/scenario/0e79900540a44163b17a58f37433dc59)
-- [Python入门（二）](https://developer.aliyun.com/ai/scenario/72fd191415564071b57aead45b279856)
+# [AI入门体验](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
 
 ## 基本信息
-- 贡献人员：马燕鹏、徐韬、何煊、韩绘锦、任帅
-- 学习周期：17天 2-3h/天
-- 学习形式：理论学习 + 练习
-- 人群定位：Python小白，对Python语言有兴趣。
+- 贡献人员：
+- 学习周期：
+- 学习形式：
+- 人群定位：
 - 先修内容：无
 - 难度系数：低
 
 
 ## 学习目标
 
-- 了解Python的基础数据类型与运算。
-- 掌握Python基础的语言结构与异常判断。
-- 掌握列表、元组、字典和字符串等Python数据类型。
-- 理解Python函数的概念与相关用法。
-- 掌握Python类与对象用法，理解Python面向对象的特性。
-- 了解Python处理文件与操作文件系统过程。
-
-
 
 ## 任务安排
 
-### Task01：变量、运算符、数据类型及位运算(2天)
-
-**理论部分**
-
-- 了解python中基本的变量类型，运算符，及数据类型。
-- 了解python的位运算。
-
-**练习部分**
-
-- 课后思考题
-- leetcode练习题
-
-
-### Task02：条件循环结构(1天)
-
-**理论部分**
-
-- 掌握基本的条件，循环语句的使用。
-- 掌握assert断言break,continue，pass，等语句的使用。
-- 熟悉推导式的用法。
-
-**练习部分**
-
-- 课后思考题
-- 龟兔赛跑游戏
-
-
-
-### Task03：异常处理(2天)
-
-**理论部分**
-
-- 了解可能会出现的各类异常。
-- 熟练掌握`try_except_finally`结构，使用`raise`语句抛出指定的异常。
-
-**练习部分**
-
-- 猜字游戏
-
-
-
-### Task04：列表、元组和字符串(3天)
-
-**理论部分**
-
-- 掌握列表的定义与创建。
-- 熟练添加、删除和获取列表中的元素。
-- 了解列表的常用操作符及其他方法。
-- 掌握元组定义，熟悉创建和访问元组。
-- 熟悉更新和删除元组。
-- 了解元组相关的操作符和内置方法，以及解压元组。
-- 掌握字符串的定义。
-- 熟悉字符串的切片和拼接。
-- 掌握字符串的常用内置方法和格式化。
-
-
-**练习部分**
-
-- 列表操作练习
-- 元组操作练习
-- 字符串操作练习
-- 实现`isdigit`函数
-- leetcode练习题
-
-
-### Task05：字典、集合和序列(3天)
-
-**理论部分**
-
-- 掌握字典的定义，创建和访问字典。
-- 熟悉字典的可变类型和不可变类型。
-- 了解字典的内置方法。
-- 掌握集合的创建与访问，熟悉集合的内置方法。
-- 熟悉集合的转换，了解不可变集合。
-- 熟悉针对序列的内置函数
-
-**练习部分**
-
-- 字典操作练习
-- 集合操作练习
-- 序列内置函数练习
-
-
-### Task06：函数与Lambda表达式(2天)
-
-**理论部分**
-
-- 掌握函数的定义与调用，熟悉函数灵活的参数形态。
-- 熟悉变量的作用域和递归函数。
-- 熟悉匿名函数和定义与应用。
-
-**练习部分**
-
-- 课后思考题
-- `lambda`表达式应用
-- 汉诺塔游戏
-
-### Task07：类、对象与魔法方法(3天)
-
-**理论部分**
-
-- 掌握类、对象和实例对象之间的关系，熟悉类的继承与多态。
-- 理解`self`的含义，熟悉类的公有和私有，了解绑定的概念和相关内置函数。
-- 了解Python的魔法方法，理解Python面向对象特性的基础。
-
-**练习部分**
-
-- 课后思考题
-- 编程实践
-
-
-### Task08：模块与datetime模块(2天)
-
-**理论部分**
-
-- 了解python的模块定义，理解python的命名空间。
-- 熟悉python模块的引用方法与搜索路径。
-- 了解并应用datetime模块。
-
-**练习部分**
-
-- 课后思考题
-- 编程实践
-
-
-### Task09： 文件与文件系统(1天)
-
-**理论部分**
-
-- 掌握打开文件的`open`函数,熟练文件对象的操作方法与with语句使用方法。
-- 掌握OS模块关于文件/目录常用的函数。
-- 了解Python的序列化与反序列化，熟悉`pickle`模块。
-
-**练习部分**
-
-- 课后思考题
-- 编程实践
-
-## 参考资料
-
-- 菜鸟教程：https://www.runoob.com/python3/python3-tutorial.html
-- 小甲鱼python基础入门：https://www.bilibili.com/video/av4050443
-
-
 
 ---
-# [自然语言处理实践（新闻文本分类）](https://github.com/datawhalechina/team-learning-nlp/tree/master/NewsTextClassification)
-
-## 天池新人赛
-
-![](https://img-blog.csdnimg.cn/20200801001354118.png)
-
-- [零基础入门NLP - 新闻文本分类](https://tianchi.aliyun.com/competition/entrance/531810/introduction)
-- [Task01：赛题理解](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.6.6406111aIKCSLV&postId=118252)
-- [Task02：数据读取与数据分析](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.9.6406111aIKCSLV&postId=118253)
-- [Task03：基于机器学习的文本分类](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.12.6406111aIKCSLV&postId=118254)
-- [Task04：基于深度学习的文本分类1](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.15.6406111aIKCSLV&postId=118255)
-- [Task05：基于深度学习的文本分类2](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.18.6406111aIKCSLV&postId=118268)
-- [Task06：基于深度学习的文本分类3](https://tianchi.aliyun.com/notebook-ai/detail?spm=5176.12586969.1002.27.6406111aIKCSLV&postId=118260)
-- [录播01：赛题理解以及数据分析、基于机器学习的文本分类](https://tianchi.aliyun.com/course/live?liveId=41190)
-- [录播02：文本分类架构HAN、TextCNN](https://tianchi.aliyun.com/course/live?liveId=41192)
-- [录播03：预训练语言模型BERT](https://tianchi.aliyun.com/course/video?liveId=41193)
-
+# [动手学数据分析](https://github.com/datawhalechina/hands-on-data-analysis)
 
 ## 基本信息
-- 贡献人员：刘羽中、张帆、陈海顺、但扬杰、高永伟、王翔、周郴莲、胡明豪、朱鑫海、于鸿飞
-- 学习周期：15天 2-3h/天
-- 学习形式：理论学习 + 练习
-- 人群定位：有一定的Python和nlp基础，对参加天池新人赛有兴趣。
-- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)、[自然语言处理入门](https://github.com/datawhalechina/team-learning-nlp/tree/master/IntroductionToNLP)
-- 难度系数：中
+- 贡献人员：
+- 学习周期：
+- 学习形式：
+- 人群定位：
+- 先修内容：无
+- 难度系数：低
+
+
+## 学习目标
 
 
 ## 任务安排
 
 
-### Task1 赛题理解（1天）
-
-<b>学习目标</b>
-
-- 理解赛题背景与赛题数据
-- 完成赛题报名和数据下载，理解赛题的解题思路
-
-<b>本章作业</b>
-- 无
-
-### Task2 数据读取与数据分析（1天）
-
-<b>学习目标</b>
-
-- 学习使用`Pandas`读取赛题数据。
-- 分析赛题数据的分布规律。
-
-<b>本章作业</b>
-
-- 假设字符3750，字符900和字符648是句子的标点符号，请分析赛题每篇新闻平均由多少个句子构成？
-- 统计每类新闻中出现次数对多的字符。
-
-### Task3 基于机器学习的文本分类（3天）
-
-<b>学习目标</b>
-
-- 学会TF-IDF的原理和使用。
-- 使用sklearn的机器学习模型完成文本分类。
-
-<b>本章作业</b>
-
-- 尝试改变TF-IDF的参数，并验证精度。
-- 尝试使用其他机器学习模型，完成训练和验证。
-
-### Task4 基于深度学习的文本分类1（2天）
-
-<b>学习目标</b>
-
-- 学习FastText的使用和基础原理。
-- 学会使用验证集进行调参。
-
-<b>本章作业</b>
-
-- 阅读FastText的文档，尝试修改参数，得到更好的分数。
-- 基于验证集的结果调整超参数，使得模型性能更优。
-
-### Task5 基于深度学习的文本分类2（4天）
-
-<b>学习目标</b>
-
-- 学习Word2Vec的使用和基础原理。
-- 学习使用TextCNN、TextRNN进行文本表示。
-- 学习使用HAN网络结构完成文本分类。
-
-<b>本章作业</b>
-
-- 尝试通过Word2Vec训练词向量。
-- 尝试使用TextCNN、TextRNN完成文本表示。
-- 尝试使用HAN进行文本分类。
-
-### Task6 基于深度学习的文本分类3（4天）
-
-<b>学习目标</b>
-
-- 了解Transformer的原理和基于预训练语言模型（Bert）的词表示。
-- 学会Bert的使用，具体包括pretrain和finetune。
-
-<b>本章作业</b>
-
-- 完成Bert Pretrain和Finetune的过程。
-- 阅读Bert官方文档，找到相关参数进行调参。
 
 ---
-# 具体规则
-- 注册 CSDN 或 Github 账户。
-- 按照任务安排进行学习，完成后写学习笔记Blog。
-- 在每次任务截止之前在群内填写问卷打卡，遇到问题在群内讨论。
-- 未按时打卡的同学视为自动放弃，被抱出学习群。
+# [编程实践（LeetCode 分类练习）](https://github.com/datawhalechina/team-learning-program/tree/master/LeetCodeClassification)
+
+## 基本信息
+- 贡献人员：胡联粤、王嘉鹏、Yaxe、韩绘锦、姚行志、李云龙、汪健麟
+- 学习周期：10天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动。
+- 学习形式：理论学习 + 练习
+- 人群定位：具有一定编程语言基础；
+- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)、[数据结构与算法](https://github.com/datawhalechina/team-learning-program/tree/master/DataStructureAndAlgorithm)
+- 难度系数：中
+
+## 学习目标
+
+- 能够熟练的使用LeetCode刷题，提高自身的coding能力
+
+## 任务安排
+
+### Task01：分治（2天）
+
+独立完成以下leetcode题目：
+
+- [50. Pow(x, n)](https://leetcode-cn.com/problems/powx-n/)
+- [53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)
+- [169. 多数元素](https://leetcode-cn.com/problems/majority-element/)
+
+
+
+## Task02：动态规划（3天）
+
+独立完成以下leetcode题目：
+
+- [5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)
+- [72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)
+- [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)
+- [213. 打家劫舍II](https://leetcode-cn.com/problems/house-robber-ii/)
+- [516. 最长回文子序列](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)
+- [674. 最长连续递增序列](https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/)
+
+
+
+## Task03：查找1（2天）
+
+独立完成以下leetcode题目：
+
+- [35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/)
+- [202. 快乐数](https://leetcode-cn.com/problems/happy-number/)
+- [205. 同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/)
+- [242. 有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
+- [290. 单词规律](https://leetcode-cn.com/problems/word-pattern/)
+- [349. 两个数组的交集](https://leetcode-cn.com/problems/intersection-of-two-arrays/)
+- [350. 两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
+- [410. 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)
+- [451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/)
+- [540. 有序数组中的单一元素](https://leetcode-cn.com/problems/single-element-in-a-sorted-array/)
+
+
+
+## Task04：查找2（3天）
+
+独立完成以下leetcode题目：
+
+- [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
+- [15. 三数之和](https://leetcode-cn.com/problems/3sum/)
+- [16. 最接近的三数之和](https://leetcode-cn.com/problems/3sum-closest/)
+- [18. 四数之和](https://leetcode-cn.com/problems/4sum/)
+- [49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)
+- [149. 直线上最多的点数](https://leetcode-cn.com/problems/max-points-on-a-line/)
+- [219. 存在重复元素 II](https://leetcode-cn.com/problems/contains-duplicate-ii/)
+- [220. 存在重复元素 III](https://leetcode-cn.com/problems/contains-duplicate-iii/)
+- [447. 回旋镖的数量](https://leetcode-cn.com/problems/number-of-boomerangs/)
+- [454. 四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)
+
+
+
+---
+# [数据挖掘实践（资金流入流出预测）]
+
+## 基本信息
+- 贡献人员：薛传雨、车弘书
+- 学习周期：
+- 学习形式：
+- 人群定位：
+- 先修内容：无
+- 难度系数：低
+
+
+## 学习目标
+
+
+## 任务安排
+
 
 ---
 # 备注
