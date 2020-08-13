@@ -21,39 +21,39 @@
 
 
 ## 基本信息
-- 贡献人员：肖然、薛传雨、陈泽、李云龙、汪健麟、牛宝华
+- 贡献人员：王茂霖、薛传雨、陈泽、李云龙、汪健麟、牛宝华
 - 学习周期：7天
-- 学习形式：天池notebook实践
-- 人群定位：懂一些python语言，希望对机器学习算法有所了解的学员。
+- 学习形式：阿里云notebook实践
+- 人群定位：懂一些python语言，希望对机器学习算法有所了解的学习者。
 - 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
 - 难度系数：低
 
 
 ## 学习目标
 
-了解knn、svm、决策树的算法原理，能够在天池notebook环境运行并理解代码。
+了解逻辑回归、svm、决策树的算法原理，能够在阿里云notebook环境运行并理解代码。
 
 ## 任务安排
 
-### Task01：K近邻(k-nearest neighbors)初探（2天）
+### Task01：基于逻辑回归的分类预测（2天）
 
-- 了解KNN的基本原理。
-- 能够完整运行KNN的实现代码。
-- 天池notebook：https://developer.aliyun.com/ai/scenario/febc2223e46f419dae84df47b1760ffc
+- 了解逻辑回归的基本原理。
+- 能够完整运行逻辑回归的实现代码。
+- 阿里云notebook：https://developer.aliyun.com/ai/scenario/9ad3416619b1423180f656d1c9ae44f7
 
 
 ### Task02：基于决策树的分类预测（2天）
 
 - 了解决策树的基本原理。
 - 能够完整运行决策树的实现代码。
-- 天池notebook：https://developer.aliyun.com/ai/scenario/bb2fe211e5e94017840ce42cc31fe621
+- 阿里云notebook：https://developer.aliyun.com/ai/scenario/bb2fe211e5e94017840ce42cc31fe621
 
 
 ### Task03：基于支持向量机的分类预测（3天）
 
 - 了解SVM的基本原理。
 - 能够完整运行SVM的实现代码。
-- 天池notebook：https://developer.aliyun.com/ai/scenario/b6c1ef3172d84236ae10c3b91798a796
+- 阿里云notebook：https://developer.aliyun.com/ai/scenario/b6c1ef3172d84236ae10c3b91798a796
 
 
 
@@ -64,8 +64,8 @@
 ## 基本信息
 - 贡献人员：陈安东，金娟娟，老表，杨佳达，李玲，张文涛，高立业
 - 学习周期：10天，每天学习3~5个小时
-- 学习形式：使用jupyter完成课程版块的内容，并做笔记或者写博客
-- 人群定位：懂一些python，希望入门数据分析的学员
+- 学习形式：使用jupyter完成课程版块的内容，并做笔记或者写博客。
+- 人群定位：懂一些python，希望入门数据分析的学习者。
 - 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)，[编程实践（Pandas）](https://github.com/datawhalechina/joyful-pandas)
 - 难度系数：低
 
@@ -98,7 +98,7 @@
 
 *主要学习内容是*：课程的第二章第二和第三部分（数据重构）
 
-### Task04 数据可视化（2天）
+### Task04：数据可视化（2天）
 - 了解可视化的目的
 - 知道各种图形可用于的场景
 - 实战数据可视化的基本库
@@ -270,9 +270,6 @@
 **实战部分**
 
 - 自己尝试获得更好的预测结果
-
-
-
 
 
 ---
