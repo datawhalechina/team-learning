@@ -6,7 +6,7 @@
 
 本次组队学习的内容为：
 
-- [AI入门体验](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
+- [机器学习算法梳理（AI入门体验）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
 - [动手学数据分析](https://github.com/datawhalechina/hands-on-data-analysis)
 - [编程实践（LeetCode 分类练习）](https://github.com/datawhalechina/team-learning-program/tree/master/LeetCodeClassification)
 - [数据挖掘实践（资金流入流出预测）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/PurchaseAndRedemptionForecast)
