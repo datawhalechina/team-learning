@@ -17,7 +17,7 @@
 
 
 ---
-# [AI入门体验](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
+# [机器学习算法梳理（AI入门体验）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
 
 
 ## 基本信息
