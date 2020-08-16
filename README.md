@@ -19,6 +19,7 @@
 ---
 # [机器学习算法梳理（AI入门体验）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI)
 
+> 注：此处显示本次组队学习的任务，点击标题的链接可以跳转到对应的学习资料。
 
 ## 基本信息
 - 贡献人员：王茂霖、薛传雨、陈泽、李云龙、汪健麟、牛宝华
@@ -60,6 +61,9 @@
 
 ---
 # [动手学数据分析](https://github.com/datawhalechina/hands-on-data-analysis)
+
+> 注：此处显示本次组队学习的任务，点击标题的链接可以跳转到对应的学习资料。
+
 
 ## 基本信息
 - 贡献人员：陈安东，金娟娟，老表，杨佳达，李玲，张文涛，高立业
@@ -116,6 +120,8 @@
 ---
 # [编程实践（LeetCode 分类练习）](https://github.com/datawhalechina/team-learning-program/tree/master/LeetCodeClassification)
 
+> 注：此处显示本次组队学习的任务，点击标题的链接可以跳转到对应的学习资料。
+
 ## 基本信息
 - 贡献人员：胡联粤、王嘉鹏、Yaxe、韩绘锦、姚行志
 - 学习周期：10天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动。
@@ -123,6 +129,8 @@
 - 人群定位：具有一定编程语言基础；
 - 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)、[数据结构与算法](https://github.com/datawhalechina/team-learning-program/tree/master/DataStructureAndAlgorithm)
 - 难度系数：中
+
+
 
 ## 学习目标
 
@@ -190,8 +198,10 @@
 ---
 # [数据挖掘实践（资金流入流出预测）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/PurchaseAndRedemptionForecast)
 
+> 注：此处显示本次组队学习的任务，点击标题的链接可以跳转到对应的学习资料。
+
 ## 基本信息
-- 贡献人员：小雨姑娘，AI蜗牛车
+- 贡献人员：薛传雨，车弘书
 - 学习周期：7天 2-3h/天
 - 学习形式：理论学习 + 实战
 - 人群定位：有 python 编程、数据挖掘基础，希望从事数据分析工作的学习者，希望体验时间序列比赛的学习者，对金融时间序列感兴趣的学习者。
