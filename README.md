@@ -214,6 +214,10 @@
 
 ## 任务安排
 
+该组队学习所用到的数据集可在阿里天池下载：
+
+https://tianchi.aliyun.com/competition/entrance/231573/information
+
 ### Task01：数据探索与分析（2天）
 
 <b>理论部分</b>
