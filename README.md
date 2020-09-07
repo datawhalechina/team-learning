@@ -5,7 +5,9 @@
 
 第17期 Datawhale 组队学习活动马上就要开始啦！
 
-本次组队学习的内容为：[数据挖掘实践（金融风控）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/FinancialRiskControl)，该内容来自 Datawhale与天池联合发起的 零基础入门数据挖掘 - 金融风控 学习赛的第一场。
+本次组队学习的内容为：[数据挖掘实践（金融风控）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/FinancialRiskControl)，该内容来自 Datawhale与天池联合发起的 [零基础入门数据挖掘 - 贷款违约预测](https://tianchi.aliyun.com/competition/entrance/531830/introduction) 学习赛的第一场。
+
+![](https://img-blog.csdnimg.cn/20200907140357613.png)
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
@@ -55,8 +57,8 @@
 
 ---
 # 具体规则
-- 注册 CSDN 或 Github 账户。
-- 按照任务安排进行学习，完成后写学习笔记Blog。
+- 注册 CSDN、Github 或 B站等账户。
+- 按照任务安排进行学习，完成后写学习笔记Blog 或 进行视频直播。
 - 在每次任务截止之前在群内填写问卷打卡，遇到问题在群内讨论。
 - 未按时打卡的同学视为自动放弃，被抱出学习群。
 
