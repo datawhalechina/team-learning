@@ -16,7 +16,7 @@
 # [数据挖掘实践（金融风控）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/FinancialRiskControl)
 
 ## 基本信息
-- 贡献人员：王贺、杨冰楠、陶旭东、吴争光
+- 贡献人员：王贺、杨冰楠、陶旭东、吴争光、苏鹏、王程伟、担扬杰、成森、陈长沙、刘雯静
 - 学习周期：14天
 - 学习形式：理论学习 + 练习
 - 人群定位：有一定数据分析与python编程的基础。
