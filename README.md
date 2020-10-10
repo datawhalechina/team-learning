@@ -13,14 +13,16 @@
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
 ---
-# [数据挖掘实践（金融风控）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/FinancialRiskControl)
+# 数据挖掘实践（金融风控）
+
+开源学习内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/FinancialRiskControl
 
 ## 基本信息
 - 贡献人员：王贺、杨冰楠、陶旭东、吴争光、苏鹏、王程伟、担扬杰、成森、陈长沙、刘雯静
 - 学习周期：14天
 - 学习形式：理论学习 + 练习
 - 人群定位：有一定数据分析与python编程的基础。
-- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
+- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)；[动手学数据分析](https://github.com/datawhalechina/hands-on-data-analysis)
 - 难度系数：中
 
 ## 任务安排
@@ -33,7 +35,7 @@
 
 
 
-### Task2 EDA 3天
+### Task2 探索性数据分析（EDA）（3天）
 
 - EDA的价值主要在于熟悉数据集，了解数据集，对数据集进行验证来确定所获得数据集可以用于接下来的机器学习或者深度学习使用。
 - 当了解了数据集之后我们下一步就是要去了解变量间的相互关系以及变量与预测值之间的存在关系。
@@ -54,6 +56,20 @@
 
 - 对于多种调参完成的模型进行模型融合。
 - 完成对于多种模型的融合，提交融合结果并打卡。
+
+## 学习视频
+
+### 第1讲：赛题理解baseline讲解
+- 主讲人：鱼佬（王贺）武汉大学计算机硕士，天池数据科学家，2019和2020腾讯广告算法冠军
+- 链接：https://tianchi.aliyun.com/course/video?liveId=41203
+
+### 第2讲：数据探索性分析和特征工程
+- 主讲人：言溪（陶旭东）：北京师范大学硕士 ，算法工程师
+- 链接：https://tianchi.aliyun.com/course/live?liveId=41204
+
+### 第3讲：建模调参，模型融合
+- 主讲人：小一（吴争光）Datawhale成员，金融风控爱好者，数据分析工程师
+- 链接：https://tianchi.aliyun.com/course/live?liveId=41206
 
 ---
 # 具体规则
