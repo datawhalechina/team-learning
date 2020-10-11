@@ -3,73 +3,187 @@
 
 
 
-第17期 Datawhale 组队学习活动马上就要开始啦！
+第18期 Datawhale 组队学习活动马上就要开始啦！
 
-本次组队学习的内容为：[数据挖掘实践（金融风控）](https://github.com/datawhalechina/team-learning-data-mining/tree/master/FinancialRiskControl)，该内容来自 Datawhale与天池联合发起的 [零基础入门数据挖掘 - 贷款违约预测](https://tianchi.aliyun.com/competition/entrance/531830/introduction) 学习赛的第一场。
+本次组队学习的内容为：
 
-![](https://img-blog.csdnimg.cn/20200907140357613.png)
+- [推荐系统基础](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommendationSystemFundamentals)
+- [编程实践（Numpy）上](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)
+- [深度强化学习基础](https://github.com/datawhalechina/leedeeprl-notes)
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
----
-# 数据挖掘实践（金融风控）
 
-开源学习内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/FinancialRiskControl
+
+---
+# 推荐系统基础
+
+开源内容：https://github.com/datawhalechina/team-learning-rs/tree/master/RecommendationSystemFundamentals
 
 ## 基本信息
-- 贡献人员：王贺、杨冰楠、陶旭东、吴争光、苏鹏、王程伟、担扬杰、成森、陈长沙、刘雯静
-- 学习周期：14天
+- 贡献人员：何世福、罗如意、梁家晖、徐何军、陈凯、吴忠强
+- 学习周期：12天
 - 学习形式：理论学习 + 练习
-- 人群定位：有一定数据分析与python编程的基础。
-- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)；[动手学数据分析](https://github.com/datawhalechina/hands-on-data-analysis)
+- 人群定位：对机器学习有一定的了解，会使用常见的数据分析工具（Numpy，Pandas），了解向量检索工具（faiss）的学习者。
+- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)；[编程实践（Pandas）](https://github.com/datawhalechina/joyful-pandas)；[编程实践（Numpy）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)。
 - 难度系数：中
+
+
+## 学习目标
+
+本次课程是由Datawhale推荐系统小组内部成员共同完成，是针对推荐系统小白的一入门课程。学习本课程需要学习者对机器学习有一定的了解，会使用常见的数据分析工具（Numpy，Pandas），了解向量检索工具（faiss）。
+
+本次课程内容的设计参考了项亮老师的《推荐系统实践》、王喆老师的《深度学习推荐系统》以及大量的技术博客，选择了在推荐系统算法发展中比较重要的几个算法作为本次课程的核心内容，对于每个算法都进行了细致的分析以及必要的代码的演示，便于学习者们深刻理解推荐算法的本质。除此之外，每个算法都会在一个完整的数据集上从头到尾的重新把算法实现一遍，以便于学习者们可以快速的使用这些算法。在这些完整的代码中，我们给出了详细的代码注释，尽量让学习者们不会因为看不懂代码而感到烦恼。
+
+**传统推荐系统及深度学习推荐系统的演化关系图（图来自《深度学习推荐系统》）**
+
+传统推荐系统：
+
+![](http://ryluo.oss-cn-chengdu.aliyuncs.com/Javaimage-20200923143443499.png)
+
+深度学习推荐系统:
+
+![](http://ryluo.oss-cn-chengdu.aliyuncs.com/Javaimage-20200923143559968.png)
+
+
+**本开源内容的目标是掌握以下算法：**
+- 协同过滤算法
+- 矩阵分解算法
+- FM（Factorization Machines）算法
+- Wide&Deep
+- GBDT+LR
+
+
+**推荐系统组队学习内容汇总：**
+
+![](https://img-blog.csdnimg.cn/20201011094520518.png)
+
 
 ## 任务安排
 
-### Task1 赛题理解 2天
+### Task01：推荐系统简介（1天）
 
-- 理解赛题数据和目标，清楚评分体系。
-- 完成赛题报名和数据下载，理解赛题的解题思路。
-
+了解推荐系统常用的评测指标、召回的策略和作用等。
 
 
+### Task02：协同过滤（3天）
 
-### Task2 探索性数据分析（EDA）（3天）
+掌握协同过滤算法，包括基于用户的协同过滤（UserCF）和基于商品的协同过滤（ItemCF），这是入门推荐系统的人必看的内容，因为这些算法可以让初学者更加容易的理解推荐算法的思想。
 
-- EDA的价值主要在于熟悉数据集，了解数据集，对数据集进行验证来确定所获得数据集可以用于接下来的机器学习或者深度学习使用。
-- 当了解了数据集之后我们下一步就是要去了解变量间的相互关系以及变量与预测值之间的存在关系。
-- 引导数据科学从业者进行数据处理以及特征工程的步骤,使数据集的结构和特征集让接下来的预测问题更加可靠。
-- 完成对于数据的探索性分析，并对于数据进行一些图表或者文字总结并打卡。
 
-### Task3 特征工程 3天
+### Task03：矩阵分解和FM（3天）
 
-- 对于特征进行进一步分析，并对于数据进行处理。
-- 完成对于特征工程的分析，并对于数据进行一些图表或者文字总结并打卡。
+掌握矩阵分解和FM算法。
 
-### Task4 建模与调参 3天
+矩阵分解算法通过引入了隐向量的概念，加强了模型处理稀疏矩阵的能力，也为后续深度学习推荐系统算法中Embedding的使用打下了基础。
 
-- 了解常用的机器学习模型，并掌握机器学习模型的建模与调参流程。
-- 完成相应学习打卡任务。
+FM（Factorization Machines）算法属于对逻辑回归（LR）算法应用在推荐系统上的一个改进，在LR模型的基础上加上了特征交叉项，该思想不仅在传统的推荐算法中继续使用过，在深度学习推荐算法中也对其进行了改进与应用。
 
-### Task5 模型融合 3天
+### Task04：Wide&Deep（2天）
 
-- 对于多种调参完成的模型进行模型融合。
-- 完成对于多种模型的融合，提交融合结果并打卡。
+从深度学习推荐系统的演化图中可以看出Wide&Deep模型处在最中间的位置，可以看出该模型在推荐系统发展中的重要地位，此外该算法模型的思想与实现都比较的简单，非常适合初学深度学习推荐系统的学习者们去学习。
 
-## 学习视频
+### Task05：GBDT+LR（3天）
 
-### 第1讲：赛题理解baseline讲解
-- 主讲人：鱼佬（王贺）武汉大学计算机硕士，天池数据科学家，2019和2020腾讯广告算法冠军
-- 链接：https://tianchi.aliyun.com/course/video?liveId=41203
+该模型仍然是对LR模型的改进，使用树模型做特征交叉，相比于FM的二阶特征交叉，树模型可以对特征进行深度的特征交叉，充分利用了特征之间的相关性。
 
-### 第2讲：数据探索性分析和特征工程
-- 主讲人：言溪（陶旭东）：北京师范大学硕士 ，算法工程师
-- 链接：https://tianchi.aliyun.com/course/live?liveId=41204
 
-### 第3讲：建模调参，模型融合
-- 主讲人：小一（吴争光）Datawhale成员，金融风控爱好者，数据分析工程师
-- 链接：https://tianchi.aliyun.com/course/live?liveId=41206
+---
+# 编程实践（Numpy）上
+
+开源学习内容：https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy
+
+
+
+## 基本信息
+- 贡献人员：韩绘锦、左秉文、王彦淳
+- 学习周期：13天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动。
+- 学习形式：理论学习 + 练习
+- 人群定位：有一定python编程的基础。
+- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
+- 难度系数：中
+
+
+
+
+## 学习目标
+
+本开源内容是Python基础的进阶，主要目标是学习numpy的基本数据类型，了解numpy各类函数的应用；以便为后期学习pandas和sklearn奠定坚实基础。
+
+## 任务安排
+
+
+### Task01：数据类型及数组创建（2天）
+- 熟悉基础常量、常见数据类型，以及时间日期和时间增量的处理。
+- 掌握数组的创建和数组的属性。
+
+
+### Task02：索引（3天）
+
+- 掌握数组的索引与切片，熟悉数组迭代。
+
+
+### Task03：数组的操作（2天）
+- 掌握数组的各种操作，比如：更改形状，数组转置，更改维度，数组组合，数组拆分，数组平铺，添加和删除元素等。
+
+
+### Task04：数学函数及逻辑函数（3天）
+
+- 掌握numpy中常用的数学函数及逻辑函数。
+- 数学函数，比如：数学运算，三角函数，指数和对数，加法函数及乘法函数，四舍五入等。
+- 逻辑函数，比如：真值测试，数组内容，逻辑函数等。
+
+### Task05：排序搜索计数及集合操作（3天）
+- 掌握numpy中排序搜索计数的相关函数。
+- 掌握numpy中关于集合的操作，比如：如何构建集合，集合的交并差集及异或操作等。
+
+
+
+---
+# 深度强化学习基础
+
+开源内容：https://github.com/datawhalechina/leedeeprl-notes
+
+
+## 基本信息
+- 贡献人员：
+- 学习周期：
+- 学习形式：
+- 人群定位：
+- 先修内容：
+- 难度系数：中
+
+
+
+## 学习目标
+
+%%%
+
+## 任务安排
+
+### Task01：
+
+%%%
+
+
+
+### Task02：
+
+%%%
+
+
+### Task03：
+
+%%%
+
+
+
+### Task04：
+
+%%%
+
+
 
 ---
 # 具体规则
@@ -77,7 +191,6 @@
 - 按照任务安排进行学习，完成后写学习笔记Blog 或 进行视频直播。
 - 在每次任务截止之前在群内填写问卷打卡，遇到问题在群内讨论。
 - 未按时打卡的同学视为自动放弃，被抱出学习群。
-
 
 
 ---
@@ -91,6 +204,7 @@
 - [03 自然语言处理](https://github.com/datawhalechina/team-learning-nlp)
 - [04 计算机视觉](https://github.com/datawhalechina/team-learning-cv)
 - [05 推荐系统](https://github.com/datawhalechina/team-learning-rs)
+- [06 强化学习](https://github.com/datawhalechina/team-learning-rl)
 
 
 
@@ -102,3 +216,4 @@
 
 ---
 ![Datawhale](https://img-blog.csdnimg.cn/20200726211045814.png)
+
