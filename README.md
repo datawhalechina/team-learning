@@ -1,4 +1,7 @@
 ﻿
+[toc]
+
+---
 # Datawhale 组队学习
 
 
@@ -154,6 +157,7 @@ FM（Factorization Machines）算法属于对逻辑回归（LR）算法应用在
 - 先修内容：[机器学习算法基础](https://github.com/datawhalechina/team-learning-data-mining/tree/master/MachineLearningFundamentals)
 - 难度系数：中
 
+
 ## 学习目标
 
 本开源内容是深度强化学习的基础，主要目标是学习常见的强化学习算法及其应用。
@@ -179,11 +183,11 @@ FM（Factorization Machines）算法属于对逻辑回归（LR）算法应用在
 - 对应教程的第四章和第五章。
 
 
-### Task4：DQN 算法（3天）
+### Task4：DQN 算法及 Actor-Critic 算法（3天）
 
-- 掌握 DQN 算法以及目标网络、经验回放等常用的 tips；
-- 了解 DQN 的进阶技巧和针对连续动作的 DQN；
-- 对应教程的第六章到第八章。
+- 掌握 DQN 算法、DQN 的进阶技巧以及针对连续动作的 DQN；
+- 掌握 Actor-Critic 算法；
+- 对应教程的第六章到第九章。
 
 ### Task5：稀疏奖励及模仿学习（2天)
 - 掌握稀疏奖励的解决方法，比如：Reward Shaping、Curriculum Learning 等；
