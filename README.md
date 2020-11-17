@@ -1,104 +1,101 @@
 ﻿
-# Datawhale 组队学习
 
-
-
-第18期 Datawhale 组队学习活动马上就要开始啦！
+第19期 Datawhale 组队学习活动马上就要开始啦！
 
 本次组队学习的内容为：
 
-- [推荐系统基础](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommendationSystemFundamentals)
-- [编程实践（Numpy）上](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)
-- [深度强化学习基础](https://github.com/datawhalechina/leedeeprl-notes)
+- [推荐系统实践（新闻推荐）](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews)
+- [编程实践（Numpy）下](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)
 
+其中，[推荐系统实践（新闻推荐）](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews)的内容来自Datawhale与天池联合发起的 [零基础入门推荐系统 - 新闻推荐]() 学习赛的第一场。
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
 
-
 ---
-# 推荐系统基础
+# 推荐系统实践（新闻推荐）
 
-开源内容：https://github.com/datawhalechina/team-learning-rs/tree/master/RecommendationSystemFundamentals
+开源学习内容：https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews
 
 ## 基本信息
-- 贡献人员：何世福、罗如意、梁家晖、徐何军、陈锴、吴忠强
-- 学习周期：12天
-- 学习形式：理论学习 + 练习
-- 人群定位：对机器学习有一定的了解，会使用常见的数据分析工具（Numpy，Pandas），了解向量检索工具（faiss）的学习者。
-- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)；[编程实践（Pandas）](https://github.com/datawhalechina/joyful-pandas)；[编程实践（Numpy）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)。
+- 贡献人员：王贺、罗如意、吴忠强、李万业、陈琰钰、张汉隆
+- 学习周期：15天
+- 学习形式：理论学习+练习
+- 人群定位：有一定的数据分析基础，了解推荐系统基本算法，了解机器学习算法流程
+- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)；[编程实践（Pandas）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToPandas)；[编程实践（Numpy）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)；[推荐系统基础](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommendationSystemFundamentals)。
 - 难度系数：中
-
 
 ## 学习目标
 
-本次课程是由Datawhale推荐系统小组内部成员共同完成，是针对推荐系统小白的一入门课程。学习本课程需要学习者对机器学习有一定的了解，会使用常见的数据分析工具（Numpy，Pandas），了解向量检索工具（faiss）。
+### 熟悉推荐系统竞赛的基本流程
 
-本次课程内容的设计参考了项亮老师的《推荐系统实践》、王喆老师的《深度学习推荐系统》以及大量的技术博客，选择了在推荐系统算法发展中比较重要的几个算法作为本次课程的核心内容，对于每个算法都进行了细致的分析以及必要的代码的演示，便于学习者们深刻理解推荐算法的本质。除此之外，每个算法都会在一个完整的数据集上从头到尾的重新把算法实现一遍，以便于学习者们可以快速的使用这些算法。在这些完整的代码中，我们给出了详细的代码注释，尽量让学习者们不会因为看不懂代码而感到烦恼。
-
-**传统推荐系统及深度学习推荐系统的演化关系图（图来自《深度学习推荐系统》）**
-
-传统推荐系统：
-
-![](http://ryluo.oss-cn-chengdu.aliyuncs.com/Javaimage-20200923143443499.png)
-
-深度学习推荐系统:
-
-![](http://ryluo.oss-cn-chengdu.aliyuncs.com/Javaimage-20200923143559968.png)
+- 掌握数据分析方法
+- 了解多路召回策略
+- 了解冷启动策略
+- 了解排序特征的构造方法
+- 了解常见的排序模型
+- 了解模型融合
 
 
-**本开源内容的目标是掌握以下算法：**
-- 协同过滤算法
-- 矩阵分解算法
-- FM（Factorization Machines）算法
-- Wide&Deep
-- GBDT+LR
+### 新闻推荐入门赛学习内容汇总：
 
-
-**推荐系统组队学习内容汇总：**
-
-![](https://img-blog.csdnimg.cn/20201011094520518.png)
+![](https://img-blog.csdnimg.cn/20201117153943695.png)
 
 
 ## 任务安排
 
-### Task01：推荐系统简介（1天）
+### Task00：熟悉规则（1天）
 
-了解推荐系统常用的评测指标、召回的策略和作用等。
+- 组队、修改群昵称
+- 熟悉打开规则
+
+### Task01：赛题理解+Baseline（3天）
+
+- 理解赛题数据和目标，理解评分指标，了解赛题的解题思路
+- 完成赛题报名和数据下载，跑通Baseline并成功提交结果
+
+### Task02：数据分析（2天）
+
+- 了解数据中不同文件所包含的信息，不同数据文件之间的关系
+- 分析点击数据中用户的点击环境、点击偏好，点击的文章属性等分布
+- 分析点击数据中文章的基本属性，文章的热门程度，文章的共现情况等
+- 分析文章属性文件中(embedding文件和属性特征文件)，文章的基本信息
 
 
-### Task02：协同过滤（3天）
+### Task03：多路召回（3天）
 
-掌握协同过滤算法，包括基于用户的协同过滤（UserCF）和基于商品的协同过滤（ItemCF），这是入门推荐系统的人必看的内容，因为这些算法可以让初学者更加容易的理解推荐算法的思想。
+- 熟悉常见的召回策略，如：itemcf, usercf以及深度模型召回等
+- 了解当前场景下的冷启动问题，及常见解决策略，了解如何将多路召回的结果进行合并
+- 完成多种策略的召回，冷启动及多路召回合并
+- 完成召回策略的调参和召回效果的评估
 
 
-### Task03：矩阵分解和FM（3天）
+### Task04：特征工程（3天）
 
-掌握矩阵分解和FM算法。
+- 了解排序数据标签的构建，训练数据的负采样，排序特征的常用构造思路
+- 完成用户召回文章与历史文章相关性的特征构造
+- 完成用户历史兴趣的相关特征的提取，文章本身属性特征的提取
 
-矩阵分解算法通过引入了隐向量的概念，加强了模型处理稀疏矩阵的能力，也为后续深度学习推荐系统算法中Embedding的使用打下了基础。
 
-FM（Factorization Machines）算法属于对逻辑回归（LR）算法应用在推荐系统上的一个改进，在LR模型的基础上加上了特征交叉项，该思想不仅在传统的推荐算法中继续使用过，在深度学习推荐算法中也对其进行了改进与应用。
 
-### Task04：Wide&Deep（2天）
+### Task05：排序模型+模型融合（3天）
 
-从深度学习推荐系统的演化图中可以看出Wide&Deep模型处在最中间的位置，可以看出该模型在推荐系统发展中的重要地位，此外该算法模型的思想与实现都比较的简单，非常适合初学深度学习推荐系统的学习者们去学习。
+- 了解基本的排序模型，模型的训练和测试，常用的模型融合策略
+- 完成LGB分类模型，LGB排序模型，及深度模型中的DIN模型的训练、验证及调参
+- 完成加权融合与Staking融合两种融合策略
 
-### Task05：GBDT+LR（3天）
-
-该模型仍然是对LR模型的改进，使用树模型做特征交叉，相比于FM的二阶特征交叉，树模型可以对特征进行深度的特征交叉，充分利用了特征之间的相关性。
 
 
 ---
-# 编程实践（Numpy）上
+# 编程实践（Numpy）下
 
 开源学习内容：https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy
 
 
 
 ## 基本信息
-- 贡献人员：韩绘锦、左秉文、王彦淳、马燕鹏
-- 学习周期：13天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动。
+- 贡献人员：韩绘锦、王彦淳、马燕鹏
+- 学习周期：9天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动。
 - 学习形式：理论学习 + 练习
 - 人群定位：有一定python编程的基础。
 - 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)
@@ -113,91 +110,36 @@ FM（Factorization Machines）算法属于对逻辑回归（LR）算法应用在
 
 ## 任务安排
 
+### Task00：熟悉规则（1天）
 
-### Task01：数据类型及数组创建（2天）
-- 熟悉基础常量、常见数据类型，以及时间日期和时间增量的处理。
-- 掌握数组的创建和数组的属性。
-
-
-### Task02：索引（3天）
-
-- 掌握数组的索引与切片，熟悉数组迭代。
+- 组队、修改群昵称
+- 熟悉打开规则
 
 
-### Task03：数组的操作（2天）
-- 掌握数组的各种操作，比如：更改形状，数组转置，更改维度，数组组合，数组拆分，数组平铺，添加和删除元素等。
+### Task01：输入输出（2天）
+- 熟悉 Numpy 如何处理二进制文件和文本文件。
 
 
-### Task04：数学函数及逻辑函数（3天）
+### Task02：随机抽样（2天）
 
-- 掌握numpy中常用的数学函数及逻辑函数。
-- 数学函数，比如：数学运算，三角函数，指数和对数，加法函数及乘法函数，四舍五入等。
-- 逻辑函数，比如：真值测试，数组内容，逻辑函数等。
-
-### Task05：排序搜索计数及集合操作（3天）
-- 掌握numpy中排序搜索计数的相关函数。
-- 掌握numpy中关于集合的操作，比如：如何构建集合，集合的交并差集及异或操作等。
+- 熟悉 Numpy 常用的随机函数
+- 熟悉 Numpy 如何处理离散型随机变量的分布，如二项分布、泊松分布、超几何分布
+- 熟悉 Numpy 如何处理连续型随机变量的分布，如均匀分布、正态分布、指数分布
 
 
-
----
-# 深度强化学习基础
-
-开源内容：https://github.com/datawhalechina/leedeeprl-notes
-
-
-## 基本信息
-- 贡献人员：王琦、杨毅远、江季
-- 学习周期：15天
-- 学习形式：理论学习 + 练习 + 项目 
-- 人群定位：有一定机器学习的基础
-- 先修内容：[机器学习算法基础](https://github.com/datawhalechina/team-learning-data-mining/tree/master/MachineLearningFundamentals)
-- 难度系数：中
+### Task03：统计相关（2天）
+- 熟悉 Numpy 如何处理次序统计，如最大值、最小值、极差、百分位数等
+- 熟悉 Numpy 如何处理均值、方差、标准差、协方差等
+- 熟悉 Numpy 如何绘制直方图等
 
 
-## 学习目标
+### Task04：线性代数（2天）
 
-本开源内容是深度强化学习的基础，主要目标是学习常见的强化学习算法及其应用。
-
-## 任务安排
-
-### Task1：强化学习基础（2天）
-- 了解强化学习的基本概念；
-- 掌握 Gym 的使用；
-- 对应教程的第一章。
-
-
-### Task2：马尔可夫决策过程及表格型方法（3天）
-
-- 了解马尔可夫过程、马尔可夫奖励过程、马尔可夫决策过程；
-- 掌握 Sarsa 和 Q-learning 算法；
-- 对应教程的第二章和第三章。
-
-
-### Task3：策略梯度及 PPO 算法（3天）
-- 掌握策略梯度算法及其实现常用的 tips；
-- 掌握 PPO 算法、on-policy、off-policy 和重要性采样；
-- 对应教程的第四章和第五章。
-
-
-### Task4：DQN 算法及 Actor-Critic 算法（3天）
-
-- 掌握 DQN 算法、DQN 的进阶技巧以及针对连续动作的 DQN；
-- 掌握 Actor-Critic 算法；
-- 对应教程的第六章到第九章。
-
-### Task5：稀疏奖励及模仿学习（2天)
-- 掌握稀疏奖励的解决方法，比如：Reward Shaping、Curriculum Learning 等；
-- 掌握模仿学习的常见方法，比如 Behavior Cloning、Inverse Reinforcement Learning 等；
-- 对应教程的第十章和第十一章。
-
-### Task6：DDPG 算法（2天）
-
-- 掌握 DDPG 算法及其与 DQN 之间的关系；
-- 对应教程的第十二章。
-
-
-
+- 熟悉 Numpy 如何处理矩阵乘法以及向量的内积
+- 熟悉 Numpy 如何处理矩阵的特征值和特征向量
+- 熟悉 Numpy 如何处理矩阵的各种分解，如SVD、QR、Cholesky分解
+- 熟悉 Numyp 如何处理矩阵的范数、行列式和秩
+- 熟悉 Numpy 如何处理逆矩阵和线性方程组求解
 
 ---
 # 具体规则
