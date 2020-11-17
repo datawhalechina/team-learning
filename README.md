@@ -7,7 +7,7 @@
 - [推荐系统实践（新闻推荐）](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews)
 - [编程实践（Numpy）下](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)
 
-其中，[推荐系统实践（新闻推荐）](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews)的内容来自Datawhale与天池联合发起的 [零基础入门推荐系统 - 新闻推荐]() 学习赛的第一场。
+其中，[推荐系统实践（新闻推荐）](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews)的内容来自Datawhale与天池联合发起的 [零基础入门推荐系统 - 新闻推荐](https://tianchi.aliyun.com/competition/gameList/coupleList) 学习赛的第一场。
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
