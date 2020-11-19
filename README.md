@@ -6,7 +6,7 @@
 - [推荐系统实践（新闻推荐）](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews)
 - [编程实践（Numpy）下](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)
 
-其中，[推荐系统实践（新闻推荐）](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews)的内容来自Datawhale与天池联合发起的 [零基础入门推荐系统 - 新闻推荐](https://tianchi.aliyun.com/competition/gameList/coupleList) 学习赛的第一场。
+其中，[推荐系统实践（新闻推荐）](https://github.com/datawhalechina/team-learning-rs/tree/master/RecommandNews)的内容来自Datawhale与天池联合发起的 [零基础入门推荐系统 - 新闻推荐](https://tianchi.aliyun.com/competition/entrance/531842/information) 学习赛的第一场。
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
@@ -105,7 +105,9 @@
 
 ## 学习目标
 
-本开源内容是Python基础的进阶，主要目标是学习numpy在输入输出、随机抽样、数理统计和线性代数中的应用，为后期学习pandas和sklearn奠定坚实基础。
+本开源内容是Python基础的进阶，主要目标是学习numpy在输入输出、随机抽样、数理统计和线性代数中的应用，
+
+为后期学习pandas和sklearn奠定坚实基础。
 
 ## 任务安排
 
@@ -181,4 +183,3 @@
 
 ---
 ![Datawhale](https://img-blog.csdnimg.cn/20200726211045814.png)
-
