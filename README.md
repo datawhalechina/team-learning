@@ -88,7 +88,7 @@
 ## 基本信息
 
 - 贡献人员：**姚行志**，韩绘锦，徐韬，马燕鹏
-- 学习周期：17天，每天平均花费时间2小时-5小时不等，根据个人学习接受能力强弱有所浮动。
+- 学习周期：20天，每天平均花费时间2小时-5小时不等，根据个人学习接受能力强弱有所浮动。
 - 学习形式：练习
 - 人群定位：有一定编程基础，对学习算法有需求的学员。
 - 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/PythonLanguage)、[数据结构与算法](https://github.com/datawhalechina/team-learning-program/tree/master/DataStructureAndAlgorithm)、[编程实践（LeetCode 分类练习）](https://github.com/datawhalechina/team-learning-program/tree/master/LeetCodeClassification)
@@ -126,6 +126,8 @@
 - [014 最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/)
 - [015 三数之和](https://leetcode-cn.com/problems/3sum/)
 
+### TaskShare：讨论总结分享（1天）
+
 ### Task04: 完成以下三个题目并打卡（1天）
 
 - [016 最接近的三数之和](https://leetcode-cn.com/problems/3sum-closest/)
@@ -150,6 +152,9 @@
 - [059 螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/)
 - [061 旋转链表](https://leetcode-cn.com/problems/rotate-list/)
 
+
+
+
 ### Task 08: 完成以下三个题目并打卡（1天）
 
 - [062 不同路径](https://leetcode-cn.com/problems/unique-paths/)
@@ -162,11 +167,16 @@
 - [089 格雷编码](https://leetcode-cn.com/problems/gray-code/)
 - [104 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
+
+
 ### Task10: 完成以下三个题目并打卡（1天）
 
 - [121 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
 - [122 买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
 - [124 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
+
+
+
 
 ### Task11: 完成以下三个题目并打卡（1天）
 
@@ -179,6 +189,8 @@
 - [146 LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)
 - [148 排序链表](https://leetcode-cn.com/problems/sort-list/)
 - [155 最小栈](https://leetcode-cn.com/problems/min-stack/)
+
+### TaskShare：讨论总结分享（1天）
 
 ### Task13: 完成以下三个题目并打卡（1天）
 
@@ -205,12 +217,13 @@
 - [238 除自身以外数组的乘积](https://leetcode-cn.com/problems/product-of-array-except-self/)
 - [292 Nim 游戏](https://leetcode-cn.com/problems/nim-game/)
 
+
 ### Task17：完成以下三个题目并打卡（1天）
 
 - [344 反转字符串](https://leetcode-cn.com/problems/reverse-string/)
 - [557 反转字符串中的单词 III](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/)
  
-
+### TaskShare：讨论总结分享（1天）
 
 ---
 
