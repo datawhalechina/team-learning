@@ -1,5 +1,4 @@
 ﻿
-
 # Datawhale 组队学习
 
 
@@ -95,7 +94,7 @@
 
 ## 学习目标
 
-每天刷三道题，利用17天完成Leetcode腾讯精选练习50题。
+每天刷三道题，利用20天完成Leetcode腾讯精选练习50题。
 
 ![](https://img-blog.csdnimg.cn/20210101170326763.png)
 
@@ -234,7 +233,7 @@
 
 ## 基本信息
 - 贡献人员：**梁家晖**，李玲，李芝翔，赵可，陈信达
-- 学习周期：16天，每天平均花费时间2小时-5小时不等，根据个人学习接受能力强弱有所浮动。
+- 学习周期：14天，每天平均花费时间2小时-5小时不等，根据个人学习接受能力强弱有所浮动。
 - 学习形式：理论+实践
 - 人群定位：熟悉数据挖掘的基本方法，对学习异常检测算法有需求的学员。
 - 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)、[编程实践（Numpy）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)、[编程实践（Pandas）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToPandas)、[编程实践（数据可视化）](https://github.com/datawhalechina/fantastic-matplotlib)
@@ -249,20 +248,22 @@
 
 
 
+
 ### Task00：熟悉规则（1天）
 
 - 组队、修改群昵称
 - 熟悉打卡规则。
 
-### Task01：异常检测介绍（1天）
+### Task01：异常检测介绍（2天）
 
 - 了解异常检测基本概念
 - 了解异常检测基本方法
 
-### Task02：基于统计学的方法（2天）
+### Task02：基于统计学的方法（3天）
 
 - 掌握基于高斯分布的异常检测方法
 - 理解非参数异常检测方法
+- 掌握HBOS算法
 
 ### Task03：线性模型（3天）
 
@@ -276,15 +277,9 @@
 
 ### Task05：高维异常检测（3天）
 
-- 了解子空间方法思想
-- 掌握HBOS算法
-
-### Task06：集成方法（3天）
-
 - 了解集成方法的思想
 - 理解feature bagging原理
 - 掌握孤立森林算法
-
 
 ---
 
@@ -391,4 +386,5 @@
 
 ---
 ![Datawhale](https://img-blog.csdnimg.cn/20200726211045814.png)
+
 
