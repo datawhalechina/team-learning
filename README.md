@@ -17,7 +17,7 @@
 
 
 ---
-# 1. 数据挖掘实战（学术前沿趋势分析）
+# 1. 数据分析实践（学术前沿趋势分析）
 
 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/AcademicTrends
 
