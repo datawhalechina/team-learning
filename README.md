@@ -20,6 +20,8 @@
 
 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/AcademicTrends
 
+天池比赛：https://tianchi.aliyun.com/competition/entrance/531866/introduction
+
 ## 基本信息
 - 贡献人员：**刘羽中**、**杨毅远**、张晋、雷钲仪、周郴莲、宋怡然、姚童
 - 学习周期：15天，每天平均花费时间2小时-5小时不等，根据个人学习接受能力强弱有所浮动。
@@ -76,6 +78,10 @@
 - 学习内容：构建作者关系图，挖掘作者关系；
 - 学习成果：论文作者知识图谱、图关系挖掘；
 
+### 直播01：数据统计分析与可视化方法
+- 直播时间：2021-01-17
+- 直播嘉宾：杨毅远，Datawhale成员，Datawhale数据分析-学术前沿趋势分析、深度强化学习项目核心贡献者。
+- 直播网址：https://tianchi.aliyun.com/course/video?liveId=41284
 
 ---
 # 2. 编程实践（LeetCode 腾讯精选练习50）
