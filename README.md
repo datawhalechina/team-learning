@@ -19,11 +19,14 @@
 # 1. 天池赛事
 
 - a. 布匹疵点智能识别（CV）
-- https://tianchi.aliyun.com/competition/entrance/531864/introduction
+	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531864/introduction
+	- 论坛地址：http://datawhale.club/t/topic/1418
 - b. 中文预训练模型泛化能力挑战赛（NLP）
-- https://tianchi.aliyun.com/competition/entrance/531865/introduction
+	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531865/introduction
+	- 论坛地址：http://datawhale.club/t/topic/1417
 - c. AI助力精准气象和海洋预测赛（时间序列）
-- https://tianchi.aliyun.com/competition/entrance/531871/introduction
+	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531871/introduction
+	- 论坛地址：http://datawhale.club/t/topic/1419
 
 ## 任务安排
 
@@ -60,7 +63,8 @@
 
 
 - d. 城市管理大数据算法模型
-- https://data.xm.gov.cn/contest-series/digit-china-2021/#/3/
+	- 比赛地址：https://data.xm.gov.cn/contest-series/digit-china-2021/#/3/
+	- 论坛地址：http://datawhale.club/t/topic/1420
 
 ## 任务安排
 
@@ -95,7 +99,8 @@
 # 3. 天池学习赛
 
 - e. 零基础语义分割 - 城市建筑识别
-- https://tianchi.aliyun.com/competition/entrance/531872/introduction
+	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531872/introduction
+	- 论坛地址：http://datawhale.club/t/topic/1421
 
 ## 任务安排
 
