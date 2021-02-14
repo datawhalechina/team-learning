@@ -60,7 +60,7 @@
 ==开营时间：02月15日21:00==
 
 - d. 城市管理大数据算法模型
-- 缺url
+- https://data.xm.gov.cn/contest-series/digit-china-2021/#/3/
 
 ## 任务安排
 
