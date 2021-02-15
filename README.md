@@ -101,6 +101,7 @@
 - e. 零基础语义分割 - 城市建筑识别
 	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531872/introduction
 	- 论坛地址：http://datawhale.club/t/topic/1421
+	- 开源内容：https://github.com/datawhalechina/team-learning-cv/tree/master/AerialImageSegmentation
 
 ## 任务安排
 
