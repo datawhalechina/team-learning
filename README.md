@@ -19,13 +19,13 @@
 # 1. 天池赛事
 
 - a. 布匹疵点智能识别（CV）
-	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531864/introduction
+	- 比赛地址：https://tianchi.aliyun.com/s/fed26b0e90c5776e6b3d61cd5912a423
 	- 论坛地址：http://datawhale.club/t/topic/1418
 - b. 中文预训练模型泛化能力挑战赛（NLP）
-	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531865/introduction
+	- 比赛地址：https://tianchi.aliyun.com/s/3bd272d942f97725286a8e44f40f3f74
 	- 论坛地址：http://datawhale.club/t/topic/1417
 - c. AI助力精准气象和海洋预测赛（时间序列）
-	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531871/introduction
+	- 比赛地址：https://tianchi.aliyun.com/s/d3bcf37c856703fec5903c40ea323710
 	- 论坛地址：http://datawhale.club/t/topic/1419
 
 ## 任务安排
