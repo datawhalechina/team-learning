@@ -28,6 +28,7 @@
 - c. AI助力精准气象和海洋预测赛（时间序列）
 	- 比赛地址：https://tianchi.aliyun.com/s/d3bcf37c856703fec5903c40ea323710
 	- 论坛地址：http://datawhale.club/t/topic/1419
+	- 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/WeatherOceanForecasts
 
 ## 任务安排
 
