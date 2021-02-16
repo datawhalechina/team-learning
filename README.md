@@ -63,8 +63,10 @@
 
 
 - d. 城市管理大数据算法模型
-	- 比赛地址：https://data.xm.gov.cn/contest-series/digit-china-2021/#/3/
+	- 比赛地址：https://data.xm.gov.cn/contest-series/digit-china-2021/#/3/contest_explain?projectId=c81952239f3411eab1d014187758123f
 	- 论坛地址：http://datawhale.club/t/topic/1420
+	- 学习课程链接：https://coggle.club/learn/DCIC2021/
+	- 视频讲解链接：https://www.bilibili.com/video/BV1Af4y1C7fv?zw
 
 ## 任务安排
 
