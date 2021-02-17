@@ -25,7 +25,7 @@
 - b. 中文预训练模型泛化能力挑战赛（NLP）
 	- 比赛地址：https://tianchi.aliyun.com/s/3bd272d942f97725286a8e44f40f3f74
 	- 论坛地址：http://datawhale.club/t/topic/1417
-	- 开源内容：https://github.com/finlay-liu/tianchi-multi-task-nlp
+	- 开源内容：https://github.com/datawhalechina/team-learning-nlp/tree/master/PretrainModelsGeneralization
 - c. AI助力精准气象和海洋预测赛（时间序列）
 	- 比赛地址：https://tianchi.aliyun.com/s/d3bcf37c856703fec5903c40ea323710
 	- 论坛地址：http://datawhale.club/t/topic/1419
