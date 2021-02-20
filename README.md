@@ -31,6 +31,16 @@
 	- 论坛地址：http://datawhale.club/t/topic/1419
 	- 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/WeatherOceanForecasts
 
+
+天池赛事Docker快速复现讲解:
+
+- https://www.bilibili.com/video/BV1jy4y1J7rp/
+
+天池赛事Docker快速复现讲解，markdown版本:
+
+- https://github.com/datawhalechina/team-learning-cv/blob/master/DefectDetection/%E5%A4%A9%E6%B1%A0%E7%AB%9E%E8%B5%9Bdocker%E5%BF%AB%E9%80%9F%E5%A4%8D%E7%8E%B0.md
+
+
 ## 任务安排
 
 开营时间：02月16日21:00
@@ -60,8 +70,6 @@
 - 我们根据截图，邀请提分比较多的学习者进行分享。
 
 
-
-
 ---
 # 2. DCIC赛事
 
@@ -74,6 +82,8 @@
 	- 视频讲解链接：https://www.bilibili.com/video/BV1Af4y1C7fv?zw
 
 ## 任务安排
+
+开营时间：02月16日21:00
 
 ### Task00：熟悉规则（1天）
 
@@ -99,6 +109,7 @@
 
 
 
+
 ---
 
 # 3. 天池学习赛
@@ -119,17 +130,23 @@
 - 熟悉打卡规则。
 - 打卡截止时间：02月18日03:00
 
+
+
 ### Task01：赛题理解与baseline（3天）
 - 学习主题：理解赛题内容解题流程
 - 学习内容：赛题理解、数据读取、比赛baseline构建
 - 学习成果：比赛baseline提交
 - 打卡截止时间：02月21日03:00
 
+
+
 ### Task02：数据扩增方法（3天）
 - 学习主题：语义分割任务中数据扩增方法
 - 学习内容：掌握语义分割任务中数据扩增方法的细节和使用
 - 学习成果：数据扩增方法的实践
 - 打卡截止时间：02月24日03:00
+
+
 
 
 ### Task03：网络模型结构发展（3天）
@@ -139,11 +156,17 @@
 - 打卡截止时间：02月27日03:00
 
 
+
+
 ### Task04：评价函数与损失函数（3天）
 - 学习主题：语义分割模型各种评价函数与损失函数
 - 学习内容：Dice、IoU、BCE、Focal Loss、Lovász-Softmax
 - 学习成果：评价/损失函数的实践
 - 打卡截止时间：03月02日03:00
+
+
+
+
 
 ### Task05：模型训练与验证（3天）
 - 学习主题：数据划分方法
@@ -152,11 +175,15 @@
 - 打卡截止时间：03月05日03:00
 
 
+
+
 ### Task06：分割模型模型集成（3天）
 - 学习主题：语义分割模型集成方法
 - 学习内容：LookaHead、SnapShot、SWA、TTA
 - 学习成果：模型集成思路
 - 打卡截止时间：03月08日03:00
+
+
 
 ---
 # 具体规则
