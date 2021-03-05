@@ -18,18 +18,21 @@
 
 # 1. 天池赛事
 
-- a. 布匹疵点智能识别（CV）
+- a. CV实践-布匹疵点智能识别（异常检测，工业场景）
 	- 比赛地址：https://tianchi.aliyun.com/s/fed26b0e90c5776e6b3d61cd5912a423
 	- 论坛地址：http://datawhale.club/t/topic/1418
 	- 开源内容：https://github.com/datawhalechina/team-learning-cv/tree/master/DefectDetection
-- b. 中文预训练模型泛化能力挑战赛（NLP）
+	- 贡献人员：江保祥；姚童
+- b. NLP实践-中文预训练模型泛化能力挑战赛（文本分类，bert）
 	- 比赛地址：https://tianchi.aliyun.com/s/3bd272d942f97725286a8e44f40f3f74
 	- 论坛地址：http://datawhale.club/t/topic/1417
 	- 开源内容：https://github.com/datawhalechina/team-learning-nlp/tree/master/PretrainModelsGeneralization
-- c. AI助力精准气象和海洋预测赛（时间序列）
+	- 贡献人员：刘羽中；姚行志；徐美兰
+- c. 时间序列实践-2021 “AI Earth”人工智能创新挑战赛 AI助力精准气象和海洋预测
 	- 比赛地址：https://tianchi.aliyun.com/s/d3bcf37c856703fec5903c40ea323710
 	- 论坛地址：http://datawhale.club/t/topic/1419
 	- 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/WeatherOceanForecasts
+	- 贡献人员：王贺；段秋阳；杰少；车弘书
 
 
 天池赛事Docker快速复现讲解:
@@ -75,11 +78,12 @@
 
 
 
-- d. 城市管理大数据算法模型
+- d. 城市管理大数据算法模型（DCIC）
 	- 比赛地址：https://data.xm.gov.cn/contest-series/digit-china-2021/#/3/contest_explain?projectId=c81952239f3411eab1d014187758123f
 	- 论坛地址：http://datawhale.club/t/topic/1420
 	- 学习课程链接：https://coggle.club/learn/DCIC2021/
 	- 视频讲解链接：https://www.bilibili.com/video/BV1Af4y1C7fv?zw
+	- 贡献人员：刘羽中；赵可；李祖贤
 
 ## 任务安排
 
@@ -114,10 +118,11 @@
 
 # 3. 天池学习赛
 
-- e. 零基础语义分割 - 城市建筑识别
+- e. 零基础入门语义分割-地表建筑物识别
 	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531872/introduction
 	- 论坛地址：http://datawhale.club/t/topic/1421
 	- 开源内容：https://github.com/datawhalechina/team-learning-cv/tree/master/AerialImageSegmentation
+	- 贡献人员：刘羽中；陈信达；安晟；袁明坤；闫永强；宋志龙；路建飞；王程伟；钱振
 
 ## 任务安排
 
