@@ -1,192 +1,340 @@
 ﻿
+
 # Datawhale 组队学习
 
-2021年02月16日，第22期 Datawhale 组队学习活动马上就要开始啦！
+
+第23期 Datawhale 组队学习活动马上就要开始啦！
 
 本次组队学习的内容为：
 
-- a. 天池赛事 - 布匹疵点智能识别（CV）
-- b. 天池赛事 - 中文预训练模型泛化能力挑战赛（NLP）
-- c. 天池赛事 - AI助力精准气象和海洋预测赛（时间序列）
-- d. DCIC赛事 - 城市管理大数据算法模型
-- e. 零基础语义分割 - 城市建筑识别
+- 编程实践（区块链）
+- 集成学习
+- 深度推荐模型
+- 零基础入门数据挖掘（心电图心跳分类）
+- 第22届蓝桥杯个人省赛刷题
+- 青少年编程（Turtle）
+- 青少年编程（Scratch）电子学会一级
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
 
+---
+# 1. 编程实践（区块链）
 
-# 1. 天池赛事
+开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/Blockchain
 
-- a. CV实践-布匹疵点智能识别（异常检测，工业场景）
-	- 比赛地址：https://tianchi.aliyun.com/s/fed26b0e90c5776e6b3d61cd5912a423
-	- 论坛地址：http://datawhale.club/t/topic/1418
-	- 开源内容：https://github.com/datawhalechina/team-learning-cv/tree/master/DefectDetection
-	- 贡献人员：江保祥；姚童
-- b. NLP实践-中文预训练模型泛化能力挑战赛（文本分类，bert）
-	- 比赛地址：https://tianchi.aliyun.com/s/3bd272d942f97725286a8e44f40f3f74
-	- 论坛地址：http://datawhale.club/t/topic/1417
-	- 开源内容：https://github.com/datawhalechina/team-learning-nlp/tree/master/PretrainModelsGeneralization
-	- 贡献人员：刘羽中；姚行志；徐美兰
-- c. 时间序列实践-2021 “AI Earth”人工智能创新挑战赛 AI助力精准气象和海洋预测
-	- 比赛地址：https://tianchi.aliyun.com/s/d3bcf37c856703fec5903c40ea323710
-	- 论坛地址：http://datawhale.club/t/topic/1419
-	- 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/WeatherOceanForecasts
-	- 贡献人员：王贺；段秋阳；杰少；车弘书
+## 基本信息
+- 贡献人员：陈锴、孙子涵、李岳昆、易远哲
+- 学习周期：
+- 学习形式：
+- 人群定位：
+- 难度系数：
 
 
-天池赛事Docker快速复现讲解:
+## 学习目标
 
-- https://www.bilibili.com/video/BV1jy4y1J7rp/
-
-天池赛事Docker快速复现讲解，markdown版本:
-
-- https://github.com/datawhalechina/team-learning-cv/blob/master/DefectDetection/%E5%A4%A9%E6%B1%A0%E7%AB%9E%E8%B5%9Bdocker%E5%BF%AB%E9%80%9F%E5%A4%8D%E7%8E%B0.md
 
 
 ## 任务安排
 
-开营时间：02月16日21:00
-
 ### Task00：熟悉规则（1天）
 
-- 组队、修改群昵称。
-- 熟悉打卡规则。
-- 打卡截止时间：02月18日03:00
-
-### Task01：比赛全流程体验（4天）
-
-- 学习如何使用Docker提交代码及比赛上分。
-- 记录比赛中遇到的问题，并在学习笔记中插入初始分数截图。
-- 打卡截止时间：02月22日03:00
+- 组队、修改群昵称
+- 熟悉打卡规则
 
 
-### Task02：Baseline学习及改进（4天）
-
-- 学习baseline，并提出自己的改进策略，提交代码并更新自己的分数排名。
-- 在学习笔记中插入改进baseline之后分数排名截图。
-- 打卡截止时间：02月26日03:00
 
 
-### Task03：学习者分享（2天）
+### Task01：
 
-- 我们根据截图，邀请提分比较多的学习者进行分享。
+
+
+### Task02：
+
+
+
+### Task03：
+
+
+
+### Task04：
+
+
+
+
+### Task05：
+
 
 
 ---
-# 2. DCIC赛事
+# 2. 集成学习
 
 
+开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntegratedLearning
 
-- d. 城市管理大数据算法模型（DCIC）
-	- 比赛地址：https://data.xm.gov.cn/contest-series/digit-china-2021/#/3/contest_explain?projectId=c81952239f3411eab1d014187758123f
-	- 论坛地址：http://datawhale.club/t/topic/1420
-	- 学习课程链接：https://coggle.club/learn/DCIC2021/
-	- 视频讲解链接：https://www.bilibili.com/video/BV1Af4y1C7fv?zw
-	- 贡献人员：刘羽中；赵可；李祖贤
+## 基本信息
+
+- 贡献人员：李祖贤、薛传雨、赵可、杨毅远、陈琰钰
+- 学习周期：
+- 学习形式：
+- 人群定位：
+- 难度系数：
+
+## 学习目标
+
 
 ## 任务安排
 
-开营时间：02月16日21:00
 
 ### Task00：熟悉规则（1天）
 
-- 组队、修改群昵称。
-- 熟悉打卡规则。
-- 打卡截止时间：02月18日03:00
+- 组队、修改群昵称
+- 熟悉打卡规则
 
-### Task01：比赛全流程体验（2天）
+### Task01: 
 
-- 熟悉比赛流程：学习将一份现成的赛事结果文件在平台上提交。
-- 记录比赛中遇到的问题，并在学习笔记中插入初始分数截图。
-- 打卡截止时间：02月20日03:00
 
-### Task02：Baseline学习及改进（5天）
 
-- 学习baseline，并提出自己的改进策略，提交代码并更新自己的分数排名。
-- 在学习笔记中插入改进baseline之后分数排名截图。
-- 打卡截止时间：02月25日03:00
+### Task02: 
 
-### Task03：学习者分享（2天）
 
-- 我们根据截图，邀请提分比较多的学习者进行分享。
+### Task03: 
+
+
+### Task04: 
+
+
+
+### Task05: 
+
 
 
 
 
 ---
 
-# 3. 天池学习赛
+# 3. 深度推荐模型
 
-- e. 零基础入门语义分割-地表建筑物识别
-	- 比赛地址：https://tianchi.aliyun.com/competition/entrance/531872/introduction
-	- 论坛地址：http://datawhale.club/t/topic/1421
-	- 开源内容：https://github.com/datawhalechina/team-learning-cv/tree/master/AerialImageSegmentation
-	- 贡献人员：刘羽中；陈信达；安晟；袁明坤；闫永强；宋志龙；路建飞；王程伟；钱振
+开源内容：https://github.com/datawhalechina/team-learning-rs/tree/master/DeepRecommendationModel
+
+
+## 基本信息
+- 贡献人员：罗如意、吴忠强、何世福、徐何军、田雨、刘纪川、宁彦吉、赖敏材
+- 学习周期：
+- 学习形式：
+- 人群定位：
+- 难度系数：
+
+
+## 学习目标
+
+
 
 ## 任务安排
 
 
-开营时间：02月16日21:00
 
 ### Task00：熟悉规则（1天）
 
-- 组队、修改群昵称。
+- 组队、修改群昵称
 - 熟悉打卡规则。
-- 打卡截止时间：02月18日03:00
 
 
+### Task01：
 
-### Task01：赛题理解与baseline（3天）
-- 学习主题：理解赛题内容解题流程
-- 学习内容：赛题理解、数据读取、比赛baseline构建
-- 学习成果：比赛baseline提交
-- 打卡截止时间：02月21日03:00
+### Task02：
 
+### Task03：
 
+### Task04：
 
-### Task02：数据扩增方法（3天）
-- 学习主题：语义分割任务中数据扩增方法
-- 学习内容：掌握语义分割任务中数据扩增方法的细节和使用
-- 学习成果：数据扩增方法的实践
-- 打卡截止时间：02月24日03:00
+### Task05：
 
 
 
 
-### Task03：网络模型结构发展（3天）
-- 学习主题：掌握语义分割模型的发展脉络
-- 学习内容：FCN、Unet、DeepLab、SegNet、PSPNet
-- 学习成果：多种网络模型的搭建
-- 打卡截止时间：02月27日03:00
+---
+
+# 4. 零基础入门数据挖掘（心电图心跳分类）
+
+开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/HeartbeatClassification
+
+## 基本信息
+
+- 贡献人员：鱼佬、杜晓东、张晋、王皓月、牧小熊
+- 学习周期：
+- 学习形式：
+- 人群定位：
+- 难度系数：
+
+
+## 学习目标
+
+
+
+## 任务安排
+
+### Task00：熟悉规则（1天）
+
+- 组队、修改群昵称
+- 熟悉打卡规则
+
+
+### Task01：
+
+
+
+### Task02：
+
+
+
+### Task03：
+
+
+### Task04：
+
+
+
+### Task05：
 
 
 
 
-### Task04：评价函数与损失函数（3天）
-- 学习主题：语义分割模型各种评价函数与损失函数
-- 学习内容：Dice、IoU、BCE、Focal Loss、Lovász-Softmax
-- 学习成果：评价/损失函数的实践
-- 打卡截止时间：03月02日03:00
+
+---
+# 5. 第11届蓝桥杯个人省赛刷题
+
+开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/LanQiao
+
+## 基本信息
+- 贡献人员：韩绘锦、黄建国
+- 学习周期：14天，每天平均花费时间2小时-5小时不等，根据个人学习接受能力强弱有所浮动。
+- 学习形式：练习
+- 人群定位：有一定编程基础，对学习算法有需求的学员。
+- 难度系数：中
+
+## 学习目标
+
+每天刷三道题，利用30天对于蓝桥杯这个比赛有一个初步的了解，掌握基本的蓝桥杯赛题解法。
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210302103259975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTU2OTc4NQ==,size_16,color_FFFFFF,t_70)
+
+
+## 任务安排
+
+### Task00：熟悉规则（1天）
+
+- 组队、修改群昵称
+- 熟悉打卡规则
+
+### Task01：热身练习（2天）
+- 完成热身练习文件夹中的7道题目
+- 熟悉基本输入输出及蓝桥杯的练习系统的使用方法。
+
+### Task02：基础练习1（3天）
+- 完成基础练习文件夹中的7道题目
+
+### Task03：基础练习2（3天）
+- 完成基础练习2文件夹中的8道题目
+
+### Task04：真题练习1（3天）
+- 完成真题练习文件夹中的10道题目
+
+### Task05：真题练习2（3天）
+- 完成真题练习文件夹中的8道题目
+
+---
+# 6. 青少年编程（Turtle）
+
+开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/Turtle
+
+## 基本信息
+- 贡献人员：王思齐、马燕鹏、王皓月、杨煜、舒敏、赵可
+- 学习周期：
+- 学习形式：
+- 人群定位：
+- 难度系数：
+
+## 学习目标
 
 
 
+## 任务安排
+
+### Task00：熟悉规则（1天）
+
+- 组队、修改群昵称
+- 熟悉打卡规则
+
+### Task01：
 
 
-### Task05：模型训练与验证（3天）
-- 学习主题：数据划分方法
-- 学习内容：三种数据划分方法、模型调参过程
-- 学习成果：数据划分具体操作
-- 打卡截止时间：03月05日03:00
+### Task02：
 
 
+### Task03：
 
 
-### Task06：分割模型模型集成（3天）
-- 学习主题：语义分割模型集成方法
-- 学习内容：LookaHead、SnapShot、SWA、TTA
-- 学习成果：模型集成思路
-- 打卡截止时间：03月08日03:00
+### Task04：
+
+
+### Task05：
+
+---
+# 7. 青少年编程（Scratch）电子学会一级
+
+开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/Scratch
+
+## 基本信息
+- 贡献人员：马燕鹏、王思齐
+- 学习周期：12天，每天平均花费时间1小时，根据个人学习接受能力强弱有所浮动。
+- 学习形式：模拟测试题
+- 人群定位：Scratch初学者
+- 难度系数：低
+
+## 学习目标
+
+由于测试题目为往年电子学会Scratch一级考试的真题，所以通过做题来掌握Scratch一级考试的知识点，为通过考试做准备。
+
+
+## 任务安排
+
+### Task00：熟悉规则（1天）
+
+- 组队、修改群昵称
+- 熟悉打卡规则
+
+### Task01：熟悉Scratch【2天】
+
+- 熟悉Scratch考级（一级）的考试标准
+- 熟悉Scratch考级（一级）的知识点
+
+### Task02：模拟题（一）【2天】
+
+- 课堂派：判断题15个，单选题20个
+- 写博客：编程题（01 森林的一天、02 舞者凯希）
+
+### Task03：模拟题（二）【2天】
+
+- 课堂派：判断题15个，单选题20个
+- 写博客：编程题（03 小狗散步、04 猫捉老鼠）
+
+###  Task04：模拟题（三）【2天】
+
+- 课堂派：判断题15个，单选题20个
+- 写博客：编程题（05 城堡漫步、06 火箭发射）
+
+###  Task05：模拟题（四）【2天】
+
+- 课堂派：判断题15个，单选题20个
+- 写博客：编程题（07 飞向太空、08 小狗长大记）
+
+
+###  Task06：模拟题（五）【2天】
+
+- 课堂派：判断题15个，单选题20个
+- 写博客：编程题（09 运动起来、10 动物园之旅）
 
 
 
@@ -221,10 +369,5 @@
 
 ---
 ![Datawhale](https://img-blog.csdnimg.cn/20200726211045814.png)
-
-
-
-
-
 
 
