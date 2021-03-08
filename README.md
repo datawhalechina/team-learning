@@ -203,7 +203,7 @@
 
 
 ---
-# 5. 第11届蓝桥杯个人省赛刷题
+# 5. 第12届蓝桥杯个人省赛刷题
 
 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/LanQiao
 
@@ -217,8 +217,6 @@
 ## 学习目标
 
 每天刷三道题，利用30天对于蓝桥杯这个比赛有一个初步的了解，掌握基本的蓝桥杯赛题解法。
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210302103259975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTU2OTc4NQ==,size_16,color_FFFFFF,t_70)
 
 
 ## 任务安排
