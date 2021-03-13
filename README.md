@@ -10,7 +10,7 @@
 - 编程实践（区块链）
 - 集成学习（上）
 - 深度推荐模型
-- 零基础入门数据挖掘（心电图心跳分类）
+- 零基础入门数据挖掘（心跳信号分类）
 
 
 
@@ -192,7 +192,7 @@ Tensorflow2.x
 
 ---
 
-# 4. 零基础入门数据挖掘（心电图心跳分类）
+# 4. 零基础入门数据挖掘（心跳信号分类）
 
 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/HeartbeatClassification
 
@@ -202,7 +202,12 @@ Tensorflow2.x
 - 学习周期：14天，每天平均花费时间2小时-5小时不等，根据个人学习接受能力强弱有所浮动。
 - 学习形式：理论+实践
 - 人群定位：熟悉数据挖掘的基本方法，对学习时间序列相关问题和医学大数据有需求的学员。
-- 先修内容：[Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)、[编程实践（Numpy）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)、[编程实践（Pandas）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToPandas)、[编程实践（数据可视化）](https://github.com/datawhalechina/fantastic-matplotlib)
+- 对应比赛：https://tianchi.aliyun.com/competition/entrance/531883/introduction
+- 先修内容：
+	- [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)
+	- [编程实践（Numpy）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)
+	- [编程实践（Pandas）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToPandas)
+	- [编程实践（数据可视化）](https://github.com/datawhalechina/fantastic-matplotlib)
 
 
 ## 任务安排
