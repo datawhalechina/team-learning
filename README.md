@@ -73,7 +73,7 @@
 # 2. 集成学习（上）
 
 
-开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntegratedLearning
+开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/EnsembleLearning
 
 ## 基本信息
 
