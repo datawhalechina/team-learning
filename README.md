@@ -227,16 +227,16 @@ XGBoost是一个优化的分布式梯度增强库。它是陈天奇等人开发�
 
 ## 基本信息
 
-- 贡献人员：王茂霖、王瑞楠、田杨军、谢文昕、韩可航
-- 学习周期：
-- 学习形式：
-- 人群定位：
-- 对应比赛：
+- 贡献人员：王茂霖、王瑞楠、田杨军、谢文昕、韩可航、薛传雨、车弘书、陈泽
+- 学习周期：14天，每天平均花费时间3小时-5小时不等，根据个人学习接受能力强弱有所浮动。
+- 学习形式：理论学习 + 练习
+- 人群定位：有一定数据分析与python编程的基础。
+- 对应比赛：河北邀请赛（二手车价格预测）
 - 先修内容：
-	- [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)
-	- [编程实践（Numpy）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)
-	- [编程实践（Pandas）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToPandas)
-	- [编程实践（数据可视化）](https://github.com/datawhalechina/fantastic-matplotlib)
+    - [Python编程语言](https://github.com/datawhalechina/team-learning-program/tree/master/Python-Language)
+    - [编程实践（Numpy）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToNumpy)
+    - [编程实践（Pandas）](https://github.com/datawhalechina/team-learning-program/tree/master/IntroductionToPandas)
+    - [编程实践（数据可视化）](https://github.com/datawhalechina/fantastic-matplotlib)
 
 
 ## 任务安排
@@ -246,34 +246,61 @@ XGBoost是一个优化的分布式梯度增强库。它是陈天奇等人开发�
 - 组队、修改群昵称
 - 熟悉打卡规则
 
-### Task01 
+### Task01：赛题理解（2天）
+理解赛题数据和目标，清楚评分体系。
+本部分的内容主要包括完成相应报名，下载数据和结果提交打卡（可提交示例结果），熟悉比赛流程，了解数据挖掘的常用评估指标，了解赛题。
 
-- 
-- 
-- 
+- 1.1 赛题概况
+- 1.2 数据概况
+- 1.3 预测指标
+- 1.4 分析赛题
+- 1.5 代码示例
+
+### Task02 数据探索性分析（EDA）（3天）
+EDA的价值主要在于熟悉数据集，了解数据集，对数据集进行验证来确定所获得数据集可以用于接下来的机器学习或者深度学习使用,是数据科学从业者进行数据处理以及特征工程的前提,使数据集的结构和特征集让接下来的预测问题更加可靠。
+本部分内容通过各项数据挖掘的数据分析和特征之间关联性分析方法，介绍常用的数据可视化分析方法。
+
+- 2.1 总览数据概况
+- 2.2 判断数据缺失和异常
+- 2.3 了解预测值的分布
+- 2.4 特征分为类别特征和数字特征
+- 2.5 数字特征分析
+- 2.6 类别特征分析
 
 
-### Task02
+### Task03：特征工程（3天）
 
-- 
-- 
-- 
-- 
+特征工程是对于特征进行进一步分析，是将原始数据转化成更好的表达问题本质的特征的过程，使得将这些特征运用到预测模型中能提高对不可见数据的模型预测精度。
+本部分内容介绍了常用的特征工程部分的方法，主要分为：特征构造和特征筛选两部分。
 
-### Task03
+- 3.1 特征构造
+- 3.2 特征筛选
+- 3.3 降维
 
-- 
-- 
+### Task04：建模调参（3天）
 
-### Task04 
+建模调参是数据挖掘中的重要内容，由于模型的参数往往决定着模型的复杂度，所以模型的建立和调参决定了最终的结果。
+本部分内容介绍了常用的机器学习模型，并讲解了机器学习模型的建模与调参流程。
 
-- 
-- 
+- 4.1 常用机器学习模型
+    * 线性回归模型
+    * 决策树模型
+    * GBDT模型
+    * XGBoost模型
+    * LightGBM模型
+- 4.2 线性回归 & 五折交叉验证 & 模拟真实业务情况
+- 4.3 多种模型对比
+- 4.4 模型调参
 
-### Task05 
 
-- 
-- 
+### Task05：模型融合（2天）
+
+模型融合是融合不同模型的预测结果，往往是把强分类器进行强强联合，变得更强。但也不是说随意的融合就能达到好的效果。进行融合时，所需的集成个体（就是用来集成的模型）应该好而不同。
+本部分内容介绍了多种模型融合方法。
+
+- 5.1 加权融合
+- 5.2 boosting/bagging
+- 5.3 stacking/blending
 
 
 ---
