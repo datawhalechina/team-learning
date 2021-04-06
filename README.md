@@ -22,6 +22,8 @@
 
 开源内容：https://github.com/datawhalechina/team-learning-nlp/tree/master/FoodVoiceRecognition
 
+比赛地址：https://tianchi.aliyun.com/competition/entrance/531887/introduction
+
 ## 学习目标
 
 本次新人赛是Datawhale与天池联合发起的0基础入门系列赛事 —— 零基础入门语音识别之食物声音识别。赛题以语音识别为背景，要求选手使用给定的音频数据集进行建模，并完成食物声音识别任务。为更好的引导大家入门，我们为本赛题定制了学习任务。通过对本方案的完整学习，可以帮助掌握数据分析基本技能。
