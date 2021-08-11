@@ -231,7 +231,7 @@
 - 论坛版块：http://datawhale.club/c/team-learning/39-category/39
 - 开源内容：https://github.com/datawhalechina/Learn-NLP-with-Transformers
 - 内容属性：打磨课程
-- 内容说明：以NLP经典任务和Transformer为主线，配合经典模型讲解和7个经典人物的代码实践。
+- 内容说明：以NLP经典任务和Transformer为主线，配合经典模型讲解和7个经典任务的代码实践。
 - 定位人群：有一定NLP基础的学员。
 - 特别提示：无。
 
