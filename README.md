@@ -1,101 +1,27 @@
 ﻿
+第30期 Datawhale 组队学习活动马上就要开始啦！
 
-
-第29期 Datawhale 组队学习活动马上就要开始啦！
-
-[![](https://img-blog.csdnimg.cn/20210909102658244.png)](https://mp.weixin.qq.com/s/bIhrPsOOKKAQGverVcZMdg)
+![](https://img-blog.csdnimg.cn/64a4b5b7a5324e7f8badb93ed33a8c47.png)
 
 本次组队学习的内容为：
 
-1. 编程实践（数据可视化）
-2. 计算机视觉
-3. 自然语言处理之情感分析
-4. 吃瓜教程——西瓜书+南瓜书
-5. 李宏毅机器学习（含深度学习）
-6. 动手学数据分析
-7. 集成学习（上）
-8. SQL编程语言
-9. 基于transformers的自然语言处理(NLP)入门
-10. 机器学习数学基础
-11. 青少年编程（Scratch 二级）
+1. 吃瓜教程——西瓜书+南瓜书
+2. 李宏毅机器学习（含深度学习）
+3. 深入浅出Pytorch
+4. 时间序列分析
+5. 机器学习数学基础
+6. 树模型与集成学习
+7. CV中的Transformer
+8. 青少年编程（Scratch 三级）
+
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
 ---
-# [1. 编程实践（数据可视化）](https://mp.weixin.qq.com/s/l3xu8OnRLMW9WQpLUO0CWA)
-
-- 航路开辟者：杨剑砺、杨煜、耿远昊、李运佳、居凤霞
-- 领航员：范佳慧
-- 航海士：杨剑砺、伊雪、肖桐、李晴晴、蔡婧旎
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/fantastic-matplotlib
-- 内容属性：精品入门课程系列
-- 内容说明：本次课程内容的设计几乎完全基于官方文档的结构，通过对于官方文档的归纳总结，系统梳理了python最重要的数据可视化包的方方面面，并且配有部分练习题供学习者核查自己的学习效果。
-- 定位人群：希望通过系统学习matplotlib包来提高python可视化技能的人。
-- 特别提示：本次课程是由 Datawhale 数据可视化小组内部成员共同完成，是针对 matplotlib 初学者的入门课程。学习本课程需要基本的python基础即可。
-
-
-## 任务安排
-
-- 学习周期：14天
-- [杨剑砺：数据可视化漫谈](https://mp.weixin.qq.com/s/zGDE6h2_byB5jMfNwqvw9g)
-
-![](https://img-blog.csdnimg.cn/20210909103544405.png)
-
-
----
-# 2. 计算机视觉
-
-- 航路开辟者：王程伟、任乔牧、张强、李芝翔
-- 领航员：杜蕊
-- 航海士：王程伟、任乔牧、张强、李芝翔
-
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/team-learning-cv/tree/master/ImageProcessingFundamentals
-- 内容属性：打磨课程
-- 内容说明：使用OpenCV学习和梳理图像处理算法
-- 定位人群：具备一定编程基础，了解OpenCV，有学习和梳理图像处理算法的需求。
-- 特别提示：无
-
-
-## 任务安排
-
-- 学习周期：12天
-
-![](https://img-blog.csdnimg.cn/20210909104008365.png)
-
-
----
-# 3. 自然语言处理之情感分析
-
-- 航路开辟者：芙蕖、戴治旭、陈海顺
-- 领航员：初晓宇
-- 航海士：芙蕖、戴治旭、陈海顺、汪超
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/team-learning-nlp/tree/master/EmotionalAnalysis
-- 内容属性：打磨课程
-- 内容说明：情感分析入门教程，共同学习，一起完善！
-- 定位人群：具备《高等数学》、《线性代数》、《概率论与数理统计》基础，了解机器学习常用模型、自然语言处理的理论知识，能够调用相应模型库解决的学习者。
-- 特别提示：情感分析教程学习形式为直播+社群答疑，旨在促进更多人动手学习。
-
-## 任务安排
-
-- 学习周期：19天
-
-
-![](https://img-blog.csdnimg.cn/20210909110432337.png)
-
----
-# [4. 吃瓜教程——西瓜书+南瓜书](https://mp.weixin.qq.com/s/_BRI9OUPQG46uhJ5Gukd0A) 
+# [1. 吃瓜教程——西瓜书+南瓜书](https://mp.weixin.qq.com/s/_BRI9OUPQG46uhJ5Gukd0A) 
 
 - 航路开辟者：谢文睿、秦州
-- 领航员：刘琳
+- 领航员：邱振波
 - 航海士：谢文睿、秦州
 
 ## 基本信息
@@ -121,16 +47,16 @@
 - [7. 支持向量机](https://mp.weixin.qq.com/s/wWTHv1ozRCn3uYhptlE1jA)
 - [8. 软间隔与支持向量回归](https://mp.weixin.qq.com/s/BFWTF_u24w02X588FMkCtQ)
 - [9. 集成学习（上）](https://mp.weixin.qq.com/s/T4tg1HFZlL0nqDLy2PQFpA)
+- [10. 集成学习（下）](https://mp.weixin.qq.com/s/KWRGt0ZjfIIilpycdTeIqQ)
 
-![](https://img-blog.csdnimg.cn/20210909104346841.png)
 
-
+![](https://img-blog.csdnimg.cn/8471709d6a294471b5907bd00328712b.png)
 
 ---
-# [5. 李宏毅机器学习（含深度学习）](https://mp.weixin.qq.com/s/PLKLvlKYq8QMgSBKXFiO2w)
+# [2. 李宏毅机器学习（含深度学习）](https://mp.weixin.qq.com/s/PLKLvlKYq8QMgSBKXFiO2w)
 
 - 航路开辟者：王茂霖、陈安东，刘峥嵘，李玲
-- 领航员：王洲烽
+- 领航员：初晓宇
 - 航海士：王茂霖
 
 ## 基本信息
@@ -149,115 +75,62 @@
 - 学习周期：14天
 - 任务路线：李宏毅视频+解读辅助。
 
-![](https://img-blog.csdnimg.cn/20210909104646773.png)
+![](https://img-blog.csdnimg.cn/0474e6c907854970b1f14b95fc1ccf71.png)
+
 
 
 ---
-# [6. 动手学数据分析](https://mp.weixin.qq.com/s/CC_NnCcVjVTRQ92FT3EbKw)
+# 3. 深入浅出Pytorch
 
-- 航路开辟者：陈安东、金娟娟、杨佳达、老表、李玲、张文涛、高立业
-- 领航员：李婉桦
-- 航海士：陈安东、叶前坤、18：46、吴卓辰、livid
+- 航路开辟者：李嘉骐、牛志康、刘洋、陈安东
+- 领航员：叶志雄
+- 航海士：李嘉骐、牛志康、刘洋、陈安东
 
 ## 基本信息
 
+- 开源内容：https://github.com/datawhalechina/thorough-pytorch
+- 内容属性：深度学习（实践）专题
+- 内容说明：PyTorch理论与实践结合，由基础知识到项目实战。
+- 定位人群：具备《高等数学》、《线性代数》、《概率论与数理统计》基础，有一定的机器学习和深度学习基础，熟悉常见概念，会使用Python。
+- 特别提示：学习形式为课程材料学习+直播答疑。
 
-- 开源内容：https://github.com/datawhalechina/hands-on-data-analysis
-- 内容属性：精品入门课系列
-- 内容说明：以项目为主线，通过边学，边做以及边被引导的方式，既掌握知识点又能掌握数据分析的大致思路和流程。
-- 定位人群：懂一些python，希望入门数据分析的学习者。
-- 特别提示：无
+
+## 任务安排
+
+- 学习周期：10天
+
+![](https://img-blog.csdnimg.cn/b38d6ff1fe5f4a6d99a6dfa4b098bff9.png)
+
+
+---
+# 4. 时间序列分析
+
+- 航路开辟者：李岳昆、易远哲
+- 领航员：王洲烽
+- 航海士：李岳昆、易远哲
+
+
+
+
+## 基本信息
+
+- 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/TimeSeries
+- 内容属性：打磨课程
+- 内容说明：时间序列是数据分析中的重要部分，本次学习旨在从基础的概率论统计知识入手，从零开始时间序列分析，内容涵盖了简单的时间序列模型如移动平均法以及较为复杂的ARMA复合时间序列分析。学好本课程可以为更加复杂的时间序列统计学模型打好基础，以解决更为困难的实际问题。
+- 定位人群：有本科数学基础（高等数学、线性代数、概率论与数理统计）的同学。
+- 特别提示：学习形式为课程材料学习+在线答疑。
 
 
 ## 任务安排
 
 - 学习周期：11天
-- 任务路线：了解数据分析中基本库的操作；熟悉数据分析的操作流程，建立数据分析思维，入门数据建模。
 
-![](https://img-blog.csdnimg.cn/20210909104854601.png)
-
-
----
-# 7. 集成学习（上）
-
-- 航路开辟者：李祖贤、薛传雨、六一、杨毅远、陈琰钰
-- 领航员：刘思含
-- 航海士：李祖贤
-
-
-## 基本信息
-
-
-- 开源内容：https://github.com/datawhalechina/ensemble-learning
-- 开源内容：https://gitee.com/datawhalechina/ensemble-learning
-- 内容属性：精品入门课系列
-- 内容说明：详细介绍了机器学习领域中最经典的算法并给出了相应的数学推导和代码，对于每个算法都进行了细致的分析以及必要的代码的演示，便于学习者深刻理解本质。在案例的代码中也给出了详细的代码注释。
-- 定位人群：具备本科数学基础，会使用常见的数据分析工具，既想系统学习sklearn工具库解决机器学习问题，又想系统学习机器学习算法理论的数学推导的学习者。
-- 特别提示：本期集成学习分上下专题，感兴趣的伙伴即可参与。
-
-
-## 任务安排
-
-- 学习周期：14天
-- 任务路线：掌握基本的回归模型、偏差与方差理论、回归模型的评估及超参数调优等。
-- [李祖贤：常用集成思路](https://mp.weixin.qq.com/s/SJa_VilidHz7kjfkE7gu9g)
-- [杨毅远：幸福感预测案例实战](https://mp.weixin.qq.com/s/MTQROZIz4kqq9Pcmp1syvA)
-- [李嘉骐：蒸汽量预测案例实战](https://mp.weixin.qq.com/s/QjnppZpgRMKDssdNzLx0bg)
-- [李祖贤：集成学习的知识点回顾与补充](https://mp.weixin.qq.com/s/JGO2R4goL0WuuLlbbuycnQ)
-
-![](https://img-blog.csdnimg.cn/20210909105152291.png)
-
----
-# 8. SQL编程语言
-
-- 航路开辟者：王复振、杨煜、闫钟峰、杨梦迪、苏鹏、红星、张晋、汪健麟
-- 领航员：丁丹
-- 航海士：王复振、于翔鹏、姜诗扬
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/wonderful-sql
-- 内容属性：精品入门课系列
-- 内容说明：Follow me，从 0 到 1 掌握 SQL，决胜秋招。
-- 定位人群：0基础学员，希望掌握SQL基础查询的同学。
-- 特别提示：无
-
-## 任务安排
-
-- 学习周期：15天
-- 任务路线：完成SQL使用环境搭建，了解关系型数据库的基本特点，熟悉SQL增删改查基本操作，进一步掌握视图、子查询、函数、窗口函数等高阶用法，最后试一试秋招秘籍，检验下自己学习的效果。
- 
-![](https://img-blog.csdnimg.cn/20210909105332328.png)
+![](https://img-blog.csdnimg.cn/8284e7b66fe1441a8a3c27fe7d701fc4.png)
 
 
 ---
-# 9. 基于transformers的自然语言处理(NLP)入门
+# 5. 机器学习数学基础
 
-- 航路开辟者：多多、erenup、张帆、张贤、李泺秋、蔡杰、hlzhang
-- 领航员：张红旭、袁一涵
-- 航海士：多多、张红旭、袁一涵、童鸣
-
-## 基本信息
-
-
-- 开源内容：https://github.com/datawhalechina/Learn-NLP-with-Transformers
-- 内容属性：打磨课程
-- 内容说明：以NLP经典任务和Transformer为主线，配合经典模型讲解和7个经典任务的代码实践。
-- 定位人群：有一定NLP基础的学员。
-- 特别提示：无。
-
-
-## 任务安排
-
-- 学习周期：19天
-- 任务路线：以Transformer和NLP经典任务为主线，配合经典模型讲解和7个经典任务的代码实践。
-
-
-![](https://img-blog.csdnimg.cn/20210909105600570.png)
-
-
----
-# 10. 机器学习数学基础
 
 - 航路开辟者：李祖贤
 - 领航员：张智涵
@@ -280,13 +153,74 @@
 - 学习周期：30天
 - 任务路线：从8月份贯穿到12月份带着同学们一起复习高等数学、线性代数、概率论与数理统计的知识点，以及一起进行刷题练习。
 
-8月份的内容如下：
+10月份的内容如下：
 
-![](https://img-blog.csdnimg.cn/20210909105901756.png)
+![](https://img-blog.csdnimg.cn/6ecbf19419e64a209d2182e97f9c953b.png)
+
+
+
+
+
 
 
 ---
-# 11. 青少年编程（Scratch 二级）
+# 6. 树模型与集成学习
+
+- 航路开辟者：耿远昊
+- 领航员：姜萌
+- 航海士：耿远昊
+
+
+
+
+
+## 基本信息
+
+
+
+- 开源内容：https://github.com/datawhalechina/machine-learning-toy-code
+- 内容属性：打磨课程
+- 内容说明：本课程将对机器学习中的集成学习模型进行理论讲解和代码实践，涵盖了决策树、集成模式、随机森林、孤立森林、adaboost、GBDT、XGBoost与LightGBM内容的详细介绍，带领读者使用numpy构建相关模块，深入理解算法原理与实现。
+- 定位人群：有本科数学基础（高等数学、线性代数、概率论与数理统计）和numpy基础的同学。
+- 特别提示：每个task的第2天晚20:30直播。
+
+
+## 任务安排
+
+- 学习周期：27天
+
+
+![](https://img-blog.csdnimg.cn/eda2c551411e4bcbaaa148e34d18845f.png)
+
+
+---
+# 7. CV中的Transformer
+
+- 航路开辟者：安晟
+- 领航员：尚育鹏
+- 航海士：安晟、袁明坤、闫永强
+
+
+
+## 基本信息
+
+- 开源内容：https://github.com/datawhalechina/dive-into-cv-pytorch [第六章] 
+- 内容属性：打磨课程
+- 内容说明：17年在NLP领域横空出世的transformer，近期在CV方向也火热起来，分类、检测、分割三大方向均有相应研究并取得了不错的成果。本次组队学习内容大致分为两个部分，第一部分介绍Transformer本身的原理和实现，第二部分会介绍如何利用Transformer进行OCR字符识别，目的是通过这样一个独特的视角来带领大家了解Transformer是如何应用到CV领域中的。
+- 定位人群：有一定深度学习基础，了解pytorch的基本使用。
+- 特别提示：自主学习+社群答疑，计划会有一次直播讲解。
+
+
+## 任务安排
+
+- 学习周期：14天
+
+![](https://img-blog.csdnimg.cn/adf0cc042b0642999ce6e166335f7935.png)
+
+
+
+---
+# 8. 青少年编程（Scratch 三级）
 
 
 - 航路开辟者：王思齐、马燕鹏
@@ -298,23 +232,22 @@
 
 - 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/Scratch
 - 内容属性：打磨课程
-- 内容说明：抽取电子学会青少年编程能力等级测试图形化二级的真题来组成试卷，在做题目的过程中掌握图形化编程的基本知识。
+- 内容说明：抽取电子学会青少年编程能力等级测试图形化三级的真题来组成试卷，在做题目的过程中掌握图形化编程的基本知识。由于测试题目为往年电子学会Scratch三级考试的真题，所以通过做题来掌握Scratch三级考试的知识点，为通过考试做准备。
 - 定位人群：对图形化编程感兴趣的小朋友。
 - 特别提示：小学3年级及以上。
 
 ## 任务安排
 
 - 学习周期：15天
-- 任务路线：由于测试题目为往年电子学会Scratch二级考试的真题，所以通过做题来掌握Scratch二级考试的知识点，为通过考试做准备。
 
-![](https://img-blog.csdnimg.cn/20210909110106906.png)
+![](https://img-blog.csdnimg.cn/0ba0be4c0a2f4e33a8d1b93e85be8498.png)
 
 
 
 
 
 ---
-# 12. 具体规则
+# 9. 具体规则
 
 
 ## 打卡方法介绍
@@ -339,8 +272,8 @@
 
 
 
-
-# 13. 组队学习的那些事
+---
+# 10. 组队学习的那些事
 
 
 组队学习之余，来读读组队学习中发生的故事！
@@ -365,12 +298,12 @@
 
 希望参与活动的学习者，来读读组队学习的注意事项！
 
-- [船长参考手册](https://mp.weixin.qq.com/s/WYEE3QSYLirPMntx2Wp5ng)
-- [学习者参考手册](https://mp.weixin.qq.com/s/pwWg0w1DL2C1i_Hs3SZedg)
+- [学习者参考手册](https://mp.weixin.qq.com/s/wXSCQ9fcit7gL0fwAwbtCQ)
 - [什么是组队学习的大航海模型？](https://mp.weixin.qq.com/s/D2SedoGaGYOfzsaXa2BIww)
-- [如何进行作业的评审？](https://mp.weixin.qq.com/s/fH3783jPOaiRcHVMNILKaA)
+- [如何进行作业的评审？](https://mp.weixin.qq.com/s/qnxokuoNLz62HwfJwY2SEQ)
 - [如何使用开源学习小程序？](https://mp.weixin.qq.com/s/iPmzb72Yk0mhIA2NYezXDg)
 - [如何提高国内访问 GitHub 的速度？](https://mp.weixin.qq.com/s/sHQ0yjqYNgEb1Bw_X0BxZg)
+
 
 
 
