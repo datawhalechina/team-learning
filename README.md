@@ -1,75 +1,34 @@
 ﻿
 
 
-第31期 Datawhale 组队学习活动马上就要开始啦！
+第32期 Datawhale 组队学习活动马上就要开始啦！
 
-![](https://img-blog.csdnimg.cn/6e2851b83db7464bbfae60184d986f94.png)
+- 12月08日（星期三），宣发，[今年最后一场组队学习！](https://mp.weixin.qq.com/s/89b2OSlzcQP5YvdB_PD_uA)。
+- 12月11日（星期六），进入学习群、开营仪式。
 
 本次组队学习的内容为：
 
-1. IOS开发
-2. 基于Python的办公自动化
-3. 吃瓜教程——西瓜书+南瓜书
-4. LeetCode 刷题
-5. 李宏毅机器学习（含深度学习）
-6. 动手学数据分析
-7. SQL编程语言
-8. 数据可视化（Matplotlib）
-9. 机器学习数学基础
-10. 水很深的深度学习
-11. 青少年编程（Scratch 四级）
+1. 吃瓜教程——西瓜书+南瓜书
+2. 动手学数据分析
+3. 李宏毅机器学习（含深度学习）
+4. SQL编程语言
+5. 数据可视化（Matplotlib）
+6. 深入理解计算机系统
+7. 推荐系统-新闻推荐系统实践
+8. scikit-learn教程
+9. 统计学习方法习题实战
+10. 算法的应用
+11. Linux实践 
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
----
-# 1. IOS开发
-
-- 航路开辟者：李岳昆、易远哲
-- 领航员：杨皓博
-- 航海士：李岳昆、易远哲
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/IOS
-- 内容属性：公测课程
-- 内容说明：iOS开发入门参考（控件与算法方向）。
-- 定位人群：具有Mac/iMac/iPad相关设备，对协议式编程、Swift语言或iOS开发感兴趣的零基础同学。
-- 特别提示：虚拟机运行MacOS可能会造成卡顿，推荐使用Mac相关设备。
-
-## 任务安排
-
-- 学习周期：14天
-
-![](https://img-blog.csdnimg.cn/bb1c462bb5124f2d979a243e321aa6c6.png)
 
 ---
-# 2. 基于Python的办公自动化
-
-- 航路开辟者：牧小熊、刘雯静、张晓东、吴争光、隆军
-- 领航员：六一
-- 航海士：牧小熊、李显、刘羽中、王晓亮
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/OfficeAutomation
-- 内容属性：公测课程
-- 内容说明：了解通过python进行word、excel、pdf的相关操作，了解通过python进行文件批量处理、电子邮件收发、数据爬取。熟悉自动化办公的相关流程，力求在平时的工作中应用提高工作效率。
-- 定位人群：有Python语言编程基础，对自动化办公有需求的学员。
-- 特别提示：无
-
-## 任务安排
-
-- 学习周期：13天
-
-![](https://img-blog.csdnimg.cn/ee590e23dc2b4119bf1ee019675e58d4.png)
-
-
----
-# [3. 吃瓜教程——西瓜书+南瓜书](https://mp.weixin.qq.com/s/_BRI9OUPQG46uhJ5Gukd0A) 
+# [1. 吃瓜教程——西瓜书+南瓜书](https://mp.weixin.qq.com/s/_BRI9OUPQG46uhJ5Gukd0A) 
 
 - 航路开辟者：谢文睿、秦州
-- 领航员：张海腾
+- 领航员：陈伟峰
 - 航海士：谢文睿、秦州
 
 ## 基本信息
@@ -97,39 +56,41 @@
 - [9. 集成学习（上）](https://mp.weixin.qq.com/s/T4tg1HFZlL0nqDLy2PQFpA)
 - [10. 集成学习（下）](https://mp.weixin.qq.com/s/KWRGt0ZjfIIilpycdTeIqQ)
 - [11. 贝叶斯分类器](https://mp.weixin.qq.com/s/6SLGfSEee6b-GtWWkdeejA)
+- [12. 聚类](https://mp.weixin.qq.com/s/b84tX_4q4-SqIuItkCEqvA)
 
-![](https://img-blog.csdnimg.cn/0fb9cef11a4d462482c8302614ad87f3.png)
+![](https://img-blog.csdnimg.cn/478504f86bce463d8d665874a98853f2.png)
 
 ---
-# 4. LeetCode 刷题
 
-- 航路开辟者：杨世超
-- 领航员：刘军
-- 航海士：杨世超、李彦鹏、叶志雄、赵子一
+# [2. 动手学数据分析](https://mp.weixin.qq.com/s/CC_NnCcVjVTRQ92FT3EbKw)
+
+- 航路开辟者：陈安东、金娟娟、杨佳达、老表、李玲、张文涛、高立业
+- 领航员：范淑卷
+- 航海士：武者小路、曾心怡
 
 ## 基本信息
 
-- 开源内容：https://github.com/itcharge/LeetCode-Py
-- 开源电子书：https://algo.itcharge.cn
-- 内容属性：合作课程
-- 内容说明：算法知识与 LeetCode 刷题。
-- 定位人群：有 Python 语言编程基础，想要学习算法、数据结构基础知识，想在 LeetCode 刷算法题的学员。
+- 内容属性：精品入门课系列
+- 开源内容：https://github.com/datawhalechina/hands-on-data-analysis
+- 开源内容：https://gitee.com/datawhalechina/hands-on-data-analysis
+- B 站视频：https://www.bilibili.com/video/BV1Uv411p77r
+- 内容说明：以项目为主线，通过边学，边做以及边被引导的方式，既掌握知识点又能掌握数据分析的大致思路和流程。
+- 定位人群：懂一些python，希望入门数据分析的学习者。
 - 特别提示：无
 
 ## 任务安排
 
-- 学习周期：13天
+- 学习周期：11天
 
-![](https://img-blog.csdnimg.cn/dbb69094856b4251b1956fb1cd579419.png)
-
+![](https://img-blog.csdnimg.cn/96920875d68c43e6945b1fc9f888a3fc.png)
 
 ---
 
-# [5. 李宏毅机器学习（含深度学习）](https://mp.weixin.qq.com/s/PLKLvlKYq8QMgSBKXFiO2w)
+# [3. 李宏毅机器学习（含深度学习）](https://mp.weixin.qq.com/s/PLKLvlKYq8QMgSBKXFiO2w)
 
 - 航路开辟者：王茂霖、陈安东，刘峥嵘，李玲
-- 领航员：张菘淳
-- 航海士：王茂霖、吴振一
+- 领航员：郭棉昇
+- 航海士：汪超、赵美
 
 ## 基本信息
 
@@ -141,7 +102,7 @@
 - 官方地址：http://speech.ee.ntu.edu.tw/~tlkagk/courses.html
 - 内容说明：辅助大家更好学习李宏毅老师机器学习视频，并加入相关补充资料，相信你会对机器学习有更加深刻的理解。
 - 定位人群：深度学习初学者，有微积分，线性代数基础。
-- 特别提示：本教程为深度学习教程
+- 特别提示：本教程为深度学习教程。
 
 ## 任务安排
 
@@ -149,40 +110,15 @@
 - 任务路线：李宏毅视频+解读辅助。
 - [深度学习的三个主要步骤！](https://mp.weixin.qq.com/s/8c1bBzGTMfeuSQB4EiwRgA)
 
-![](https://img-blog.csdnimg.cn/efb5551c812949ba9583c474a5b4df09.png)
-
-
+![](https://img-blog.csdnimg.cn/2d136d06e7264463a435d66fafe0f37f.png)
 
 ---
 
-# [6. 动手学数据分析](https://mp.weixin.qq.com/s/CC_NnCcVjVTRQ92FT3EbKw)
-
-- 航路开辟者：陈安东、金娟娟、杨佳达、老表、李玲、张文涛、高立业
-- 领航员：陈玉立
-- 航海士：陈安东、武帅、肖涵哲、叶前坤、沈豪
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/hands-on-data-analysis
-- 内容属性：精品入门课系列
-- 内容说明：以项目为主线，通过边学，边做以及边被引导的方式，既掌握知识点又能掌握数据分析的大致思路和流程。
-- 定位人群：懂一些python，希望入门数据分析的学习者。
-- 特别提示：无
-
-## 任务安排
-
-- 学习周期：11天
-
-![](https://img-blog.csdnimg.cn/e09bb179615041f99f91c77dbf623897.png)
-
-
----
-
-# [7. SQL编程语言](https://mp.weixin.qq.com/s/sUnIAjhTMikR2uvcpoL_yA)
+# [4. SQL编程语言](https://mp.weixin.qq.com/s/sUnIAjhTMikR2uvcpoL_yA)
 
 - 航路开辟者：王复振、杨煜、闫钟峰、杨梦迪、苏鹏、红星、张晋、汪健麟
-- 领航员：武帅
-- 航海士：王复振、闫钟峰、刘海霞
+- 领航员：李云龙
+- 航海士：蒋志强、闫钟峰
 
 ## 基本信息
 
@@ -197,15 +133,15 @@
 
 - 学习周期：15天
 
-![](https://img-blog.csdnimg.cn/339f404f9e6840f0a6f92ebff9bc13f8.png)
+![](https://img-blog.csdnimg.cn/12a98203805b4b13ae3b2b694c7fbfa4.png)
 
 ---
 
-# [8. 数据可视化（Matplotlib）](https://mp.weixin.qq.com/s/l3xu8OnRLMW9WQpLUO0CWA)
+# [5. 数据可视化（Matplotlib）](https://mp.weixin.qq.com/s/l3xu8OnRLMW9WQpLUO0CWA)
 
 - 航路开辟者：杨剑砺、杨煜、耿远昊、李运佳、居凤霞
-- 领航员：贾献华
-- 航海士：杨剑砺、郭棉昇、张文恺、肖桐
+- 领航员：王万
+- 航海士：范歆琦
 
 ## 基本信息
 
@@ -221,80 +157,157 @@
 - 学习周期：14天
 - [杨剑砺：数据可视化漫谈](https://mp.weixin.qq.com/s/zGDE6h2_byB5jMfNwqvw9g)
 
-![](https://img-blog.csdnimg.cn/871edc8684fd4f4caca647bec74e4fcb.png)
+![](https://img-blog.csdnimg.cn/328e00a251a5474bb8c184fdb2e11fa0.png)
+
 
 ---
+# 6. 深入理解计算机系统
 
-# 9. 机器学习数学基础
+- 航路开辟者：李岳昆、易远哲
+- 领航员：初晓宇
+- 航海士：叶前坤、沈豪
 
-- 航路开辟者：李祖贤
-- 领航员：张智涵
-- 航海士：李祖贤、邱广坤、戴治旭、黄浩霖
 
 ## 基本信息
 
-- 开源内容：https://github.com/datawhalechina/team-learning-data-mining/tree/master/Mathematics
-- 直播平台：https://www.bilibili.com/video/BV1H54y1J7Ka/
+- 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/ComputerSystems
 - 内容属性：公测课程
-- 内容说明：本课程主要针对希望系统学习大学数学，或者是想为深造机器学习补充数学基础的的同学，考研的同学也可一起来学，前提是必须要跟上节奏，不能掉队。
-- 定位人群：机器学习算法研究生、大四准备考研的本科生、参加工作转行算法工程师的在职人员（需曾经学习过大学数学）。
-- 特别提示：坚持到最后，你已经击败了80%的对手！
-
-## 任务安排
-
-- 学习周期：32天
-
-![](https://img-blog.csdnimg.cn/7306b2f779f944e1b9645407cb250b88.png)
-
----
-
-# 10. 水很深的深度学习
-
-- 航路开辟者：刘洋
-- 领航员：陈宇
-- 航海士：刘洋、陈陟原、左凯文、初晓宇、刘羽中
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/unusual-deep-learning
-- 内容属性：公测课程
-- 内容说明：本课程讲授和讨论深度学习的主要理论和关键技术，主要内容有深度学习基础、卷积神经网络、循环神经网络、深度生成模型、深度学习正则化等以及上述深度学习理论在图像、语音、自然语言处理等领域的主要应用，同时也介绍了一些新兴的深度学习模型及其应用。通过本课程的学习，希望能够掌握深度学习的基本理论和关键技术，提高基于深度学习技术进行科学研究与应用开发的能力。（第一期为前六章）
-- 定位人群：了解一些基本的机器学习算法和高数知识。
-- 特别提示：不要求编程，只讲述理论。
-
+- 内容说明：本部分为「Datawhale 开源 408 计划」首篇，旨在通过计算机科学领域经典丛书：《深入理解计算机系统》（Computer Systems: A Programmer's Perspective，CSAPP）帮助更多的小伙伴理解计算机真实的运行过程与逻辑。Datawhale开源社区将全程支持并提供CSAPP原书习题、lab伴读、课件制作等内容。
+- 定位人群：0基础希望理解计算机底层系统的同学
+- 特别提示：我们鼓励小伙伴们使用「费曼学习法」：“纸上得来终觉浅，绝知此事要躬行。”课件中提供了相应的ppt教材，您可以尝试给自己讲述相关内容以强化理解；也可以录制自己讲述知识点过程中的视频，作为组队学习的打卡内容。
 
 ## 任务安排
 
 - 学习周期：17天
 
-![](https://img-blog.csdnimg.cn/65f189cda82a45839c5d0d324202a83c.png)
+![](https://img-blog.csdnimg.cn/5550df47f22640c48f130a6be22dae44.png)
+
+---
+# 7. 推荐系统-新闻推荐系统实践
+
+- 航路开辟者：罗如意
+- 领航员：肖桐
+- 航海士：汪志鸿、吴忠强、赖敏材、王辰玥、毛伟、宋禹成、陈雨龙、管柯琴
+
+## 基本信息
+
+- 开源内容：https://github.com/datawhalechina/fun-rec
+- 内容属性：公测课程
+- 内容说明：新闻推荐系统实践是fun-rec开源项目中比较偏工程的实战项目（前端+后端+策略+算法），该项目没有实际的商用价值仅用于学习推荐系统的基本流程和实现过程。
+- 定位人群：了解推荐推荐系统，有一定的计算机基础，想了解推荐系统工程实现的同学。
+- 特别提示：内容虽然有点多，我们会在每次任务中都给大家划重点学习。
+
+## 任务安排
+
+- 学习周期：18天
+
+![](https://img-blog.csdnimg.cn/9f3c22bac0ed4fbc8e44b233c918b368.png)
+
+
+
+---
+# 8. scikit-learn教程
+
+
+
+- 航路开辟者：江季
+- 领航员：李牧轩
+- 航海士：武帅、陈宇
+
+## 基本信息
+
+- 开源内容：：https://github.com/datawhalechina/machine-learning-toy-code/tree/main/ml-with-sklearn
+- 内容属性：公测课程
+- 内容说明：实用sklearn学习库进行各类算法的实战，并且善用可视化技术润色结果。
+- 定位人群：具有一定机器学习概念以及Python编程的同学。
+- 特别提示：本教程重在负责实际的编程实践，相关理论知识需同学自行补全。
+
+## 任务安排
+
+- 学习周期：24天
+
+![](https://img-blog.csdnimg.cn/af3af631c55d4d41adb3caf64dc97b2b.png)
+
+
+
+
+
 
 
 
 
 
 ---
-# 11. 青少年编程（Scratch 四级）
+
+# 9. 统计学习方法习题实战
+
+- 航路开辟者：胡锐锋、王维嘉、王瀚翀、王茸茸、毛鹏志
+- 领航员：张璇
+- 航海士：胡锐锋、王维嘉、王瀚翀、王茸茸、毛鹏志、王天富、范佳慧
+
+## 基本信息
+
+- 开源内容：https://github.com/datawhalechina/statistical-learning-method-solutions-manual
+- 内容属性：公测课程
+- 内容说明：李航老师的《统计学习方法》是机器学习领域的经典入门教材之一，主要学习本书第1篇的监督学习内容，结合课后习题，巩固相关知识。
+- 定位人群：具有本科数学基础（指高数、线代、概率论与数理统计）的同学。
+- 特别提示：以习题为核心，配合教程；先看书、做题、看习题解答。
+
+## 任务安排
+
+- 学习周期：18天
+
+![](https://img-blog.csdnimg.cn/9d7a3d9369754baf969e00e6a5d1c890.png)
+
+---
+
+# 10. 算法的应用
+
+- 航路开辟者：肖然
+- 领航员：李铭哲
+- 航海士：伊雪、左凯文
+
+## 基本信息
+
+- 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/AlgorithmRunning
+- 内容属性：公测课程
+- 内容说明：本次内容主要是对算法的理解和应用，我们会从优质的课程设计、或者简化的工业界小项目出发。希望每一个参与者能够实实现相应的函数接口。我们会给出相关的文档和函数的接口设计，每个学习的同学都需要实现代码，并提交自己的代码到我们的网站，会有相关的可视化显示。
+- 定位人群：计算机相关专业，有一定编程能力，学习过数据结构。
+- 特别提示：可能存在测试不充分，我们的小网站可能有很多奇怪的bug，遇到问题请直接在群里反馈，我们将修复bug并完善评测网站。
 
 
-- 航路开辟者：王思齐、马燕鹏
-- 领航员：马燕鹏
-- 航海士：王思齐、马燕鹏
+## 任务安排
+
+- 学习周期：14天
+
+![](https://img-blog.csdnimg.cn/4688dae906144e49a4b8015a428fe5ea.png)
+
+
+
+
+
+---
+# 11. Linux实践
+
+- 航路开辟者：刘羽中
+- 领航员：六一
+- 航海士：刘洋、王晓亮、陈玉立、六一
 
 ## 基本信息
 
 
-- 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/Scratch
+- 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/LinuxPractice
+- 开源内容：https://shimo.im/docs/v5YBGnjJDAMrKyhk
 - 内容属性：公测课程
-- 内容说明：抽取电子学会青少年编程能力等级测试图形化四级的真题来组成试卷，在做题目的过程中掌握图形化编程的基本知识。由于测试题目为往年电子学会Scratch四级考试的真题，所以通过做题来掌握Scratch四级考试的知识点，为通过考试做准备。
-- 定位人群：对图形化编程感兴趣的小朋友。
-- 特别提示：小学3年级及以上
+- 内容说明：Linux，全称GNU/Linux，是一种免费使用和自由传播的类UNIX操作系统，其内核由林纳斯·本纳第克特·托瓦兹于1991年10月5日首次发布，它主要受到Minix和Unix思想的启发，是一个基于POSIX的多用户、多任务、支持多线程和多CPU的操作系统。Linux有上百种不同的发行版，如基于社区开发的debian、archlinux，和基于商业开发的Red Hat Enterprise Linux、SUSE、Oracle Linux等。在全球超级计算机TOP500强操作系统排行榜中，Linux的占比最近十几年长期保持在85%以上，且一直呈现快速上升趋势。根据2016年的排行榜，Linux的占比已经高达98.80%。其实在各种大、中小型企业的服务器应用领域，在企业内部服务器99%的情况下都是Linux系统，如果你想成为一个合格的软件工程师&算法工程师，Linux是你必备的技能。
+- 定位人群：希望通过系列实践任务，学习linux基本操作的学习者。
+- 特别提示：需要使用指定的Linux系统完成任务；需要完成所有的任务细节才算完成一个任务。
 
 ## 任务安排
 
 - 学习周期：15天
 
-![](https://img-blog.csdnimg.cn/5d41ac549a9b4f33a7a70c8256c9a1e4.png)
+![](https://img-blog.csdnimg.cn/3dfc955b65fd4ac7bf5527dd9c87f0a3.png)
 
 
 
@@ -357,5 +370,3 @@
 - [如何进行作业的评审？](https://mp.weixin.qq.com/s/qnxokuoNLz62HwfJwY2SEQ)
 - [如何使用开源学习小程序？](https://mp.weixin.qq.com/s/iPmzb72Yk0mhIA2NYezXDg)
 - [如何提高国内访问 GitHub 的速度？](https://mp.weixin.qq.com/s/sHQ0yjqYNgEb1Bw_X0BxZg)
-
-
