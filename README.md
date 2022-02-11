@@ -1,164 +1,147 @@
 ﻿
 
 
-第33期 Datawhale 组队学习活动马上就要开始啦！
+第34期 Datawhale 组队学习活动马上就要开始啦！
 
-- 01月05日（星期三），宣发，[寒假组队学习计划！](https://mp.weixin.qq.com/s/EEm630RTmR28b-hT6cLSGA)。
-- 01月08日（星期六），进入学习群、开营仪式。
+
+- 02月09日（星期三），宣发，[2月组队学习计划！](https://mp.weixin.qq.com/s/yChZKYd4HPOeZwTl3WGruQ)。
+- 02月12日（星期六），进入学习群、开营仪式。
 
 本次组队学习的内容为：
 
-1. 吃瓜教程——西瓜书+南瓜书
-2. 动手学数据分析
-3. 李宏毅机器学习（含深度学习）
-4. 数据可视化（Matplotlib）
-5. LeetCode刷题
-7. Scratch（一级）
+1. 阿里云天池在线编程训练营
+2. 百度飞桨AI达人创造营
+3. 零基础学python编程思维
+4. Python（一级）
+5. Scratch（二级）
+
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
 
 
 ---
-# [1. 吃瓜教程——西瓜书+南瓜书](https://mp.weixin.qq.com/s/_BRI9OUPQG46uhJ5Gukd0A) 
+# 1. 阿里云天池在线编程训练营
 
-- 航路开辟者：谢文睿、秦州
-- 领航员：潘磊
-- 航海士：谢文睿、秦州
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/pumpkin-book
-- B 站视频：https://www.bilibili.com/video/BV1Mh411e7VU
-- 内容属性：机器学习（理论）专题
-- 内容说明：周志华老师的“西瓜书”是机器学习经典入门教材，值得反复阅读，配合“南瓜书”从本科数学基础的视角进行讲解，一起打好基础！
-- 定位人群：有本科数学基础（高等数学、线性代数、概率论与数理统计）的同学。
-- 特别提示：吃瓜教程学习形式为直播+社群答疑，旨在促进更多人动手学习。
-
-## 任务安排
-
-- 学习周期：18天
-- 任务路线：以《机器学习》西瓜书为主线，配合南瓜书攻克疑难点。
-- [0. 导学](https://mp.weixin.qq.com/s/KZP2tGVEoTTNgMO_gpfC6g)
-- [1. 一元线性回归](https://mp.weixin.qq.com/s/zwqZQnVOlKqlD9aXl1trSQ)
-- [2. 多元线性回归](https://mp.weixin.qq.com/s/C3y2wcjmrFbc-VSO1vzd_A)
-- [3. 对数几率回归](https://mp.weixin.qq.com/s/9AjR5DgnEbEFOs8RQdUJqA)
-- [4. 二分类线性判别分析](https://mp.weixin.qq.com/s/_bwpeORk9W93XTfuSdnlIw)
-- [5. 决策树](https://mp.weixin.qq.com/s/kxAuVAhnimskmT667JjrFA)
-- [6. 神经网络](https://mp.weixin.qq.com/s/S5b6Dt3Pn0FyK88PiULjcw)
-- [7. 支持向量机](https://mp.weixin.qq.com/s/wWTHv1ozRCn3uYhptlE1jA)
-- [8. 软间隔与支持向量回归](https://mp.weixin.qq.com/s/BFWTF_u24w02X588FMkCtQ)
-- [9. 集成学习（上）](https://mp.weixin.qq.com/s/T4tg1HFZlL0nqDLy2PQFpA)
-- [10. 集成学习（下）](https://mp.weixin.qq.com/s/KWRGt0ZjfIIilpycdTeIqQ)
-- [11. 贝叶斯分类器](https://mp.weixin.qq.com/s/6SLGfSEee6b-GtWWkdeejA)
-- [12. 聚类](https://mp.weixin.qq.com/s/b84tX_4q4-SqIuItkCEqvA)
-- [13. 降维与度量学习（上）](https://mp.weixin.qq.com/s/cTNj9zNY5uaPVee2woPX8Q)
-- [14. 降维与度量学习（下）](https://mp.weixin.qq.com/s/lwcswbxaqThC8Za3wlwnYA)
-
-![](https://img-blog.csdnimg.cn/6db256e3b3244c2690ee371fbaaf23a6.png)
-
----
-
-# [2. 动手学数据分析](https://mp.weixin.qq.com/s/CC_NnCcVjVTRQ92FT3EbKw)
-
-- 航路开辟者：陈安东、金娟娟、杨佳达、老表、李玲、张文涛、高立业
-- 领航员：张文恺
-- 航海士：武帅、戴治旭、初晓宇
+- 航路开辟者：陈信达、杨世超、赵子一、马燕鹏
+- 领航员：武帅、初晓宇、叶前坤、邱广坤、朱松青
+- 航海士：宁彦吉、肖桐、汪超、陈信达、杨世超、赵子一、武帅、初晓宇、叶前坤、邱广坤、朱松青、马燕鹏
 
 ## 基本信息
 
-- 内容属性：精品入门课系列
-- 开源内容：https://github.com/datawhalechina/hands-on-data-analysis
-- 开源内容：https://gitee.com/datawhalechina/hands-on-data-analysis
-- B 站视频：https://www.bilibili.com/video/BV1Uv411p77r
-- 内容说明：以项目为主线，通过边学，边做以及边被引导的方式，既掌握知识点又能掌握数据分析的大致思路和流程。
-- 定位人群：懂一些python，希望入门数据分析的学习者。
-- 特别提示：无
-
-## 任务安排
-
-- 学习周期：11天
-
-![](https://img-blog.csdnimg.cn/1d44cbe68a6f453381a88c32877f91a9.png)
-
----
-
-# [3. 李宏毅机器学习（含深度学习）](https://mp.weixin.qq.com/s/PLKLvlKYq8QMgSBKXFiO2w)
-
-- 航路开辟者：王茂霖、陈安东，刘峥嵘，李玲
-- 领航员：宋泽山
-- 航海士：汪健麟、叶梁
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/leeml-notes
-- 开源内容：https://gitee.com/datawhalechina/leeml-notes
-- 内容属性：深度学习（理论）专题
-- B 站视频：https://www.bilibili.com/video/BV1Ht411g7Ef
-- B 站视频：https://www.bilibili.com/video/BV1JA411c7VT
-- 官方地址：http://speech.ee.ntu.edu.tw/~tlkagk/courses.html
-- 内容说明：辅助大家更好学习李宏毅老师机器学习视频，并加入相关补充资料，相信你会对机器学习有更加深刻的理解。
-- 定位人群：深度学习初学者，有微积分，线性代数基础。
-- 特别提示：本教程为深度学习教程。
-
-## 任务安排
-
-- 学习周期：14天
-- 任务路线：李宏毅视频+解读辅助。
-- [深度学习的三个主要步骤！](https://mp.weixin.qq.com/s/8c1bBzGTMfeuSQB4EiwRgA)
-
-![](https://img-blog.csdnimg.cn/307cb3807aab47519177d61230306da6.png)
-
----
-
-# [4. 数据可视化（Matplotlib）](https://mp.weixin.qq.com/s/l3xu8OnRLMW9WQpLUO0CWA)
-
-- 航路开辟者：杨剑砺、杨煜、耿远昊、李运佳、居凤霞
-- 领航员：王森
-- 航海士：肖明远、郭棉昇
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/fantastic-matplotlib
-- 开源内容：https://gitee.com/datawhalechina/fantastic-matplotlib
-- 内容属性：精品入门课程系列
-- 内容说明：本次课程内容的设计几乎完全基于官方文档的结构，通过对于官方文档的归纳总结，系统梳理了python最重要的数据可视化包的方方面面，并且配有部分练习题供学习者核查自己的学习效果。
-- 定位人群：希望通过系统学习matplotlib包来提高python可视化技能的人。
-- 特别提示：本次课程是由 Datawhale 数据可视化小组内部成员共同完成，是针对 matplotlib 初学者的入门课程。学习本课程需要基本的python基础即可。
-
-## 任务安排
-
-- 学习周期：14天
-- [杨剑砺：数据可视化漫谈](https://mp.weixin.qq.com/s/zGDE6h2_byB5jMfNwqvw9g)
-
-![](https://img-blog.csdnimg.cn/8a5e18e21c8e492b9d85a34bded9b8e0.png)
-
-
----
-# 5. Leetcode刷题
-
-- 航路开辟者：杨世超
-- 领航员：肖桐
-- 航海士：刘军、孙子涵、汪超、赵子一
-
-
-## 基本信息
-
-- 开源内容：https://github.com/itcharge/LeetCode-Py
-- 开源内容：https://algo.itcharge.cn
+- 学习平台：https://tianchi.aliyun.com/oj/
 - 内容属性：合作课程
-- 内容说明：算法基础知识与 LeetCode 刷题，一期课程大概 40 道题。
-- 定位人群：有 Python 语言编程基础，想要学习算法、数据结构基础知识，想在 LeetCode 刷算法题的学员。
-- 特别提示：无。
+- 内容说明：Datawhale、天池、Leetcode联合为数据结构与算法的初学者开发了一套入门课程，该课程包含知识点讲解与题目解析两部分，通过训练营的形式帮助初学者学习数据结构与算法的内容。
+- 定位人群：对某种编程语言的基本语法有所了解的同学。
+- 特别提示：该训练营的学习形式为 **录播 + 社群答疑 + oj平台练习**，旨在促进更多人掌握数据结构与算法的内容。
 
 ## 任务安排
 
-- 学习周期：14天
+- 学习周期：24天
 
-![](https://img-blog.csdnimg.cn/d8cb20cfb90449289ee252cfd39ec93b.png)
+
+![](https://img-blog.csdnimg.cn/780b04a119364441887178a983958bbb.png)
+![](https://img-blog.csdnimg.cn/6efadb6e11144d87bbc9f80058383dfd.png)
+
+
+
+
+
+
 
 ---
-# 6. Scratch一级
+
+# 2. 百度飞桨AI达人创造营
+
+- 航路开辟者：百度飞桨
+- 领航员：六一
+- 航海士：阿水、颜鑫、宋泽山、刘洋、张文恺 
+
+## 基本信息
+
+- 内容属性：合作课程
+- 练习平台：https://aistudio.baidu.com/aistudio/course/introduce/25259?ad-from=pdg-1
+- 内容说明：通过课程学习和项目实践，全面提升基于飞桨的工程应用落地能力，积累AI项目全流程实战经验。
+- 定位人群：熟悉python语言、了解paddle框架的学习者。
+- 特别提示：飞桨本次活动的QQ群：132371190
+
+## 任务安排
+
+- 学习周期：21天
+
+![](https://img-blog.csdnimg.cn/772f9d32967545ddab373ec866fb53f0.png)
+![](https://img-blog.csdnimg.cn/17f2989bf9cc451c9b3f5745bae2e0a2.png)
+
+
+
+
+---
+
+# 3. 零基础学python编程思维
+
+- 航路开辟者：邓林权
+- 领航员：沈一
+- 航海士：覃嘉俊、马子阳、左凯文
+
+## 基本信息
+
+- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/6
+- 内容属性：公测课程
+- 内容说明：课程是由MIT6.00计算机科学和编程导论和笨方法学python结合编写的，为的是帮助零基础的同学更好和更容易学习，因为我是在学习不同课程时碰到很多问题，原因是基础没打好，通过学习这个课程可以清楚了解编程思维、代码规范、防御性编程等，为以后的学习打好基础。
+- 定位人群：零基础希望学习Python的学习者。
+
+
+## 任务安排
+
+- 学习周期：19天
+
+![](https://img-blog.csdnimg.cn/761815c07a13478aa80f944dbd30e796.png)
+
+
+
+
+---
+
+# 4. Python（一级）
+
+- 航路开辟者：王思齐、马燕鹏
+- 领航员：马燕鹏
+- 航海士：马燕鹏
+
+## 基本信息
+
+- 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/PythonTest
+- 内容属性：公测课程
+- 内容说明：抽取电子学会青少年编程能力等级测试Python一级的真题来组成试卷，在做题目的过程中掌握Python编程的基本知识。
+- 定位人群：对Python编程感兴趣的小朋友。
+- 特别提示：小学3年级及以上。
+
+## 任务安排
+
+- 学习周期：10天
+- [Task01：青少年软件编程（Python）等级考试模拟卷（一级）](https://mp.weixin.qq.com/s/7z_7DQ6fUpXe9hr56c01VQ)
+- [Task02：青少年软件编程（Python）等级考试模拟卷（一级）](https://mp.weixin.qq.com/s/rZq3a7hmgJYOfbHwa7auUQ)
+- [Task03：青少年软件编程（Python）等级考试模拟卷（一级）](https://mp.weixin.qq.com/s/TqBk5WNA2t6dgWsHArMp3g)
+- [Task04：青少年软件编程（Python）等级考试模拟卷（一级）](https://mp.weixin.qq.com/s/LUq2_LxK9Ju8CTduIxzyQg)
+- [Task05：青少年软件编程（Python）等级考试模拟卷（一级）](https://mp.weixin.qq.com/s/g1VHLc_Z19RkFqg3MLhx4g)
+- 参考资料：
+- [电子学会青少年编程等级考试Python一级题目解析01](https://mp.weixin.qq.com/s/PWUxVvexpkZUDuSXTsUw8A)
+- [电子学会青少年编程等级考试Python一级题目解析02](https://mp.weixin.qq.com/s/HI0bw3ZAg3AbiCd0h7hpqg)
+- [电子学会青少年编程等级考试Python一级题目解析03](https://mp.weixin.qq.com/s/CxvAgNfUCt74JfRvqaJvYA)
+- [电子学会青少年编程等级考试Python一级题目解析04](https://mp.weixin.qq.com/s/T60SAv6qvY-aRcK2S8vzdA)
+- [电子学会青少年编程等级考试Python一级题目解析05](https://mp.weixin.qq.com/s/RSOUNCfW-R30kfQ7rB4u-A)
+- [电子学会青少年编程等级考试Python一级题目解析06](https://mp.weixin.qq.com/s/pf0_x5Hgy8eiynavTURm9g)
+- [电子学会青少年编程等级考试Python一级案例01](https://mp.weixin.qq.com/s/YeBCQ69-LxymFZmmUgyTMA)
+- [电子学会青少年编程等级考试Python一级案例02](https://mp.weixin.qq.com/s/RVzC50nD17pqb1U-V9Hv-w)
+- [电子学会青少年编程等级考试Python一级案例03](https://mp.weixin.qq.com/s/3Djb2-zYL_IXPEW-7OAlkg)
+
+
+![](https://img-blog.csdnimg.cn/61313be0ebd74b2a8015d049b0682acd.png)
+
+
+
+---
+# 5. Scratch（二级）
 
 - 航路开辟者：王思齐、马燕鹏
 - 领航员：马燕鹏
@@ -168,15 +151,40 @@
 
 - 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/Scratch
 - 内容属性：公测课程
-- 内容说明：抽取电子学会青少年编程能力等级测试图形化一级的真题来组成试卷，在做题目的过程中掌握图形化编程的基本知识。
+- 内容说明：抽取电子学会青少年编程能力等级测试图形化二级的真题来组成试卷，在做题目的过程中掌握图形化编程的基本知识。
 - 定位人群：对图形化编程感兴趣的小朋友。
 - 特别提示：小学3年级及以上。
 
 ## 任务安排
 
 - 学习周期：10天
+- [Task01：青少年软件编程（Scratch）等级考试模拟卷（二级）](https://mp.weixin.qq.com/s/1yJqKkW5b6MwQSiemycShA)
+- [Task02：青少年软件编程（Scratch）等级考试模拟卷（二级）](https://mp.weixin.qq.com/s/JiFDH9mk1UwaqnDECrPpbA)
+- [Task03：青少年软件编程（Scratch）等级考试模拟卷（二级）](https://mp.weixin.qq.com/s/7BBsJhPD83IQlYDZflETwQ)
+- [Task04：青少年软件编程（Scratch）等级考试模拟卷（二级）](https://mp.weixin.qq.com/s/jZ2_-Ir-bx5nWI9w0Qh31A)
+- [Task05：青少年软件编程（Scratch）等级考试模拟卷（二级）](https://mp.weixin.qq.com/s/UEEQXMDDzfX801n40kGAJQ)
+- 参考资料：
+- [01 寻找宝石](https://mp.weixin.qq.com/s/uOFtGwWc7sSPyPVjb8ZXrA)
+- [02 绘制五彩缤纷的多瓣花](https://mp.weixin.qq.com/s/wBQIRuW1fi7sm6fprGORAw)
+- [03 制作蝙蝠冲关游戏](https://mp.weixin.qq.com/s/wF2t25KIDBGHut_vTx2YVg)
+- [04 飞翔的小鸟](https://mp.weixin.qq.com/s/kGqXOsnXNOMzCXc7VxTe-Q)
+- [05 绘制十个正方形](https://mp.weixin.qq.com/s/HdAbQTRLfelYk8bBGVH3CQ)
+- [06 巡线小车](https://mp.weixin.qq.com/s/ueodpL4KE4NB4h9Q9txQpg)
+- [07 两座对称的山峰](https://mp.weixin.qq.com/s/gGgh4rixEZ8_wxalvWJj5w)
+- [08 绘制图形_五个正方形](https://mp.weixin.qq.com/s/-B7LGC6GkwigYFwCnL37bA)
+- [09 货运飞船](https://mp.weixin.qq.com/s/U_cdyCB6pGWoNkbdkJwysg)
+- [10 飞不出去的蝴蝶](https://mp.weixin.qq.com/s/TJv-ai_K11qLX1P-ZQEZLQ)
+- [11 绘制雪花图案](https://mp.weixin.qq.com/s/uo_XwZBaaTDUdNkLRRiHQA)
+- [12 别碰红块](https://mp.weixin.qq.com/s/QHaH1m8CnikaFcUt0cRhxw)
+- [13 小鸡捉害虫](https://mp.weixin.qq.com/s/3H8zppI3qq1d8wRxYvMKzA)
+- [14 垃圾分类](https://mp.weixin.qq.com/s/hopCpEzQg6QJhA0KOpKC4Q)
+- [15 绘制方形螺旋](https://mp.weixin.qq.com/s/jdEwVnKUq1WYLuZlSHgg_w)
+- [16 小瓢虫找妈妈](https://mp.weixin.qq.com/s/WRPVn_MWgXFVRMox3oOkow)
+- [17 绘制图形_三个正方形](https://mp.weixin.qq.com/s/4KoooehK3y9IKAWvgYfACQ)
 
-![](https://img-blog.csdnimg.cn/239f61d39e194e1884b0a1673b4cf3bb.png)
+
+![](https://img-blog.csdnimg.cn/61313be0ebd74b2a8015d049b0682acd.png)
+
 
 
 
@@ -184,7 +192,7 @@
 
 
 ---
-# 7. 具体规则
+# 6. 具体规则
 
 
 ## 打卡方法介绍
@@ -210,7 +218,7 @@
 
 
 ---
-# 8. 组队学习的那些事
+# 7. 组队学习的那些事
 
 
 组队学习之余，来读读组队学习中发生的故事！
