@@ -4,10 +4,10 @@
 
 [toc]
 
-第38期 Datawhale 组队学习活动马上就要开始啦！
+第39期 Datawhale 组队学习活动马上就要开始啦！
 
-- 06月08日（星期三），宣发，[6月组队学习计划！](https://mp.weixin.qq.com/s/3wTY1B7eGgMuqf_cFTU0rg)。
-- 06月11日（星期六），进入学习群、开营仪式。
+- 07月06日（星期三），宣发，[7月组队学习计划！](https://mp.weixin.qq.com/s/6edHU0kswIEmGvkccaTrpA)。
+- 07月09日（星期六），进入学习群、开营仪式。
 
 本次组队学习的内容为：
 
@@ -17,11 +17,12 @@
 4. 数据可视化（Matplotlib）
 5. SQL编程语言
 6. 深入浅出Pytorch
-7. GitModel数学建模
-8. 使用Pytorch复现推荐模型
-9. C++语言与基础算法
-10. 零基础入门数据挖掘赛事
-11. 青少年编程：Python语言
+7. GitModel-统计分析（上）
+8. 采蘑菇教程——Easy-RL：强化学习
+9. 数据结构与算法
+10. Intel带你初识视觉识别
+11. 基于Python的办公自动化
+12. 青少年编程：Python语言
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
@@ -36,6 +37,7 @@
 
 ## 基本信息
 
+- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/1
 - 开源内容：https://github.com/datawhalechina/pumpkin-book
 - B站视频：https://www.bilibili.com/video/BV1Mh411e7VU
 - 内容属性：机器学习（理论）专题
@@ -48,7 +50,7 @@
 
 - 学习周期：18天
 
-![](https://img-blog.csdnimg.cn/bf53c39b2d2c46c3b010ca37ac204a88.png)
+![](https://img-blog.csdnimg.cn/e508e1488dee4d5485b2e38dc5953293.png)
 
 
 
@@ -65,10 +67,11 @@
 
 - 航路开辟者：陈安东、金娟娟、杨佳达、老表、李玲、张文涛、高立业
 - 领航员：周辉池
-- 航海士：崔腾松、于鸿飞
+- 航海士：肖桐、郭棉昇、乔彬
 
 ## 基本信息
 
+- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/5
 - 开源内容：https://github.com/datawhalechina/hands-on-data-analysis
 - 开源内容：https://gitee.com/datawhalechina/hands-on-data-analysis
 - B站视频：https://www.bilibili.com/video/BV1Uv411p77r
@@ -81,7 +84,7 @@
 
 - 学习周期：11天
 
-![](https://img-blog.csdnimg.cn/970b181a47b74db4bd9cc165864061fc.png)
+![](https://img-blog.csdnimg.cn/8bf6600e880f4fbbadcdea6bf0187b30.png)
 
 ---
 
@@ -90,10 +93,11 @@
 
 - 航路开辟者：王茂霖、陈安东，刘峥嵘，李玲
 - 领航员：吕豪杰
-- 航海士：苗圃、宋昊阳、孙子涵
+- 航海士：叶前坤、吴建新
 
 ## 基本信息
 
+- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/13
 - 开源内容：https://github.com/datawhalechina/leeml-notes
 - 开源内容：https://gitee.com/datawhalechina/leeml-notes
 - 内容属性：深度学习（理论）专题
@@ -110,7 +114,7 @@
 
 - 学习周期：14天
 
-![](https://img-blog.csdnimg.cn/98977bfa5def4a8fa32db0cd16706e40.png)
+![](https://img-blog.csdnimg.cn/84a77bdabb9f4288a3cb01ad46cf7cd7.png)
 
 
 ---
@@ -118,11 +122,12 @@
 # 4. 数据可视化（Matplotlib）
 
 - 航路开辟者：杨剑砺、杨煜、耿远昊、李运佳、居凤霞
-- 领航员：李元朋
-- 航海士：袁一涵、徐韵婉
+- 领航员：夏木桃
+- 航海士：徐辉、殷萍萍
 
 ## 基本信息
 
+- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/3
 - 开源内容：https://github.com/datawhalechina/fantastic-matplotlib
 - 开源内容：https://gitee.com/datawhalechina/fantastic-matplotlib
 - 内容属性：精品入门课程系列
@@ -136,14 +141,14 @@
 
 - 学习周期：14天
 
-![](https://img-blog.csdnimg.cn/d01c0d5ee1b147e59ac1a1bc27570433.png)
+![](https://img-blog.csdnimg.cn/9dd5fc044098484e974ed504a775f3cc.png)
 
 ---
 # 5. SQL编程语言
 
 - 航路开辟者：王复振、杨煜、闫钟峰、杨梦迪、苏鹏
-- 领航员：刘琳
-- 航海士：张翔宇、杨世超、牧童
+- 领航员：王鑫
+- 航海士：崔腾松、陈长沙、黄涛
 
 ## 基本信息
 
@@ -160,19 +165,20 @@
 
 - 学习周期：16天
 
-![](https://img-blog.csdnimg.cn/edd8150fcebc4931a592a1cc4f8ba7b1.png)
+![](https://img-blog.csdnimg.cn/0f2863b4ceda4b6ebefe34c1b3bf6109.png)
 
 ---
 # 6. 深入浅出Pytorch
 
 - 航路开辟者：李嘉骐、牛志康、刘洋、陈安东
-- 领航员：陈玉立
-- 航海士：刘兴、郭棉昇、乔彬、邝俊伟
+- 领航员：隆军
+- 航海士：陈鑫、刘晓东、曹志宾、杨沁瑜
 
 ## 基本信息
 
 - 开源内容：https://github.com/datawhalechina/thorough-pytorch
 - 开源内容：https://gitee.com/datawhalechina/thorough-pytorch
+- B站视频：https://www.bilibili.com/video/BV1L44y1472Z
 - 内容属性：深度学习（实践）专题
 - 课程编号：904
 - 内容说明：PyTorch理论与实践结合，由基础知识到项目实战。
@@ -184,111 +190,135 @@
 
 - 学习周期：14天
 
-![](https://img-blog.csdnimg.cn/a2b59a90d35941c2bfd32d8077668a16.png)
+![](https://img-blog.csdnimg.cn/b473526cd91747c1aa8c97d6bbb16aa8.png)
 
 
 
 ---
-# 7. GitModel数学建模
+# 7. GitModel-统计分析（上）
 
 
 
-- 航路开辟者：李祖贤、刘斯豪、郑伯斌
-- 领航员：六一
-- 航海士：刘斯豪、何清旋、邱广坤
+- 航路开辟者：李祖贤、刘斯豪、黎卓然
+- 领航员：左凯文
+- 航海士：胡隆辉、邱广坤、黎卓然、刘斯豪、李祖贤
 
 ## 基本信息
 
-- 开源内容：https://github.com/Git-Model/__init_Modeling__
+- 开源内容：https://github.com/Git-Model/Modeling-Universe/tree/main/Data-Story
 - 内容属性：合作课程
-- 内容说明：讲解数学建模所用到最基本的数学工具——高数、线代、概率统计，并且讲解如何使用Python编程语言进行实现，跨越理论到实践的鸿沟！
-- 定位人群：想要入门数学建模但不知道从何学起的非数学专业的同学；数学专业出身懂得理论知识，但不知如何实现的同学。
-- 特别提示：学习形式为课程材料学习+直播答疑
+- 内容说明：介绍数学建模中数据分析问题的完整链路，着重介绍回归&分类问题的建模以及分析过程，并且手把手带你画出专业性满满的可视化图表！
+- 定位人群：有一定Python基础，学过GitModel数学建模的基石或有概率论与数理统计基础的同学；刚接触数学建模，想要入门统计分析模型的同学；
+- 特别提示：学习形式为课程材料学习+社群答疑
 
 ## 任务安排
 
-- 学习周期：14天
+- 学习周期：18天
 
-![](https://img-blog.csdnimg.cn/3dc65c90d4de4d22b592098f2c2af1ac.png)
+![](https://img-blog.csdnimg.cn/083f573c5b6a4571a4806d4d85acbec7.png)
 
 
 ---
 
-# 8. 使用Pytorch复现推荐模型
+# 8. 采蘑菇教程——Easy-RL：强化学习
 
 
 
 
 
-- 航路开辟者：赖敏材，罗如意，吴忠强，汪志鸿，唐鑫，王宇宸，何世福
-- 领航员：李拙
-- 航海士：王宇宸、王炜良、于宙鑫、王凯、唐鑫、任鹏飞
+- 航路开辟者：王琦、杨毅远、江季
+- 领航员：梁恩瑞
+- 航海士：汪聪、ayres、李赤
 
 ## 基本信息
 
-- 开源内容：https://github.com/datawhalechina/torch-rechub
-- 开源内容：https://github.com/datawhalechina/fun-rec
-- 内容属性：推荐系统实践专题
-- 内容说明：学习本课程有一定的pytorch与深度学习基础即可，适合推荐系统新手入门。本课程旨在帮助学员掌握torch-rechub框架的设计与使用，掌握深度推荐系统中的排序、召回、多任务模型的设计思想与实战技巧。
-- 定位人群：有一定的Pytorch基础，熟悉深度学习，了解推荐系统基本算法，想进一步熟悉业界应用较广泛的深度推荐模型。
-- 特别提示：无
+- 开源内容：https://datawhalechina.github.io/easy-rl/#/
+- 开源内容：https://linklearner.com/datawhale-homepage/#/learn/detail/91
+- 开源内容：https://github.com/datawhalechina/easy-rl/releases/tag/v.1.0.3
+- 内容属性：强化学习专题
+- 内容说明：本内容是强化学习的基础，主要目标是学习常见的强化学习算法并进行相关的实践。
+- 定位人群：有一些机器学习、数学基础的小伙伴，有意向了解、学习强化学习的小伙伴，难度系数中。
+- 特别提示：学习形式为课程材料学习+在线、社群答疑，旨在促进更多人动手学习。
 
 ## 任务安排
 
-- 学习周期：15天
+- 学习周期：17天
 
-![](https://img-blog.csdnimg.cn/8c87fc186bc14af9a7934a9e580ad62e.png)
+![](https://img-blog.csdnimg.cn/791243868069413d8ec59ac3a2ecd3e0.png)
 
 ---
-# 9. C++语言与基础算法 
+# 9. 数据结构与算法
 
 
 - 航路开辟者：伯禹团队、上海交大ACM班同学
-- 领航员：左凯文、聂耀
-- 航海士：陈煜昂、谷国伟、高岩、赵文一
+- 领航员：沈一、徐韵婉
+- 航海士：张文恺、刘兴、刘佳福、曾海如
 
 
 ## 基本信息
 
 - 开源内容：https://www.qingzhouzhixue.com/
 - 内容属性：合作课程
-- 内容说明：课程从 C++ 核心语法到程序运行原理进行全方位讲解。并以C++讲解高精度运算、经典排序与搜索、二分查找应用、动态规划与背包问题等基本内容和实现思想。
-- 定位人群：零基础希望学习C++的同学。
-- 特别提示：无
+- 内容说明：数据结构与算法课程会以算法核心素质为基本特色，也就是“学习算法不仅仅是刷题”。希望学员学完后能不仅在面试时用到算法，更是为今后进入需要较强算法能力的高端工作领域打好基础。
+- 定位人群：有一定C++基础，准备面试求职的同学。
+- 特别提示：具有一定C++基础。
 
 ## 任务安排
 
 - 学习周期：22天
 
-![](https://img-blog.csdnimg.cn/043d46b793e04f9cb5de0fd8714be609.png)
+![](https://img-blog.csdnimg.cn/5aaeed059eb6485b8f0d5b657e84615f.png)
 
 
 ---
-# 10. 零基础入门数据挖掘赛事
+# 10. Intel带你初识视觉识别
 
-- 航路开辟者：鱼佬、阿水
-- 领航员：田瑶
-- 航海士：吴纪洋、张福胜
+- 航路开辟者：Intel
+- 领航员：王顺意
+- 航海士：路建飞、陈陟原、谢文昕
 
 
 ## 基本信息
 
-- 开源内容：https://coggle.club/?platform=xfyun
-- 内容属性：公测课程
-- 内容说明：零基础入门数据挖掘赛事，在学习过程中熟练赛事操作流程，学习处理非结构化数据，巩固已学算法知识。
-- 定位人群：具有一定的Python基础，了解基础的机器学习算法，想要实践学习的入门者。
-- 特别提示：无
+- 开源内容：https://vxr.h5.xeknow.com/s/3Eg4J8
+- 内容属性：合作课程
+- 课程编号：410
+- 内容说明：视觉识别是人工智能中重要的一个版块，可应用于安防、医疗、金融、手机、交通等领域。OpenVINO™是英特尔®于2018年发布开源且免费商用的软件包，主要应用于计算机视觉，实现神经网络模型优化和推理计算加速，助力AI开发者快速进行应用程序或解决方案开发，可解决视觉模拟、自动语音识别、自然语言处理、推荐系统等多种任务。本课程将帮助学员快速理解英特尔® OpenVINO™工具套件的基本概念以及应用场景。
+- 定位人群：初识人工智能，希望了解边缘计算、应用落地工具的同学。
+- 特别提示：完成所有视频和测试题后，可获得 Datawhale X 英特尔联合证书。
 
 ## 任务安排
 
-- 学习周期：10天
+- 学习周期：7天
 
-![](https://img-blog.csdnimg.cn/560e046a19a946dea07395ddedba2f99.png)
+![](https://img-blog.csdnimg.cn/f2bc9beca243444da377b0321636de16.png)
 
 
 
 ---
-# 11. 青少年编程：Python语言
+# 11. 基于Python的办公自动化
+
+- 航路开辟者：牧小熊、赵信达、吴争光、张建华、于鸿飞
+- 领航员：崔腾松
+- 航海士：袁一涵、刘瑞航、于鸿飞
+
+## 基本信息
+
+- 开源内容： https://github.com/datawhalechina/office-automation
+- 内容属性：公测课程
+- 内容说明：包含有python操作文件处理，python操作邮件发送，python操作excel、word、pdf等，python操作钉钉以及python的简单爬虫。
+- 定位人群：有python基础，对自动化办公有兴趣的同学。
+- 特别提示：暂无。
+
+## 任务安排
+
+- 学习周期：14天
+
+![](https://img-blog.csdnimg.cn/ff9fa41f1d6844e7a78393b70d11767f.png)
+
+
+---
+# 12. 青少年编程：Python语言
 
 - 航路开辟者：王思齐、马燕鹏
 - 领航员：马燕鹏
@@ -308,11 +338,11 @@
 
 - 学习周期：21天
 
-![](https://img-blog.csdnimg.cn/1f882a1c5aff4868ac8ebd6eddcbe133.png)
+![](https://img-blog.csdnimg.cn/ac0402d39dde4c0d8b76865d52863a0d.png)
 
 
 ---
-# 10. 具体规则
+# 13. 具体规则
 
 
 ## 打卡方法介绍
@@ -338,7 +368,7 @@
 
 
 ---
-# 11. 组队学习的那些事
+# 14. 组队学习的那些事
 
 
 组队学习之余，来读读组队学习中发生的故事！
