@@ -1,28 +1,20 @@
 
 
 
+第44期 Datawhale 组队学习活动马上就要开始啦！
 
-[toc]
-
-第39期 Datawhale 组队学习活动马上就要开始啦！
-
-- 07月06日（星期三），宣发，[7月组队学习计划！](https://mp.weixin.qq.com/s/6edHU0kswIEmGvkccaTrpA)。
-- 07月09日（星期六），进入学习群、开营仪式。
+- 12月07日（星期三），宣发，[Datawhale年末组队学习来了！](https://mp.weixin.qq.com/s/MHU-V5cOsbxJI2PKpWEkUg)。
+- 12月10日（星期六），进入学习群、开营仪式。
 
 本次组队学习的内容为：
 
 1. 吃瓜教程——西瓜书+南瓜书
-2. 动手学数据分析
-3. 李宏毅机器学习（含深度学习）
-4. 数据可视化（Matplotlib）
-5. SQL编程语言
-6. 深入浅出Pytorch
-7. GitModel-统计分析（上）
-8. 采蘑菇教程——Easy-RL：强化学习
-9. 数据结构与算法
-10. Intel带你初识视觉识别
-11. 基于Python的办公自动化
-12. 青少年编程：Python语言
+2. 周志华机器学习视频课
+3. 可解释机器学习
+4. OpenCV教程
+5. Whalepaper推荐系统论文阅读
+6. 大话设计模式
+
 
 
 大家可以根据我们的开源内容进行自学，也可以加入我们的组队学习一起来学。
@@ -32,12 +24,12 @@
 # 1. 吃瓜教程——西瓜书+南瓜书
 
 - 航路开辟者：谢文睿、秦州
-- 领航员：卢水琼
-- 航海士：谢文睿、秦州
+- 领航员：徐韵婉
+- 航海士：谢文睿、秦州、学弱猹
 
 ## 基本信息
 
-- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/1
+- 开源内容：https://linklearner.com/#/learn/detail/10
 - 开源内容：https://github.com/datawhalechina/pumpkin-book
 - B站视频：https://www.bilibili.com/video/BV1Mh411e7VU
 - 内容属性：机器学习（理论）专题
@@ -50,7 +42,8 @@
 
 - 学习周期：18天
 
-![](https://img-blog.csdnimg.cn/e508e1488dee4d5485b2e38dc5953293.png)
+![](https://files.mdnice.com/user/3656/8d107723-c7d9-4eac-960f-d926d7440f62.png)
+
 
 
 
@@ -60,95 +53,83 @@
 
 ---
 
-# 2. 动手学数据分析
+# 2. 周志华机器学习视频课
 
 
-
-
-- 航路开辟者：陈安东、金娟娟、杨佳达、老表、李玲、张文涛、高立业
-- 领航员：周辉池
-- 航海士：肖桐、郭棉昇、乔彬
+- 航路开辟者：谢文睿
+- 领航员：小年
+- 航海士：崔腾松、周辉池
 
 ## 基本信息
 
-- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/5
-- 开源内容：https://github.com/datawhalechina/hands-on-data-analysis
-- 开源内容：https://gitee.com/datawhalechina/hands-on-data-analysis
-- B站视频：https://www.bilibili.com/video/BV1Uv411p77r
-- 内容属性：精品入门课系列
+- 开源内容：https://www.xuetangx.com/course/nju0802bt/14363483
+- 内容属性：机器学习（理论）专题
 - 课程编号：202
-- 内容说明：以项目为主线，通过边学，边做以及边被引导的方式，既掌握知识点又能掌握数据分析的大致思路和流程。
-- 定位人群：懂一些python，希望入门数据分析的学习者。
+- 内容说明：《机器学习初步》课程覆盖机器学习的入门基石内容，课程主讲人周志华教授是领域专家，周志华老师的西瓜书正是本课程的教材。
+- 定位人群：学习者需具备一定的微积分、线性代数、概率统计、最优化方法的基础知识。
+- 特别提示：学习形式为学习视频+社群答疑，旨在促进更多人动手学习。
 
 ## 任务安排
 
-- 学习周期：11天
+- 学习周期：18天
 
-![](https://img-blog.csdnimg.cn/8bf6600e880f4fbbadcdea6bf0187b30.png)
+![](https://files.mdnice.com/user/3656/ef146864-cf36-452e-b129-c157a074cc8d.png)
 
 ---
 
-# 3. 李宏毅机器学习（含深度学习）
+# 3. 可解释机器学习
 
 
-- 航路开辟者：王茂霖、陈安东，刘峥嵘，李玲
+- 航路开辟者：张子豪
 - 领航员：吕豪杰
-- 航海士：叶前坤、吴建新
+- 航海士：田文博、张燕、黄俊程
 
 ## 基本信息
 
-- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/13
-- 开源内容：https://github.com/datawhalechina/leeml-notes
-- 开源内容：https://gitee.com/datawhalechina/leeml-notes
-- 内容属性：深度学习（理论）专题
-- 课程编号：108
-- 视频地址：https://www.bilibili.com/video/BV1Ht411g7Ef
-- 视频地址：https://www.bilibili.com/video/BV1JA411c7VT
-- 官方地址：http://speech.ee.ntu.edu.tw/~tlkagk/courses.html
-- 内容说明：辅助大家更好学习李宏毅老师机器学习视频，并加入相关补充资料，相信你会对机器学习有更加深刻的理解。
-- 定位人群：深度学习初学者，有微积分，线性代数基础。
-- 特别提示：本教程为深度学习教程。
+- 开源内容：https://github.com/TommyZihao/zihao_course/tree/main/XAI
+- 内容属性：机器学习基础公开课
+- 视频地址：https://space.bilibili.com/1900783
+- 内容说明：算法导论、综述、经典论文精读、代码实战、前沿讲座
+- 定位人群：机器学习、深度学习、计算机视觉初学者
+
+
+
+## 任务安排
+
+- 学习周期：15天
+
+![](https://files.mdnice.com/user/3656/8b7baad6-9b83-4ded-b4ac-596a03878cc4.png)
+
+
+---
+
+# 4. OpenCV教程
+
+- 航路开辟者：谢文昕
+- 领航员：赖南英
+- 航海士：陈伟峰，曹志宾，张露雨
+
+## 基本信息
+
+- 开源内容：https://vxr.xet.tech/s/49dV3o
+- 内容属性：计算机视觉
+- 内容说明：OpenCV和计算机视觉的基础相关知识点学习。
+- 定位人群：计算机视觉初学者。
+- 特别提示：学习形式为课程材料学习。
 
 
 ## 任务安排
 
 - 学习周期：14天
 
-![](https://img-blog.csdnimg.cn/84a77bdabb9f4288a3cb01ad46cf7cd7.png)
-
-
----
-
-# 4. 数据可视化（Matplotlib）
-
-- 航路开辟者：杨剑砺、杨煜、耿远昊、李运佳、居凤霞
-- 领航员：夏木桃
-- 航海士：徐辉、殷萍萍
-
-## 基本信息
-
-- 开源内容：https://linklearner.com/datawhale-homepage/index.html#/learn/detail/3
-- 开源内容：https://github.com/datawhalechina/fantastic-matplotlib
-- 开源内容：https://gitee.com/datawhalechina/fantastic-matplotlib
-- 内容属性：精品入门课程系列
-- 课程编号：006
-- 内容说明：本次课程内容的设计几乎完全基于官方文档的结构，通过对于官方文档的归纳总结，系统梳理了python最重要的数据可视化包的方方面面，并且配有部分练习题供学习者核查自己的学习效果。
-- 定位人群：希望通过系统学习matplotlib包来提高python可视化技能的人。
-- 特别提示：本次课程是由 Datawhale 数据可视化小组内部成员共同完成，是针对 matplotlib 初学者的入门课程。学习本课程需要基本的python基础即可。
-
-
-## 任务安排
-
-- 学习周期：14天
-
-![](https://img-blog.csdnimg.cn/9dd5fc044098484e974ed504a775f3cc.png)
+![](https://files.mdnice.com/user/3656/003653c7-dd15-46af-bd9b-f83e78a7c665.png)
 
 ---
-# 5. SQL编程语言
+# 5. Whalepaper推荐系统论文阅读
 
-- 航路开辟者：王复振、杨煜、闫钟峰、杨梦迪、苏鹏
-- 领航员：王鑫
-- 航海士：崔腾松、陈长沙、黄涛
+- 航路开辟者：王凯，芙蕖
+- 领航员：邱雯
+- 航海士：郭棉昇
 
 ## 基本信息
 
@@ -165,184 +146,35 @@
 
 - 学习周期：16天
 
-![](https://img-blog.csdnimg.cn/0f2863b4ceda4b6ebefe34c1b3bf6109.png)
+![](https://files.mdnice.com/user/3656/f16d09f7-5ac8-462e-a009-7f6877053d6b.png)
 
 ---
-# 6. 深入浅出Pytorch
+# 6. 大话设计模式
 
-- 航路开辟者：李嘉骐、牛志康、刘洋、陈安东
-- 领航员：隆军
-- 航海士：陈鑫、刘晓东、曹志宾、杨沁瑜
+- 航路开辟者：长琴、肖桐、碧涵、锐锋、鸿飞
+- 领航员：六一
+- 航海士：长琴、肖桐、碧涵、锐锋、鸿飞
 
 ## 基本信息
 
-- 开源内容：https://github.com/datawhalechina/thorough-pytorch
-- 开源内容：https://gitee.com/datawhalechina/thorough-pytorch
-- B站视频：https://www.bilibili.com/video/BV1L44y1472Z
-- 内容属性：深度学习（实践）专题
-- 课程编号：904
-- 内容说明：PyTorch理论与实践结合，由基础知识到项目实战。
-- 定位人群：具备《高等数学》、《线性代数》、《概率论与数理统计》基础，有一定的机器学习和深度学习基础，熟悉常见概念，会使用Python。
-- 特别提示：学习形式为课程材料学习+直播答疑
+- 开源内容：https://github.com/datawhalechina/sweetalk-design-pattern
+- 内容说明：基于《大话设计模式》学习设计原则和设计模式。
+- 定位人群：不了解设计模式，想提升自己代码水平的工程师。
+- 特别提示：需要有一定代码经验。
 
 
 ## 任务安排
 
-- 学习周期：14天
+- 学习周期：20天
 
-![](https://img-blog.csdnimg.cn/b473526cd91747c1aa8c97d6bbb16aa8.png)
+![](https://files.mdnice.com/user/3656/c98ea039-df25-498e-8f49-e9982f8eb273.png)
+
+
 
 
 
 ---
-# 7. GitModel-统计分析（上）
-
-
-
-- 航路开辟者：李祖贤、刘斯豪、黎卓然
-- 领航员：左凯文
-- 航海士：胡隆辉、邱广坤、黎卓然、刘斯豪、李祖贤
-
-## 基本信息
-
-- 开源内容：https://github.com/Git-Model/Modeling-Universe/tree/main/Data-Story
-- 内容属性：合作课程
-- 内容说明：介绍数学建模中数据分析问题的完整链路，着重介绍回归&分类问题的建模以及分析过程，并且手把手带你画出专业性满满的可视化图表！
-- 定位人群：有一定Python基础，学过GitModel数学建模的基石或有概率论与数理统计基础的同学；刚接触数学建模，想要入门统计分析模型的同学；
-- 特别提示：学习形式为课程材料学习+社群答疑
-
-## 任务安排
-
-- 学习周期：18天
-
-![](https://img-blog.csdnimg.cn/083f573c5b6a4571a4806d4d85acbec7.png)
-
-
----
-
-# 8. 采蘑菇教程——Easy-RL：强化学习
-
-
-
-
-
-- 航路开辟者：王琦、杨毅远、江季
-- 领航员：梁恩瑞
-- 航海士：汪聪、ayres、李赤
-
-## 基本信息
-
-- 开源内容：https://datawhalechina.github.io/easy-rl/#/
-- 开源内容：https://linklearner.com/datawhale-homepage/#/learn/detail/91
-- 开源内容：https://github.com/datawhalechina/easy-rl/releases/tag/v.1.0.3
-- 内容属性：强化学习专题
-- 内容说明：本内容是强化学习的基础，主要目标是学习常见的强化学习算法并进行相关的实践。
-- 定位人群：有一些机器学习、数学基础的小伙伴，有意向了解、学习强化学习的小伙伴，难度系数中。
-- 特别提示：学习形式为课程材料学习+在线、社群答疑，旨在促进更多人动手学习。
-
-## 任务安排
-
-- 学习周期：17天
-
-![](https://img-blog.csdnimg.cn/791243868069413d8ec59ac3a2ecd3e0.png)
-
----
-# 9. 数据结构与算法
-
-
-- 航路开辟者：伯禹团队、上海交大ACM班同学
-- 领航员：沈一、徐韵婉
-- 航海士：张文恺、刘兴、刘佳福、曾海如
-
-
-## 基本信息
-
-- 开源内容：https://www.qingzhouzhixue.com/
-- 内容属性：合作课程
-- 内容说明：数据结构与算法课程会以算法核心素质为基本特色，也就是“学习算法不仅仅是刷题”。希望学员学完后能不仅在面试时用到算法，更是为今后进入需要较强算法能力的高端工作领域打好基础。
-- 定位人群：有一定C++基础，准备面试求职的同学。
-- 特别提示：具有一定C++基础。
-
-## 任务安排
-
-- 学习周期：22天
-
-![](https://img-blog.csdnimg.cn/5aaeed059eb6485b8f0d5b657e84615f.png)
-
-
----
-# 10. Intel带你初识视觉识别
-
-- 航路开辟者：Intel
-- 领航员：王顺意
-- 航海士：路建飞、陈陟原、谢文昕
-
-
-## 基本信息
-
-- 开源内容：https://vxr.h5.xeknow.com/s/3Eg4J8
-- 内容属性：合作课程
-- 课程编号：410
-- 内容说明：视觉识别是人工智能中重要的一个版块，可应用于安防、医疗、金融、手机、交通等领域。OpenVINO™是英特尔®于2018年发布开源且免费商用的软件包，主要应用于计算机视觉，实现神经网络模型优化和推理计算加速，助力AI开发者快速进行应用程序或解决方案开发，可解决视觉模拟、自动语音识别、自然语言处理、推荐系统等多种任务。本课程将帮助学员快速理解英特尔® OpenVINO™工具套件的基本概念以及应用场景。
-- 定位人群：初识人工智能，希望了解边缘计算、应用落地工具的同学。
-- 特别提示：完成所有视频和测试题后，可获得 Datawhale X 英特尔联合证书。
-
-## 任务安排
-
-- 学习周期：7天
-
-![](https://img-blog.csdnimg.cn/f2bc9beca243444da377b0321636de16.png)
-
-
-
----
-# 11. 基于Python的办公自动化
-
-- 航路开辟者：牧小熊、赵信达、吴争光、张建华、于鸿飞
-- 领航员：崔腾松
-- 航海士：袁一涵、刘瑞航、于鸿飞
-
-## 基本信息
-
-- 开源内容： https://github.com/datawhalechina/office-automation
-- 内容属性：公测课程
-- 内容说明：包含有python操作文件处理，python操作邮件发送，python操作excel、word、pdf等，python操作钉钉以及python的简单爬虫。
-- 定位人群：有python基础，对自动化办公有兴趣的同学。
-- 特别提示：暂无。
-
-## 任务安排
-
-- 学习周期：14天
-
-![](https://img-blog.csdnimg.cn/ff9fa41f1d6844e7a78393b70d11767f.png)
-
-
----
-# 12. 青少年编程：Python语言
-
-- 航路开辟者：王思齐、马燕鹏
-- 领航员：马燕鹏
-- 航海士：马燕鹏
-
-## 基本信息
-
-- 开源内容：https://github.com/datawhalechina/team-learning-program/tree/master/ChildrenProgramming
-- 学习视频：https://space.bilibili.com/90353310/
-- 内容属性：公测课程
-- 课程编号：030
-- 内容说明：跟着春雷老师，看视频学习Python编程的基本知识。。
-- 定位人群：对Python编程感兴趣的小朋友。
-- 特别提示：小学3年级及以上。
-
-## 任务安排
-
-- 学习周期：21天
-
-![](https://img-blog.csdnimg.cn/ac0402d39dde4c0d8b76865d52863a0d.png)
-
-
----
-# 13. 具体规则
+# 7. 具体规则
 
 
 ## 打卡方法介绍
@@ -368,7 +200,7 @@
 
 
 ---
-# 14. 组队学习的那些事
+# 8. 组队学习的那些事
 
 
 组队学习之余，来读读组队学习中发生的故事！
