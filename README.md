@@ -133,13 +133,9 @@
 
 ## 基本信息
 
-- 开源内容：https://github.com/datawhalechina/wonderful-sql
-- 开源内容：https://hub.fastgit.org/datawhalechina/wonderful-sql
-- 内容属性：精品入门课系列
-- 课程编号：014
-- 内容说明：Follow me，从 0 到 1 掌握 SQL。完成SQL使用环境搭建，了解关系型数据库的基本特点，熟悉SQL增删改查基本操作，进一步掌握视图、子查询、函数、窗口函数等高阶用法，最后试一试秋招秘籍，检验下自己学习的效果。
-- 定位人群：0基础学员，希望掌握SQL基础查询的同学。
-- 特别提示：无
+- 开源内容：https://oljacoephk.feishu.cn/docx/He0GdxFr5o9hVwx7Vzjc3M4JnKd
+- 内容说明：Whalepaper入门课程，让初学者更好的学习推荐相关paper，掌握推荐系统基本方法。
+- 特别提示：学习形式为课程材料学习+直播答疑
 
 
 ## 任务安排
